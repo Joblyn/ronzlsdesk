@@ -1,0 +1,53 @@
+import * as ActionType from '../../Types';
+import { getDataWithToken } from '../../Services';
+
+const onGetClient = payload => {
+  return {
+    type: ActionType.ADMIN_GET_CLIENT_SUCCESS,
+    payload: payload,
+  };
+};
+
+const onGetClientDetails = payload => {
+  return {
+    type: ActionType.ADMIN_GET_CLIENT_DETAILS_SUCCESS,
+    payload: payload,
+  };
+};
+
+// const onLogin = payload => {
+//   return {
+//     type: ActionType.ADMIN_LOGIN_SUCCESS,
+//     payload,
+//   };
+// };
+
+// export const setCurrentAdminUser = decoded => {
+//   return {
+//     type: ActionType.SET_CURRENT_ADMIN_USER,
+//     payload: decoded,
+//   };
+// };
+
+// export const onForgotPassword = payload => {
+//   return {
+//     type: ActionType.ADMIN_FORGOT_PASSWORD_SUCCESS,
+//     payload,
+//   };
+// };
+
+export const getClient = url => {
+  return getDataWithToken(url, onGetClient);
+};
+
+export const getClientDetails = url => {
+  return getDataWithToken(url, onGetClientDetails);
+};
+
+// export const login = (url, payload) => {
+//   return postData(url, payload, onLogin);
+// };
+
+// export const forgotPassword = (url, payload) => {
+//   return postData(url, payload, onForgotPassword);
+// };

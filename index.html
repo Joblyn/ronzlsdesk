@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>body { margin-top: 0; }
+
+        #container {
+          max-width: 1000px;
+          margin: 0 auto;
+          background: #EEE;
+        }
+        
+        h1,
+        p {     padding: 0em 2em;}
+        
+        #fvpp-blackout {
+          display: none;
+          z-index: 499;
+          position: fixed;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          background: #000;
+          opacity: 0.5;
+        }
+        
+        #pop-up-content {
+          display: none;
+          z-index: 500;
+          position: fixed;
+          width: 36%;
+          left: 30%;
+          top: 20%;
+          padding: 20px 2%;
+          font-family: Calibri, Arial, sans-serif;
+          background: #FFF;
+        }
+        
+        #fvpp-close {
+            position: absolute;
+            top: -16px;
+            right: -10px;
+            font-size: 23px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #FFF;
+            background-color: #000;
+            padding: 1px 9px;
+            border-radius: 34px;
+        }
+        
+        
+        #fvpp-dialog h2 {
+          font-size: 2em;
+          margin: 0;
+        }
+        
+        #fvpp-dialog p { margin: 0; }
+        
+        
+        input{
+        width:100%;
+        height:40px;
+        border:1px solid green;
+        padding:8px;
+        }
+        
+        select
+        {
+        width:104%;
+        height:40px;
+        border:1px solid green;
+        padding:8px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        }
+        
+        textarea
+        {
+        width:100%;
+        height:80px;
+        border:1px solid green;
+        padding:8px;
+        }
+        .enq-div{
+        width:300px;
+        padding:35px;
+        border:1px solid green;
+        background-color:#f1f1f1;
+        display:block;
+        margin:0 auto;
+        }
+        
+        .btn{
+        width: 50% !important;
+            background-color: green;
+            color: #fff;
+            height: 50px;
+            margin: 0 auto;
+            display: block;
+        }</style>
+        <div id="container">
+        <h1>jQuery Responsive popup box with feedback form</h1>
+        </div>
+        </div>
+        <div id="pop-up-content">
+        <form id="contact-form1" class="contact-form flex-type" action="mail1.php" method="post">
+        <p><input type="text" name="name"  required placeholder="Your Name (required)"></p>
+        <p><select name="enquiry-abt">
+        <option name="Enquiry About Admission" value="Enquiry About Admission" >Enquiry About Admission</option>
+        <option name="Enquiry About Fees" value="Enquiry About Fees" >Enquiry About Fees</option>
+        <option name="Others" value="Others" >Others</option>
+        </select></p>
+        <p><input type="email" name="email" required placeholder="Email (required)"></p>
+        <p><input type="text" name="subject" required placeholder="Subject"></p>
+        <p><input type="Mobile" name="mobile" required placeholder="Mobile Number"></p>
+        <p><textarea rows="8" name="message" required placeholder="Message"></textarea></p>
+        <p><input type="submit" name="submit" required value="submit" class="btn" data-type="submit"></button></p>
+        </div>
+
+        </form>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+        <script src="jquery.firstVisitPopup.js"></script> 
+        <script>
+        $(function () {
+        $('#pop-up-content').firstVisitPopup({
+        cookieName : 'homepage',
+        showAgainSelector: '#show-message'
+        });
+        });
+        </script>
+    
+
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+    <style>
+      #mask {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 9000;
+        background-color: #cccccc;
+        opacity: ;
+        display: none;
+      }
+
+      #boxes .window {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 440px;
+        height: 200px;
+        display: none;
+        z-index: 9999;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+      }
+
+      #boxes #dialog {
+        width: 750px;
+        height: 300px;
+        padding: 10px;
+        background-color: #ffffff;
+        font-family: 'Segoe UI Light', sans-serif;
+        font-size: 15pt;
+      }
+
+      #popupfoot {
+        font-size: 16pt;
+        position: absolute;
+        bottom: 0px;
+        width: 250px;
+        left: 250px;
+      }
+    </style>
+    <div id="boxes">
+      <div id="dialog" class="window">
+        Your Content Goes Here
+        <div id="popupfoot">
+          <a href="#" class="close agree">I agree</a> |
+          <a class="agree" style="color: red" href="#">I do not agree</a>
+        </div>
+      </div>
+      <div id="mask"></div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        var id = '#dialog';
+
+        //Get the screen height and width
+        var maskHeight = $(document).height();
+        var maskWidth = $(window).width();
+
+        //Set heigth and width to mask to fill up the whole screen
+        $('#mask').css({ width: maskWidth, height: maskHeight });
+
+        //transition effect
+        $('#mask').fadeIn(500);
+        $('#mask').fadeTo('slow', 0.9);
+
+        //Get the window height and width
+        var winH = $(window).height();
+        var winW = $(window).width();
+
+        //Set the popup window to center
+        $(id).css('top', winH / 2 - $(id).height() / 2);
+        $(id).css('left', winW / 2 - $(id).width() / 2);
+
+        //transition effect
+        $(id).fadeIn(2000);
+
+        //if close button is clicked
+        $('.window .close').click(function (e) {
+          //Cancel the link behavior
+          e.preventDefault();
+
+          $('#mask').hide();
+          $('.window').hide();
+        });
+
+        //if mask is clicked
+        $('#mask').click(function () {
+          $(this).hide();
+          $('.window').hide();
+        });
+      });
+    </script> -->
+    <!-- <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+    ></script>
+    <script
+      src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js"
+      type="text/javascript"
+    ></script>
+    <link
+      href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script type="text/javascript">
+      $(function () {
+        $('#dialog').dialog({
+          //   title: 'jQuery Dialog Popup',
+          buttons: {
+            Close: function () {
+              $(this).dialog('close');
+            },
+          },
+        });
+      });
+    </script>
+    <div id="dialog" style="display: none">This is a simple popup</div> -->
+    <!-- <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.8.2.js"
+    ></script>
+    <style type="text/css">
+      #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        filter: alpha(opacity=70);
+        -moz-opacity: 0.7;
+        -khtml-opacity: 0.7;
+        opacity: 0.7;
+        z-index: 100;
+        display: none;
+      }
+      .cnt223 a {
+        text-decoration: none;
+      }
+      .popup {
+        width: 100%;
+        margin: 0 auto;
+        display: none;
+        position: fixed;
+        z-index: 101;
+      }
+      .cnt223 {
+        min-width: 600px;
+        width: 800px;
+        min-height: 150px;
+        margin: 100px auto;
+        background: #f3f3f3;
+        position: relative;
+        z-index: 103;
+        padding: 15px 35px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px #000;
+      }
+      .cnt223 p {
+        clear: both;
+        color: #555555;
+        /* text-align: justify; */
+        font-size: 20px;
+        font-family: sans-serif;
+      }
+      .cnt223 p a {
+        color: #d91900;
+        font-weight: bold;
+      }
+      .cnt223 .x {
+        float: right;
+        height: 35px;
+        left: 22px;
+        position: relative;
+        top: -25px;
+        width: 34px;
+      }
+      .cnt223 .x:hover {
+        cursor: pointer;
+        text-align: center;
+      }
+    </style>
+    <script type="text/javascript">
+      $(function () {
+        var overlay = $('<div id="overlay"></div>');
+        overlay.show();
+        overlay.appendTo(document.body);
+        $('.popup').show();
+        $('.close').click(function () {
+          $('.popup').hide();
+          overlay.appendTo(document.body).remove();
+          return false;
+        });
+
+        $('.x').click(function () {
+          $('.popup').hide();
+          overlay.appendTo(document.body).remove();
+          return false;
+        });
+      });
+    </script>
+    <div class="popup">
+      <div class="cnt223">
+        <h1>Important Notice</h1>
+        <p>
+          We were affected by the fire next door and will remain closed until
+          further notice.
+          <br />
+          <br />
+          <a href="" class="close">Close</a>
+        </p>
+      </div>
+    </div> -->
+  </body>
+</html>
