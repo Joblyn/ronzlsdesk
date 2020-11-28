@@ -38,10 +38,6 @@ import Button from '../button';
 
 const bem = bn.create('header');
 
-require('react-dom');
-window.React2 = require('react');
-console.log(window.React1 === window.React2);
-
 const MdNotificationsActiveWithBadge = withBadge({
   size: 'md',
   color: 'primary',

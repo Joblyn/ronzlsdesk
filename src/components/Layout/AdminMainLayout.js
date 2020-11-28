@@ -75,10 +75,11 @@ class AdminMainLayout extends React.Component {
 
   render() {
     const { children } = this.props;
-    const role = localStorage.getItem('role');
+    const role = window.localStorage.getItem('role');
+    console.log(role);
     return (
       <main className="cr-app bg-light">
-        {role ===  'admin' ? <AdminSidebar /> : <SuperAdminSidebar /> }
+        {role === "admin" ? <AdminSidebar /> : <SuperAdminSidebar />}
         <Content fluid onClick={this.handleContentClick}>
           <Header />
           {children}

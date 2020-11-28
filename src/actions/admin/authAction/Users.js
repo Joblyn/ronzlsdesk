@@ -67,10 +67,6 @@ export const forgotPassword = (url, payload) => {
 export const logOutAction = () => {
   window.localStorage.removeItem('jwtToken');
   window.localStorage.removeItem('role');
-  // localStorage.clear('jwtToken');
-  // localStorage.clear('role');
-  // localStorage.clear();
-  //remove auth header for feature request
   setAuthToken(false);
   window.location.href = '/';
 };

@@ -35,6 +35,8 @@ export const getAllClient = {
 
 export const adminData =  {};
 
+export const updateSubscription = {};
+
 // export const getClientDetails = {
 //   isLoading: false,
 //   error: null,

@@ -5,7 +5,8 @@ import logo from '../../assets/images/logo.png';
 import bgImage from '../../assets/images/illustration.png';
 
 import { registerUser } from '../../actions/user/authAction/Users';
-import { userRegister } from '../../apiConstants/apiConstants';
+import { updateClientSubscription } from '../../actions/admin/clients/Clients';
+import { userRegister, adminUpdateSubscription } from '../../apiConstants/apiConstants';
 import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
 import PageSpinner from '../../components/PageSpinner';
 
@@ -20,7 +21,7 @@ import { getClientDetail } from '../../apiConstants/apiConstants';
 const AdminViewClientDetails = () => {
   const [userState, setUserState] = useState('');
   const [inputList, setInputList] = useState([1]);
-  const [enable, setEnable] = useState('disabled');
+  const [disabled, setDisabled] = useState(true);
   const [managerControl, setManagerControl] = useState({});
   const [count, setCount] = useState(1);
   let obj = {};
@@ -31,35 +32,13 @@ const AdminViewClientDetails = () => {
   const location = useLocation();
 
   const [data, setData] = useState({});
-  const [director, setDirector ] = useState([{}]);
-  //change form view state from disabled to enable
-  const handleEditClick = event => {
-    event.preventDefault();
-    setEnable('');
-  };
+  const [director, setDirector] = useState([{}]);
 
-  const { userId } = useParams();
-  // console.log('USer :' + userId);
-
+  
   useEffect(() => {
-    
-    // const endpoint = getClientDetail + userId.split('=')[1];
-    // //const endpoint = getClientDetail + userId;
-    // console.log('Details; ' + userId);
-    // dispatch(getClientDetails(endpoint));
-    // setUserState(clientDetails);
     setData(clientDetails);
     setDirector(clientDetails.director)
-    console.log(clientDetails);
   }, [clientDetails]);
-
-  // if (clientDetails.isSuccessful === true) {
-  //   let client = clientDetails.user;
-  //   // client = clientDetails.user;
-  //   // setUserState(userState);
-  //   // client = userState;
-  //   console.log('Deatila: ' + userState);
-  // }
 
   const handleInputChange = (event, count) => {
     obj[event.target.name] = event.target.value;
@@ -96,16 +75,16 @@ const AdminViewClientDetails = () => {
     }
     return newManagers;
   };
-
+  
   const _onFocus = event => {
     event.currentTarget.type = 'date';
   };
-
+  
   const _onBlur = event => {
     event.currentTarget.type = 'text';
     event.currentTarget.placeholder = 'Date of Birth';
   };
-
+  
   const addNewDirector = (count, name) => (
     <div key={'director' + (count + 1)}>
       <label className="font-semibold">{`Director ${count + 1}`} </label>
@@ -116,7 +95,7 @@ const AdminViewClientDetails = () => {
         value={data.director[name].fullName}
         onChange={e => setDirector(e.target.value)}
         className="intro-x login__input input mb-2 input--lg border border-gray-300 block"
-        disabled={enable}
+        disabled={disabled}
       />
       <label className="font-semibold mt-2">Date of Birth:</label>
       <InputField
@@ -127,35 +106,21 @@ const AdminViewClientDetails = () => {
         onBlur={_onBlur}
         onChange={e => setDirector(e.target.value)}
         className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-        disabled={enable}
+        disabled={disabled}
       />
-      {/* <div className="flex justify-between">
-        {enable ? (
-          ''
-        ) : (
-          <>
-            {inputList.length !== 1 && (
-              <MdRemoveCircleOutline onClick={() => handleRemoveClick(count)} />
-            )}
-            {inputList.length - 1 === count && (
-              <MdAddCircleOutline onClick={handleAddClick} />
-            )}
-          </>
-        )}
-      </div> */}
     </div>
   );
-
+  
   // const handleChange = event => {
-  //   console.log('change');
-  //   let name = event.target.name;
+    //   console.log('change');
+    //   let name = event.target.name;
   //   setControl({
   //     ...control,
   //     // ...inputList,
   //     [name]: event.target.value,
   //   });
   // };
-
+  
   const handleClick = event => {
     event.preventDefault();
     let managers = prepareManager(managerControl);
@@ -163,17 +128,11 @@ const AdminViewClientDetails = () => {
     console.log('Result: ' + JSON.stringify(payload));
     dispatch(registerUser(userRegister, payload));
   };
-
+  
   const AccountTypeDatas = [
     ['Individual', 'individual'],
     ['Company', 'company'],
   ];
-
-  //   const StatusDatas = [
-  //     ['Select Account Type', ''],
-  //     ['Individual', 'individual'],
-  //     ['Company', 'company'],
-  //   ];
 
   const AccountTypeDropdownData = AccountTypeDatas.map((data, id) => {
     return (
@@ -182,23 +141,70 @@ const AdminViewClientDetails = () => {
       </option>
     );
   });
+  
+  const { userId } = useParams();
+  const [subscriptionBegin, setSubscriptionBegin] = useState("2020-11-03");
+  const [subscriptionEnd, setSubscriptionEnd] = useState("2021-11-03");
 
-  //   const StatusDropdownData = StatusDatas.map((data, id) => {
-  //     return (
-  //       <option value={data[1]} key={id}>
-  //         {data[0]}
-  //       </option>
-  //     );
-  //   });
+  const updateSubscription = (e) => {
+    e.preventDefault();
+    console.log('Here');
+    console.log(userId);
+    const payload = {
+      subscriptionBegin,
+      subscriptionEnd
+    }
+    console.log(payload);
+    const endpoint = adminUpdateSubscription + userId;
+    console.log(endpoint);
+    dispatch(updateClientSubscription(endpoint, payload));
+  };
+
   if (data === null) {
     return <PageSpinner />;
   }
+
   return (
     <div className="login">
       <div className="container sm:px-10">
         <div className="intro-x">
-          <div className="block xl:grid grid-cols-2 gap-4">
+          <div className="block xl:grid grid-cols-2 gap-4 mt-3">
             <div className="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto ">
+              <div className="mb-3">
+                <header className="font-semibold">Subscription</header>
+                <div className="mb-2 d-flex" style={{ justifyContent: "space-between" }}>
+                  <div>Start:</div>
+                  <div><input type="date"
+                    name="subscriptionBegin"
+                    value={subscriptionBegin}
+                    onChange={({ target}) => setSubscriptionBegin(target.value)}
+                    disabled={disabled}
+                    style={{ backgroundColor: "inherit" }}
+                  />
+                  </div>
+                </div>
+                <div className="mb-2 d-flex" style={{ justifyContent: "space-between" }}>
+                  <div>End:</div>
+                  <div><input type="date"
+                    name="subscriptionEnd"
+                    value={subscriptionEnd}
+                    onChange={({target}) => setSubscriptionEnd(target.value)}
+                    disabled={disabled}
+                    style={{ backgroundColor: "inherit" }} />
+                  </div>
+                </div>
+                {disabled ? <Button
+                  type="button"
+                  onClick={() => setDisabled(!disabled)}
+                  className="button button--md xl:w-32 text-white bg-theme-1 xl:mr-3"
+                  value="Set Subscription" /> 
+                  : <Button
+                  type="button"
+                  onClick={updateSubscription}
+                  className="button button--md xl:w-32 text-white bg-theme-1 xl:mr-3"
+                  value="Update"
+                />}
+              </div>
               {data.director &&
                 data.director.map((data, i) => {
                   return addNewDirector(i, i);
@@ -210,7 +216,7 @@ const AdminViewClientDetails = () => {
                 name="accountType"
                 className="intro-x login__input input input--lg mb-2 border border-gray-300 block"
                 dropdownElements={AccountTypeDropdownData}
-                disabled={enable}
+                disabled
               />
               <label className="font-semibold mt-2">Company Name:</label>
               <InputField
@@ -219,7 +225,7 @@ const AdminViewClientDetails = () => {
                 name="Company Name"
                 onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled={enable}
+                disabled
               />
               <label className="font-semibold mt-2">Company Address:</label>
               <InputField
@@ -228,7 +234,7 @@ const AdminViewClientDetails = () => {
                 value={data.companyAddress}
                 onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled={enable}
+                disabled
               />
               <label className="font-semibold mt-2">City:</label>
               <InputField
@@ -237,7 +243,7 @@ const AdminViewClientDetails = () => {
                 value={data.city}
                 onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled={enable}
+                disabled={disabled}
               />
               <label className="font-semibold mt-2">Postal Code:</label>
               <InputField
@@ -246,7 +252,7 @@ const AdminViewClientDetails = () => {
                 value={data.postalCode}
                 onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled={enable}
+                disabled
               />
               <label className="font-semibold mt-2">Country:</label>
               <InputField
@@ -255,7 +261,7 @@ const AdminViewClientDetails = () => {
                 value={data.country}
                 onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled={enable}
+                disabled
               />
               <label className="font-semibold mt-2">Phone Number:</label>
               <InputField
@@ -264,7 +270,7 @@ const AdminViewClientDetails = () => {
                 value={data.phoneNumber}
                 onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled={enable}
+                disabled
               />
 
               <label className="font-semibold mt-2">Email:</label>
@@ -274,10 +280,10 @@ const AdminViewClientDetails = () => {
                 value={data.email}
                 onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled={enable}
+                disabled
               />
             </div>
-            <div className="h-screen xl:h-auto flex xl:py-0 xl:my-0">
+            <div className="xl:h-auto flex xl:py-0 xl:my-0 mb-5">
               <div className="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto ">
                 <label className="font-semibold mt-2">Website:</label>
                 <InputField
@@ -286,7 +292,7 @@ const AdminViewClientDetails = () => {
                   value={data.websiteUrl}
                   onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled={enable}
+                  disabled
                 />
                 <label className="font-semibold mt-2">Company Begin:</label>
                 <InputField
@@ -295,7 +301,7 @@ const AdminViewClientDetails = () => {
                   value={data.companyBegin}
                   onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled={enable}
+                  disabled
                 />
                 <label className="font-semibold mt-2">Company Reg No:</label>
                 <InputField
@@ -304,7 +310,7 @@ const AdminViewClientDetails = () => {
                   value={data.companyRegNo}
                   onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled={enable}
+                  disabled
                 />
                 <label className="font-semibold mt-2">UTR Number:</label>
                 <InputField
@@ -313,7 +319,7 @@ const AdminViewClientDetails = () => {
                   value={data.utrNo}
                   onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled={enable}
+                  disabled
                 />
                 <label className="font-semibold mt-2">VAT Submit Type:</label>
                 <InputField
@@ -322,7 +328,7 @@ const AdminViewClientDetails = () => {
                   value={data.vatSubmitType}
                   onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled={enable}
+                  disabled
                 />
                 <label className="font-semibold mt-2">VAT Scheme:</label>
                 <InputField
@@ -331,7 +337,7 @@ const AdminViewClientDetails = () => {
                   value={data.vatScheme}
                   onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled={enable}
+                  disabled
                 />
                 <label className="font-semibold mt-2">VAT Reg No:</label>
                 <InputField
@@ -340,7 +346,7 @@ const AdminViewClientDetails = () => {
                   value={data.vatRegNo}
                   onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled={enable}
+                  disabled
                 />
                 <label className="font-semibold mt-2">VAT Reg Date:</label>
                 <InputField
@@ -349,7 +355,7 @@ const AdminViewClientDetails = () => {
                   value={data.vatRegDate}
                   onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled={enable}
+                  disabled
                 />
                 <label className="font-semibold mt-2">Insurance Number:</label>
                 <InputField
@@ -358,7 +364,7 @@ const AdminViewClientDetails = () => {
                   value={data.insuranceNumber}
                   onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled={enable}
+                  disabled
                 />
                 <label className="font-semibold mt-2">Payee Ref No:</label>
                 <InputField
@@ -367,27 +373,19 @@ const AdminViewClientDetails = () => {
                   value={data.payeeRefNo}
                   onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  disabled={enable}
+                  disabled
                 />
-                {/* <label className="font-semibold mt-2">:</label>
-                <InputField
-                  type="password"
-                  name="password"
-                   onChange={(e) => setData(e.target.value)}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Password"
-                  disabled={enable}
-                /> */}
               </div>
             </div>
-            <div></div>
-            <div className="intro-x flex xl:justify-center">
-              {enable ? (
+            {/* <div></div> */}
+            {/* <div className="intro-x flex xl:justify-center d-flex justify-content-center">
+              {disabled ? (
                 <Button
                   type="button"
                   onClick={handleEditClick}
-                  className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"
+                  className="button button--lg xl:w-32 text-white bg-theme-1 xl:mr-3"
                   value="Edit"
+                  style={{width: '150px', margin:'1rem'}}
                 />
               ) : (
                 <>
@@ -396,6 +394,7 @@ const AdminViewClientDetails = () => {
                     onClick={handleEditClick}
                     className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"
                     value="Update"
+                    style={{width: '150px', margin:'1rem'}}
                   />
 
                   <Button
@@ -403,10 +402,11 @@ const AdminViewClientDetails = () => {
                     onClick={handleEditClick}
                     className="button bg-red-700 button--lg w-full xl:w-32 text-white"
                     value="Delete"
+                    style={{width: '150px', margin:'1rem'}}
                   />
                 </>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -452,7 +452,7 @@ export default AdminViewClientDetails;
 //         name="accountType"
 //         className="intro-x login__input input input--lg mb-2 border border-gray-300 block"
 //         dropdownElements={AccountTypeDropdownData}
-//         disabled={enable}
+//         disabled={disabled}
 //       />
 //       <label className="font-semibold mt-2">{this.props.lable}</label>
 //       <InputField
@@ -461,7 +461,7 @@ export default AdminViewClientDetails;
 //         name={this.props.name}
 //         onChange={this.handleChange.bind(this, this.props.name)}
 //         className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-//        // disabled={enable}
+//        // disabled={disabled}
 //       />
 //       {/* <label className="font-semibold mt-2">Company Address:</label>
 //       <InputField
@@ -470,7 +470,7 @@ export default AdminViewClientDetails;
 //         // value={client.companyAddress}
 //          onChange={(e) => setData(e.target.value)}
 //         className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-//         disabled={enable}
+//         disabled={disabled}
 //       />
 //       <label className="font-semibold mt-2">City:</label>
 //       <InputField
@@ -479,7 +479,7 @@ export default AdminViewClientDetails;
 //         // value={client.city}
 //          onChange={(e) => setData(e.target.value)}
 //         className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-//         disabled={enable}
+//         disabled={disabled}
 //       />
 //       <label className="font-semibold mt-2">Postal Code:</label>
 //       <InputField
@@ -488,7 +488,7 @@ export default AdminViewClientDetails;
 //         // value={client.postalCode}
 //          onChange={(e) => setData(e.target.value)}
 //         className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-//         disabled={enable}
+//         disabled={disabled}
 //       />
 //       <label className="font-semibold mt-2">Country:</label>
 //       <InputField
@@ -497,7 +497,7 @@ export default AdminViewClientDetails;
 //         // value={client.country}
 //          onChange={(e) => setData(e.target.value)}
 //         className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-//         disabled={enable}
+//         disabled={disabled}
 //       />
 //       <label className="font-semibold mt-2">Phone Number:</label>
 //       <InputField
@@ -506,7 +506,7 @@ export default AdminViewClientDetails;
 //         // value={client.phoneNumber}
 //          onChange={(e) => setData(e.target.value)}
 //         className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-//         disabled={enable}
+//         disabled={disabled}
 //       />
 
 //       <label className="font-semibold mt-2">Email:</label>
@@ -516,7 +516,7 @@ export default AdminViewClientDetails;
 //         // value={client.email}
 //          onChange={(e) => setData(e.target.value)}
 //         className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
-//         disabled={enable}
+//         disabled={disabled}
 //       /> */}
 //     </div>
 //     );

@@ -48,7 +48,7 @@ const adminClient = React.lazy(() => import('pages/admin/adminClient'));
 const adminDashboard = React.lazy(() => import('pages/admin/adminDashboard'));
 const adminAlertPage = React.lazy(() => import('pages/admin/adminAlertPage'));
 const adminBadgePage = React.lazy(() => import('pages/admin/adminBadgePage'));
-const adminButtonGroupPage = React.lazy(() =>import('pages/admin/adminButtonGroupPage'),);
+const adminButtonGroupPage = React.lazy(() =>import('pages/admin/adminButtonGroupPage'));
 const adminButtonPage = React.lazy(() => import('pages/admin/adminButtonPage'));
 const adminCardPage = React.lazy(() => import('pages/admin/adminCardPage'));
 const adminChartPage = React.lazy(() => import('pages/admin/adminChartPage'));
@@ -81,15 +81,20 @@ const TypographyPage = React.lazy(() => import('pages/user/TypographyPage'));
 const WidgetPage = React.lazy(() => import('pages/user/WidgetPage'));
 
 // superAdmin
-const superAdminRegister = React.lazy(() => import('pages/super/adminRegister'));
 const superAdminDashboard = React.lazy(() => import('pages/super/adminDashboard'));
+const superAdminRegisterAdmin = React.lazy(() => import('pages/super/adminRegister'));
+const superAdminAllAdmins = React.lazy(() => import('pages/super/allAdmins'));
+
+const superAdminProfile = React.lazy(() => import('pages/super/profile'));
+const superAdminRequests = React.lazy(() => import('pages/super/requests'));
+
 const superAdminButtonGroupPage = React.lazy(() =>import('pages/super/adminButtonGroupPage'));
 const superAdminButtonPage = React.lazy(() => import('pages/super/adminButtonPage'));
 const superAdminCardPage = React.lazy(() => import('pages/super/adminCardPage'));
 const superAdminChartPage = React.lazy(() => import('pages/super/adminChartPage'));
 const superAdminClientPage = React.lazy(() => import('pages/super/clientPage'));
 const superAdminViewClientDetails = React.lazy(() => import('pages/super/adminViewClientDetails'));
-const superAdminDashboardPage = React.lazy(() =>import('pages/super/adminDashboardPage'));
+// const superAdminDashboardPage = React.lazy(() =>import('pages/super/adminDashboardPage'));
 const superAdminDropdownPage = React.lazy(() =>import('pages/super/adminDropdownPage'));
 const superAdminFormPage = React.lazy(() => import('pages/super/adminFormPage'));
 const superAdminInputGroupPage = React.lazy(() =>import('pages/super/adminInputGroupPage'));
@@ -156,8 +161,8 @@ const App = ({ breakpoint }) => {
           // Admin Routes
           (<AdminMainLayout breakpoint={breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
-              <Route exact path="/admin/dashboardold" component={adminDashboardPage} />
               <Route exact path="/admin/dashboard" component={adminDashboard} />
+              <Route exact path="/admin/dashboardold" component={adminDashboardPage} />
               <Route exact path="/admin/buttons" component={adminButtonPage} />
               <Route exact path="/admin/cards" component={adminCardPage} />
               <Route exact path="/admin/widgets" component={adminWidgetPage} />
@@ -180,7 +185,9 @@ const App = ({ breakpoint }) => {
             <AdminMainLayout breakpoint={breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/superadmin/dashboard" component={superAdminDashboard} />
-                <Route exact path="/superadmin/dashboardold" component={superAdminDashboardPage} />
+                <Route exact path="/superadmin/admins" component={superAdminAllAdmins} />
+                <Route exact path="/superadmin/profile" component={superAdminProfile} />
+                <Route exact path="/superadmin/requests" component={superAdminRequests} />
                 <Route exact path="/superadmin/buttons" component={superAdminButtonPage} />
                 <Route exact path="/superadmin/cards" component={superAdminCardPage} />
                 <Route exact path="/superadmin/widgets" component={superAdminWidgetPage} />
@@ -195,7 +202,8 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/superadmin/forms" component={superAdminFormPage} />
                 <Route exact path="/superadmin/input-groups" component={superAdminInputGroupPage} />
                 <Route exact path="/superadmin/charts" component={superAdminChartPage} />
-                <Route exact path="/superadmin/register" component={superAdminRegister} /> 
+                <Route exact path="/superadmin/registeradmin" component={superAdminRegisterAdmin} /> 
+                {/* <Route exact path="/superadmin/registerclient" component={superAdminRegisterClient} />  */}
                 <Route exact path="/superadmin/client" component={superAdminClientPage} />
                 <Route exact path="/superadmin/client/details/:userId" component={superAdminViewClientDetails} /> 
                 <Route exact path="/superadmin/alert" component={superAdminAlertPage} /> 

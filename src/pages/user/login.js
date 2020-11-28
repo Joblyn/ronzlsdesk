@@ -32,9 +32,6 @@ const Login = () => {
     const role = localStorage.getItem('role');
     console.log('Auth: ' + token);
     console.log('Role: ' + role);
-    if ((token && role === 'admin') || (token && role === 'superadmin')) {
-      history.push('/admin/dashboard');
-    }
     if (token && role === 'user') {
       history.push('/user/dashboard');
     }

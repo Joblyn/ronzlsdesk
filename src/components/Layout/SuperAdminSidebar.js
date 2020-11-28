@@ -26,6 +26,7 @@ import {
   MdWidgets,
 } from 'react-icons/md';
 import { NavLink, Link } from 'react-router-dom';
+import { logOutAction } from '../../actions/admin/authAction/Users';
 import {
   // UncontrolledTooltip,
   Collapse,
@@ -100,22 +101,41 @@ const pageContents = [
 
 const navItems = [
   { to: '/superadmin/dashboard', name: 'dashboard', exact: true, Icon: MdDashboard },
-  { to: '/superadmin/client', name: 'client', exact: true, Icon: MdDashboard },
   {
-    to: '/superadmin/dashboardold',
-    name: 'dashboardold',
+    to: '/superadmin/profile',
+    name: 'profile',
     exact: true,
     Icon: MdDashboard,
   },
-  { to: '/superadmin/cards', name: 'cards', exact: false, Icon: MdWeb },
+  { to: '/superadmin/admins', name: 'admins', exact: false, Icon: MdWeb },
+  { to: '/superadmin/client', name: 'clients', exact: true, Icon: MdDashboard },
+  // { to: '/superadmin/cards', name: 'cards', exact: false, Icon: MdWeb },
   {
-    to: '/superadmin/register',
+    to: '/superadmin/registeradmin',
     name: 'Register Admin',
     exact: false,
     Icon: MdAccountCircle,
   },
-  { to: '/superadmin/charts', name: 'charts', exact: false, Icon: MdInsertChart },
-  { to: '/superadmin/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
+  {
+    to: '/superadmin/documents',
+    name: 'Documents',
+    exact: false,
+    Icon: MdExtension,
+  }, 
+  {
+    to: '/superadmin/requests',
+    name: 'Requests',
+    exact: false,
+    Icon: MdSend,
+  }, 
+  // {
+  //   to: '/superadmin/registerclient',
+  //   name: 'Register Client',
+  //   exact: false,
+  //   Icon: MdAccountCircle,
+  // },
+  // { to: '/superadmin/charts', name: 'charts', exact: false, Icon: MdInsertChart },
+  // { to: '/superadmin/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
 ];
 
 const bem = bn.create('sidebar');
@@ -170,16 +190,16 @@ class Sidebar extends React.Component {
               </NavItem>
             ))}
 
-            <NavItem
+            {/* <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Components')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
                   <MdExtension className={bem.e('nav-item-icon')} />
-                  <span className=" align-self-start">Components</span>
-                </div>
-                <MdKeyboardArrowDown
+                  <span className=" align-self-start">DOCUMENTS</span>
+                </div> */}
+                {/* <MdKeyboardArrowDown
                   className={bem.e('nav-item-icon')}
                   style={{
                     padding: 0,
@@ -189,10 +209,10 @@ class Sidebar extends React.Component {
                     transitionDuration: '0.3s',
                     transitionProperty: 'transform',
                   }}
-                />
-              </BSNavLink>
-            </NavItem>
-            <Collapse isOpen={this.state.isOpenComponents}>
+                /> */}
+              {/* </BSNavLink>
+            </NavItem> */}
+            {/* <Collapse isOpen={this.state.isOpenComponents}>
               {navComponents.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
@@ -208,18 +228,18 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse>
+            </Collapse> */}
 
-            <NavItem
+            {/* <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Contents')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
                   <MdSend className={bem.e('nav-item-icon')} />
-                  <span className="">Contents</span>
-                </div>
-                <MdKeyboardArrowDown
+                  <span className="">REQUESTS</span> */}
+                {/* </div> */}
+                {/* <MdKeyboardArrowDown
                   className={bem.e('nav-item-icon')}
                   style={{
                     padding: 0,
@@ -229,10 +249,10 @@ class Sidebar extends React.Component {
                     transitionDuration: '0.3s',
                     transitionProperty: 'transform',
                   }}
-                />
-              </BSNavLink>
-            </NavItem>
-            <Collapse isOpen={this.state.isOpenContents}>
+                /> */}
+              {/* </BSNavLink> */}
+            {/* </NavItem> */}
+            {/* <Collapse isOpen={this.state.isOpenContents}>
               {navContents.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
@@ -248,18 +268,18 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse>
+            </Collapse> */}
 
             <NavItem
               className={bem.e('nav-item')}
-              onClick={this.handleClick('Pages')}
+              onClick={logOutAction}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
                   <MdPages className={bem.e('nav-item-icon')} />
-                  <span className="">Pages</span>
+                  <span className="">LOGOUT</span>
                 </div>
-                <MdKeyboardArrowDown
+                {/* <MdKeyboardArrowDown
                   className={bem.e('nav-item-icon')}
                   style={{
                     padding: 0,
@@ -269,10 +289,10 @@ class Sidebar extends React.Component {
                     transitionDuration: '0.3s',
                     transitionProperty: 'transform',
                   }}
-                />
+                /> */}
               </BSNavLink>
             </NavItem>
-            <Collapse isOpen={this.state.isOpenPages}>
+            {/* <Collapse isOpen={this.state.isOpenPages}>
               {pageContents.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
@@ -288,7 +308,7 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse>
+            </Collapse> */}
           </Nav>
         </div>
       </aside>

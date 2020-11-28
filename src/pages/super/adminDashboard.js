@@ -67,7 +67,7 @@ class DashboardAdmin extends React.Component {
         title="Dashboard"
         breadcrumbs={[{ name: 'Dashboard', active: true }]}
       >
-        <Row>
+        {/* <Row>
           <Col lg={3} md={6} sm={6} xs={12}>
             <NumberWidget
               title="Total Profit"
@@ -119,28 +119,29 @@ class DashboardAdmin extends React.Component {
               }}
             />
           </Col>
-        </Row>
+        </Row> */}
 
-        <Row>
-          <Col lg="8" md="12" sm="12" xs="12">
+        {/* <Row>
+          <Col lg="12" md="12" sm="12" xs="12">
             <Card>
               <CardHeader>
                 Total Revenue{' '}
                 <small className="text-muted text-capitalize">This year</small>
               </CardHeader>
-              <CardBody>
-                <Line data={chartjs.line.data} options={chartjs.line.options} />
-              </CardBody>
-            </Card>
-          </Col>
+              <CardBody> */}
+                {/* <Line data={chartjs.line.data} options={chartjs.line.options} /> */}
 
-          <Col lg="4" md="12" sm="12" xs="12">
+              {/* </CardBody>
+            </Card>
+          </Col> */}
+
+          {/* <Col lg="12" md="12" sm="12" xs="12">
             <Card>
               <CardHeader>Total Expense</CardHeader>
-              <CardBody>
-                <Bar data={chartjs.bar.data} options={chartjs.bar.options} />
-              </CardBody>
-              <ListGroup flush>
+              <CardBody> */}
+                {/* <Bar data={chartjs.bar.data} options={chartjs.bar.options} /> */}
+              {/* </CardBody> */}
+              {/* <ListGroup flush>
                 <ListGroupItem>
                   <MdInsertChart size={25} color={primaryColor} /> Cost of sales{' '}
                   <Badge color="secondary">$3000</Badge>
@@ -157,12 +158,12 @@ class DashboardAdmin extends React.Component {
                   <MdPieChart size={25} color={primaryColor} /> Other operating
                   costs <Badge color="secondary">$2400</Badge>
                 </ListGroupItem>
-              </ListGroup>
-            </Card>
+              </ListGroup> */}
+            {/* </Card>
           </Col>
-        </Row>
+        </Row> */}
 
-        <CardGroup style={{ marginBottom: '1rem' }}>
+        {/* <CardGroup style={{ marginBottom: '1rem' }}>
           <IconWidget
             bgColor="white"
             inverse={false}
@@ -184,9 +185,9 @@ class DashboardAdmin extends React.Component {
             title="30+ Shares"
             subtitle="New Shares"
           />
-        </CardGroup>
+        </CardGroup> */}
 
-        <Row>
+        {/* <Row>
           <Col md="6" sm="12" xs="12">
             <Card>
               <CardHeader>New Products</CardHeader>
@@ -223,9 +224,9 @@ class DashboardAdmin extends React.Component {
               </CardBody>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
 
-        <Row>
+        {/* <Row>
           <Col lg={4} md={4} sm={12} xs={12}>
             <Card>
               <Line
@@ -308,9 +309,9 @@ class DashboardAdmin extends React.Component {
               </CardBody>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
 
-        <Row>
+        {/* <Row>
           <Col lg="4" md="12" sm="12" xs="12">
             <InfiniteCalendar
               selected={today}
@@ -345,9 +346,9 @@ class DashboardAdmin extends React.Component {
               </CardBody>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
 
-        <CardDeck style={{ marginBottom: '1rem' }}>
+        {/* <CardDeck style={{ marginBottom: '1rem' }}>
           <Card
             body
             style={{
@@ -378,25 +379,55 @@ class DashboardAdmin extends React.Component {
               reversed
             />
           </Card>
-        </CardDeck>
+        </CardDeck> */}
 
         <Row>
-          <Col lg="4" md="12" sm="12" xs="12">
+          <Col lg="12" md="12" sm="12" xs="12" className="d-flex align-items-center justify-content-center mb-3" >
             <AnnouncementCard
               color="gradient-secondary"
-              header="Announcement"
-              avatarSize={60}
-              name="Jamy"
-              date="1 hour ago"
-              text="Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy euismod tinciduntut laoreet doloremagna"
+              // header="Announcement"
+              // avatarSize={60}
+              // name="Jamy"
+              // date="1 hour ago"
+              text="View All Admins"
               buttonProps={{
-                children: 'show',
+                children: 'View',
+                href:'/superadmin/admins'
               }}
-              style={{ height: 500 }}
+              style={{ height: 'fit-content', width: '100%', maxWidth: '500px',cursor: 'pointer'}}
             />
           </Col>
-
-          <Col lg="4" md="12" sm="12" xs="12">
+          <Col lg="12" md="12" sm="12" xs="12" className="d-flex align-items-center justify-content-center mb-3">
+            <AnnouncementCard
+              color="gradient-secondary"
+              // header="Announcement"
+              // avatarSize={60}
+              // name="Jamy"
+              // date="1 hour ago"
+              text="View All Clients"
+              buttonProps={{
+                children: 'View',
+                href:'/superadmin/client'
+              }}
+              style={{ height: 'fit-content', width: '100%', maxWidth: '500px',cursor: 'pointer'}}
+            />
+          </Col>
+          <Col lg="12" md="12" sm="12" xs="12" className="d-flex align-items-center justify-content-center mb-3">
+            <AnnouncementCard
+              color="gradient-secondary"
+              // header="Announcement"
+              // avatarSize={60}
+              // name="Jamy"
+              // date="1 hour ago"
+              text="View All Requests"
+              buttonProps={{
+                children: 'View',
+                href:'/superadmin/requests'
+              }}
+              style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer'}}
+            />
+          </Col>
+          {/* <Col lg="4" md="12" sm="12" xs="12">
             <Card>
               <CardHeader>
                 <div className="d-flex justify-content-between align-items-center">
@@ -412,11 +443,11 @@ class DashboardAdmin extends React.Component {
                 ))}
               </CardBody>
             </Card>
-          </Col>
+          </Col> */}
 
-          <Col lg="4" md="12" sm="12" xs="12">
+          {/* <Col lg="4" md="12" sm="12" xs="12">
             <TodosCard todos={todosData} />
-          </Col>
+          </Col> */}
         </Row>
       </Page>
     );

@@ -21,6 +21,9 @@ export let getClientDetail = 'admin/user/';
 //Admin Doc Upload
 export let adminUploadDoc = 'admin/actions/uploadDocToUser/{user_id}';
 
+//Admin update client subscription
+export let adminUpdateSubscription = 'admin/actions/date/'
+
 //User
 //Authentication
 export let userRegister = 'user/signup';

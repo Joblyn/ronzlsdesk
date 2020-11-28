@@ -135,10 +135,7 @@ const AdminLogin = () => {
                   </label>
                 </div> */}
 
-                <Link
-                  to="/admin/forgot-password"
-                  className="text-green-500 font-semibold px-2 hover:underline"
-                >
+                <Link to="/admin/forgot-password" className="text-green-500 font-semibold px-2 hover:underline">
                   Forgot Password
                 </Link>
               </div>
