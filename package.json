@@ -61,7 +61,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject --env=jsdom",
     "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
-    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
+    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
   },
   "browserslist": [
     ">0.2%",
