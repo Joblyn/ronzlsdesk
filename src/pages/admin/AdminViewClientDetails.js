@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
+import { 
+  // Link, 
+  // useHistory,
+  // useLocation, 
+  // useParams 
+} from 'react-router-dom';
 
-import logo from '../../assets/images/logo.png';
-import bgImage from '../../assets/images/illustration.png';
+// import logo from '../../assets/images/logo.png';
+// import bgImage from '../../assets/images/illustration.png';
 
 import { registerUser } from '../../actions/user/authAction/Users';
 import { userRegister } from '../../apiConstants/apiConstants';
-import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
+// import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
 import PageSpinner from '../../components/PageSpinner';
 
 //components
@@ -14,21 +19,23 @@ import InputField from '../../components/InputField';
 import Button from '../../components/button';
 import { useDispatch, useSelector } from 'react-redux';
 import InputDropdown from '../../components/InputDropdown';
-import { getClientDetails } from '../../actions/admin/clients/Clients';
-import { getClientDetail } from '../../apiConstants/apiConstants';
+// import { getClientDetails } from '../../actions/admin/clients/Clients';
+// import { getClientDetail } from '../../apiConstants/apiConstants';
 
 const AdminViewClientDetails = () => {
-  const [userState, setUserState] = useState('');
+  // const [userState, setUserState] = useState('');
   const [inputList, setInputList] = useState([1]);
   const [enable, setEnable] = useState('disabled');
   const [managerControl, setManagerControl] = useState({});
   const [count, setCount] = useState(1);
   let obj = {};
-  const [control, setControl] = useState(control);
+  const [control, setControl] = useState();
   const dispatch = useDispatch();
   const clientDetails = useSelector(state => state.adminGetAllClient.user);
-  const history = useHistory();
-  const location = useLocation();
+  // const history = useHistory();
+  // const location = useLocation();
+
+  console.log(setControl);
 
   const [data, setData] = useState({});
   const [director, setDirector ] = useState([{}]);
@@ -38,7 +45,7 @@ const AdminViewClientDetails = () => {
     setEnable('');
   };
 
-  const { userId } = useParams();
+  // const { userId } = useParams();
   // console.log('USer :' + userId);
 
   useEffect(() => {
@@ -69,6 +76,7 @@ const AdminViewClientDetails = () => {
     });
     // console.log("Res: "+JSON.stringify(obj));
   };
+  console.log(handleInputChange);
 
   // console.log({ ...inputList, ...control });
   // handle click event of the Remove button
@@ -78,12 +86,15 @@ const AdminViewClientDetails = () => {
     setInputList(list);
     setCount(count - 1);
   };
+  console.log(handleRemoveClick);
 
   // handle click event of the Add button
   const handleAddClick = () => {
     setInputList([...inputList, { firstName: '', dateOfBirth: '' }]);
     setCount(count + 1);
   };
+  console.log(handleAddClick);
+
   const prepareManager = managers => {
     let newManagers = [];
     let temp = Object.keys(managers);
@@ -163,6 +174,7 @@ const AdminViewClientDetails = () => {
     console.log('Result: ' + JSON.stringify(payload));
     dispatch(registerUser(userRegister, payload));
   };
+  console.log(handleClick);
 
   const AccountTypeDatas = [
     ['Individual', 'individual'],

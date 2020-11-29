@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import React from 'react';
+// import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 const ExcelTable = ({ exportData, exportRow, fileName, exportHead, id }) => {
   if (!exportData) {

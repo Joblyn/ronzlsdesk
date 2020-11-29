@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { Link, Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import { Link, Redirect } from 'react-router-dom';
+// import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { register, test } from '../../actions/admin/authAction/Users';
+import { register,
+  //  test
+  } from '../../actions/admin/authAction/Users';
 import { adminRegsiter } from '../../apiConstants/apiConstants';
 
-import logo from '../../assets/images/logo.png';
-import bgImage from '../../assets/images/illustration.png';
+// import logo from '../../assets/images/logo.png';
+// import bgImage from '../../assets/images/illustration.png';
 
 //components
 import InputField from '../../components/InputField';
@@ -21,6 +23,7 @@ const AdminRegister = () => {
   const dispatch = useDispatch();
   const adminRegister = useSelector(state => state.adminRegisterAuth);
   const history = useHistory();
+  console.log(history);
 
   useEffect(() => {
     if (adminRegister.isSuccessful) {

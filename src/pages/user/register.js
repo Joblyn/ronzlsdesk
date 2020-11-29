@@ -16,7 +16,7 @@ import InputDropdown from '../../components/InputDropdown';
 
 const Register = () => {
   const [inputList, setInputList] = useState([1]);
-  const [inputList1, setInputList1] = useState([]);
+  // const [inputList1, setInputList1] = useState([]);
   const [managerControl, setManagerControl] = useState({});
   const [count, setCount] = useState(1);
   let obj = {};

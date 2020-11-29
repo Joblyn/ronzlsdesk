@@ -1,6 +1,6 @@
 import * as ActionType from '../../Types';
 import setAuthToken from '../../../utils/setAuthToken';
-import { postData, getData, getDataWithToken, postDataWithToken } from '../../Services';
+import { postData, getDataWithToken, postDataWithToken } from '../../Services';
 
 const onRegister = payload => {
   return {

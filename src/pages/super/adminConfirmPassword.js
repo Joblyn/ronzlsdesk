@@ -43,7 +43,7 @@ const ConfirmPasswordAdmin = () => {
             </div>
             <div className="my-auto">
               <img
-                alt="Ronzl background image"
+                alt="Ronzl background"
                 className="-intro-x w-1/2 -mt-16"
                 src={bgImage}
               />
@@ -64,7 +64,7 @@ const ConfirmPasswordAdmin = () => {
                   <img alt="Ronzl Logo" className="w-20" src={logo} />
                 </Link>
               </div>
-              <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left"></h2>
+              <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Header</h2>
               <div className="intro-x mt-2 text-gray-500 xl:hidden text-center">
                 Update account
                 <br /> password <br />

@@ -6,7 +6,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-// import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Pagination from '@material-ui/lab/Pagination';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -105,7 +104,7 @@ export default function CustomTable({
   const [items, setItems] = React.useState(rows);
   const [count, setCount] = React.useState(items.length / rowsPerPage);
   const [filter, setFilter] = React.useState('Name');
-
+  console.log(filter);
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -132,10 +131,13 @@ export default function CustomTable({
   const handleFilterChange = event => {
     setFilter(event.target.value);
   };
+  console.log(handleFilterChange);
   const renderTableColumns = () => {
     let nColumn = null;
     let nActions = null;
     let nEmoji = null;
+    console.log(nEmoji);
+
     const nColumns = columns.map(column => {
       nColumn = column;
 
@@ -266,6 +268,8 @@ export default function CustomTable({
         return <Icon.CheckCircle key={index} color="green" />;
       case 'close':
         return <Icon.XCircle key={index} color="red" />;
+      default: 
+      return null
     }
   };
   return (

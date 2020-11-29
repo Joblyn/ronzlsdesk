@@ -1,20 +1,24 @@
 import Page from 'components/Page';
-import React, { useEffect, useRef } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import React, { useEffect, 
+  // useRef 
+} from 'react';
+import { Link, 
+  // useHistory, 
+  useParams } from 'react-router-dom';
 import PageSpinner from '../../components/PageSpinner';
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Row,
-  UncontrolledButtonDropdown,
-} from 'reactstrap';
+// import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+// import {
+  // Button,
+  // Card,
+  // CardBody,
+  // CardHeader,
+  // Col,
+  // DropdownItem,
+  // DropdownMenu,
+  // DropdownToggle,
+  // Row,
+  // UncontrolledButtonDropdown,
+// } from 'reactstrap';
 import { getThemeColors } from 'utils/colors';
 import CustomTable from '../../components/table/CustomTable';
 
@@ -25,16 +29,18 @@ import {
   getDocuments
 } from '../../apiConstants/apiConstants';
 import { useDispatch, useSelector } from 'react-redux';
-import ExcelTable from '../../components/ExportToExcel';
+// import ExcelTable from '../../components/ExportToExcel';
 import Modal from '../../components/Modal';
 
 const colors = getThemeColors();
+console.log(colors);
 
 const Documents = () => {
-  const history = useHistory();
+  // const history = useHistory();
   const dispatch = useDispatch();
   const adminGetAllDocuments = useSelector(state => state.getAllDocuments);
   const { params } = useParams();
+  console.log(params);
 
   // console.log('Payload:' + adminGetAllDocuments.users);
 
@@ -77,17 +83,18 @@ const Documents = () => {
             >
               View Document
             </Link>
-          ),
+          )
         });
+        return null
       });
     return rows;
   };
   const onActionClicked = (e, payload) => {
     alert(JSON.stringify(payload));
   };
-  // if (adminGetAllDocuments.users.length === 0) {
-    // return <PageSpinner />;
-  // }
+  if (adminGetAllDocuments.documents === 0) {
+    return <PageSpinner />;
+  }
   return (
     <Page
       title="Dropdowns"
@@ -134,8 +141,7 @@ const Documents = () => {
         rows={getRows(adminGetAllDocuments.documents)}
         handleActionClick={onActionClicked}
         handleLinkClick={onLinkClicked}
-      />
-      
+      />      
     </Page>
   );
 }

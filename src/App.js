@@ -1,17 +1,17 @@
-import { STATE_LOGIN, STATE_SIGNUP } from 'components/AuthForm';
-import GAListener from 'components/GAListener';
+// import { STATE_LOGIN, STATE_SIGNUP } from 'components/AuthForm';
+// import GAListener from 'components/GAListener';
 import {
-  EmptyLayout,
-  LayoutRoute,
+  // EmptyLayout,
+  // LayoutRoute,
   MainLayout,
   AdminMainLayout,
 } from './components/Layout';
 import PageSpinner from './components/PageSpinner';
-import React, { useEffect } from 'react';
+import React from 'react';
 import componentQueries from 'react-component-queries';
 import {
   BrowserRouter as Router,
-  Redirect,
+  // Redirect,
   Route,
   Switch,
 } from 'react-router-dom';
@@ -32,15 +32,15 @@ import AdminForgotPassword from './pages/admin/adminForgotPassword';
 import AdminConfirmPassword from './pages/admin/adminConfirmPassword';
 
 
-import {
-  logoutAdminAction,
-  setCurrentAdminUser,
-} from './actions/admin/authAction/Users';
+// import {
+  // logoutAdminAction,
+  // setCurrentAdminUser,
+// } from './actions/admin/authAction/Users';
 import { ProtectedRoute } from './validations/protectedRoute';
 import { IsUserRedirect } from './validations/isUserRedirect';
-import { useDispatch } from 'react-redux';
-import { getClient } from './actions/admin/clients/Clients';
-import { getAllClients } from './apiConstants/apiConstants';
+// // import { useDispatch } from 'react-redux';
+// import { getClient } from './actions/admin/clients/Clients';
+// import { getAllClients } from './apiConstants/apiConstants';
 
 //Admin
 // const AdminRegister = React.lazy(() => import('pages/admin/adminRegister'));
@@ -116,7 +116,7 @@ const superAdminDocumentPage = React.lazy(() => import('pages/super/document'));
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
 };
-
+console.log(getBasename);
 const auth = localStorage.getItem('jwtToken');
 const role = localStorage.getItem('role');
 
@@ -143,28 +143,61 @@ const App = ({ breakpoint }) => {
         <Route path="/user/confirm-password" component={ConfirmPassword} />
 
         {/* User Routes */}
-        {role === 'user' ? (
+        {(auth && role === 'user') ? (
           <MainLayout breakpoint={breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
-              <Route exact path="/user/dashboard" component={DashboardPage} />
-              <Route exact path="/user/login-modal" component={AuthModalPage} />
-              <Route exact path="/user/buttons" component={ButtonPage} />
-              <Route exact path="/user/cards" component={CardPage} />
-              <Route exact path="/user/widgets" component={WidgetPage} />
-              <Route exact path="/user/typography" component={TypographyPage} />
-              <Route exact path="/user/alerts" component={AlertPage} />
-              <Route exact path="/user/tables" component={TablePage} />
-              <Route exact path="/user/badges" component={BadgePage} />
-              <Route exact path="/user/button-groups" component={ButtonGroupPage}/>
-              <Route exact path="/user/dropdowns" component={DropdownPage} />
-              <Route exact path="/user/progress" component={ProgressPage} />
-              <Route exact path="/user/modals" component={ModalPage} />
-              <Route exact path="/user/forms" component={FormPage} />
-              <Route exact path="/user/input-groups" component={InputGroupPage} />
-              <Route exact path="/user/charts" component={ChartPage} />
+              <ProtectedRoute>
+                <Route exact path="/user/dashboard" component={DashboardPage} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/login-modal" component={AuthModalPage} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/buttons" component={ButtonPage} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/cards" component={CardPage} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/widgets" component={WidgetPage} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/typography" component={TypographyPage} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/alerts" component={AlertPage} />
+              </ProtectedRoute> 
+              <ProtectedRoute>
+                <Route exact path="/user/tables" component={TablePage} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/badges" component={BadgePage} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/button-groups" component={ButtonGroupPage}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/dropdowns" component={DropdownPage} />
+              </ProtectedRoute> 
+              <ProtectedRoute>
+                <Route exact path="/user/progress" component={ProgressPage} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/modals" component={ModalPage} />
+              </ProtectedRoute> 
+              <ProtectedRoute>
+                <Route exact path="/user/forms" component={FormPage} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/input-groups" component={InputGroupPage} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/charts" component={ChartPage} />
+              </ProtectedRoute>
+
             </React.Suspense>
           </MainLayout>
-        ) : ( role === 'admin' ? 
+        ) : ((auth && role === 'admin') ? 
           // Admin Routes
           (<AdminMainLayout breakpoint={breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
@@ -189,8 +222,8 @@ const App = ({ breakpoint }) => {
               <Route exact path="/admin/client" component={adminClient} />
             </React.Suspense>
           </AdminMainLayout>
-          ) : (
-            <AdminMainLayout breakpoint={breakpoint}>
+          ) : ( (auth && role === 'superadmin') ?
+            (<AdminMainLayout breakpoint={breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
                 <ProtectedRoute>
                   <Route exact path="/superadmin/dashboard" component={superAdminDashboard} />
@@ -242,7 +275,8 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/superadmin/auth" component={superAuthPage} /> 
                 <Route exact path="/superadmin/badges" component={superAdminBadgePage} /> 
               </React.Suspense>
-            </AdminMainLayout>
+            </AdminMainLayout> )
+            : null
           )
         )}
       </Switch>

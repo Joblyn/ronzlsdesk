@@ -12,13 +12,13 @@ import { getAllAdmin } from 'apiConstants/apiConstants';
 import {
   MdClearAll,
   MdExitToApp,
-  MdHelp,
-  MdInsertChart,
+  // MdHelp,
+  // MdInsertChart,
   MdMessage,
   MdNotificationsActive,
   MdNotificationsNone,
   MdPersonPin,
-  MdSettingsApplications,
+  // MdSettingsApplications,
 } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import {

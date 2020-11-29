@@ -1,4 +1,3 @@
-import { getAllDocuments } from '../../actions/admin/clients/Clients';
 import * as ActionTypes from '../../actions/Types';
 import { adminGetAllDocuments } from '../initialState';
 

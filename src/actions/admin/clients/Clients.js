@@ -1,5 +1,5 @@
 import * as ActionType from '../../Types';
-import { getDataWithToken, postDataWithToken, postData } from '../../Services';
+import { getDataWithToken, postDataWithToken } from '../../Services';
 
 const onGetClient = payload => {
   return {

@@ -4,33 +4,33 @@ import React from 'react';
 // import { FaGithub } from 'react-icons/fa';
 import {
   MdAccountCircle,
-  MdArrowDropDownCircle,
-  MdBorderAll,
-  MdBrush,
-  MdChromeReaderMode,
+  // MdArrowDropDownCircle,
+  // MdBorderAll,
+  // MdBrush,
+  // MdChromeReaderMode,
   MdDashboard,
   MdExtension,
-  MdGroupWork,
-  MdInsertChart,
-  MdKeyboardArrowDown,
-  MdNotificationsActive,
+  // MdGroupWork,
+  // MdInsertChart,
+  // MdKeyboardArrowDown,
+  // MdNotificationsActive,
   MdPages,
-  MdRadioButtonChecked,
+  // MdRadioButtonChecked,
   MdSend,
-  MdStar,
-  MdTextFields,
-  MdViewCarousel,
-  MdViewDay,
-  MdViewList,
+  // MdStar,
+  // MdTextFields,
+  // MdViewCarousel,
+  // MdViewDay,
+  // MdViewList,
   MdWeb,
-  MdWidgets,
+  // MdWidgets,
   MdSchedule
 } from 'react-icons/md';
 import { NavLink, Link } from 'react-router-dom';
 import { logOutAction } from '../../actions/admin/authAction/Users';
 import {
   // UncontrolledTooltip,
-  Collapse,
+  // Collapse,
   Nav,
   Navbar,
   NavItem,
@@ -44,61 +44,61 @@ const sidebarBackground = {
   backgroundRepeat: 'no-repeat',
 };
 
-const navComponents = [
-  {
-    to: '/superadmin/buttons',
-    name: 'buttons',
-    exact: false,
-    Icon: MdRadioButtonChecked,
-  },
-  {
-    to: '/superadmin/button-groups',
-    name: 'button groups',
-    exact: false,
-    Icon: MdGroupWork,
-  },
-  { to: '/superadmin/forms', name: 'forms', exact: false, Icon: MdChromeReaderMode },
-  {
-    to: '/superadmin/input-groups',
-    name: 'input groups',
-    exact: false,
-    Icon: MdViewList,
-  },
-  {
-    to: '/superadmin/dropdowns',
-    name: 'dropdowns',
-    exact: false,
-    Icon: MdArrowDropDownCircle,
-  },
-  { to: '/superadmin/badges', name: 'badges', exact: false, Icon: MdStar },
-  {
-    to: '/superadmin/alerts',
-    name: 'superadmin alerts',
-    exact: false,
-    Icon: MdNotificationsActive,
-  },
-  { to: '/superadmin/progress', name: 'progress', exact: false, Icon: MdBrush },
-  { to: '/superadmin/modals', name: 'modals', exact: false, Icon: MdViewDay },
-];
+// const navComponents = [
+//   {
+//     to: '/superadmin/buttons',
+//     name: 'buttons',
+//     exact: false,
+//     Icon: MdRadioButtonChecked,
+//   },
+//   {
+//     to: '/superadmin/button-groups',
+//     name: 'button groups',
+//     exact: false,
+//     Icon: MdGroupWork,
+//   },
+//   { to: '/superadmin/forms', name: 'forms', exact: false, Icon: MdChromeReaderMode },
+//   {
+//     to: '/superadmin/input-groups',
+//     name: 'input groups',
+//     exact: false,
+//     Icon: MdViewList,
+//   },
+//   {
+//     to: '/superadmin/dropdowns',
+//     name: 'dropdowns',
+//     exact: false,
+//     Icon: MdArrowDropDownCircle,
+//   },
+//   { to: '/superadmin/badges', name: 'badges', exact: false, Icon: MdStar },
+//   {
+//     to: '/superadmin/alerts',
+//     name: 'superadmin alerts',
+//     exact: false,
+//     Icon: MdNotificationsActive,
+//   },
+//   { to: '/superadmin/progress', name: 'progress', exact: false, Icon: MdBrush },
+//   { to: '/superadmin/modals', name: 'modals', exact: false, Icon: MdViewDay },
+// ];
 
-const navContents = [
-  {
-    to: '/superadmin/typography',
-    name: 'typography',
-    exact: false,
-    Icon: MdTextFields,
-  },
-  { to: '/superadmin/tables', name: 'tables', exact: false, Icon: MdBorderAll },
-];
+// const navContents = [
+//   {
+//     to: '/superadmin/typography',
+//     name: 'typography',
+//     exact: false,
+//     Icon: MdTextFields,
+//   },
+//   { to: '/superadmin/tables', name: 'tables', exact: false, Icon: MdBorderAll },
+// ];
 
-const pageContents = [
-  {
-    to: '/superadmin/login-modal',
-    name: 'login modal',
-    exact: false,
-    Icon: MdViewCarousel,
-  },
-];
+// const pageContents = [
+//   {
+//     to: '/superadmin/login-modal',
+//     name: 'login modal',
+//     exact: false,
+//     Icon: MdViewCarousel,
+//   },
+// ];
 
 const navItems = [
   { to: '/superadmin/dashboard', name: 'dashboard', exact: true, Icon: MdDashboard },

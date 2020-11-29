@@ -5,7 +5,7 @@ import bn from 'utils/bemnames';
 
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
-import Typography from './Typography';
+// import Typography from './Typography';
 
 const bem = bn.create('page');
 

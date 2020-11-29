@@ -1,20 +1,22 @@
 import Page from 'components/Page';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect,
+  //  useRef 
+  } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import PageSpinner from '../../components/PageSpinner';
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Row,
-  UncontrolledButtonDropdown,
-} from 'reactstrap';
+// import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+// import {
+  // Button,
+  // Card,
+  // CardBody,
+  // CardHeader,
+  // Col,
+  // DropdownItem,
+  // DropdownMenu,
+  // DropdownToggle,
+  // Row,
+  // UncontrolledButtonDropdown,
+// } from 'reactstrap';
 import { getThemeColors } from 'utils/colors';
 import CustomTable from '../../components/table/CustomTable';
 
@@ -27,18 +29,20 @@ import {
   getClientDetail,
 } from '../../apiConstants/apiConstants';
 import { useDispatch, useSelector } from 'react-redux';
-import ExcelTable from '../../components/ExportToExcel';
+// import ExcelTable from '../../components/ExportToExcel';
 import Modal from '../../components/Modal';
 
 const colors = getThemeColors();
-
+console.log(colors);
 const AdminClient = () => {
   // const excelTable = useRef('');
   // console.log('Data' + data.data);
   const history = useHistory();
+  console.log(history)
   const dispatch = useDispatch();
   const adminGetClient = useSelector(state => state.adminGetAllClient);
   const { params } = useParams();
+  console.log(params);
 
   console.log('Payload:' + adminGetClient.users);
 
@@ -90,6 +94,7 @@ const AdminClient = () => {
             </Link>
           ),
         });
+        return null;
       });
     return rows;
   };
