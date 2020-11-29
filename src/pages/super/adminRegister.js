@@ -23,10 +23,9 @@ const AdminRegister = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(adminRegister);
     if (adminRegister.isSuccessful) {
       alert('Registered Admin Successfully!');
-      // history.push('/admin/login');
+      setControl({}); 
     }
   }, [adminRegister]);
 

@@ -35,8 +35,15 @@ export const getAllClient = {
 
 export const adminData =  {};
 
-export const updateSubscription = {};
+export const updateSubscription = {
+  isSuccessful: false,
+  result: {}
+};
 
+export const adminGetAllDocuments = {
+  isSuccessful: false,
+  documents: []
+}
 // export const getClientDetails = {
 //   isLoading: false,
 //   error: null,

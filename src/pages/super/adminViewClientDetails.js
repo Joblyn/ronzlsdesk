@@ -34,7 +34,7 @@ const AdminViewClientDetails = () => {
   const [data, setData] = useState({});
   const [director, setDirector] = useState([{}]);
 
-  
+
   useEffect(() => {
     setData(clientDetails);
     setDirector(clientDetails.director)
@@ -46,10 +46,7 @@ const AdminViewClientDetails = () => {
       ...managerControl,
       [event.target.name]: event.target.value,
     });
-    // console.log("Res: "+JSON.stringify(obj));
   };
-
-  // console.log({ ...inputList, ...control });
   // handle click event of the Remove button
   const handleRemoveClick = index => {
     const list = [...inputList];
@@ -75,16 +72,16 @@ const AdminViewClientDetails = () => {
     }
     return newManagers;
   };
-  
+
   const _onFocus = event => {
     event.currentTarget.type = 'date';
   };
-  
+
   const _onBlur = event => {
     event.currentTarget.type = 'text';
     event.currentTarget.placeholder = 'Date of Birth';
   };
-  
+
   const addNewDirector = (count, name) => (
     <div key={'director' + (count + 1)}>
       <label className="font-semibold">{`Director ${count + 1}`} </label>
@@ -110,17 +107,17 @@ const AdminViewClientDetails = () => {
       />
     </div>
   );
-  
+
   // const handleChange = event => {
-    //   console.log('change');
-    //   let name = event.target.name;
+  //   console.log('change');
+  //   let name = event.target.name;
   //   setControl({
   //     ...control,
   //     // ...inputList,
   //     [name]: event.target.value,
   //   });
   // };
-  
+
   const handleClick = event => {
     event.preventDefault();
     let managers = prepareManager(managerControl);
@@ -128,7 +125,7 @@ const AdminViewClientDetails = () => {
     console.log('Result: ' + JSON.stringify(payload));
     dispatch(registerUser(userRegister, payload));
   };
-  
+
   const AccountTypeDatas = [
     ['Individual', 'individual'],
     ['Company', 'company'],
@@ -141,22 +138,28 @@ const AdminViewClientDetails = () => {
       </option>
     );
   });
-  
+
   const { userId } = useParams();
   const [subscriptionBegin, setSubscriptionBegin] = useState("2020-11-03");
   const [subscriptionEnd, setSubscriptionEnd] = useState("2021-11-03");
 
+
+  const updatedSubscription = useSelector(state => state.adminUpdateSubscription);
+  useEffect(() => {
+    if (updatedSubscription.isSuccesful) {
+      let result = updatedSubscription.result;
+      console.log(result);
+      // setSubscriptionBegin(result.subscriptionBegin);
+      // setSubscriptionEnd(result.subscriptionEnd);
+    }
+  }, updatedSubscription);
   const updateSubscription = (e) => {
     e.preventDefault();
-    console.log('Here');
-    console.log(userId);
     const payload = {
       subscriptionBegin,
       subscriptionEnd
     }
-    console.log(payload);
-    const endpoint = adminUpdateSubscription + userId;
-    console.log(endpoint);
+    const endpoint = adminUpdateSubscription + data._id;
     dispatch(updateClientSubscription(endpoint, payload));
   };
 
@@ -177,7 +180,7 @@ const AdminViewClientDetails = () => {
                   <div><input type="date"
                     name="subscriptionBegin"
                     value={subscriptionBegin}
-                    onChange={({ target}) => setSubscriptionBegin(target.value)}
+                    onChange={({ target }) => setSubscriptionBegin(target.value)}
                     disabled={disabled}
                     style={{ backgroundColor: "inherit" }}
                   />
@@ -188,7 +191,7 @@ const AdminViewClientDetails = () => {
                   <div><input type="date"
                     name="subscriptionEnd"
                     value={subscriptionEnd}
-                    onChange={({target}) => setSubscriptionEnd(target.value)}
+                    onChange={({ target }) => setSubscriptionEnd(target.value)}
                     disabled={disabled}
                     style={{ backgroundColor: "inherit" }} />
                   </div>
@@ -197,13 +200,13 @@ const AdminViewClientDetails = () => {
                   type="button"
                   onClick={() => setDisabled(!disabled)}
                   className="button button--md xl:w-32 text-white bg-theme-1 xl:mr-3"
-                  value="Set Subscription" /> 
+                  value="Set Subscription" />
                   : <Button
-                  type="button"
-                  onClick={updateSubscription}
-                  className="button button--md xl:w-32 text-white bg-theme-1 xl:mr-3"
-                  value="Update"
-                />}
+                    type="button"
+                    onClick={updateSubscription}
+                    className="button button--md xl:w-32 text-white bg-theme-1 xl:mr-3"
+                    value="Update"
+                  />}
               </div>
               {data.director &&
                 data.director.map((data, i) => {

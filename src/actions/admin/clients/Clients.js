@@ -1,5 +1,5 @@
 import * as ActionType from '../../Types';
-import { getDataWithToken, postDataWithToken } from '../../Services';
+import { getDataWithToken, postDataWithToken, postData } from '../../Services';
 
 const onGetClient = payload => {
   return {
@@ -22,6 +22,12 @@ const onUpdateClientSubscription = payload => {
   }
 }
 
+const onGetAllDocuments = payload => {
+  return {
+    type: ActionType.ADMIN_GET_ALL_DOCUMENTS,
+    payload
+  }
+}
 // const onLogin = payload => {
 //   return {
 //     type: ActionType.ADMIN_LOGIN_SUCCESS,
@@ -55,6 +61,9 @@ export const updateClientSubscription = (url, payload) => {
   return postDataWithToken(url, payload, onUpdateClientSubscription);
 }
 
+export const getAllDocuments = (url) => {
+  return getDataWithToken(url, onGetAllDocuments)
+}
 // export const login = (url, payload) => {
 //   return postData(url, payload, onLogin);
 // };

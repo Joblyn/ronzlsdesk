@@ -15,8 +15,6 @@ import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
-// import Link from '@material-ui/core/Link';
-// import { Twemoji } from "react-emoji-render";
 import * as Icon from 'react-feather';
 
 import Search from './Search';

@@ -19,12 +19,10 @@ import { getThemeColors } from 'utils/colors';
 import CustomTable from '../../components/table/CustomTable';
 
 import {
-  getClient,
-  getClientDetails,
+  getAllDocuments,
 } from '../../actions/admin/clients/Clients';
 import {
-  getAllClients,
-  getClientDetail,
+  getDocuments
 } from '../../apiConstants/apiConstants';
 import { useDispatch, useSelector } from 'react-redux';
 import ExcelTable from '../../components/ExportToExcel';
@@ -32,41 +30,34 @@ import Modal from '../../components/Modal';
 
 const colors = getThemeColors();
 
-const AdminClient = () => {
+const Documents = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const adminGetClient = useSelector(state => state.adminGetAllClient);
+  const adminGetAllDocuments = useSelector(state => state.getAllDocuments);
   const { params } = useParams();
 
-  console.log('Payload:' + adminGetClient.users);
+  // console.log('Payload:' + adminGetAllDocuments.users);
 
   // useEffect(()=> {
 
-  // },[adminGetClient])
+  // },[adminGetAllDocuments])
   const handleClick2 = id => {
-    const endpoint = getClientDetail + id; //'5f5265a3d74c2bb6428f73ce';
-    //const endpoint = getClientDetail + userId;
-    //console.log('Details; ' + userId);
-    dispatch(getClientDetails(endpoint));
   };
 
   const onLinkClicked = (e, payload) => {
-    // console.log(JSON.stringify(payload));
-    // history.push('/admin/client/details');
   };
-  // const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getClient(getAllClients));
+    dispatch(getAllDocuments(getDocuments));
   }, []);
 
-  if (adminGetClient.isSuccessful === true) {
-    console.log('Check: ' + adminGetClient.users);
+  if (adminGetAllDocuments.isSuccessful === true) {
+    console.log('Check: ' + adminGetAllDocuments.documents);
   }
 
   const getRows = data => {
     let rows = [];
     console.log('Data: ' + JSON.stringify(data));
-    //let data = adminGetClient.users && adminGetClient.users;
+    // let data = adminGetAllDocuments.users && adminGetAllDocuments.users;
     data &&
       data.map((user, index) => {
         rows.push({
@@ -84,7 +75,7 @@ const AdminClient = () => {
               to={`/superadmin/client/details/userId=${user._id}`}
               className="bg-green-700 text-white rounded-full px-2 py-2"
             >
-              View Details
+              View Document
             </Link>
           ),
         });
@@ -94,15 +85,15 @@ const AdminClient = () => {
   const onActionClicked = (e, payload) => {
     alert(JSON.stringify(payload));
   };
-  if (adminGetClient.users.length === 0) {
-    return <PageSpinner />;
-  }
+  // if (adminGetAllDocuments.users.length === 0) {
+    // return <PageSpinner />;
+  // }
   return (
     <Page
       title="Dropdowns"
       breadcrumbs={[{ name: 'All Clients', active: true }]}
     >
-      <Modal action="Upload Document"/>
+      <Modal action="Show"/>
       <CustomTable
         pagination
         pagerows
@@ -113,7 +104,6 @@ const AdminClient = () => {
             minWidth: 20,
             color: value => 'blue',
           },
-
           {
             id: 'user',
             label: 'User',
@@ -121,56 +111,32 @@ const AdminClient = () => {
             color: value => 'blue',
           },
           {
-            id: 'accountType',
-            label: 'Account Type',
-            minWidth: 50,
-            color: value => 'blue',
-          },
-          {
-            id: 'companyAddress',
-            label: 'Address',
-            minWidth: 150,
-            align: 'center',
-            color: value => 'blue',
-          },
-          {
-            id: 'phoneNumber',
-            label: 'Phone Number',
-            minWidth: 50,
-            align: 'center',
-            color: value => 'blue',
-          },
-          {
-            id: 'email',
-            label: 'Email',
+            id: 'Document Uploaded',
+            label: 'Document Name',
             minWidth: 100,
-            align: 'center',
             color: value => 'blue',
           },
           {
-            id: 'website',
-            label: 'Website',
-            minWidth: 80,
-            align: 'center',
+            id: 'date',
+            label: 'Date Uploaded',
+            minWidth: 100,
             color: value => 'blue',
           },
           {
             id: 'view',
-            label: 'Actions',
+            label: 'Action',
             minWidth: 150,
             align: 'center',
             color: value => 'blue',
             type: 'link',
           },
         ]}
-        rows={getRows(adminGetClient.users)}
+        rows={getRows(adminGetAllDocuments.documents)}
         handleActionClick={onActionClicked}
         handleLinkClick={onLinkClicked}
       />
       
     </Page>
   );
-};
-
-export default AdminClient;
-
+}
+export default Documents;

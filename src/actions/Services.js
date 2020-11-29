@@ -99,6 +99,7 @@ export const postDataWithToken = (url, payload, done) => {
   const bearerToken = 'Bearer ' + token;
   console.log(bearerToken);
   nprogress.start();
+  debugger
   return dispatch => {
     fetch(endpoint, {
       method: 'POST',

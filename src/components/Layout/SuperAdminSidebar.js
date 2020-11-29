@@ -24,6 +24,7 @@ import {
   MdViewList,
   MdWeb,
   MdWidgets,
+  MdSchedule
 } from 'react-icons/md';
 import { NavLink, Link } from 'react-router-dom';
 import { logOutAction } from '../../actions/admin/authAction/Users';
@@ -127,6 +128,12 @@ const navItems = [
     name: 'Requests',
     exact: false,
     Icon: MdSend,
+  },
+  {
+    to: '/superadmin/appointments',
+    name: 'Appointments',
+    exact: false,
+    Icon: MdSchedule,
   }, 
   // {
   //   to: '/superadmin/registerclient',
@@ -163,7 +170,7 @@ class Sidebar extends React.Component {
         <div className={bem.e('background')} style={sidebarBackground} />
         <div className={bem.e('content')}>
           <Navbar>
-            <Link to="/" className="navbar-brand d-flex">
+            <Link to="/superadmin/dashboard" className="navbar-brand d-flex">
               <img
                 src={logo200Image}
                 width="192"

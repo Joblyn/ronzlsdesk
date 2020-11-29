@@ -36,7 +36,8 @@ import {
   logoutAdminAction,
   setCurrentAdminUser,
 } from './actions/admin/authAction/Users';
-import { ProtectedRoute } from './protected/index';
+import { ProtectedRoute } from './validations/protectedRoute';
+import { IsUserRedirect } from './validations/isUserRedirect';
 import { useDispatch } from 'react-redux';
 import { getClient } from './actions/admin/clients/Clients';
 import { getAllClients } from './apiConstants/apiConstants';
@@ -84,9 +85,9 @@ const WidgetPage = React.lazy(() => import('pages/user/WidgetPage'));
 const superAdminDashboard = React.lazy(() => import('pages/super/adminDashboard'));
 const superAdminRegisterAdmin = React.lazy(() => import('pages/super/adminRegister'));
 const superAdminAllAdmins = React.lazy(() => import('pages/super/allAdmins'));
-
 const superAdminProfile = React.lazy(() => import('pages/super/profile'));
 const superAdminRequests = React.lazy(() => import('pages/super/requests'));
+const superAdminAppointments = React.lazy(() => import('pages/super/appointments'));
 
 const superAdminButtonGroupPage = React.lazy(() =>import('pages/super/adminButtonGroupPage'));
 const superAdminButtonPage = React.lazy(() => import('pages/super/adminButtonPage'));
@@ -108,7 +109,7 @@ const superAuthModal = React.lazy(() => import('pages/super/superAuthModal'));
 const superAuthModalPage = React.lazy(() => import('pages/super/superAuthModalPage')); 
 const superAuthPage = React.lazy(() => import('pages/super/superAuthPage')); 
 const superAdminBadgePage = React.lazy(() => import('pages/super/superBadgePage')); 
-const superDocumentPage = React.lazy(() => import('pages/super/superDocument')); 
+const superAdminDocumentPage = React.lazy(() => import('pages/super/document')); 
 // end of superAdmin
 
 
@@ -123,7 +124,13 @@ const App = ({ breakpoint }) => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Landing} />
+        <IsUserRedirect
+          path="/"
+          role={role}
+          exact
+        >
+          <Landing />
+        </IsUserRedirect>
 
         {/* admin auth */}
         <Route path="/admin/login" component={AdminLogin} />
@@ -162,6 +169,8 @@ const App = ({ breakpoint }) => {
           (<AdminMainLayout breakpoint={breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
               <Route exact path="/admin/dashboard" component={adminDashboard} />
+              <Route exact path="/admin/client/details/:userId" component={AdminViewClientDetails} /> 
+
               <Route exact path="/admin/dashboardold" component={adminDashboardPage} />
               <Route exact path="/admin/buttons" component={adminButtonPage} />
               <Route exact path="/admin/cards" component={adminCardPage} />
@@ -178,16 +187,41 @@ const App = ({ breakpoint }) => {
               <Route exact path="/admin/input-groups" component={adminInputGroupPage} />
               <Route exact path="/admin/charts" component={adminChartPage} />
               <Route exact path="/admin/client" component={adminClient} />
-              <Route exact path="/admin/client/details/:userId" component={AdminViewClientDetails} /> 
             </React.Suspense>
           </AdminMainLayout>
           ) : (
             <AdminMainLayout breakpoint={breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
-                <Route exact path="/superadmin/dashboard" component={superAdminDashboard} />
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/dashboard" component={superAdminDashboard} />
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/profile" component={superAdminProfile} />
+                </ProtectedRoute>
+                <ProtectedRoute>
                 <Route exact path="/superadmin/admins" component={superAdminAllAdmins} />
-                <Route exact path="/superadmin/profile" component={superAdminProfile} />
-                <Route exact path="/superadmin/requests" component={superAdminRequests} />
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/client" component={superAdminClientPage} />
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/documents" component={superAdminDocumentPage} /> 
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/registeradmin" component={superAdminRegisterAdmin} /> 
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/requests" component={superAdminRequests} />
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/client/details/:userId" component={superAdminViewClientDetails} /> 
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/appointments" component={superAdminAppointments}/>
+                </ProtectedRoute>
+
+
+                {/* unnecessary */} 
                 <Route exact path="/superadmin/buttons" component={superAdminButtonPage} />
                 <Route exact path="/superadmin/cards" component={superAdminCardPage} />
                 <Route exact path="/superadmin/widgets" component={superAdminWidgetPage} />
@@ -202,16 +236,11 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/superadmin/forms" component={superAdminFormPage} />
                 <Route exact path="/superadmin/input-groups" component={superAdminInputGroupPage} />
                 <Route exact path="/superadmin/charts" component={superAdminChartPage} />
-                <Route exact path="/superadmin/registeradmin" component={superAdminRegisterAdmin} /> 
-                {/* <Route exact path="/superadmin/registerclient" component={superAdminRegisterClient} />  */}
-                <Route exact path="/superadmin/client" component={superAdminClientPage} />
-                <Route exact path="/superadmin/client/details/:userId" component={superAdminViewClientDetails} /> 
                 <Route exact path="/superadmin/alert" component={superAdminAlertPage} /> 
                 <Route exact path="/superadmin/authmodal" component={superAuthModal} /> 
                 <Route exact path="/superadmin/authmodalpage" component={superAuthModalPage} /> 
                 <Route exact path="/superadmin/auth" component={superAuthPage} /> 
                 <Route exact path="/superadmin/badges" component={superAdminBadgePage} /> 
-                <Route exact path="/superadmin/documents" component={superDocumentPage} /> 
               </React.Suspense>
             </AdminMainLayout>
           )

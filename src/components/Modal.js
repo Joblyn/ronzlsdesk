@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Modal() {
+export default function Modal({ action }) {
   const [showModal, setShowModal] = React.useState(false);
   return (
     <>
@@ -10,7 +10,7 @@ export default function Modal() {
         style={{ transition: 'all .15s ease' }}
         onClick={() => setShowModal(true)}
       >
-        Upload Document
+        {action}
       </button>
       {showModal ? (
         <>
