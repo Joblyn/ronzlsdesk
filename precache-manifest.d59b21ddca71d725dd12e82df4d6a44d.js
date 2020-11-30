@@ -32,8 +32,8 @@ self.__precacheManifest = [
     "url": "/ronzlsdesk/static/js/main.9413b186.chunk.js"
   },
   {
-    "revision": "d23396b927f6bf927316",
-    "url": "/ronzlsdesk/static/js/runtime~main.0658ba2b.js"
+    "revision": "508df0dce2b88709b86b",
+    "url": "/ronzlsdesk/static/js/runtime~main.1505e7bd.js"
   },
   {
     "revision": "01156eef5e1b0c755479",
@@ -200,8 +200,8 @@ self.__precacheManifest = [
     "url": "/ronzlsdesk/static/js/47.9446bbb4.chunk.js"
   },
   {
-    "revision": "e57b484cc4827781a397",
-    "url": "/ronzlsdesk/static/js/48.8589f992.chunk.js"
+    "revision": "250308697c825eadff6b",
+    "url": "/ronzlsdesk/static/js/48.dffb547b.chunk.js"
   },
   {
     "revision": "7f07aaf2282a863cf72f",
@@ -440,7 +440,7 @@ self.__precacheManifest = [
     "url": "/ronzlsdesk/static/media/100_14.595b8cbd.jpg"
   },
   {
-    "revision": "dac73f00d960744b1d5d02f7a17beb71",
+    "revision": "e75f866be03c034e84dee7d554ae2da3",
     "url": "/ronzlsdesk/index.html"
   }
 ];
