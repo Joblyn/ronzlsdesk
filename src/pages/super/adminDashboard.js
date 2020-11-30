@@ -4,6 +4,7 @@ import { AnnouncementCard,
 // import HorizontalAvatarList from 'components/HorizontalAvatarList';
 // import MapWithBubbles from 'components/MapWithBubbles';
 import Page from 'components/Page';
+import { Link } from "react-router-dom";
 // import ProductMedia from 'components/ProductMedia';
 // import SupportTicket from 'components/SupportTicket';
 // import UserProgressTable from 'components/UserProgressTable';
@@ -385,6 +386,7 @@ class DashboardAdmin extends React.Component {
 
         <Row>
           <Col lg="12" md="12" sm="12" xs="12" className="d-flex align-items-center justify-content-center mb-3" >
+          <Link to="/superadmin/admins" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none'}}>
             <AnnouncementCard
               color="gradient-secondary"
               // header="Announcement"
@@ -394,40 +396,43 @@ class DashboardAdmin extends React.Component {
               text="View All Admins"
               buttonProps={{
                 children: 'View',
-                href:'/superadmin/admins'
+                // to:'/superadmin/admins'
               }}
               style={{ height: 'fit-content', width: '100%', maxWidth: '500px',cursor: 'pointer'}}
             />
+          </Link>
           </Col>
           <Col lg="12" md="12" sm="12" xs="12" className="d-flex align-items-center justify-content-center mb-3">
-            <AnnouncementCard
-              color="gradient-secondary"
-              // header="Announcement"
-              // avatarSize={60}
-              // name="Jamy"
-              // date="1 hour ago"
-              text="View All Clients"
-              buttonProps={{
-                children: 'View',
-                href:'/superadmin/client'
-              }}
-              style={{ height: 'fit-content', width: '100%', maxWidth: '500px',cursor: 'pointer'}}
-            />
+            <Link to="/superadmin/client" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none'}}>
+              <AnnouncementCard
+                color="gradient-secondary"
+                // header="Announcement"
+                // avatarSize={60}
+                // name="Jamy"
+                // date="1 hour ago"
+                text="View All Clients"
+                buttonProps={{
+                  children: 'View',
+                  // to:'/superadmin/client'
+                }}
+              />
+            </Link>
           </Col>
           <Col lg="12" md="12" sm="12" xs="12" className="d-flex align-items-center justify-content-center mb-3">
-            <AnnouncementCard
-              color="gradient-secondary"
-              // header="Announcement"
-              // avatarSize={60}
-              // name="Jamy"
-              // date="1 hour ago"
-              text="View All Requests"
-              buttonProps={{
-                children: 'View',
-                href:'/superadmin/requests'
-              }}
-              style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer'}}
-            />
+            <Link to="/superadmin/requests" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none'}}>
+              <AnnouncementCard
+                color="gradient-secondary"
+                // header="Announcement"
+                // avatarSize={60}
+                // name="Jamy"
+                // date="1 hour ago"
+                text="View All Requests"
+                buttonProps={{
+                  children: 'View',
+                  // to:'/superadmin/requests'
+                }}
+              />
+            </Link>
           </Col>
           {/* <Col lg="4" md="12" sm="12" xs="12">
             <Card>

@@ -10,7 +10,7 @@ import PageSpinner from './components/PageSpinner';
 import React from 'react';
 import componentQueries from 'react-component-queries';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   // Redirect,
   Route,
   Switch,
@@ -122,7 +122,7 @@ const role = localStorage.getItem('role');
 
 const App = ({ breakpoint }) => {
   return (
-    <Router>
+    <Router basename="/">
       <Switch>
         <IsUserRedirect
           path="/"
