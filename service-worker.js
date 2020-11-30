@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "https://ronzl-crm.vercel.app/precache-manifest.cc913c21e51311e82f41e00efce2ef78.js"
+  "/ronzlsdesk/precache-manifest.b2ad59feac193173944a014148674279.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("https://ronzl-crm.vercel.app/index.html", {
+workbox.routing.registerNavigationRoute("/ronzlsdesk/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
