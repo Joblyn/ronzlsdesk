@@ -24,24 +24,24 @@ self.__precacheManifest = [
     "url": "https://ronzl-crm.vercel.app/static/js/5.328090a1.chunk.js"
   },
   {
-    "revision": "4f4cb3c5e96c7d3a6e8e",
+    "revision": "5b507d734129b82176d3",
     "url": "https://ronzl-crm.vercel.app/static/css/main.571f0d44.chunk.css"
   },
   {
-    "revision": "4f4cb3c5e96c7d3a6e8e",
-    "url": "https://ronzl-crm.vercel.app/static/js/main.1eebcb46.chunk.js"
+    "revision": "5b507d734129b82176d3",
+    "url": "https://ronzl-crm.vercel.app/static/js/main.3898cb20.chunk.js"
   },
   {
-    "revision": "373aecacec4f3591b1cb",
-    "url": "https://ronzl-crm.vercel.app/static/js/runtime~main.fb65fd48.js"
+    "revision": "1f6b9a86c87c0e0900b3",
+    "url": "https://ronzl-crm.vercel.app/static/js/runtime~main.7b212473.js"
   },
   {
-    "revision": "54075c7a3f51d0fa6f44",
+    "revision": "01156eef5e1b0c755479",
     "url": "https://ronzl-crm.vercel.app/static/css/8.65cb7dc5.chunk.css"
   },
   {
-    "revision": "54075c7a3f51d0fa6f44",
-    "url": "https://ronzl-crm.vercel.app/static/js/8.7069b71e.chunk.js"
+    "revision": "01156eef5e1b0c755479",
+    "url": "https://ronzl-crm.vercel.app/static/js/8.5addde07.chunk.js"
   },
   {
     "revision": "4925b6c63af86ecf168b",
@@ -176,12 +176,12 @@ self.__precacheManifest = [
     "url": "https://ronzl-crm.vercel.app/static/js/41.511a93a8.chunk.js"
   },
   {
-    "revision": "988d1da42695b4152e4d",
-    "url": "https://ronzl-crm.vercel.app/static/js/42.5cbc60f7.chunk.js"
+    "revision": "35c010ae4718b5f35dec",
+    "url": "https://ronzl-crm.vercel.app/static/js/42.f2e84a21.chunk.js"
   },
   {
-    "revision": "70a25dc9dd55f8529a27",
-    "url": "https://ronzl-crm.vercel.app/static/js/43.138f3d5e.chunk.js"
+    "revision": "72070707724d19a8749e",
+    "url": "https://ronzl-crm.vercel.app/static/js/43.759c394b.chunk.js"
   },
   {
     "revision": "c594be3646c301e881f9",
@@ -216,8 +216,8 @@ self.__precacheManifest = [
     "url": "https://ronzl-crm.vercel.app/static/js/51.7bc4e98c.chunk.js"
   },
   {
-    "revision": "61ad22099a9d9d85db48",
-    "url": "https://ronzl-crm.vercel.app/static/js/52.01ae9927.chunk.js"
+    "revision": "12eb448073c181c30096",
+    "url": "https://ronzl-crm.vercel.app/static/js/52.9d7502d2.chunk.js"
   },
   {
     "revision": "0f4867d069afdf4fb384",
@@ -440,7 +440,7 @@ self.__precacheManifest = [
     "url": "https://ronzl-crm.vercel.app/static/media/100_14.595b8cbd.jpg"
   },
   {
-    "revision": "4608c8f7a9c011ab2faa138c86db9b83",
+    "revision": "bb6636951ede32cc6c5de9d94cd085ee",
     "url": "https://ronzl-crm.vercel.app/index.html"
   }
 ];

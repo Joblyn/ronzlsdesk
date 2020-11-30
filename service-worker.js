@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "https://ronzl-crm.vercel.app/precache-manifest.1e4b21b409bb40faa04ecd0dd7671eb2.js"
+  "https://ronzl-crm.vercel.app/precache-manifest.cc913c21e51311e82f41e00efce2ef78.js"
 );
 
 workbox.clientsClaim();
