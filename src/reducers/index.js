@@ -7,6 +7,7 @@ import adminGetAllClient from './admin/getClientsReducer';
 import adminUpdateSubscriptionReducer from './admin/adminUpdateSubscription'
 import adminDataReducer from './admin/getAdminData';
 import getAllDocumentsReducer from './admin/adminGetAllDocuments';
+import getAllRequestsReducer from './admin/adminGetAllRequests';
 // import adminGetClientDetails from './admin/getClientDetailsReducer';
 
 import userRegisterReducer from './user/userRegister';
@@ -22,6 +23,7 @@ export default combineReducers({
   adminData: adminDataReducer,
   adminUpdateSubscription: adminUpdateSubscriptionReducer,
   getAllDocuments: getAllDocumentsReducer,
+  getAllRequests: getAllRequestsReducer, 
   // adminGetClientDetails: adminGetClientDetails,
   
   //user Reducer

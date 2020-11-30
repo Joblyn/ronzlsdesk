@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Avatar from 'components/Avatar';
 import { UserCard } from 'components/Card';
-import Notifications from 'components/Notifications';
+// import Notifications from 'components/Notifications';
 // import SearchInput from 'components/SearchInput';
-import { notificationsData } from 'demos/header';
-import withBadge from 'hocs/withBadge';
+// import { notificationsData } from 'demos/header';
+// import withBadge from 'hocs/withBadge';
 import { getAllAdmin } from 'apiConstants/apiConstants';
 
 import {
@@ -14,9 +14,9 @@ import {
   MdExitToApp,
   // MdHelp,
   // MdInsertChart,
-  MdMessage,
-  MdNotificationsActive,
-  MdNotificationsNone,
+  // MdMessage,
+  // MdNotificationsActive,
+  // MdNotificationsNone,
   MdPersonPin,
   // MdSettingsApplications,
 } from 'react-icons/md';
@@ -38,24 +38,24 @@ import Button from '../button';
 
 const bem = bn.create('header');
 
-const MdNotificationsActiveWithBadge = withBadge({
-  size: 'md',
-  color: 'primary',
-  style: {
-    top: -10,
-    right: -10,
-    display: 'inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  children: <small>5</small>,
-})(MdNotificationsActive);
+// const MdNotificationsActiveWithBadge = withBadge({
+//   size: 'md',
+//   color: 'primary',
+//   style: {
+//     top: -10,
+//     right: -10,
+//     display: 'inline-flex',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   children: <small>5</small>,
+// })(MdNotificationsActive);
 
 
 function Header() {
 
-  const [isOpenNotificationPopover, setIsOpenNotificationPopover] = useState(false);
-  const [isNotificationConfirmed, setIsNotificationConfirmed] = useState(false);
+  // const [isOpenNotificationPopover, setIsOpenNotificationPopover] = useState(false);
+  // const [isNotificationConfirmed, setIsNotificationConfirmed] = useState(false);
   const [isOpenUserCardPopover, setIsOpenUserCardPopover] = useState(false);
 
   const dispatch = useDispatch();
@@ -65,13 +65,13 @@ function Header() {
     console.log(adminData);
   }, []);
 
-  const toggleNotificationPopover = () => {
-    setIsOpenNotificationPopover(isOpenNotificationPopover => !isOpenNotificationPopover);
+  // const toggleNotificationPopover = () => {
+  //   setIsOpenNotificationPopover(isOpenNotificationPopover => !isOpenNotificationPopover);
 
-    if (!isNotificationConfirmed) {
-      setIsNotificationConfirmed(true);
-    }
-  };
+  //   if (!isNotificationConfirmed) {
+  //     setIsNotificationConfirmed(true);
+  //   }
+  // };
 
   const toggleUserCardPopover = () => {
     setIsOpenUserCardPopover(!isOpenUserCardPopover);
@@ -96,7 +96,7 @@ function Header() {
       </Nav> */}
 
       <Nav navbar className={bem.e('nav-right')}>
-        <NavItem className="d-inline-flex">
+        {/* <NavItem className="d-inline-flex">
           <NavLink id="Popover1" className="position-relative">
             {isNotificationConfirmed ? (
               <MdNotificationsNone
@@ -122,7 +122,7 @@ function Header() {
               <Notifications notificationsData={notificationsData} />
             </PopoverBody>
           </Popover>
-        </NavItem>
+        </NavItem> */}
 
         <NavItem>
           <NavLink id="Popover2">
@@ -148,24 +148,24 @@ function Header() {
               >
                 <ListGroup flush>
                   <ListGroupItem tag="button" action className="border-light">
-                    <MdPersonPin /> Profile
+                    <Link
+                      style={{
+                        color: 'inherit',
+                        textDecoration: 'none', 
+                        width: '100%'                    
+                      }}
+                      to={`/${adminData.role}/profile`}
+                    >
+                      <MdPersonPin /> Profile
+                    </Link>
                   </ListGroupItem>
                   {/* <ListGroupItem tag="button" action className="border-light">
-                    <MdInsertChart /> Stats
-                  </ListGroupItem> */}
-                  <ListGroupItem tag="button" action className="border-light">
                     <MdMessage /> Messages
-                  </ListGroupItem>
-                  {/* <ListGroupItem tag="button" action className="border-light">
-                    <MdSettingsApplications /> Settings
-                  </ListGroupItem> */}
-                  {/* <ListGroupItem tag="button" action className="border-light">
-                    <MdHelp /> Help
                   </ListGroupItem> */}
                   <ListGroupItem tag="button" action className="border-light">
                     <MdExitToApp />
-                    <Link to="/" onClick={logOutAction}>
-                      Sign Out
+                    <Link to="/" onClick={logOutAction} style={{color: 'red'}}>
+                      Log Out
                     </Link>
                   </ListGroupItem>
                 </ListGroup>

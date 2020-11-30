@@ -253,7 +253,6 @@ const App = ({ breakpoint }) => {
                   <Route exact path="/superadmin/appointments" component={superAdminAppointments}/>
                 </ProtectedRoute>
 
-
                 {/* unnecessary */} 
                 <Route exact path="/superadmin/buttons" component={superAdminButtonPage} />
                 <Route exact path="/superadmin/cards" component={superAdminCardPage} />

@@ -30,7 +30,7 @@ const AnnouncementCard = ({
         header
       )}
       <CardBody className="d-flex flex-wrap flex-column align-items-center justify-content-center">
-        <Avatar size={avatarSize} src={avatar} />
+        {avatar && <Avatar size={avatarSize} src={avatar} />}
         <CardText className="text-center">
           <strong className="d-block">{name}</strong>
           <small className="text-muted">{date}</small>

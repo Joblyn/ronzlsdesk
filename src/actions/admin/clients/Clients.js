@@ -28,6 +28,13 @@ const onGetAllDocuments = payload => {
     payload
   }
 }
+
+const onGetAllRequests = payload => {
+  return {
+    type: ActionType.ADMIN_GET_ALL_REQUESTS,
+    payload
+  }
+}
 // const onLogin = payload => {
 //   return {
 //     type: ActionType.ADMIN_LOGIN_SUCCESS,
@@ -64,6 +71,11 @@ export const updateClientSubscription = (url, payload) => {
 export const getAllDocuments = (url) => {
   return getDataWithToken(url, onGetAllDocuments)
 }
+
+export const getAllRequests = (url) => {
+  return getDataWithToken(url, onGetAllRequests);
+}
+
 // export const login = (url, payload) => {
 //   return postData(url, payload, onLogin);
 // };

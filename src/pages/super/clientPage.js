@@ -50,8 +50,6 @@ const AdminClient = () => {
   // },[adminGetClient])
   const handleClick2 = id => {
     const endpoint = getClientDetail + id; //'5f5265a3d74c2bb6428f73ce';
-    //const endpoint = getClientDetail + userId;
-    //console.log('Details; ' + userId);
     dispatch(getClientDetails(endpoint));
   };
 

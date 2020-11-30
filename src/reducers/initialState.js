@@ -44,6 +44,11 @@ export const adminGetAllDocuments = {
   isSuccessful: false,
   documents: []
 }
+
+export const adminGetAllRequests = {
+  isSuccessful: false,
+  requests: []
+}
 // export const getClientDetails = {
 //   isLoading: false,
 //   error: null,

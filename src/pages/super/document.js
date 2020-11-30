@@ -2,9 +2,7 @@ import Page from 'components/Page';
 import React, { useEffect, 
   // useRef 
 } from 'react';
-import { Link, 
-  // useHistory, 
-  useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PageSpinner from '../../components/PageSpinner';
 // import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 // import {
@@ -19,41 +17,30 @@ import PageSpinner from '../../components/PageSpinner';
   // Row,
   // UncontrolledButtonDropdown,
 // } from 'reactstrap';
-import { getThemeColors } from 'utils/colors';
 import CustomTable from '../../components/table/CustomTable';
 
 import {
   getAllDocuments,
 } from '../../actions/admin/clients/Clients';
 import {
-  getDocuments
+  adminGetDocuments
 } from '../../apiConstants/apiConstants';
 import { useDispatch, useSelector } from 'react-redux';
 // import ExcelTable from '../../components/ExportToExcel';
 import Modal from '../../components/Modal';
 
-const colors = getThemeColors();
-console.log(colors);
-
 const Documents = () => {
   // const history = useHistory();
   const dispatch = useDispatch();
   const adminGetAllDocuments = useSelector(state => state.getAllDocuments);
-  const { params } = useParams();
-  console.log(params);
 
-  // console.log('Payload:' + adminGetAllDocuments.users);
-
-  // useEffect(()=> {
-
-  // },[adminGetAllDocuments])
   const handleClick2 = id => {
   };
 
   const onLinkClicked = (e, payload) => {
   };
   useEffect(() => {
-    dispatch(getAllDocuments(getDocuments));
+    dispatch(getAllDocuments(adminGetDocuments));
   }, []);
 
   if (adminGetAllDocuments.isSuccessful === true) {
@@ -98,7 +85,7 @@ const Documents = () => {
   return (
     <Page
       title="Dropdowns"
-      breadcrumbs={[{ name: 'All Clients', active: true }]}
+      breadcrumbs={[{ name: 'Documents', active: true }]}
     >
       <Modal action="Show"/>
       <CustomTable
@@ -118,7 +105,7 @@ const Documents = () => {
             color: value => 'blue',
           },
           {
-            id: 'Document Uploaded',
+            id:'documnet',
             label: 'Document Name',
             minWidth: 100,
             color: value => 'blue',

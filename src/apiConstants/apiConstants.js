@@ -22,7 +22,10 @@ export let getClientDetail = 'admin/user/';
 export let adminUploadDoc = 'admin/actions/uploadDocToUser/{user_id}';
 
 // Admin get all documents
-export let getDocuments = 'admin/document/user';
+export let adminGetDocuments = 'admin/document/user';
+
+// Admin get requests 
+export let adminGetRequests = 'admin/request';
 
 //Admin update client subscription
 export let adminUpdateSubscription = 'admin/actions/date/'
