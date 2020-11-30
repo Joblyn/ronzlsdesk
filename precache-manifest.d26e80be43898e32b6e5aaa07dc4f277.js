@@ -24,12 +24,12 @@ self.__precacheManifest = [
     "url": "/ronzlsdesk/static/js/5.328090a1.chunk.js"
   },
   {
-    "revision": "3ede79c631096e9286de",
+    "revision": "f313a4814f375b7e5864",
     "url": "/ronzlsdesk/static/css/main.b4795978.chunk.css"
   },
   {
-    "revision": "3ede79c631096e9286de",
-    "url": "/ronzlsdesk/static/js/main.6ff5303f.chunk.js"
+    "revision": "f313a4814f375b7e5864",
+    "url": "/ronzlsdesk/static/js/main.9413b186.chunk.js"
   },
   {
     "revision": "9cf03cb3ea9df5d5628a",
@@ -440,7 +440,7 @@ self.__precacheManifest = [
     "url": "/ronzlsdesk/static/media/100_14.595b8cbd.jpg"
   },
   {
-    "revision": "4d930a6f9777c2215e7c915c99b334db",
+    "revision": "9d20d35a034a9695a8ee16b6a2b34f4e",
     "url": "/ronzlsdesk/index.html"
   }
 ];
