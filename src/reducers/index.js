@@ -16,6 +16,7 @@ import userForgotPasswordReducer from './user/userForgotPassword';
 import userDataReducer from './user/getUserData';
 import userCreatedRequestReducer from './user/createRequest';
 import userUploadDocReducer from './user/uploadDoc';
+import userGetRequestsReducer from './user/getRequests';
 
 export default combineReducers({
   //Admin Reducer
@@ -26,7 +27,8 @@ export default combineReducers({
   adminData: adminDataReducer,
   adminUpdateSubscription: adminUpdateSubscriptionReducer,
   getAllDocuments: getAllDocumentsReducer,
-  getAllRequests: getAllRequestsReducer, 
+  getAllRequests: getAllRequestsReducer,
+  userGetRequests:userGetRequestsReducer, 
   // adminGetClientDetails: adminGetClientDetails,
   
   //user Reducer

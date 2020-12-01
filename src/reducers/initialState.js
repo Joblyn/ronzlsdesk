@@ -64,3 +64,8 @@ export const userUploadDoc = {
   isSuccessful: false,
   data: {}
 }
+
+export const userGetRequests = {
+  isSuccessful:true,
+  requests: []
+}

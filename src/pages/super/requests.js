@@ -11,7 +11,6 @@ import { adminGetRequests } from '../../apiConstants/apiConstants';
 
 import Modal from '../../components/Modal';
 
-
 export default function Requests() {
   const dispatch = useDispatch();
   const adminGetAllDocuments = useSelector(state => state.getAllRequests);
@@ -27,7 +26,7 @@ export default function Requests() {
 
   const getRows = data => {
     let rows = [];
-    console.log('Data: ' + JSON.stringify(data));
+    // console.log('Data: ' + JSON.stringify(data));
     data &&
       data.map((user, index) => {
         rows.push({

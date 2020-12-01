@@ -48,6 +48,13 @@ export const onCreateRequest = (payload) => {
   }
 }
 
+export const onGetRequests = (payload) => {
+  return { 
+    type: ActionType.USER_GET_REQUESTS,
+    payload
+  }
+}
+
 export const onUploadDoc = (payload) => {
   return {
     type: ActionType.USER_UPLOAD_DOC,
@@ -86,6 +93,11 @@ export const getUser = (url) =>  {
 export const createRequest = (url, payload) => {
   return postDataWithToken(url, payload, onCreateRequest);
 } 
+
+// get requests 
+export const getRequests = (url) => {
+  return getDataWithToken(url, onGetRequests);
+}
 
 // upload Doc 
 export const uploadDoc = (url, payload) => {

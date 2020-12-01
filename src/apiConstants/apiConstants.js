@@ -45,5 +45,6 @@ export let updateUserData = 'user';
 //User Doc Upload
 export let userUploaDocToAdmin = 'user/document/';
 
-// User Request Upload
+// User Requests
 export let userCreateRequest = 'user/request';
+export let userGetRequests = 'user/request';
