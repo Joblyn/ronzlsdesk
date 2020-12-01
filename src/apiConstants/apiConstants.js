@@ -43,4 +43,7 @@ export let getUserData = 'user';
 export let updateUserData = 'user';
 
 //User Doc Upload
-export let userUploadDoc = 'user/actions/uploadDocToUser/{admin_id}';
+export let userUploaDocToAdmin = 'user/document/';
+
+// User Request Upload
+export let userCreateRequest = 'user/request';

@@ -18,7 +18,7 @@ const InputField = ({
     <input
       type={type}
       ref={refs}
-      //id={id}
+      id={id}
       name={name}
       className={className}
       placeholder={placeholder}

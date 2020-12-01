@@ -12,7 +12,7 @@ import {
   // MdExtension,
   // MdGroupWork,
   // MdInsertChart,
-  // MdKeyboardArrowDown,
+  MdKeyboardArrowDown,
   // MdNotificationsActive,
   // MdPages,
   // MdRadioButtonChecked,
@@ -32,7 +32,7 @@ import {
 import { NavLink, Link } from 'react-router-dom';
 import {
   // UncontrolledTooltip,
-  // Collapse,
+  Collapse,
   Nav,
   Navbar,
   NavItem,
@@ -47,42 +47,62 @@ const sidebarBackground = {
   backgroundRepeat: 'no-repeat',
 };
 
-// const navComponents = [
-//   { to: '/user/buttons', name: 'buttons', exact: false, Icon: MdRadioButtonChecked },
-//   {
-//     to: '/user/button-groups',
-//     name: 'button groups',
-//     exact: false,
-//     Icon: MdGroupWork,
-//   },
-//   { to: '/user/forms', name: 'forms', exact: false, Icon: MdChromeReaderMode },
-//   { to: '/user/input-groups', name: 'input groups', exact: false, Icon: MdViewList },
-//   {
-//     to: '/user/dropdowns',
-//     name: 'dropdowns',
-//     exact: false,
-//     Icon: MdArrowDropDownCircle,
-//   },
-//   { to: '/user/badges', name: 'badges', exact: false, Icon: MdStar },
-//   { to: '/user/alerts', name: 'alerts', exact: false, Icon: MdNotificationsActive },
-//   { to: '/user/progress', name: 'progress', exact: false, Icon: MdBrush },
-//   { to: '/user/modals', name: 'modals', exact: false, Icon: MdViewDay },
-// ];
+const navComponents = [
+  { 
+    to: '/user/upload-document', 
+    name: 'Upload Document', 
+    exact: true, 
+    // Icon: MdRadioButtonChecked 
+},
+  {
+    to: '/user/view-documents',
+    name: 'View Documents',
+    exact: true,
+    // Icon: MdGroupWork,
+  },
+  // { to: '/user/forms', name: 'forms', exact: false, Icon: MdChromeReaderMode },
+  // { to: '/user/input-groups', name: 'input groups', exact: false, Icon: MdViewList },
+  // {
+  //   to: '/user/dropdowns',
+  //   name: 'dropdowns',
+  //   exact: false,
+  //   Icon: MdArrowDropDownCircle,
+  // },
+  // { to: '/user/badges', name: 'badges', exact: false, Icon: MdStar },
+  // { to: '/user/alerts', name: 'alerts', exact: false, Icon: MdNotificationsActive },
+  // { to: '/user/progress', name: 'progress', exact: false, Icon: MdBrush },
+  // { to: '/user/modals', name: 'modals', exact: false, Icon: MdViewDay },
+];
 
-// const navContents = [
-//   { to: '/user/typography', name: 'typography', exact: false, Icon: MdTextFields },
-//   { to: '/user/tables', name: 'tables', exact: false, Icon: MdBorderAll },
-// ];
+const navContents = [
+  { 
+    to: '/user/create-new-request', 
+    name: 'Create New Request', 
+    exact: false, 
+    Icon: ''
+  },
+  { 
+    to: '/user/view-requests', 
+    name: 'View Requests', 
+    exact: false, 
+    Icon: '' 
+  },
+];
 
-// const pageContents = [
-//   { to: '/user/login', name: 'login / signup', exact: false, Icon: MdAccountCircle },
-//   {
-//     to: '/user/login-modal',
-//     name: 'login modal',
-//     exact: false,
-//     Icon: MdViewCarousel,
-//   },
-// ];
+const pageContents = [
+  { 
+    to: '/user/create-appointment', 
+    name: 'Create Appointment', 
+    exact: false, 
+    // Icon: MdAccountCircle 
+  },
+  {
+    to: '/user/view-appointments',
+    name: 'View Appointments',
+    exact: false,
+    // Icon: MdViewCarousel,
+  },
+];
 
 const navItems = [
   { 
@@ -97,33 +117,15 @@ const navItems = [
     exact: true, 
     Icon: MdPersonPin, 
   },
-  { 
-    to: '/user/requests', 
-    name: 'Requests', 
-    exact: true, 
-    Icon: MdSend 
-  },
-  { 
-    to: '/user/documents', 
-    name: 'documents', 
-    exact: true, 
-    Icon: MdFolder 
-  },
-  { 
-    to: '/user/appointments', 
-    name: 'appointments', 
-    exact: true, 
-    Icon: MdSchedule 
-  },
 ];
 
 const bem = bn.create('sidebar');
 
 class Sidebar extends React.Component {
   state = {
-    isOpenComponents: true,
-    isOpenContents: true,
-    isOpenPages: true,
+    isOpenComponents: false,
+    isOpenContents: false,
+    isOpenPages: false,
   };
 
   handleClick = name => () => {
@@ -168,15 +170,55 @@ class Sidebar extends React.Component {
                 </BSNavLink>
               </NavItem>
             ))}
-
-            {/* <NavItem
+              
+            <NavItem
+              className={bem.e('nav-item')}
+              onClick={this.handleClick('Pages')}
+            >
+              <BSNavLink className={bem.e('nav-item-collapse')}>
+                <div className="d-flex">
+                  <MdSchedule className={bem.e('nav-item-icon')} />
+                  <span className="">APPOINTMENTS</span>
+                </div>
+                <MdKeyboardArrowDown
+                  className={bem.e('nav-item-icon')}
+                  style={{
+                    padding: 0,
+                    transform: this.state.isOpenPages
+                      ? 'rotate(0deg)'
+                      : 'rotate(-90deg)',
+                    transitionDuration: '0.3s',
+                    transitionProperty: 'transform',
+                  }}
+                />
+              </BSNavLink>
+            </NavItem>
+            <Collapse isOpen={this.state.isOpenPages}>
+              {pageContents.map(({ to, name, exact }, index) => (
+                <NavItem key={index} className={bem.e('nav-item')}>
+                  <BSNavLink
+                    id={`navItem-${name}-${index}`}
+                    // className="text-uppercase"
+                    tag={NavLink}
+                    to={to}
+                    activeClassName="active"
+                    exact={exact}
+                  >
+                    {/* <Icon className={bem.e('nav-item-icon')} /> */}
+                    <span className="">{name}</span>
+                  </BSNavLink>
+                </NavItem>
+              ))}
+            </Collapse>
+            
+            <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Components')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
-                  <MdExtension className={bem.e('nav-item-icon')} />
-                  <span className=" align-self-start">Components</span>
+                  <MdFolder className={bem.e('nav-item-icon')} />
+                  <span className=" align-self-start">DOCUMENTS</span>
                 </div>
                 <MdKeyboardArrowDown
                   className={bem.e('nav-item-icon')}
@@ -190,33 +232,33 @@ class Sidebar extends React.Component {
                   }}
                 />
               </BSNavLink>
-            </NavItem> */}
-            {/* <Collapse isOpen={this.state.isOpenComponents}>
+            </NavItem>
+            <Collapse isOpen={this.state.isOpenComponents}>
               {navComponents.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
+                    // className="text-uppercase"
                     tag={NavLink}
                     to={to}
                     activeClassName="active"
                     exact={exact}
                   >
-                    <Icon className={bem.e('nav-item-icon')} />
+                    {/* <Icon className={bem.e('nav-item-icon')} /> */}
                     <span className="">{name}</span>
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse> */}
+            </Collapse>
 
-            {/* <NavItem
+            <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Contents')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
                   <MdSend className={bem.e('nav-item-icon')} />
-                  <span className="">Contents</span>
+                  <span className="">REQUESTS</span>
                 </div>
                 <MdKeyboardArrowDown
                   className={bem.e('nav-item-icon')}
@@ -230,24 +272,25 @@ class Sidebar extends React.Component {
                   }}
                 />
               </BSNavLink>
-            </NavItem> */}
-            {/* <Collapse isOpen={this.state.isOpenContents}>
+            </NavItem>
+            <Collapse isOpen={this.state.isOpenContents}>
               {navContents.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
+                    // className="text-uppercase"
                     tag={NavLink}
                     to={to}
                     activeClassName="active"
                     exact={exact}
                   >
-                    <Icon className={bem.e('nav-item-icon')} />
+                    {/* <Icon className={bem.e('nav-item-icon')} /> */}
                     <span className="">{name}</span>
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse> */}
+            </Collapse>
+
 
             <NavItem
               className={bem.e('nav-item')}

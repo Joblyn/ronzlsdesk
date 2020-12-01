@@ -99,7 +99,6 @@ export const postDataWithToken = (url, payload, done) => {
   const bearerToken = 'Bearer ' + token;
   console.log(bearerToken);
   nprogress.start();
-  debugger
   return dispatch => {
     fetch(endpoint, {
       method: 'POST',
@@ -112,6 +111,7 @@ export const postDataWithToken = (url, payload, done) => {
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         console.log(data.data);
         if (data.data) {
           nprogress.done();
@@ -119,6 +119,10 @@ export const postDataWithToken = (url, payload, done) => {
           dispatch(done(data.data));
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        nprogress.remove();
+        alert('Oopps!! An error occured, please try again.');
+      });
   };
 };

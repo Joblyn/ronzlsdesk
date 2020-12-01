@@ -14,7 +14,7 @@ export default function Profile() {
   }, []);
   console.log(adminData);
 
-  if (!adminData.phoneNumber) {
+  if (adminData === {}) {
     return <PageSpinner />;
   }
   return (

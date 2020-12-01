@@ -99,9 +99,10 @@ function Header() {
   return (
     <Navbar light expand className={bem.b('bg-white')}>
       <Nav navbar className="mr-2">
-        <Button outline onClick={handleSidebarControlButton}>
-          <MdClearAll size={25} />
-        </Button>
+        <Button outline 
+          onClick={handleSidebarControlButton} 
+          value={<MdClearAll size={25} />} 
+        />
       </Nav>
       {/* <Nav navbar>
         <SearchInput />

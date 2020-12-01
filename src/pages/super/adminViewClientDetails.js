@@ -42,7 +42,6 @@ const AdminViewClientDetails = () => {
   const [data, setData] = useState({});
   const [director, setDirector] = useState([{}]);
 
-
   useEffect(() => {
     setData(clientDetails);
     setDirector(clientDetails.director)
@@ -169,7 +168,7 @@ const AdminViewClientDetails = () => {
       subscriptionBegin,
       subscriptionEnd
     }
-    const endpoint = adminUpdateSubscription + id;
+    const endpoint = `${adminUpdateSubscription}${id}`;
     console.log("endpoint: " + endpoint);
     dispatch(updateClientSubscription(endpoint, payload));
   };

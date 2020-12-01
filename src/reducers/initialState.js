@@ -54,3 +54,13 @@ export const getUserData = {
   isSuccessful: false,
   data: {}
 }
+
+export const userCreatedRequest = {
+  isSuccessful: false,
+  request: {}
+}
+
+export const userUploadDoc = {
+  isSuccessful: false,
+  data: {}
+}

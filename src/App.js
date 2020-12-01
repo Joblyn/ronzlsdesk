@@ -66,9 +66,12 @@ const adminWidgetPage = React.lazy(() => import('pages/admin/adminWidgetPage'));
 //User
 const DashboardPage = React.lazy(() => import('pages/user/DashboardPage'));
 const Profile = React.lazy(() => import('pages/user/profile'));
-const Requests = React.lazy(() => import('pages/user/requests'));
-const Documents = React.lazy(() => import('pages/user/documents'));
-const Appointments = React.lazy(() => import('pages/user/appointments'));
+const CreateNewRequest = React.lazy(() => import('pages/user/createRequest'));
+const UserViewRequests = React.lazy(() => import('pages/user/viewRequests'))
+const UserViewDocuments = React.lazy(() => import('pages/user/viewDocuments'));
+const UserUploadDocument = React.lazy(() => import('pages/user/uploadDocument'));
+const UserViewAppointments = React.lazy(() => import('pages/user/viewAppointments'));
+const CreateNewAppointment = React.lazy(() => import('pages/user/createAppointment'));
 
 // unneccessary 
 const AlertPage = React.lazy(() => import('pages/user/AlertPage'));
@@ -160,16 +163,22 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/user/profile" component={Profile}/>
               </ProtectedRoute>
               <ProtectedRoute>
-                <Route exact path="/user/requests" component={Requests}/>
+                <Route exact path="/user/create-new-request" component={CreateNewRequest}/>
               </ProtectedRoute>
               <ProtectedRoute>
-                <Route exact path="/user/documents" component={Documents}/>
+                <Route exact path="/user/view-requests" component={UserViewRequests}/>
               </ProtectedRoute>
               <ProtectedRoute>
-                <Route exact path="/user/requests" component={Requests}/>
+                <Route exact path="/user/view-documents" component={UserViewDocuments}/>
               </ProtectedRoute>
               <ProtectedRoute>
-                <Route exact path="/user/appointments" component={Appointments}/>
+                <Route exact path="/user/upload-document" component={UserUploadDocument}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/view-appointments" component={UserViewAppointments}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/create-appointment" component={CreateNewAppointment}/>
               </ProtectedRoute>
 
               {/* unneccessary */}

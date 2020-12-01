@@ -2,7 +2,8 @@ import * as ActionType from '../Types';
 import setAuthToken from '../../utils/setAuthToken';
 import { 
   postData,
-  getDataWithToken
+  getDataWithToken,
+  postDataWithToken
 } from '../Services';
 
 const onRegisterUser = payload => {
@@ -40,6 +41,21 @@ export const onGetUser = (payload) => {
   }
 }
 
+export const onCreateRequest = (payload) => {
+  return {
+    type: ActionType.USER_CREATE_REQUEST,
+    payload
+  }
+}
+
+export const onUploadDoc = (payload) => {
+  return {
+    type: ActionType.USER_UPLOAD_DOC,
+    payload 
+  }
+}
+
+
 export const registerUser = (url, payload) => {
   return postData(url, payload, onRegisterUser);
 };
@@ -60,7 +76,18 @@ export const logOutAction = () => {
   window.location.href = '/';
 };
 
+
 // get User Data 
 export const getUser = (url) =>  {
   return getDataWithToken(url, onGetUser)
+}
+
+// upload request 
+export const createRequest = (url, payload) => {
+  return postDataWithToken(url, payload, onCreateRequest);
+} 
+
+// upload Doc 
+export const uploadDoc = (url, payload) => {
+  return postDataWithToken(url, payload, onUploadDoc)
 }
