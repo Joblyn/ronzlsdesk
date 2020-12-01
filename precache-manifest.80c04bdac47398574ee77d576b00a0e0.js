@@ -24,16 +24,16 @@ self.__precacheManifest = [
     "url": "/ronzlsdesk/static/js/5.89a38b68.chunk.js"
   },
   {
-    "revision": "ecdabe46ea75fe3c9d83",
+    "revision": "b819cc4376d11c716f76",
     "url": "/ronzlsdesk/static/css/main.e536a409.chunk.css"
   },
   {
-    "revision": "ecdabe46ea75fe3c9d83",
-    "url": "/ronzlsdesk/static/js/main.22e2f14c.chunk.js"
+    "revision": "b819cc4376d11c716f76",
+    "url": "/ronzlsdesk/static/js/main.54799143.chunk.js"
   },
   {
-    "revision": "440b4e03f5844b4be753",
-    "url": "/ronzlsdesk/static/js/runtime~main.3216248e.js"
+    "revision": "75119a24e4ffc296eedb",
+    "url": "/ronzlsdesk/static/js/runtime~main.c5ac69bc.js"
   },
   {
     "revision": "b34ab5bbb5a444cbd3c8",
@@ -224,12 +224,12 @@ self.__precacheManifest = [
     "url": "/ronzlsdesk/static/js/53.d5f289c0.chunk.js"
   },
   {
-    "revision": "5721544292525e521a53",
-    "url": "/ronzlsdesk/static/js/54.2410621e.chunk.js"
+    "revision": "97c3e2edf083d048f9d1",
+    "url": "/ronzlsdesk/static/js/54.ddac4d6a.chunk.js"
   },
   {
-    "revision": "8766a098d37851c4aa37",
-    "url": "/ronzlsdesk/static/js/55.06aaaded.chunk.js"
+    "revision": "40db5fa619cc9776aad4",
+    "url": "/ronzlsdesk/static/js/55.501da9e7.chunk.js"
   },
   {
     "revision": "6741607be665ecc8d019",
@@ -332,16 +332,16 @@ self.__precacheManifest = [
     "url": "/ronzlsdesk/static/media/slick.ced611da.eot"
   },
   {
-    "revision": "f97e3bbf73254b0112091d0192f17aec",
-    "url": "/ronzlsdesk/static/media/slick.f97e3bbf.svg"
+    "revision": "b7c9e1e479de3b53f1e4e30ebac2403a",
+    "url": "/ronzlsdesk/static/media/slick.b7c9e1e4.woff"
   },
   {
     "revision": "d41f55a78e6f49a5512878df1737e58a",
     "url": "/ronzlsdesk/static/media/slick.d41f55a7.ttf"
   },
   {
-    "revision": "b7c9e1e479de3b53f1e4e30ebac2403a",
-    "url": "/ronzlsdesk/static/media/slick.b7c9e1e4.woff"
+    "revision": "f97e3bbf73254b0112091d0192f17aec",
+    "url": "/ronzlsdesk/static/media/slick.f97e3bbf.svg"
   },
   {
     "revision": "1f7beca5bf4cda1803cd59cd881c372d",
@@ -456,7 +456,7 @@ self.__precacheManifest = [
     "url": "/ronzlsdesk/static/media/100_14.595b8cbd.jpg"
   },
   {
-    "revision": "0cf5912fb2cbfcf5db55e9f400bc9253",
+    "revision": "1ecb10b7759a97b34a5cf8c95873839b",
     "url": "/ronzlsdesk/index.html"
   }
 ];
