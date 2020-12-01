@@ -97,7 +97,7 @@ export default function Landing() {
                               to="/user/login"
                               className="text-green-500 text-lg font-semibold px-2 hover:underline"
                             >
-                              User
+                              Client
                             </Link>
                           </div>
                         </div>

@@ -1,0 +1,53 @@
+.profile-main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile-main > div{
+  width: 100%;
+  max-width: 800px;
+  border: 1px solid rgba(0,0,0,0.125);
+  border-radius: 0.25rem;
+  background-color: #fff;
+  padding: 1rem; 
+}
+.profile-ul > li {
+  display: flex; 
+  align-items: center;
+  margin: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.125);
+}
+.profile-ul > li div:nth-child(1){
+  width: 30%;
+}
+.profile-ul > li div:nth-child(1) p {
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+.profile-ul > li div:nth-child(2) {
+  width: 70%; 
+  text-align: left;
+}
+.yellow {
+  color: rgb(247, 247, 27);
+}
+.green {
+  color: green;
+}
+
+.director-div{
+  width: 100%!important;
+}
+.director-div div {
+  display: flex;
+  width: 100%!important;
+}
+.director-div div p {
+  width: 30%;
+}
+.director-div div h5 {
+  width: 70%;
+}
+.director-ul { 
+  width: 100%;
+}

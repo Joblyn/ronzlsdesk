@@ -1,6 +1,9 @@
-import * as ActionType from '../../Types';
-import setAuthToken from '../../../utils/setAuthToken';
-import { postData } from '../../Services';
+import * as ActionType from '../Types';
+import setAuthToken from '../../utils/setAuthToken';
+import { 
+  postData,
+  getDataWithToken
+} from '../Services';
 
 const onRegisterUser = payload => {
   return {
@@ -30,12 +33,12 @@ export const onForgotPasswordUser = payload => {
   };
 };
 
-// const onAllUsers = payload => {
-//   return {
-//     type: ActionType.GET_USERS,
-//     payload,
-//   };
-// };
+export const onGetUser = (payload) => {
+  return {
+    type: ActionType.GET_USER_DATA,
+    payload
+  }
+}
 
 export const registerUser = (url, payload) => {
   return postData(url, payload, onRegisterUser);
@@ -51,25 +54,13 @@ export const forgotPasswordUser = (url, payload) => {
 
 export const logOutAction = () => {
   localStorage.removeItem('jwtToken');
-  // localStorage.removeItem('role');
-  // localStorage.clear('jwtToken');
-  // localStorage.clear('role');
   localStorage.clear();
   //remove auth header for feature request
   setAuthToken(false);
   window.location.href = '/';
 };
 
-// export const logoutUSERAction = () => dispatch => {
-//   //remove token from local storage
-//   localStorage.removeItem('jwtToken');
-//   localStorage.removeItem('role');
-//   //remove auth header for feature request
-//   setAuthToken(false);
-//   //set current user to {} which will set isAuthenticated to false
-//   dispatch(setCurrentUSERUser({}));
-// };
-
-// export const getAllUser = url => {
-//   return getData(url, onAllUsers);
-// };
+// get User Data 
+export const getUser = (url) =>  {
+  return getDataWithToken(url, onGetUser)
+}

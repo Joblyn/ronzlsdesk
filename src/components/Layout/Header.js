@@ -7,7 +7,10 @@ import { UserCard } from 'components/Card';
 // import SearchInput from 'components/SearchInput';
 // import { notificationsData } from 'demos/header';
 // import withBadge from 'hocs/withBadge';
-import { getAllAdmin } from 'apiConstants/apiConstants';
+import { 
+  getAllAdmin,
+  getUserData 
+} from 'apiConstants/apiConstants';
 
 import {
   MdClearAll,
@@ -34,6 +37,8 @@ import {
 } from 'reactstrap';
 import bn from 'utils/bemnames';
 import { getAdminData, logOutAction } from '../../actions/admin/authAction/Users';
+import { getUser } from '../../actions/user/Users';
+
 import Button from '../button';
 
 const bem = bn.create('header');
@@ -60,9 +65,16 @@ function Header() {
 
   const dispatch = useDispatch();
   const adminData = useSelector(state => state.adminData);
+  const userData = useSelector(state => state.userData.data); 
   useEffect(() => {
-    dispatch(getAdminData(getAllAdmin));
-    console.log(adminData);
+    const role = localStorage.getItem('role');
+    if (role === ('superadmin' || 'admin')) {
+      dispatch(getAdminData(getAllAdmin));
+      console.log(adminData);
+    } else if (role === 'user') {
+      dispatch(getUser(getUserData));
+      console.log(userData);
+    }
   }, []);
 
   // const toggleNotificationPopover = () => {
@@ -141,8 +153,8 @@ function Header() {
           >
             <PopoverBody className="p-0 border-light">
               <UserCard
-                title={adminData.fullName}
-                subtitle={adminData.email}
+                title={adminData.fullName || userData.companyName}
+                subtitle={adminData.email || userData.email}
                 text="Last updated 3 mins ago"
                 className="border-light"
               >
@@ -152,9 +164,9 @@ function Header() {
                       style={{
                         color: 'inherit',
                         textDecoration: 'none', 
-                        width: '100%'                    
+                        width: '100%'      
                       }}
-                      to={`/${adminData.role}/profile`}
+                      to={`/${adminData.role || userData.role}/profile`}
                     >
                       <MdPersonPin /> Profile
                     </Link>

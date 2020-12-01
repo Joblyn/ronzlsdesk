@@ -10,7 +10,7 @@ import bgImage from '../../assets/images/illustration.png';
 import InputField from '../../components/InputField';
 import Button from '../../components/button';
 
-import { forgotPasswordUser } from '../../actions/user/authAction/Users';
+import { forgotPasswordUser } from '../../actions/user/Users';
 import { userForgotPassword } from '../../apiConstants/apiConstants';
 import { useDispatch, useSelector } from 'react-redux';
 

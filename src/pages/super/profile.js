@@ -22,36 +22,28 @@ export default function Profile() {
       title="Dropdowns"
       breadcrumbs={[{ name: 'Profile', active: true }]}
     >
-      <main style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '60vh'
-      }}>
-        <div style={{
-          width: '100%',
-          maxWidth: '500px',
-          border: '1px solid rgba(0,0,0,0.125)',
-          borderRadius: '0.25rem',
-          backgroundColor: '#fff',
-          padding: '2rem',
-        }}>
-          <ul>
-            <li style={{ display: 'flex', alignItems: 'center', margin: '1rem' }}>
-              <div style={{ width: '40%' }}><p style={{ marginBottom: '0', fontSize: '1rem' }}>Name:</p></div>
-              <div style={{ width: '80%', textAlign: 'center' }}><h5>{adminData.fullName}</h5></div>
+      <main className="profile-main">
+        <div>
+          <ul className="profile-ul">
+            <li>
+              <div>
+                <p>Name:</p>
+              </div>
+              <div><h5>{adminData.fullName}</h5>
+              </div>
             </li>
-            <li style={{ display: 'flex', alignItems: 'center', margin: '1rem' }}>
-              <div style={{ width: '40%' }}><p style={{ marginBottom: '0', fontSize: '1rem' }}>Email:</p></div>
-              <div style={{ width: '80%', textAlign: 'center' }}><h5>{adminData.email}</h5></div>
+            <li>
+              <div><p>Email:</p></div>
+              <div><h5>{adminData.email}</h5>
+              </div>
             </li>
-            <li style={{ display: 'flex', alignItems: 'center', margin: '1rem' }}>
-              <div style={{ width: '40%' }}><p style={{ marginBottom: '0', fontSize: '1rem' }}>Phone Number:</p></div>
-              <div style={{ width: '80%', textAlign: 'center' }}><h5>{`0${adminData.phoneNumber}`}</h5></div>
+            <li>
+              <div><p>Phone Number:</p></div>
+              <div><h5>{`0${adminData.phoneNumber}`}</h5></div>
             </li>
-            <li style={{ display: 'flex', alignItems: 'center', margin: '1rem' }}>
-              <div style={{ width: '40%' }}><p style={{ marginBottom: '0', fontSize: '1rem' }}>Role:</p></div>
-              <div style={{ width: '80%', textAlign: 'center', color: 'green' }}><h5>{adminData.role}</h5></div>
+            <li>
+              <div><p>Role:</p></div>
+              <div><h5>{adminData.role}</h5></div>
             </li>
           </ul>
         </div>

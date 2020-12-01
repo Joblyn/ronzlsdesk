@@ -9,12 +9,12 @@ import {
   // MdBrush,
   // MdChromeReaderMode,
   MdDashboard,
-  MdExtension,
+  // MdExtension,
   // MdGroupWork,
   // MdInsertChart,
   // MdKeyboardArrowDown,
   // MdNotificationsActive,
-  MdPages,
+  // MdPages,
   // MdRadioButtonChecked,
   MdSend,
   // MdStar,
@@ -24,8 +24,12 @@ import {
   // MdViewList,
   MdWeb,
   // MdWidgets,
-  MdSchedule
+  MdSchedule,
+  MdExitToApp,
+  MdPersonPin,
+  MdFolder
 } from 'react-icons/md';
+import { HiUserGroup } from 'react-icons/hi'
 import { NavLink, Link } from 'react-router-dom';
 import { logOutAction } from '../../actions/admin/authAction/Users';
 import {
@@ -106,33 +110,32 @@ const navItems = [
     to: '/superadmin/profile',
     name: 'profile',
     exact: true,
-    Icon: MdDashboard,
+    Icon: MdPersonPin,
   },
   { to: '/superadmin/admins', name: 'admins', exact: false, Icon: MdWeb },
-  { to: '/superadmin/client', name: 'clients', exact: true, Icon: MdDashboard },
-  // { to: '/superadmin/cards', name: 'cards', exact: false, Icon: MdWeb },
+  { to: '/superadmin/client', name: 'clients', exact: true, Icon: HiUserGroup },
   {
     to: '/superadmin/registeradmin',
     name: 'Register Admin',
-    exact: false,
+    exact: true,
     Icon: MdAccountCircle,
   },
   {
     to: '/superadmin/documents',
     name: 'Documents',
-    exact: false,
-    Icon: MdExtension,
+    exact: true,
+    Icon: MdFolder,
   }, 
   {
     to: '/superadmin/requests',
     name: 'Requests',
-    exact: false,
+    exact: true,
     Icon: MdSend,
   },
   {
     to: '/superadmin/appointments',
     name: 'Appointments',
-    exact: false,
+    exact: true,
     Icon: MdSchedule,
   }, 
   // {
@@ -283,7 +286,7 @@ class Sidebar extends React.Component {
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
-                  <MdPages className={bem.e('nav-item-icon')} />
+                  <MdExitToApp className={bem.e('nav-item-icon')} />
                   <span className="">LOGOUT</span>
                 </div>
                 {/* <MdKeyboardArrowDown

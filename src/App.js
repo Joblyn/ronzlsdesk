@@ -64,6 +64,13 @@ const adminTypographyPage = React.lazy(() => import('pages/admin/adminTypography
 const adminWidgetPage = React.lazy(() => import('pages/admin/adminWidgetPage'));
 
 //User
+const DashboardPage = React.lazy(() => import('pages/user/DashboardPage'));
+const Profile = React.lazy(() => import('pages/user/profile'));
+const Requests = React.lazy(() => import('pages/user/requests'));
+const Documents = React.lazy(() => import('pages/user/documents'));
+const Appointments = React.lazy(() => import('pages/user/appointments'));
+
+// unneccessary 
 const AlertPage = React.lazy(() => import('pages/user/AlertPage'));
 const AuthModalPage = React.lazy(() => import('pages/user/AuthModalPage'));
 const BadgePage = React.lazy(() => import('pages/user/BadgePage'));
@@ -71,7 +78,6 @@ const ButtonGroupPage = React.lazy(() => import('pages/user/ButtonGroupPage'));
 const ButtonPage = React.lazy(() => import('pages/user/ButtonPage'));
 const CardPage = React.lazy(() => import('pages/user/CardPage'));
 const ChartPage = React.lazy(() => import('pages/user/ChartPage'));
-const DashboardPage = React.lazy(() => import('pages/user/DashboardPage'));
 const DropdownPage = React.lazy(() => import('pages/user/DropdownPage'));
 const FormPage = React.lazy(() => import('pages/user/FormPage'));
 const InputGroupPage = React.lazy(() => import('pages/user/InputGroupPage'));
@@ -80,6 +86,7 @@ const ProgressPage = React.lazy(() => import('pages/user/ProgressPage'));
 const TablePage = React.lazy(() => import('pages/user/TablePage'));
 const TypographyPage = React.lazy(() => import('pages/user/TypographyPage'));
 const WidgetPage = React.lazy(() => import('pages/user/WidgetPage'));
+
 
 // superAdmin
 const superAdminDashboard = React.lazy(() => import('pages/super/adminDashboard'));
@@ -122,7 +129,7 @@ const role = localStorage.getItem('role');
 
 const App = ({ breakpoint }) => {
   return (
-    <Router basename="/">
+    <Router>
       <Switch>
         <IsUserRedirect
           path="/"
@@ -149,6 +156,23 @@ const App = ({ breakpoint }) => {
               <ProtectedRoute>
                 <Route exact path="/user/dashboard" component={DashboardPage} />
               </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/profile" component={Profile}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/requests" component={Requests}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/documents" component={Documents}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/requests" component={Requests}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/appointments" component={Appointments}/>
+              </ProtectedRoute>
+
+              {/* unneccessary */}
               <ProtectedRoute>
                 <Route exact path="/user/login-modal" component={AuthModalPage} />
               </ProtectedRoute>

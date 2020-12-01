@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import bgImage from '../../assets/images/illustration.png';
 
-import { registerUser } from '../../actions/user/authAction/Users';
+import { registerUser } from '../../actions/user/Users';
 import { userRegister } from '../../apiConstants/apiConstants';
 import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
 

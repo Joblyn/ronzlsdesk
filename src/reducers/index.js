@@ -13,6 +13,7 @@ import getAllRequestsReducer from './admin/adminGetAllRequests';
 import userRegisterReducer from './user/userRegister';
 import userLoginReducer from './user/userLogin';
 import userForgotPasswordReducer from './user/userForgotPassword';
+import userDataReducer from './user/getUserData';
 
 export default combineReducers({
   //Admin Reducer
@@ -30,6 +31,7 @@ export default combineReducers({
   userRegisterauth: userRegisterReducer,
   userLoginAuth: userLoginReducer,
   userForgotPasswordReducer: userForgotPasswordReducer,
+  userData: userDataReducer,
 
   //Error
   errors: errorReducer,

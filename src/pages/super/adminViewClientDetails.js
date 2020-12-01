@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 // import logo from '../../assets/images/logo.png';
 // import bgImage from '../../assets/images/illustration.png';
 
-import { registerUser } from '../../actions/user/authAction/Users';
+import { registerUser } from '../../actions/user/Users';
 import { updateClientSubscription } from '../../actions/admin/clients/Clients';
 import { userRegister, adminUpdateSubscription } from '../../apiConstants/apiConstants';
 // import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
@@ -155,24 +155,22 @@ const AdminViewClientDetails = () => {
   // const { userId } = useParams();
   const [subscriptionBegin, setSubscriptionBegin] = useState("2020-11-03");
   const [subscriptionEnd, setSubscriptionEnd] = useState("2021-11-03");
-
-
   const updatedSubscription = useSelector(state => state.adminUpdateSubscription);
   useEffect(() => {
     if (updatedSubscription.isSuccesful) {
       let result = updatedSubscription.result;
       console.log(result);
-      // setSubscriptionBegin(result.subscriptionBegin);
-      // setSubscriptionEnd(result.subscriptionEnd);
+      // continue from here
     }
   }, updatedSubscription);
-  const updateSubscription = (e) => {
-    e.preventDefault();
+  const updateSubscription = (e, id) => {
+    e.preventDefault(); 
     const payload = {
       subscriptionBegin,
       subscriptionEnd
     }
-    const endpoint = adminUpdateSubscription + data._id;
+    const endpoint = adminUpdateSubscription + id;
+    console.log("endpoint: " + endpoint);
     dispatch(updateClientSubscription(endpoint, payload));
   };
 
@@ -216,7 +214,7 @@ const AdminViewClientDetails = () => {
                   value="Set Subscription" />
                   : <Button
                     type="button"
-                    onClick={updateSubscription}
+                    onClick={(e) => updateSubscription(e, data._id)}
                     className="button button--md text-white bg-theme-1 xl:mr-3"
                     value="Update"
                   />}

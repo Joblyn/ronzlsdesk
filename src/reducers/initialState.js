@@ -49,9 +49,8 @@ export const adminGetAllRequests = {
   isSuccessful: false,
   requests: []
 }
-// export const getClientDetails = {
-//   isLoading: false,
-//   error: null,
-//   isSuccessful: false,
-//   user: ,
-// };
+
+export const getUserData = {
+  isSuccessful: false,
+  data: {}
+}

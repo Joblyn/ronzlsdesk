@@ -11,7 +11,7 @@ import setAuthToken from '../../utils/setAuthToken';
 import InputField from '../../components/InputField';
 import Button from '../../components/button';
 
-import { loginUser, setCurrentUser } from '../../actions/user/authAction/Users';
+import { loginUser, setCurrentUser } from '../../actions/user/Users';
 import { userLogin } from '../../apiConstants/apiConstants';
 
 const Login = () => {
