@@ -28,13 +28,11 @@ export const getData = (url, done) => {
 export const getDataWithToken = (url, done) => {
   const endpoint = baseUrl + url;
   console.log('Endpoint: ' + endpoint);
-
   const token = localStorage.getItem('jwtToken');
-
   const bearerToken = 'Bearer ' + token;
   console.log(bearerToken);
-
   nprogress.start();
+  
   return dispatch => {
     fetch(endpoint, {
       method: 'GET',
@@ -46,6 +44,7 @@ export const getDataWithToken = (url, done) => {
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         console.log(data.data);
         if (data.status === 'success') {
           nprogress.done();
@@ -53,7 +52,11 @@ export const getDataWithToken = (url, done) => {
           dispatch(done(data.data));
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        nprogress.remove();
+        alert('Oopps!! An error occured, please try again.');
+      });
   };
 };
 
@@ -87,7 +90,11 @@ export const postData = (url, payload, done) => {
           dispatch(done(data.data));
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        nprogress.remove();
+        alert('Oopps!! An error occured, please try again.');
+      });
   };
 };
 

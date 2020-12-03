@@ -42,8 +42,11 @@ export let userResetPassword = 'user/resetpassword';
 export let getUserData = 'user';
 export let updateUserData = 'user';
 
-//User Doc Upload
+//User Doc
 export let userUploaDocToAdmin = 'user/document/';
+export let userGetDocumentSentByUser = 'user/document';
+export let userGetDocumentSentByAdminToUser = 'user/document/admin'
+// export let userGetDocumentSentByAdmin = 'admin/document';
 
 // User Requests
 export let userCreateRequest = 'user/request';

@@ -17,6 +17,8 @@ import userDataReducer from './user/getUserData';
 import userCreatedRequestReducer from './user/createRequest';
 import userUploadDocReducer from './user/uploadDoc';
 import userGetRequestsReducer from './user/getRequests';
+import userGetDocumentsSentByAdminReducer from './user/getDocumentSentByAdmin'; 
+import userGetDocumentsSentByUserReducer from './user/getDocumentSentByUser';
 
 export default combineReducers({
   //Admin Reducer
@@ -38,7 +40,8 @@ export default combineReducers({
   userData: userDataReducer,
   userCreatedRequest:userCreatedRequestReducer,
   userUploadDoc:userUploadDocReducer,
-
+  userGetDocumentsSentByAdmin:userGetDocumentsSentByAdminReducer,
+  userGetDocumentsSentByUser:userGetDocumentsSentByUserReducer,
   //Error
   errors: errorReducer,
 });

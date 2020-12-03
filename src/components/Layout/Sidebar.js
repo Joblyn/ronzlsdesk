@@ -55,7 +55,7 @@ const navComponents = [
     // Icon: MdRadioButtonChecked 
 },
   {
-    to: '/user/view-documents',
+    to: '/user/documents',
     name: 'View Documents',
     exact: true,
     // Icon: MdGroupWork,
@@ -82,7 +82,7 @@ const navContents = [
     Icon: ''
   },
   { 
-    to: '/user/view-requests', 
+    to: '/user/requests', 
     name: 'View Requests', 
     exact: false, 
     Icon: '' 

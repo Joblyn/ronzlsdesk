@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getRequests } from '../../actions/user/Users';
@@ -23,12 +23,11 @@ export default function ViewRequests() {
   const getRows = data => {
     let rows = [];
 
-    data && data.map((request, i) => {
+    data && data.map((request, i) => (
       rows.push({
-        id:i + 1,
-      });
-      return ;
-    });
+        id: i + 1,
+      })
+    ));
     return rows; 
   };
 

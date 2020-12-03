@@ -39,7 +39,8 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "tailwindcss": "^1.8.5",
-    "victory": "^32.0.0"
+    "victory": "^32.0.0",
+    "webcam-easy": "^1.0.5"
   },
   "devDependencies": {
     "gh-pages": "^1.2.0",

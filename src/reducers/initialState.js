@@ -66,6 +66,16 @@ export const userUploadDoc = {
 }
 
 export const userGetRequests = {
-  isSuccessful:true,
+  isSuccessful:false,
   requests: []
+}
+
+export const userGetDocumentsSentByAdmin = {
+  isSuccessful: false,
+  documents: []
+}
+
+export const userGetDocumentsSentByUser = {
+  isSuccessful: false,
+  documents: []
 }

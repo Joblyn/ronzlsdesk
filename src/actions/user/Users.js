@@ -62,6 +62,19 @@ export const onUploadDoc = (payload) => {
   }
 }
 
+export const onGetDocumentSentByAdmin = (payload) => {
+  return {
+    type: ActionType.USER_GET_DOCUMENT_SENT_BY_ADMIN,
+    payload
+  }
+}
+
+export const onGetDocumentSentByUser = (payload) => {
+  return {
+    type: ActionType.USER_GET_DOCUMENT_SENT_BY_USER,
+    payload
+  }
+}
 
 export const registerUser = (url, payload) => {
   return postData(url, payload, onRegisterUser);
@@ -102,4 +115,13 @@ export const getRequests = (url) => {
 // upload Doc 
 export const uploadDoc = (url, payload) => {
   return postDataWithToken(url, payload, onUploadDoc)
+}
+
+// get documents sent by admin
+export const getDocumentSentByAdmin = (url) => {
+  return getDataWithToken(url, onGetDocumentSentByAdmin)
+}
+
+export const getDocumentSentByUser = (url) => {
+  return getDataWithToken(url, onGetDocumentSentByUser)
 }

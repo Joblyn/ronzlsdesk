@@ -166,11 +166,14 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/user/create-new-request" component={CreateNewRequest}/>
               </ProtectedRoute>
               <ProtectedRoute>
-                <Route exact path="/user/view-requests" component={UserViewRequests}/>
+                <Route exact path="/user/requests" component={UserViewRequests}/>
               </ProtectedRoute>
               <ProtectedRoute>
-                <Route exact path="/user/view-documents" component={UserViewDocuments}/>
+                <Route exact path="/user/documents" component={UserViewDocuments}/>
               </ProtectedRoute>
+              {/* <ProtectedRoute>
+                <Route exact path="/user/incoming-documents" component={UserViewIncomingDocuments}/>
+              </ProtectedRoute> */}
               <ProtectedRoute>
                 <Route exact path="/user/upload-document" component={UserUploadDocument}/>
               </ProtectedRoute>
