@@ -20,6 +20,8 @@ import userGetRequestsReducer from './user/getRequests';
 import userGetDocumentsSentByAdminReducer from './user/getDocumentSentByAdmin'; 
 import userGetDocumentsSentByUserReducer from './user/getDocumentSentByUser';
 import userBookAppointmentReducer from './user/userBookAppointment';
+import userGetAppointmentsReducer from './user/getAppointments';
+
 
 export default combineReducers({
   //Admin Reducer
@@ -31,7 +33,6 @@ export default combineReducers({
   adminUpdateSubscription: adminUpdateSubscriptionReducer,
   getAllDocuments: getAllDocumentsReducer,
   getAllRequests: getAllRequestsReducer,
-  userGetRequests:userGetRequestsReducer, 
   // adminGetClientDetails: adminGetClientDetails,
   
   //user Reducer
@@ -40,10 +41,12 @@ export default combineReducers({
   userForgotPasswordReducer: userForgotPasswordReducer,
   userData: userDataReducer,
   userCreatedRequest:userCreatedRequestReducer,
+  userGetRequests:userGetRequestsReducer, 
   userUploadDoc:userUploadDocReducer,
   userGetDocumentsSentByAdmin:userGetDocumentsSentByAdminReducer,
   userGetDocumentsSentByUser:userGetDocumentsSentByUserReducer,
   userBookAppointment:userBookAppointmentReducer,
+  userGetAppointments:userGetAppointmentsReducer,
   //Error
   errors: errorReducer,
 });

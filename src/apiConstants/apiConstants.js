@@ -54,3 +54,4 @@ export let userGetRequests = 'user/request';
 
 // User Appointmens
 export let userBookAppointmentWithAdmin = 'user/appointment';
+export let userGetAppointments = 'user/appointment';

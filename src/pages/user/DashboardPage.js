@@ -2,6 +2,8 @@ import { AnnouncementCard, TodosCard } from 'components/Card';
 import HorizontalAvatarList from 'components/HorizontalAvatarList';
 import MapWithBubbles from 'components/MapWithBubbles';
 import Page from 'components/Page';
+import { Link } from "react-router-dom";
+
 import ProductMedia from 'components/ProductMedia';
 import SupportTicket from 'components/SupportTicket';
 import UserProgressTable from 'components/UserProgressTable';
@@ -68,6 +70,58 @@ class DashboardPage extends React.Component {
         breadcrumbs={[{ name: 'Dashboard', active: true }]}
       >
         <Row>
+        <Col lg="12" md="12" sm="12" xs="12" className="d-flex align-items-center justify-content-center mb-3">
+            <Link to="/user/profile" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none', fontSize: '1.2rem'}}>
+              <AnnouncementCard
+                color="gradient-secondary"
+                text="View Profile"
+                buttonProps={{
+                  children: 'View',
+                }}
+              />
+            </Link>
+          </Col>
+          <Col lg="12" md="12" sm="12" xs="12" className="d-flex align-items-center justify-content-center mb-3" >
+          <Link to="/user/view-appointments" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none'}}>
+            <AnnouncementCard
+              color="gradient-secondary"
+              text="View Appointments"
+              buttonProps={{
+                children: 'View',
+              }}
+              style={{ height: 'fit-content', width: '100%', maxWidth: '500px',cursor: 'pointer', fontSize: '1.2rem'}}
+            />
+          </Link>
+          </Col>
+          <Col lg="12" md="12" sm="12" xs="12" className="d-flex align-items-center justify-content-center mb-3">
+            <Link to="/user/documents" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none', fontSize: '1.2rem'}}>
+              <AnnouncementCard
+                color="gradient-secondary"
+                text="View Documents"
+                buttonProps={{
+                  children: 'View',
+                }}
+              />
+            </Link>
+          </Col>
+          <Col lg="12" md="12" sm="12" xs="12" className="d-flex align-items-center justify-content-center mb-3">
+            <Link to="/user/requests" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none', fontSize: '1.2rem'}}>
+              <AnnouncementCard
+                color="gradient-secondary"
+                text="View Requests"
+                buttonProps={{
+                  children: 'View',
+                }}
+              />
+            </Link>
+          </Col>
+        </Row>
+
+
+
+
+
+        {/* <Row>
           <Col lg={3} md={6} sm={6} xs={12}>
             <NumberWidget
               title="Total Profit"
@@ -401,7 +455,7 @@ class DashboardPage extends React.Component {
           <Col lg="4" md="12" sm="12" xs="12">
             <TodosCard todos={todosData} />
           </Col>
-        </Row>
+        </Row> */}
       </Page>
     );
   }

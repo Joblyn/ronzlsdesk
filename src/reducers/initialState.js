@@ -81,6 +81,11 @@ export const userGetDocumentsSentByUser = {
 }
 
 export const userBookAppointment = {
-  isSucessful: false,
+  isSuccessful: false,
   result: {}
+}
+
+export const userGetAppointments = {
+  isSuccessful: false,
+  appointments: []
 }

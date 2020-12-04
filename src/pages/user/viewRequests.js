@@ -79,7 +79,7 @@ export default function ViewRequests() {
         rows={getRows(getUserRequests.requests)}
       /> 
       : <div className="empty-table">
-        <p><em>No requests available</em></p>
+        <p><em>No requests created</em></p>
       </div>
     }
     </Page>
