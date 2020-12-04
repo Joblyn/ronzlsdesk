@@ -85,14 +85,13 @@ const navContents = [
     to: '/user/requests', 
     name: 'View Requests', 
     exact: false, 
-    Icon: '' 
   },
 ];
 
 const pageContents = [
   { 
-    to: '/user/create-appointment', 
-    name: 'Create Appointment', 
+    to: '/user/book-appointment', 
+    name: 'Book Appointment', 
     exact: false, 
     // Icon: MdAccountCircle 
   },

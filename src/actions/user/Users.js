@@ -76,6 +76,13 @@ export const onGetDocumentSentByUser = (payload) => {
   }
 }
 
+export const onBookAppointment = (payload) => {
+  return {
+    type: ActionType.USER_BOOK_APPOINTMENT,
+    payload
+  }
+}
+
 export const registerUser = (url, payload) => {
   return postData(url, payload, onRegisterUser);
 };
@@ -121,7 +128,12 @@ export const uploadDoc = (url, payload) => {
 export const getDocumentSentByAdmin = (url) => {
   return getDataWithToken(url, onGetDocumentSentByAdmin)
 }
-
+// get documents sent by user 
 export const getDocumentSentByUser = (url) => {
   return getDataWithToken(url, onGetDocumentSentByUser)
+}
+
+// book appointment with admin 
+export const bookAppointment = (url, payload) => {
+  return postDataWithToken(url, payload, onBookAppointment)
 }

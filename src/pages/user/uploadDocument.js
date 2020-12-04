@@ -132,7 +132,7 @@ export default function UploadDocument() {
                   onChange={({ target }) => setFileName(target.value)}
                 />
               </FormGroup>
-              <Button type="submit" form="doc-form" className="form-button mt-3" style={{padding: '.7rem', fontSize: '1.2rem'}}>
+              <Button type="submit" form="doc-form" className="appt-button mt-3" style={{padding: '.7rem', fontSize: '1.2rem'}}>
                 Upload 
               </Button>
             </Form>

@@ -20,6 +20,7 @@
     "postcss-cli": "^7.1.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
+    "react-calendar": "^3.2.1",
     "react-chartjs-2": "^2.7.4",
     "react-component-queries": "^2.3.0",
     "react-d3-map": "^0.8.3",

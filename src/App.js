@@ -71,7 +71,7 @@ const UserViewRequests = React.lazy(() => import('pages/user/viewRequests'))
 const UserViewDocuments = React.lazy(() => import('pages/user/viewDocuments'));
 const UserUploadDocument = React.lazy(() => import('pages/user/uploadDocument'));
 const UserViewAppointments = React.lazy(() => import('pages/user/viewAppointments'));
-const CreateNewAppointment = React.lazy(() => import('pages/user/createAppointment'));
+const BookAppointment = React.lazy(() => import('pages/user/bookAppointment'));
 
 // unneccessary 
 const AlertPage = React.lazy(() => import('pages/user/AlertPage'));
@@ -171,9 +171,6 @@ const App = ({ breakpoint }) => {
               <ProtectedRoute>
                 <Route exact path="/user/documents" component={UserViewDocuments}/>
               </ProtectedRoute>
-              {/* <ProtectedRoute>
-                <Route exact path="/user/incoming-documents" component={UserViewIncomingDocuments}/>
-              </ProtectedRoute> */}
               <ProtectedRoute>
                 <Route exact path="/user/upload-document" component={UserUploadDocument}/>
               </ProtectedRoute>
@@ -181,7 +178,7 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/user/view-appointments" component={UserViewAppointments}/>
               </ProtectedRoute>
               <ProtectedRoute>
-                <Route exact path="/user/create-appointment" component={CreateNewAppointment}/>
+                <Route exact path="/user/book-appointment" component={BookAppointment}/>
               </ProtectedRoute>
 
               {/* unneccessary */}

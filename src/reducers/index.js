@@ -19,6 +19,7 @@ import userUploadDocReducer from './user/uploadDoc';
 import userGetRequestsReducer from './user/getRequests';
 import userGetDocumentsSentByAdminReducer from './user/getDocumentSentByAdmin'; 
 import userGetDocumentsSentByUserReducer from './user/getDocumentSentByUser';
+import userBookAppointmentReducer from './user/userBookAppointment';
 
 export default combineReducers({
   //Admin Reducer
@@ -42,6 +43,7 @@ export default combineReducers({
   userUploadDoc:userUploadDocReducer,
   userGetDocumentsSentByAdmin:userGetDocumentsSentByAdminReducer,
   userGetDocumentsSentByUser:userGetDocumentsSentByUserReducer,
+  userBookAppointment:userBookAppointmentReducer,
   //Error
   errors: errorReducer,
 });

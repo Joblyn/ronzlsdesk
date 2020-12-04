@@ -51,3 +51,6 @@ export let userGetDocumentSentByAdminToUser = 'user/document/admin'
 // User Requests
 export let userCreateRequest = 'user/request';
 export let userGetRequests = 'user/request';
+
+// User Appointmens
+export let userBookAppointmentWithAdmin = 'user/appointment';
