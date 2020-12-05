@@ -30,7 +30,7 @@ export default function ViewAppointments() {
     return rows;
   }
 
-  if(!getUserAppointments.appointments) {
+  if(!getUserAppointments.isSuccessful) {
     return <PageSpinner />
   }
   return (
@@ -78,7 +78,7 @@ export default function ViewAppointments() {
         rows={getRows(getUserAppointments.appointments)}
       /> 
       : <div className="empty-table">
-        <p><em>No appointments created</em></p>
+        <p><em>No appointments scheduled by clients</em></p>
       </div>
     } 
     </Page>

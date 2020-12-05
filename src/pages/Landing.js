@@ -13,12 +13,14 @@ export default function Landing() {
     const role = localStorage.getItem('role');
     console.log('Auth: ' + token);
     console.log('Role: ' + role);
-    if ((token && role === 'admin') || (token && role === 'superadmin')) {
-      history.push('/admin/dashboard');
-    }
-    if (token && role === 'user') {
-      history.push('/user/dashboard');
-    }
+    token && history.push(`/${role}/dashboard`);
+    // if (token && role === 'admin') {
+    //   history.push('/admin/dashboard');
+    // } else if (token && role === 'superadmin'){
+    //   history.push('superadmin/dashboard')
+    // } else if (token && role === 'user') {
+    //   history.push('/user/dashboard');
+    // }
   }, []);
 
   return (

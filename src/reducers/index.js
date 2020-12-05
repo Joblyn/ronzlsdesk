@@ -4,10 +4,14 @@ import adminRegisterReducer from './admin/adminRegister';
 import adminLoginReducer from './admin/adminLogin';
 import adminForgotPasswordReducer from './admin/adminForgotPassword';
 import adminGetAllClient from './admin/getClientsReducer';
-import adminUpdateSubscriptionReducer from './admin/adminUpdateSubscription'
+import adminUpdateSubscriptionReducer from './admin/adminUpdateSubscription';
 import adminDataReducer from './admin/getAdminData';
 import getAllDocumentsReducer from './admin/adminGetAllDocuments';
 import getAllRequestsReducer from './admin/adminGetAllRequests';
+import getClientsForAdminReducer from './admin/getClientsForAdmin';
+import adminGetSentDocumentsReducer from './admin/getSentDocuments';
+import adminGetReceivedDocumentsReducer from './admin/getReceivedDocuments';
+
 // import adminGetClientDetails from './admin/getClientDetailsReducer';
 
 import userRegisterReducer from './user/userRegister';
@@ -22,7 +26,6 @@ import userGetDocumentsSentByUserReducer from './user/getDocumentSentByUser';
 import userBookAppointmentReducer from './user/userBookAppointment';
 import userGetAppointmentsReducer from './user/getAppointments';
 
-
 export default combineReducers({
   //Admin Reducer
   adminRegisterAuth: adminRegisterReducer,
@@ -33,6 +36,9 @@ export default combineReducers({
   adminUpdateSubscription: adminUpdateSubscriptionReducer,
   getAllDocuments: getAllDocumentsReducer,
   getAllRequests: getAllRequestsReducer,
+  getClientsForAdmin:getClientsForAdminReducer,
+  adminGetSentDocuments:adminGetSentDocumentsReducer,
+  adminGetReceivedDocuments:adminGetReceivedDocumentsReducer,
   // adminGetClientDetails: adminGetClientDetails,
   
   //user Reducer

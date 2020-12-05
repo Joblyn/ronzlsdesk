@@ -6,7 +6,7 @@ const getAllRequestsReducer = (state = adminGetAllRequests, action) => {
     case ActionTypes.ADMIN_GET_ALL_REQUESTS:
       return {
         isSuccessful:true,
-        documents: action.payload
+        requests: action.payload
       };
     default:
       return state;

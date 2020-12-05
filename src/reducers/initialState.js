@@ -89,3 +89,18 @@ export const userGetAppointments = {
   isSuccessful: false,
   appointments: []
 }
+
+export const adminGetClients = {
+  isSuccessful: false,
+  clients: []
+}
+
+export const adminGetSentDocuments = {
+  isSuccessful: false,
+  documents: []
+}
+
+export const adminGetReceivedDocuments = {
+  isSuccessful: false,
+  documents: []
+}

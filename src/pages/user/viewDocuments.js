@@ -23,8 +23,8 @@ export default function ViewDocuments() {
     
   }, [category]);
 
-  if(userGetDocumentsSentByUser.isSuccessful || userGetDocumentsSentByUser.isSuccessful) {
-    console.log((userGetDocumentsSentByUser.documents || userGetDocumentsSentByUser.documents)) 
+  if(userGetDocumentsSentByUser.isSuccessful || userGetDocumentsSentByAdmin.isSuccessful) {
+    console.log((userGetDocumentsSentByUser.documents || userGetDocumentsSentByAdmin.documents)) 
   }
   
   const getRows = (documents) => {
@@ -38,7 +38,7 @@ export default function ViewDocuments() {
     return rows;
   };
 
-  if (!(userGetDocumentsSentByUser.isSuccessful || userGetDocumentsSentByUser.isSuccessful)) {
+  if (!(userGetDocumentsSentByUser.isSuccessful || userGetDocumentsSentByAdmin.isSuccessful)) {
     return <PageSpinner />
   }
   return (

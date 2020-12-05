@@ -1,6 +1,7 @@
 import * as ActionType from '../../Types';
 import { getDataWithToken, postDataWithToken } from '../../Services';
 
+// superadmin-client actions
 const onGetClient = payload => {
   return {
     type: ActionType.ADMIN_GET_CLIENT_SUCCESS,
@@ -29,12 +30,35 @@ const onGetAllDocuments = payload => {
   }
 }
 
+const onGetDocumentsSentToUser = payload => {
+  return {
+    type: ActionType.ADMIN_GET_DOCUMENTS_SENT,
+    payload
+  }
+}
+
+const onGetDocumentsReceivedFromUser = payload => {
+  return {
+    type: ActionType.ADMIN_GET_DOCUMENTS_RECEIVED,
+    payload
+  }
+}
+
 const onGetAllRequests = payload => {
   return {
     type: ActionType.ADMIN_GET_ALL_REQUESTS,
     payload
   }
 }
+
+// admin-client actions
+const onAdminGetClients = payload => {
+  return {
+    type: ActionType.ADMIN_GET_CLIENTS,
+    payload
+  }
+}
+
 // const onLogin = payload => {
 //   return {
 //     type: ActionType.ADMIN_LOGIN_SUCCESS,
@@ -56,6 +80,13 @@ const onGetAllRequests = payload => {
 //   };
 // };
 
+// get clients under admin
+export const adminGetClients = url => {
+  return getDataWithToken(url, onAdminGetClients);
+}
+
+
+// superadmin get all clients
 export const getClient = url => {
   return getDataWithToken(url, onGetClient);
 };
@@ -70,6 +101,14 @@ export const updateClientSubscription = (url, payload) => {
 
 export const getAllDocuments = (url) => {
   return getDataWithToken(url, onGetAllDocuments)
+}
+
+export const getDocumentsSentToUser = (url) => {
+  return getDataWithToken(url, onGetDocumentsSentToUser)
+}
+
+export const getDocumentsReceivedFromUser = (url) => {
+  return getDataWithToken(url, onGetDocumentsReceivedFromUser)
 }
 
 export const getAllRequests = (url) => {

@@ -1,11 +1,6 @@
+import React, { useEffect } from 'react';
 import Page from 'components/Page';
-import React, { useEffect, 
-  // useRef 
-} from 'react';
-import { Link, 
-  // useHistory, 
-  // useParams
- } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PageSpinner from '../../components/PageSpinner';
 // import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 // import {
@@ -35,8 +30,6 @@ import { useDispatch, useSelector } from 'react-redux';
 // import ExcelTable from '../../components/ExportToExcel';
 import Modal from '../../components/Modal';
 
-// const colors = getThemeColors();
-
 const AdminClient = () => {
   // const history = useHistory();
   const dispatch = useDispatch();
@@ -44,10 +37,7 @@ const AdminClient = () => {
   // const { params } = useParams();
 
   console.log('Payload:' + adminGetClient.users);
-
-  // useEffect(()=> {
-
-  // },[adminGetClient])
+  
   const handleClick2 = id => {
     const endpoint = getClientDetail + id; //'5f5265a3d74c2bb6428f73ce';
     dispatch(getClientDetails(endpoint));

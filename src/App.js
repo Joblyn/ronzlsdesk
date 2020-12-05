@@ -43,10 +43,15 @@ import { IsUserRedirect } from './validations/isUserRedirect';
 // import { getAllClients } from './apiConstants/apiConstants';
 
 //Admin
-// const AdminRegister = React.lazy(() => import('pages/admin/adminRegister'));
-const AdminViewClientDetails = React.lazy(() => import('pages/admin/AdminViewClientDetails'));
-const adminClient = React.lazy(() => import('pages/admin/adminClient'));
-const adminDashboard = React.lazy(() => import('pages/admin/adminDashboard'));
+const AdminDashboard = React.lazy(() => import('pages/admin/adminDashboard'));
+const AdminProfile = React.lazy(() => import('pages/admin/adminProfile'));
+const AdminClients = React.lazy(() => import('pages/admin/adminClients'));
+const AdminDocuments = React.lazy(() => import('pages/admin/adminDocuments'));
+const AdminRequests = React.lazy(() => import('pages/admin/adminRequests'));
+const AdminAppointments = React.lazy(() => import('pages/admin/adminAppointments'));
+const AdminViewClientDetails = React.lazy(() => import('pages/admin/adminViewClientDetails'));
+
+
 const adminAlertPage = React.lazy(() => import('pages/admin/adminAlertPage'));
 const adminBadgePage = React.lazy(() => import('pages/admin/adminBadgePage'));
 const adminButtonGroupPage = React.lazy(() =>import('pages/admin/adminButtonGroupPage'));
@@ -67,7 +72,7 @@ const adminWidgetPage = React.lazy(() => import('pages/admin/adminWidgetPage'));
 const DashboardPage = React.lazy(() => import('pages/user/DashboardPage'));
 const Profile = React.lazy(() => import('pages/user/profile'));
 const CreateNewRequest = React.lazy(() => import('pages/user/createRequest'));
-const UserViewRequests = React.lazy(() => import('pages/user/viewRequests'))
+const UserViewRequests = React.lazy(() => import('pages/user/viewRequests'));
 const UserViewDocuments = React.lazy(() => import('pages/user/viewDocuments'));
 const UserUploadDocument = React.lazy(() => import('pages/user/uploadDocument'));
 const UserViewAppointments = React.lazy(() => import('pages/user/viewAppointments'));
@@ -234,9 +239,29 @@ const App = ({ breakpoint }) => {
           // Admin Routes
           (<AdminMainLayout breakpoint={breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
-              <Route exact path="/admin/dashboard" component={adminDashboard} />
-              <Route exact path="/admin/client/details/:userId" component={AdminViewClientDetails} /> 
+              <ProtectedRoute>
+                <Route exact path="/admin/dashboard" component={AdminDashboard} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/profile" component={AdminProfile}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/clients" component={AdminClients}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/documents" component={AdminDocuments}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/requests" component={AdminRequests}/> 
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/appointments" component={AdminAppointments}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/client/details/:userId" component={AdminViewClientDetails} /> 
+              </ProtectedRoute>
 
+              {/* unnecessary */}
               <Route exact path="/admin/dashboardold" component={adminDashboardPage} />
               <Route exact path="/admin/buttons" component={adminButtonPage} />
               <Route exact path="/admin/cards" component={adminCardPage} />
@@ -252,7 +277,6 @@ const App = ({ breakpoint }) => {
               <Route exact path="/admin/forms" component={adminFormPage} />
               <Route exact path="/admin/input-groups" component={adminInputGroupPage} />
               <Route exact path="/admin/charts" component={adminChartPage} />
-              <Route exact path="/admin/client" component={adminClient} />
             </React.Suspense>
           </AdminMainLayout>
           ) : ( (auth && role === 'superadmin') ?

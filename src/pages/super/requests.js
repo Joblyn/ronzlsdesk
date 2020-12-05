@@ -13,7 +13,7 @@ import Modal from '../../components/Modal';
 
 export default function Requests() {
   const dispatch = useDispatch();
-  const adminGetAllDocuments = useSelector(state => state.getAllRequests);
+  const adminGetAllRequests = useSelector(state => state.getAllRequests);
 
   const handleClick2 = id => {
   };
@@ -55,7 +55,7 @@ export default function Requests() {
   const onActionClicked = (e, payload) => {
     alert(JSON.stringify(payload));
   };
-  if (adminGetAllDocuments.documents === 0) {
+  if (!adminGetAllRequests.isSuccessful) {
     return <PageSpinner />;
   }
   return (
@@ -64,6 +64,7 @@ export default function Requests() {
       breadcrumbs={[{ name: 'All Clients', active: true }]}
     >
       <Modal action="Show"/>
+    {adminGetAllRequests.requests.length ?
       <CustomTable
         pagination
         pagerows
@@ -99,10 +100,14 @@ export default function Requests() {
             color: value => 'black',
           },
         ]}
-        rows={getRows(adminGetAllDocuments.documents)}
+        rows={getRows(adminGetAllRequests.requests)}
         handleActionClick={onActionClicked}
         handleLinkClick={onLinkClicked}
-      />      
+      /> 
+      : <div class="empty-table">
+        <p><em>No requests from clients</em></p>
+      </div>
+    }     
     </Page>
   )
 }

@@ -54,8 +54,8 @@ export const getDataWithToken = (url, done) => {
       })
       .catch(err => {
         console.log(err);
+        // alert('Oopps!! An error occured, please try again.');
         nprogress.remove();
-        alert('Oopps!! An error occured, please try again.');
       });
   };
 };
@@ -92,8 +92,8 @@ export const postData = (url, payload, done) => {
       })
       .catch(err => {
         console.log(err);
+        // alert('Oopps!! An error occured, please try again.');
         nprogress.remove();
-        alert('Oopps!! An error occured, please try again.');
       });
   };
 };
@@ -129,7 +129,7 @@ export const postDataWithToken = (url, payload, done) => {
       .catch(err => {
         console.log(err);
         nprogress.remove();
-        alert('Oopps!! An error occured, please try again.');
+        // alert('Oopps!! An error occured, please try again.');
       });
   };
 };

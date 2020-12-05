@@ -14,20 +14,26 @@ export let adminResetPassword = 'admin/resetpassword';
 //Get All Admins
 export let getAllAdmin = 'admin';
 
-//view all clients
+//superadmin view all clients
 export let getAllClients = 'admin/actions/users';
 export let getClientDetail = 'admin/user/';
 
+// admin view clients under admin
+export let getClientsUnderAdmin = 'admin/actions/user';
 //Admin Doc Upload
 export let adminUploadDoc = 'admin/actions/uploadDocToUser/{user_id}';
+// admin get documents sent
+export let adminGetDocumentsSentToUser = 'admin/document'
+// admin get documenst received
+export let adminGetDocumentsReceivedFromUser = 'admin/document/user';
 
-// Admin get all documents
+// Superadmin get all documents
 export let adminGetDocuments = 'admin/document/user';
 
-// Admin get requests 
+// Superadmin get requests 
 export let adminGetRequests = 'admin/request';
 
-//Admin update client subscription
+//Superadmin update client subscription
 export let adminUpdateSubscription = 'admin/actions/date/'
 
 //User

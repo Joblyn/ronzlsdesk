@@ -31,7 +31,7 @@ export default function ViewRequests() {
     return rows; 
   };
 
-  if(!getUserRequests.requests) {
+  if(!getUserRequests.isSuccessful) {
     return <PageSpinner />
   }
   return (

@@ -46,17 +46,8 @@ const AdminLogin = () => {
       console.log(decoded);
       //set current user
       dispatch(setCurrentAdminUser(decoded));
-
-      if (token && role === 'superadmin') {
-        history.push('/superadmin/dashboard');
-      }
-      if (token && role === 'admin') {
-        history.push('/admin/dashboard');
-      }
-      if (token && role === 'user') {
-        history.push('/user/dashboard');
-      }
-    }
+      history.push(`/${role}/dashboard`);
+    } 
   }, [adminLog]);
 
   const handleClick = event => {

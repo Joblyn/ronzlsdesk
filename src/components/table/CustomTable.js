@@ -273,7 +273,7 @@ export default function CustomTable({
     }
   };
   return (
-    <Grid conatiner={true} className="w-full">
+    <Grid container={true} className="w-full">
       <Grid item>
         <Grid container={true} justify="space-between" alignItems="flex-start">
           <Grid item>

@@ -43,7 +43,7 @@ const Documents = () => {
     dispatch(getAllDocuments(adminGetDocuments));
   }, []);
 
-  if (adminGetAllDocuments.isSuccessful === true) {
+  if (adminGetAllDocuments.isSuccessful) {
     console.log('Check: ' + adminGetAllDocuments.documents);
   }
 
@@ -79,7 +79,7 @@ const Documents = () => {
   const onActionClicked = (e, payload) => {
     alert(JSON.stringify(payload));
   };
-  if (adminGetAllDocuments.documents === 0) {
+  if (!adminGetAllDocuments.isSuccessful) {
     return <PageSpinner />;
   }
   return (
@@ -88,6 +88,7 @@ const Documents = () => {
       breadcrumbs={[{ name: 'Documents', active: true }]}
     >
       <Modal action="Show"/>
+    {adminGetAllDocuments.documents.length ?
       <CustomTable
         pagination
         pagerows
@@ -128,7 +129,10 @@ const Documents = () => {
         rows={getRows(adminGetAllDocuments.documents)}
         handleActionClick={onActionClicked}
         handleLinkClick={onLinkClicked}
-      />      
+      /> : <div className="empty-table">
+        <p><em>No documents sent from clients</em></p>
+      </div> 
+    }     
     </Page>
   );
 }
