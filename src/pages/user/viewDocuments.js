@@ -52,7 +52,7 @@ export default function ViewDocuments() {
       >Documents Sent</Link>
       <Link className={category === 'received' ? 'active' : ''} to="#" onClick={() => setCategory('received')}>Documents Recieved</Link>
     </div>
-    {userGetDocumentsSentByUser.documents.length ||  userGetDocumentsSentByUser.documents.length ?
+    <div style={{overflowX: 'auto'}}> 
       <CustomTable
         pagination
         pagerows
@@ -83,10 +83,8 @@ export default function ViewDocuments() {
           },
         ]}
         rows={getRows(userGetDocumentsSentByUser.documents || userGetDocumentsSentByAdmin.documents)}
-      /> : <div className="empty-table">
-        <p><em>{category === 'sent' ? 'No documents sent to admin' : 'No documents received from admin'}</em></p>
-      </div>
-    }
+      /> 
+    </div>
     </Page>
   )
 }

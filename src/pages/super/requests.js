@@ -64,7 +64,7 @@ export default function Requests() {
       breadcrumbs={[{ name: 'All Clients', active: true }]}
     >
       <Modal action="Show"/>
-    {adminGetAllRequests.requests.length ?
+      <div style={{overflowX: 'auto'}}>
       <CustomTable
         pagination
         pagerows
@@ -104,10 +104,7 @@ export default function Requests() {
         handleActionClick={onActionClicked}
         handleLinkClick={onLinkClicked}
       /> 
-      : <div class="empty-table">
-        <p><em>No requests from clients</em></p>
-      </div>
-    }     
+      </div>  
     </Page>
   )
 }

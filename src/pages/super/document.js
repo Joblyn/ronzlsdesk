@@ -88,7 +88,9 @@ const Documents = () => {
       breadcrumbs={[{ name: 'Documents', active: true }]}
     >
       <Modal action="Show"/>
-    {adminGetAllDocuments.documents.length ?
+      <div style={{
+        overflowX: 'auto'
+      }}>
       <CustomTable
         pagination
         pagerows
@@ -114,13 +116,13 @@ const Documents = () => {
           {
             id: 'date',
             label: 'Date Uploaded',
-            minWidth: 100,
+            minWidth: 150,
             color: value => 'blue',
           },
           {
             id: 'view',
             label: 'Action',
-            minWidth: 150,
+            minWidth: 100,
             align: 'center',
             color: value => 'blue',
             type: 'link',
@@ -129,10 +131,8 @@ const Documents = () => {
         rows={getRows(adminGetAllDocuments.documents)}
         handleActionClick={onActionClicked}
         handleLinkClick={onLinkClicked}
-      /> : <div className="empty-table">
-        <p><em>No documents sent from clients</em></p>
-      </div> 
-    }     
+      /> 
+      </div>    
     </Page>
   );
 }

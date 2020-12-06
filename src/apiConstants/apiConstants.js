@@ -21,7 +21,7 @@ export let getClientDetail = 'admin/user/';
 // admin view clients under admin
 export let getClientsUnderAdmin = 'admin/actions/user';
 //Admin Doc Upload
-export let adminUploadDoc = 'admin/actions/uploadDocToUser/{user_id}';
+export let adminUploadDoc = 'admin/actions/uploadDocToUser/';
 // admin get documents sent
 export let adminGetDocumentsSentToUser = 'admin/document'
 // admin get documenst received

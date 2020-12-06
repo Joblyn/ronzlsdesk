@@ -42,7 +42,7 @@ export default function Profile() {
             </li>
             <li>
               <div><p>Role:</p></div>
-              <div><h5 style={{color:'green'}}>{adminData.role}</h5></div>
+              <div><h5 style={{color:'green'}}>{adminData.role.charAt(0).toUpperCase() + adminData.role.slice(1)}</h5></div>
             </li>
           </ul>
         </div>

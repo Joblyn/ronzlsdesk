@@ -11,7 +11,7 @@ import getAllRequestsReducer from './admin/adminGetAllRequests';
 import getClientsForAdminReducer from './admin/getClientsForAdmin';
 import adminGetSentDocumentsReducer from './admin/getSentDocuments';
 import adminGetReceivedDocumentsReducer from './admin/getReceivedDocuments';
-
+import adminUploadDocToClientReducer from './admin/uploadDoc';
 // import adminGetClientDetails from './admin/getClientDetailsReducer';
 
 import userRegisterReducer from './user/userRegister';
@@ -39,6 +39,7 @@ export default combineReducers({
   getClientsForAdmin:getClientsForAdminReducer,
   adminGetSentDocuments:adminGetSentDocumentsReducer,
   adminGetReceivedDocuments:adminGetReceivedDocumentsReducer,
+  adminUploadDocToClient:adminUploadDocToClientReducer,
   // adminGetClientDetails: adminGetClientDetails,
   
   //user Reducer

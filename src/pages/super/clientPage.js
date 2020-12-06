@@ -97,71 +97,76 @@ const AdminClient = () => {
       breadcrumbs={[{ name: 'All Clients', active: true }]}
     >
       <Modal action="Upload Document"/>
-      <CustomTable
-        pagination
-        pagerows
-        columns={[
-          {
-            id: 'id',
-            label: 'ID',
-            minWidth: 20,
-            color: value => 'blue',
-          },
+      <div
+        style={{
+          overflowX: 'auto'
+        }}
+      >
+        <CustomTable
+          pagination
+          pagerows
+          columns={[
+            {
+              id: 'id',
+              label: 'ID',
+              minWidth: 20,
+              color: value => 'blue',
+            },
 
-          {
-            id: 'user',
-            label: 'User',
-            minWidth: 100,
-            color: value => 'blue',
-          },
-          {
-            id: 'accountType',
-            label: 'Account Type',
-            minWidth: 50,
-            color: value => 'blue',
-          },
-          {
-            id: 'companyAddress',
-            label: 'Address',
-            minWidth: 150,
-            align: 'center',
-            color: value => 'blue',
-          },
-          {
-            id: 'phoneNumber',
-            label: 'Phone Number',
-            minWidth: 50,
-            align: 'center',
-            color: value => 'blue',
-          },
-          {
-            id: 'email',
-            label: 'Email',
-            minWidth: 100,
-            align: 'center',
-            color: value => 'blue',
-          },
-          {
-            id: 'website',
-            label: 'Website',
-            minWidth: 80,
-            align: 'center',
-            color: value => 'blue',
-          },
-          {
-            id: 'view',
-            label: 'Actions',
-            minWidth: 150,
-            align: 'center',
-            color: value => 'blue',
-            type: 'link',
-          },
-        ]}
-        rows={getRows(adminGetClient.users)}
-        handleActionClick={onActionClicked}
-        handleLinkClick={onLinkClicked}
-      />
-      
+            {
+              id: 'user',
+              label: 'User',
+              minWidth: 100,
+              color: value => 'blue',
+            },
+            {
+              id: 'accountType',
+              label: 'Account Type',
+              minWidth: 50,
+              color: value => 'blue',
+            },
+            {
+              id: 'companyAddress',
+              label: 'Address',
+              minWidth: 150,
+              align: 'center',
+              color: value => 'blue',
+            },
+            {
+              id: 'phoneNumber',
+              label: 'Phone Number',
+              minWidth: 50,
+              align: 'center',
+              color: value => 'blue',
+            },
+            {
+              id: 'email',
+              label: 'Email',
+              minWidth: 100,
+              align: 'center',
+              color: value => 'blue',
+            },
+            {
+              id: 'website',
+              label: 'Website',
+              minWidth: 80,
+              align: 'center',
+              color: value => 'blue',
+            },
+            {
+              id: 'view',
+              label: 'Actions',
+              minWidth: 150,
+              align: 'center',
+              color: value => 'blue',
+              type: 'link',
+            },
+          ]}
+          rows={getRows(adminGetClient.users)}
+          handleActionClick={onActionClicked}
+          handleLinkClick={onLinkClicked}
+        />
+      </div>
     </Page>
   );
 };

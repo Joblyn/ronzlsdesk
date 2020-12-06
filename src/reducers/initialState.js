@@ -104,3 +104,8 @@ export const adminGetReceivedDocuments = {
   isSuccessful: false,
   documents: []
 }
+
+export const adminUploadDocToClient = {
+  isSuccessful: false,
+  result: {}
+}

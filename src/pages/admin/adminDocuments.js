@@ -13,6 +13,7 @@ import {
 import Page from 'components/Page';
 import CustomTable from '../../components/table/CustomTable';
 import PageSpinner from '../../components/PageSpinner';
+import Modal from '../../components/Modal';
 
 export default function AdminDocumnents() {
   const [category, setCategory] = useState('sent');
@@ -54,12 +55,19 @@ export default function AdminDocumnents() {
       title="Dashboard"
       breadcrumbs={[{ name: 'View Documents', active: true }]} 
     >
+    <div style={{textAlign: 'end'}}>
+      <Modal color="#fff" action="Upload Document"/>
+    </div>
       <div className="links">
         <Link className={category === 'sent' ? 'active' : ''} to="#" onClick={() => setCategory('sent')}
         >Documents Sent</Link>
         <Link className={category === 'received' ? 'active' : ''} to="#" onClick={() => setCategory('received')}>Documents Recieved</Link>
       </div>
-      {adminGetSentDocuments.documents.length || adminGetReceivedDocuments.documents.length ? 
+      <div
+        style={{
+          overflowX: 'auto'
+        }}
+      >
         <CustomTable
           pagination
           pagerows
@@ -78,22 +86,20 @@ export default function AdminDocumnents() {
             },
             {
               id: 'document',
-              label: 'Document Uploaded',
+              label: `${category === 'sent' ? 'Document Uploaded' : 'Document Received'}`,
               minWidth: 150,
               color: value => 'blue',
             },
             {
               id: 'date',
-              label: 'Date Uploaded',
+              label: `${category === 'sent' ? 'Date Uploaded' : 'Date Received'}`,
               minWidth: 100,
               color: value => 'black',
             },
           ]}
           rows={getRows(adminGetSentDocuments.documents || adminGetReceivedDocuments.documents)}
-        /> :  <div className="empty-table">
-          <p><em>{category === 'sent' ? 'No documents have been sent to clients' : 'No documents have been received from clients'}</em></p>
-        </div>
-      }
+        /> 
+      </div>
     </Page>
   )
 }

@@ -40,7 +40,7 @@ export default function ViewRequests() {
       title="Dashboard"
       breadcrumbs={[{ name: 'View Requests', active: true }]} 
     >
-    {getUserRequests.requests.length ? 
+    <div style={{overflowX: 'auto'}}>
       <CustomTable
         pagination
         pagerows
@@ -78,10 +78,7 @@ export default function ViewRequests() {
         ]}
         rows={getRows(getUserRequests.requests)}
       /> 
-      : <div className="empty-table">
-        <p><em>No requests created</em></p>
-      </div>
-    }
+    </div>
     </Page>
   )
 }

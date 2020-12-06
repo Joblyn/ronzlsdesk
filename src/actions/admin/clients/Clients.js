@@ -59,6 +59,13 @@ const onAdminGetClients = payload => {
   }
 }
 
+const onUploadDoc = (payload) => {
+  return { 
+    type: ActionType.ADMIN_UPLOAD_DOC,
+    payload
+  }
+}
+
 // const onLogin = payload => {
 //   return {
 //     type: ActionType.ADMIN_LOGIN_SUCCESS,
@@ -115,6 +122,9 @@ export const getAllRequests = (url) => {
   return getDataWithToken(url, onGetAllRequests);
 }
 
+export const uploadDoc = (url, payload) =>{
+  return postDataWithToken(url, payload, onUploadDoc)
+}
 // export const login = (url, payload) => {
 //   return postData(url, payload, onLogin);
 // };

@@ -39,7 +39,7 @@ export default function ViewAppointments() {
       title="Dashboard"
       breadcrumbs={[{ name: 'View Appointments', active: true }]} 
     >
-    {getUserAppointments.appointments.length ? 
+    <div style={{overflowX:'auto'}}>
      <CustomTable
         pagination
         pagerows
@@ -77,10 +77,7 @@ export default function ViewAppointments() {
         ]}
         rows={getRows(getUserAppointments.appointments)}
       /> 
-      : <div className="empty-table">
-        <p><em>No appointments scheduled by clients</em></p>
       </div>
-    } 
     </Page>
   )
 }
