@@ -88,11 +88,13 @@ export const postData = (url, payload, done) => {
           nprogress.remove();
           console.log(data.data);
           dispatch(done(data.data));
+        } else if (data.error) {
+          nprogress.remove();
+          alert(data.error);
         }
       })
       .catch(err => {
         console.log(err);
-        // alert('Oopps!! An error occured, please try again.');
         nprogress.remove();
       });
   };
@@ -116,20 +118,23 @@ export const postDataWithToken = (url, payload, done) => {
         Authorization: bearerToken,
       }),
     })
-      .then(res => res.json())
-      .then(data => {
+    .then(res => res.json())
+    .then(data => {
         console.log(data);
-        console.log(data.data);
         if (data.data) {
           nprogress.done();
           nprogress.remove();
           dispatch(done(data.data));
+        } else if (data.error) {
+          nprogress.done();
+          nprogress.remove();
+          alert(`An error occured: ${data.error}`);
         }
       })
       .catch(err => {
         console.log(err);
         nprogress.remove();
-        // alert('Oopps!! An error occured, please try again.');
+        alert('Oopps!! An error occured, please try again.');
       });
   };
 };

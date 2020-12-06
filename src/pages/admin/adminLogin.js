@@ -112,20 +112,6 @@ const AdminLogin = () => {
                 />
               </div>
               <div className="intro-x flex text-gray-700 text-xs sm:text-sm mt-4">
-                {/* <div className="flex items-center mr-auto">
-                  <InputField
-                    type="checkbox"
-                    className="input border mr-2"
-                    id="remember-me"
-                  />
-                  <label
-                    className="cursor-pointer select-none"
-                    for="remember-me"
-                  >
-                    Remember me
-                  </label>
-                </div> */}
-
                 <Link to="/admin/forgot-password" className="text-green-500 font-semibold px-2 hover:underline">
                   Forgot Password
                 </Link>
@@ -137,33 +123,7 @@ const AdminLogin = () => {
                   className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"
                   value="Login"
                 />
-                {/* <Link
-                  to="/dashboard"
-                  className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"
-                >
-                  Login
-                </Link> */}
               </div>
-              {/* <div className="intro-x mt-6 xl:mt-10 text-lg text-gray-700 xl:text-left">
-                Don't have an account?
-                <Link
-                  to="/admin/register"
-                  className="text-green-500 font-semibold px-2 hover:underline"
-                >
-                  Register
-                </Link>
-              </div> */}
-              {/* <div className="intro-x mt-10 xl:mt-24 text-gray-700 text-center xl:text-left">
-                By signin up, you agree to our
-                <br />
-                <a className="text-theme-1" href="#">
-                  Terms and Conditions
-                </a>
-                &
-                <a className="text-theme-1" href="#">
-                  Privacy Policy
-                </a>
-              </div> */}
             </div>
           </div>
         </div>
