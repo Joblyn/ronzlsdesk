@@ -54,7 +54,6 @@ export const getDataWithToken = (url, done) => {
       })
       .catch(err => {
         console.log(err);
-        // alert('Oopps!! An error occured, please try again.');
         nprogress.remove();
       });
   };
@@ -89,13 +88,14 @@ export const postData = (url, payload, done) => {
           console.log(data.data);
           dispatch(done(data.data));
         } else if (data.error) {
-          nprogress.remove();
+          nprogress.done();
           alert(data.error);
         }
       })
       .catch(err => {
+        alert('Oopps!! An error occurred, please try again.')
         console.log(err);
-        nprogress.remove();
+        nprogress.done();
       });
   };
 };

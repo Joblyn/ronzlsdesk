@@ -46,30 +46,35 @@ export default function ViewAppointments() {
         columns={[
           {
             id: 'id',
+            align: 'center',
             label: 'ID',
             minWidth: 20,
             color: value => 'blue',
           },
           {
             id: 'message',
+            align: 'center',
             label: 'Appointment Message',
             minWidth: 150,
             color: value => 'blue',
           },
           {
             id: 'dateScheduled',
+            align: 'center',
             label: 'Appointment Date',
             minWidth: 150,
             color: value => 'blue',
           },
           {
             id: 'status',
+            align: 'center',
             label: 'Status',
             minWidth: 100,
             color: value => 'blue',
           },
           {
             id: 'dateCreated',
+            align: 'center',
             label: 'Date Created',
             minWidth: 100,
             color: value => 'black',

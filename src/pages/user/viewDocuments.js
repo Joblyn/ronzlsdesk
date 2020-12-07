@@ -59,24 +59,28 @@ export default function ViewDocuments() {
         columns={[
           {
             id: 'id',
+            align: 'center',
             label: 'ID',
             minWidth: 20,
             color: value => 'blue',
           },
           {
             id: 'documentName',
+            align: 'center',
             label: 'Document Name',
             minWidth: 150,
             color: value => 'blue',
           },
           {
             id: 'document',
+            align: 'center',
             label: 'Document Uploaded',
             minWidth: 150,
             color: value => 'blue',
           },
           {
             id: 'date',
+            align: 'center',
             label: 'Date Uploaded',
             minWidth: 100,
             color: value => 'black',

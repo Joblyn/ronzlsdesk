@@ -42,6 +42,7 @@ export default function Modal({ action, color }) {
   if (adminUploadDocToClient.isSuccessful) {
     alert('Document successfully sent to client');
   }
+
   return (
     <>
       <Button
@@ -93,7 +94,7 @@ export default function Modal({ action, color }) {
                     <FormGroup style={{ borderBottom: '2px solid rgba(0, 0, 0, 0.2)' }}>
                       <select
                         value={client}
-                        className="inp"
+                        className="inp border-grey-300"
                         style={{
                           background: 'inherit',
                           width: '100%'
@@ -106,6 +107,7 @@ export default function Modal({ action, color }) {
                           <option key={i + 1} value={client._id}>{client.fullName}</option>
                         ))}
                       </select>
+                      
                     </FormGroup>
                     <Button type="submit" form="doc-form" disabled={isInvalid} style={{ marginRight: 'auto' }}>Upload</Button>
                   </Form>
@@ -120,14 +122,6 @@ export default function Modal({ action, color }) {
                   >
                     Close
                   </button>
-                  {/* <button
-                    className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                    type="button"
-                    style={{ transition: 'all .15s ease' }}
-                    onClick={() => setShowModal(false)}
-                  >
-                    Save Changes
-                  </button> */}
                 </div>
               </div>
             </div>

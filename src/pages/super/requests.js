@@ -9,7 +9,7 @@ import CustomTable from '../../components/table/CustomTable';
 import { getAllRequests } from '../../actions/admin/clients/Clients';
 import { adminGetRequests } from '../../apiConstants/apiConstants';
 
-import Modal from '../../components/Modal';
+// import Modal from '../../components/Modal';
 
 export default function Requests() {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export default function Requests() {
     let rows = [];
     // console.log('Data: ' + JSON.stringify(data));
     data &&
-      data.map((user, index) => {
+      data.map((user, index) => (
         rows.push({
           id: index + 1,
           user: user.companyName,
@@ -37,19 +37,17 @@ export default function Requests() {
           phoneNumber: user.phoneNumber,
           email: user.email,
           website: user.websiteUrl,
-          view: (
-            <Link
+          view: (<Link
               // to={`/admin/client/details/${user._id}`}
               onClick={() => handleClick2(user._id)}
               to={`/superadmin/client/details/userId=${user._id}`}
               className="bg-green-700 text-white rounded-full px-2 py-2"
             >
               View Document
-            </Link>
-          )
-        });
-        return null
-      });
+            </Link>)
+          })
+        )
+      );
     return rows;
   };
   const onActionClicked = (e, payload) => {
@@ -63,48 +61,62 @@ export default function Requests() {
       title="Dropdowns"
       breadcrumbs={[{ name: 'All Clients', active: true }]}
     >
-      <Modal action="Show"/>
-      <div style={{overflowX: 'auto'}}>
-      <CustomTable
-        pagination
-        pagerows
-        columns={[
-          {
-            id: 'id',
-            label: 'ID',
-            minWidth: 20,
-            color: value => 'blue',
-          },
-          {
-            id: 'user',
-            label: 'User',
-            minWidth: 100,
-            color: value => 'blue',
-          },
-          {
-            id: 'requestTitle',
-            label: 'Request Title',
-            minWidth: 100,
-            color: value => 'blue',
-          },
-          {
-            id: 'requestDescription',
-            label: 'Request Description',
-            minWidth: 150,
-            color: value => 'blue',
-          },
-          {
-            id: 'date',
-            label: 'Date Created',
-            minWidth: 100,
-            color: value => 'black',
-          },
-        ]}
-        rows={getRows(adminGetAllRequests.requests)}
-        handleActionClick={onActionClicked}
-        handleLinkClick={onLinkClicked}
-      /> 
-      </div>  
+      {/* <Modal action="Show"/> */}
+      <div style={{ overflowX: 'auto' }}>
+        <CustomTable
+          pagination
+          pagerows
+          columns={[
+            {
+              id: 'id',
+              label: 'ID',
+              minWidth: 20,
+              color: value => 'blue',
+            },
+            {
+              id: 'user',
+              label: 'Client',
+              minWidth: 100,
+              color: value => 'blue',
+            },
+            {
+              id: 'requestTitle',
+              label: 'Request Title',
+              minWidth: 100,
+              color: value => 'blue',
+            },
+            {
+              id: 'requestDescription',
+              label: 'Request Description',
+              minWidth: 150,
+              color: value => 'blue',
+            },
+            {
+              id: 'documentUploaded',
+              label: 'Document Uploaded',
+              minWidth: 100,
+              color: value => 'blue'
+            },
+            {
+              id:'view',
+              label: 'Action',
+              minWidth: 100,
+              align: 'center',
+              color: value => 'blue',
+              type: 'link'
+            },
+            {
+              id: 'date',
+              label: 'Date Created',
+              minWidth: 100,
+              color: value => 'black',
+            },
+          ]}
+          rows={getRows(adminGetAllRequests.requests)}
+          handleActionClick={onActionClicked}
+          handleLinkClick={onLinkClicked}
+        />
+      </div>
     </Page>
   )
 }

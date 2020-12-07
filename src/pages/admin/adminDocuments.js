@@ -53,7 +53,7 @@ export default function AdminDocumnents() {
     <Page
       className="DashboardPage"
       title="Dashboard"
-      breadcrumbs={[{ name: 'View Documents', active: true }]} 
+      breadcrumbs={[{ name: 'Documents', active: true }]} 
     >
     <div style={{textAlign: 'end'}}>
       <Modal color="#fff" action="Upload Document"/>
@@ -74,24 +74,28 @@ export default function AdminDocumnents() {
           columns={[
             {
               id: 'id',
+              align: 'center',
               label: 'ID',
               minWidth: 20,
               color: value => 'blue',
             },
             {
               id: 'documentName',
+              align: 'center',
               label: 'Document Name',
               minWidth: 150,
               color: value => 'blue',
             },
             {
               id: 'document',
+              align: 'center',
               label: `${category === 'sent' ? 'Document Uploaded' : 'Document Received'}`,
               minWidth: 150,
               color: value => 'blue',
             },
             {
               id: 'date',
+              align: 'center',
               label: `${category === 'sent' ? 'Date Uploaded' : 'Date Received'}`,
               minWidth: 100,
               color: value => 'black',

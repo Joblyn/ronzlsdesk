@@ -2,20 +2,7 @@ import React, { useEffect } from 'react';
 import Page from 'components/Page';
 import { Link } from 'react-router-dom';
 import PageSpinner from '../../components/PageSpinner';
-// import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-// import {
-  // Button,
-  // Card,
-  // CardBody,
-  // CardHeader,
-  // Col,
-  // DropdownItem,
-  // DropdownMenu,
-  // DropdownToggle,
-  // Row,
-  // UncontrolledButtonDropdown,
-// } from 'reactstrap';
-// import { getThemeColors } from 'utils/colors';
+
 import CustomTable from '../../components/table/CustomTable';
 
 import {
@@ -27,14 +14,10 @@ import {
   getClientDetail,
 } from '../../apiConstants/apiConstants';
 import { useDispatch, useSelector } from 'react-redux';
-// import ExcelTable from '../../components/ExportToExcel';
-import Modal from '../../components/Modal';
 
 const AdminClient = () => {
-  // const history = useHistory();
   const dispatch = useDispatch();
   const adminGetClient = useSelector(state => state.adminGetAllClient);
-  // const { params } = useParams();
 
   console.log('Payload:' + adminGetClient.users);
   
@@ -72,7 +55,6 @@ const AdminClient = () => {
           website: user.websiteUrl,
           view: (
             <Link
-              // to={`/admin/client/details/${user._id}`}
               onClick={() => handleClick2(user._id)}
               to={`/superadmin/client/details/userId=${user._id}`}
               className="bg-green-700 text-white rounded-full px-2 py-2"
@@ -88,6 +70,7 @@ const AdminClient = () => {
   const onActionClicked = (e, payload) => {
     alert(JSON.stringify(payload));
   };
+
   if (adminGetClient.users.length === 0) {
     return <PageSpinner />;
   }
@@ -96,7 +79,6 @@ const AdminClient = () => {
       title="Dropdowns"
       breadcrumbs={[{ name: 'All Clients', active: true }]}
     >
-      <Modal action="Upload Document"/>
       <div
         style={{
           overflowX: 'auto'
@@ -108,6 +90,7 @@ const AdminClient = () => {
           columns={[
             {
               id: 'id',
+              align: 'center',
               label: 'ID',
               minWidth: 20,
               color: value => 'blue',
@@ -115,12 +98,14 @@ const AdminClient = () => {
 
             {
               id: 'user',
+              align: 'center',
               label: 'User',
               minWidth: 100,
               color: value => 'blue',
             },
             {
               id: 'accountType',
+              align: 'center',
               label: 'Account Type',
               minWidth: 50,
               color: value => 'blue',

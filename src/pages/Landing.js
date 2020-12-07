@@ -14,18 +14,11 @@ export default function Landing() {
     console.log('Auth: ' + token);
     console.log('Role: ' + role);
     token && history.push(`/${role}/dashboard`);
-    // if (token && role === 'admin') {
-    //   history.push('/admin/dashboard');
-    // } else if (token && role === 'superadmin'){
-    //   history.push('superadmin/dashboard')
-    // } else if (token && role === 'user') {
-    //   history.push('/user/dashboard');
-    // }
   }, []);
 
   return (
     <div
-      className="bg-cover h-screen bg-no-repeat p-4 bg-opacity-25"
+      className="bg-cover bg-no-repeat p-4 bg-opacity-25"
       style={{ backgroundImage: `url(${pageBG})` }}
     >
       <div className="login">
@@ -39,18 +32,8 @@ export default function Landing() {
                   src={logo}
                 />
               </Link>
-              {/* <div className="my-auto">
-                <div className="-intro-x text-white font-medium text-5xl leading-tight mt-10">
-                  {/* A few more clicks to
-                <br /> 
-                  Login to your account.
-                </div>
-                <div className="-intro-x mt-5 text-lg text-white">
-                  Manage all your e-commerce accounts in one place
-                </div>
-              </div> */}
             </div>
-            <div className="h-screen xl:h-auto flex py-5 xl:py-0 xl:my-0">
+            <div className="xl:h-auto flex py-5 xl:py-0 xl:my-0">
               <div className="my-auto mx-auto xl:ml-2 bg-white xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full">
                 <div className="lg:hidden">
                   <Link to="/">
