@@ -78,6 +78,10 @@ export const ADMIN_GET_ALL_REQUESTS = 'ADMIN_GET_ALL_REQUESTS';
 // get clients under admin 
 export const ADMIN_GET_CLIENTS = 'ADMIN_GET_CLIENTS';
 
+// appointments 
+export const ADMIN_GET_APPOINTMENTS = 'ADMIN_GET_APPOINTMENTS';
+export const ADMIN_CONFRIM_APPOINTMENT = 'ADMIN_CONFRIM_APPOINTMENT';
+
 // superadmin-client actions 
 export const ADMIN_GET_CLIENT = 'ADMIN_GET_CLIENT';
 export const ADMIN_GET_CLIENT_SUCCESS = 'ADMIN_GET_CLIENT_SUCCESS';

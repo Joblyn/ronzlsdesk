@@ -26,6 +26,11 @@ export let adminUploadDoc = 'admin/actions/uploadDocToUser/';
 export let adminGetDocumentsSentToUser = 'admin/document'
 // admin get documenst received
 export let adminGetDocumentsReceivedFromUser = 'admin/document/user';
+// admin get appoinments from clients under admin
+export let getClientAppointments = '';
+// admin confirm appointment 
+export let confirmClientAppointment = 'admin/appointment/';
+
 
 // Superadmin get all documents
 export let adminGetDocuments = 'admin/document/user';

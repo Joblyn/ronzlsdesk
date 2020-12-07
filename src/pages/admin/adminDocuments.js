@@ -30,10 +30,6 @@ export default function AdminDocumnents() {
   }, []);
 
   let isSuccessful = adminGetSentDocuments.isSuccessful || adminGetReceivedDocuments.isSuccessful;
-
-  if(isSuccessful) {
-    console.log(adminGetSentDocuments.documents || adminGetReceivedDocuments.documents);
-  }
   
   const getRows = (documents) => {
     let rows = [];
@@ -44,6 +40,10 @@ export default function AdminDocumnents() {
       })
     ));
     return rows;
+  }
+
+  const onViewDocument = () => {
+    // action to view document
   }
 
   if (!isSuccessful) {
@@ -100,8 +100,16 @@ export default function AdminDocumnents() {
               minWidth: 100,
               color: value => 'black',
             },
+            {
+              id:'view',
+              align: 'center',
+              label: 'Action',
+              minWidth: 150,
+              type: 'link'
+            }
           ]}
           rows={getRows(adminGetSentDocuments.documents || adminGetReceivedDocuments.documents)}
+          handleLinkClick={onViewDocument}
         /> 
       </div>
     </Page>

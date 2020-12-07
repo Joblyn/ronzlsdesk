@@ -133,6 +133,7 @@ export const postDataWithToken = (url, payload, done) => {
       })
       .catch(err => {
         console.log(err);
+        nprogress.done();
         nprogress.remove();
         alert('Oopps!! An error occured, please try again.');
       });

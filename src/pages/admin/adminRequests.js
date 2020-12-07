@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button } from "reactstrap";
 
 import Page from 'components/Page';
 import PageSpinner from '../../components/PageSpinner';
@@ -16,33 +17,25 @@ export default function AdminRequests() {
     dispatch(getAllRequests(adminGetRequests));
   }, []);
 
-  const handleClick = () => {
-    // function to show document 
-  };
-
   const getRows = requests => {
     let rows = [];
     requests && requests.map((request, i) => (
       rows.push({
         id: i+1,
         // other data
-        view: (<Link
-          onClick={handleClick}
-          to="#"
+        view: (<Button
           className="bg-green-700 text-white rounded-full px-2 py-2"
         >
           View Document
-        </Link>)      
+        </Button>)      
       })
     ));
     return rows; 
   }
 
-  const onLinkClicked = (e, payload) => {}
-
-  const onActionClicked = (e, payload) => {
-    alert(JSON.stringify(payload));
-  };
+  const onViewDocument = (e, payload) => {
+    // function to view document
+  }
 
   if(!adminGetAllRequests.isSuccessful) {
     return <PageSpinner />
@@ -93,25 +86,22 @@ export default function AdminRequests() {
               color: value => 'blue'
             },
             {
-              id:'view',
-              align: 'center',
-              label: 'Action',
-              minWidth: 100,
-              align: 'center',
-              color: value => 'blue',
-              type: 'link'
-            },
-            {
               id: 'date',
               align: 'center',
               label: 'Date Created',
               minWidth: 100,
               color: value => 'black',
             },
+            {
+              id:'view',
+              align: 'center',
+              label: 'Action',
+              minWidth: 150,
+              type: 'link'
+            },
           ]}
           rows={getRows(adminGetAllRequests.requests)}
-          handleActionClick={onActionClicked}
-          handleLinkClick={onLinkClicked}
+          handleLinkClick={onViewDocument}
         />
       </div>
     </Page>

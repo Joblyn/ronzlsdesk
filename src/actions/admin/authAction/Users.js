@@ -67,6 +67,7 @@ export const forgotPassword = (url, payload) => {
 export const logOutAction = () => {
   window.localStorage.removeItem('jwtToken');
   window.localStorage.removeItem('role');
+  window.localStorage.clear();
   setAuthToken(false);
   window.location.href = '/';
 };

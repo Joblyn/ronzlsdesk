@@ -51,7 +51,8 @@ export default function Requests() {
     return rows;
   };
   const onActionClicked = (e, payload) => {
-    alert(JSON.stringify(payload));
+    // alert(JSON.stringify(payload));
+    console.log(payload);
   };
   if (!adminGetAllRequests.isSuccessful) {
     return <PageSpinner />;

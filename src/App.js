@@ -52,21 +52,21 @@ const AdminAppointments = React.lazy(() => import('pages/admin/adminAppointments
 const AdminViewClientDetails = React.lazy(() => import('pages/admin/adminViewClientDetails'));
 
 
-const adminAlertPage = React.lazy(() => import('pages/admin/adminAlertPage'));
-const adminBadgePage = React.lazy(() => import('pages/admin/adminBadgePage'));
-const adminButtonGroupPage = React.lazy(() =>import('pages/admin/adminButtonGroupPage'));
-const adminButtonPage = React.lazy(() => import('pages/admin/adminButtonPage'));
-const adminCardPage = React.lazy(() => import('pages/admin/adminCardPage'));
-const adminChartPage = React.lazy(() => import('pages/admin/adminChartPage'));
-const adminDashboardPage = React.lazy(() => import('pages/admin/adminDashboardPage'));
-const adminDropdownPage = React.lazy(() => import('pages/admin/adminDropdownPage'));
-const adminFormPage = React.lazy(() => import('pages/admin/adminFormPage'));
-const adminInputGroupPage = React.lazy(() => import('pages/admin/adminInputGroupPage'));
-const adminModalPage = React.lazy(() => import('pages/admin/adminModalPage'));
-const adminProgressPage = React.lazy(() => import('pages/admin/adminProgressPage'));
-const adminTablePage = React.lazy(() => import('pages/admin/adminTablePage'));
-const adminTypographyPage = React.lazy(() => import('pages/admin/adminTypographyPage'));
-const adminWidgetPage = React.lazy(() => import('pages/admin/adminWidgetPage'));
+// const adminAlertPage = React.lazy(() => import('pages/admin/adminAlertPage'));
+// const adminBadgePage = React.lazy(() => import('pages/admin/adminBadgePage'));
+// const adminButtonGroupPage = React.lazy(() =>import('pages/admin/adminButtonGroupPage'));
+// const adminButtonPage = React.lazy(() => import('pages/admin/adminButtonPage'));
+// const adminCardPage = React.lazy(() => import('pages/admin/adminCardPage'));
+// const adminChartPage = React.lazy(() => import('pages/admin/adminChartPage'));
+// const adminDashboardPage = React.lazy(() => import('pages/admin/adminDashboardPage'));
+// const adminDropdownPage = React.lazy(() => import('pages/admin/adminDropdownPage'));
+// const adminFormPage = React.lazy(() => import('pages/admin/adminFormPage'));
+// const adminInputGroupPage = React.lazy(() => import('pages/admin/adminInputGroupPage'));
+// const adminModalPage = React.lazy(() => import('pages/admin/adminModalPage'));
+// const adminProgressPage = React.lazy(() => import('pages/admin/adminProgressPage'));
+// const adminTablePage = React.lazy(() => import('pages/admin/adminTablePage'));
+// const adminTypographyPage = React.lazy(() => import('pages/admin/adminTypographyPage'));
+// const adminWidgetPage = React.lazy(() => import('pages/admin/adminWidgetPage'));
 
 //User
 const DashboardPage = React.lazy(() => import('pages/user/DashboardPage'));
@@ -79,21 +79,21 @@ const UserViewAppointments = React.lazy(() => import('pages/user/viewAppointment
 const BookAppointment = React.lazy(() => import('pages/user/bookAppointment'));
 
 // unneccessary 
-const AlertPage = React.lazy(() => import('pages/user/AlertPage'));
-const AuthModalPage = React.lazy(() => import('pages/user/AuthModalPage'));
-const BadgePage = React.lazy(() => import('pages/user/BadgePage'));
-const ButtonGroupPage = React.lazy(() => import('pages/user/ButtonGroupPage'));
-const ButtonPage = React.lazy(() => import('pages/user/ButtonPage'));
-const CardPage = React.lazy(() => import('pages/user/CardPage'));
-const ChartPage = React.lazy(() => import('pages/user/ChartPage'));
-const DropdownPage = React.lazy(() => import('pages/user/DropdownPage'));
-const FormPage = React.lazy(() => import('pages/user/FormPage'));
-const InputGroupPage = React.lazy(() => import('pages/user/InputGroupPage'));
-const ModalPage = React.lazy(() => import('pages/user/ModalPage'));
-const ProgressPage = React.lazy(() => import('pages/user/ProgressPage'));
-const TablePage = React.lazy(() => import('pages/user/TablePage'));
-const TypographyPage = React.lazy(() => import('pages/user/TypographyPage'));
-const WidgetPage = React.lazy(() => import('pages/user/WidgetPage'));
+// const AlertPage = React.lazy(() => import('pages/user/AlertPage'));
+// const AuthModalPage = React.lazy(() => import('pages/user/AuthModalPage'));
+// const BadgePage = React.lazy(() => import('pages/user/BadgePage'));
+// const ButtonGroupPage = React.lazy(() => import('pages/user/ButtonGroupPage'));
+// const ButtonPage = React.lazy(() => import('pages/user/ButtonPage'));
+// const CardPage = React.lazy(() => import('pages/user/CardPage'));
+// const ChartPage = React.lazy(() => import('pages/user/ChartPage'));
+// const DropdownPage = React.lazy(() => import('pages/user/DropdownPage'));
+// const FormPage = React.lazy(() => import('pages/user/FormPage'));
+// const InputGroupPage = React.lazy(() => import('pages/user/InputGroupPage'));
+// const ModalPage = React.lazy(() => import('pages/user/ModalPage'));
+// const ProgressPage = React.lazy(() => import('pages/user/ProgressPage'));
+// const TablePage = React.lazy(() => import('pages/user/TablePage'));
+// const TypographyPage = React.lazy(() => import('pages/user/TypographyPage'));
+// const WidgetPage = React.lazy(() => import('pages/user/WidgetPage'));
 
 
 // superAdmin
@@ -103,28 +103,28 @@ const superAdminAllAdmins = React.lazy(() => import('pages/super/allAdmins'));
 const superAdminProfile = React.lazy(() => import('pages/super/profile'));
 const superAdminRequests = React.lazy(() => import('pages/super/requests'));
 const superAdminAppointments = React.lazy(() => import('pages/super/appointments'));
-
-const superAdminButtonGroupPage = React.lazy(() =>import('pages/super/adminButtonGroupPage'));
-const superAdminButtonPage = React.lazy(() => import('pages/super/adminButtonPage'));
-const superAdminCardPage = React.lazy(() => import('pages/super/adminCardPage'));
-const superAdminChartPage = React.lazy(() => import('pages/super/adminChartPage'));
+const superAdminDocumentPage = React.lazy(() => import('pages/super/document')); 
 const superAdminClientPage = React.lazy(() => import('pages/super/clientPage'));
 const superAdminViewClientDetails = React.lazy(() => import('pages/super/adminViewClientDetails'));
-// const superAdminDashboardPage = React.lazy(() =>import('pages/super/adminDashboardPage'));
-const superAdminDropdownPage = React.lazy(() =>import('pages/super/adminDropdownPage'));
-const superAdminFormPage = React.lazy(() => import('pages/super/adminFormPage'));
-const superAdminInputGroupPage = React.lazy(() =>import('pages/super/adminInputGroupPage'));
-const superAdminModalPage = React.lazy(() => import('pages/super/adminModalPage'));
-const superAdminProgressPage = React.lazy(() =>import('pages/super/adminProgressPage'));
-const superAdminTablePage = React.lazy(() => import('pages/super/adminTablePage'));
-const superAdminTypographyPage = React.lazy(() =>import('pages/super/adminTypographyPage'));
-const superAdminWidgetPage = React.lazy(() => import('pages/super/adminWidgetPage')); 
-const superAdminAlertPage = React.lazy(() => import('pages/super/superAlertPage')); 
-const superAuthModal = React.lazy(() => import('pages/super/superAuthModal')); 
-const superAuthModalPage = React.lazy(() => import('pages/super/superAuthModalPage')); 
-const superAuthPage = React.lazy(() => import('pages/super/superAuthPage')); 
-const superAdminBadgePage = React.lazy(() => import('pages/super/superBadgePage')); 
-const superAdminDocumentPage = React.lazy(() => import('pages/super/document')); 
+
+// const superAdminButtonGroupPage = React.lazy(() =>import('pages/super/adminButtonGroupPage'));
+// const superAdminButtonPage = React.lazy(() => import('pages/super/adminButtonPage'));
+// const superAdminCardPage = React.lazy(() => import('pages/super/adminCardPage'));
+// const superAdminChartPage = React.lazy(() => import('pages/super/adminChartPage'));
+// // const superAdminDashboardPage = React.lazy(() =>import('pages/super/adminDashboardPage'));
+// const superAdminDropdownPage = React.lazy(() =>import('pages/super/adminDropdownPage'));
+// const superAdminFormPage = React.lazy(() => import('pages/super/adminFormPage'));
+// const superAdminInputGroupPage = React.lazy(() =>import('pages/super/adminInputGroupPage'));
+// const superAdminModalPage = React.lazy(() => import('pages/super/adminModalPage'));
+// const superAdminProgressPage = React.lazy(() =>import('pages/super/adminProgressPage'));
+// const superAdminTablePage = React.lazy(() => import('pages/super/adminTablePage'));
+// const superAdminTypographyPage = React.lazy(() =>import('pages/super/adminTypographyPage'));
+// const superAdminWidgetPage = React.lazy(() => import('pages/super/adminWidgetPage')); 
+// const superAdminAlertPage = React.lazy(() => import('pages/super/superAlertPage')); 
+// const superAuthModal = React.lazy(() => import('pages/super/superAuthModal')); 
+// const superAuthModalPage = React.lazy(() => import('pages/super/superAuthModalPage')); 
+// const superAuthPage = React.lazy(() => import('pages/super/superAuthPage')); 
+// const superAdminBadgePage = React.lazy(() => import('pages/super/superBadgePage')); 
 // end of superAdmin
 
 
@@ -187,7 +187,7 @@ const App = ({ breakpoint }) => {
               </ProtectedRoute>
 
               {/* unneccessary */}
-              <ProtectedRoute>
+              {/* <ProtectedRoute>
                 <Route exact path="/user/login-modal" component={AuthModalPage} />
               </ProtectedRoute>
               <ProtectedRoute>
@@ -231,7 +231,7 @@ const App = ({ breakpoint }) => {
               </ProtectedRoute>
               <ProtectedRoute>
                 <Route exact path="/user/charts" component={ChartPage} />
-              </ProtectedRoute>
+              </ProtectedRoute> */}
 
             </React.Suspense>
           </MainLayout>
@@ -262,7 +262,7 @@ const App = ({ breakpoint }) => {
               </ProtectedRoute>
 
               {/* unnecessary */}
-              <Route exact path="/admin/dashboardold" component={adminDashboardPage} />
+              {/* <Route exact path="/admin/dashboardold" component={adminDashboardPage} />
               <Route exact path="/admin/buttons" component={adminButtonPage} />
               <Route exact path="/admin/cards" component={adminCardPage} />
               <Route exact path="/admin/widgets" component={adminWidgetPage} />
@@ -276,7 +276,7 @@ const App = ({ breakpoint }) => {
               <Route exact path="/admin/modals" component={adminModalPage} />
               <Route exact path="/admin/forms" component={adminFormPage} />
               <Route exact path="/admin/input-groups" component={adminInputGroupPage} />
-              <Route exact path="/admin/charts" component={adminChartPage} />
+              <Route exact path="/admin/charts" component={adminChartPage} /> */}
             </React.Suspense>
           </AdminMainLayout>
           ) : ( (auth && role === 'superadmin') ?
@@ -311,7 +311,7 @@ const App = ({ breakpoint }) => {
                 </ProtectedRoute>
 
                 {/* unnecessary */} 
-                <Route exact path="/superadmin/buttons" component={superAdminButtonPage} />
+                {/* <Route exact path="/superadmin/buttons" component={superAdminButtonPage} />
                 <Route exact path="/superadmin/cards" component={superAdminCardPage} />
                 <Route exact path="/superadmin/widgets" component={superAdminWidgetPage} />
                 <Route exact path="/superadmin/typography" component={superAdminTypographyPage}/>
@@ -329,7 +329,7 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/superadmin/authmodal" component={superAuthModal} /> 
                 <Route exact path="/superadmin/authmodalpage" component={superAuthModalPage} /> 
                 <Route exact path="/superadmin/auth" component={superAuthPage} /> 
-                <Route exact path="/superadmin/badges" component={superAdminBadgePage} /> 
+                <Route exact path="/superadmin/badges" component={superAdminBadgePage} />  */}
               </React.Suspense>
             </AdminMainLayout> )
             : null

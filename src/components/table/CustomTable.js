@@ -217,7 +217,7 @@ export default function CustomTable({
                         alignItems: 'center',
                       }}
                     >
-                      <Avatar src={row.src && row.src} className="small" />{' '}
+                      <Avatar src={row.src && row.src} className="small" />{''}
                       <span className="px-4">{value}</span>
                     </span>
                   ) : (

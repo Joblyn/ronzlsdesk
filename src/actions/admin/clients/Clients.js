@@ -66,6 +66,20 @@ const onUploadDoc = (payload) => {
   }
 }
 
+const onGetAppoinments =(payload) => {
+  return {
+    type: ActionType.ADMIN_GET_APPOINTMENTS,
+    payload
+  }
+}
+
+const onConfirmAppoinment = (payload) => {
+  return {
+    type: ActionType.ADMIN_CONFRIM_APPOINTMENT,
+    payload
+  }
+}
+
 // const onLogin = payload => {
 //   return {
 //     type: ActionType.ADMIN_LOGIN_SUCCESS,
@@ -91,7 +105,14 @@ const onUploadDoc = (payload) => {
 export const adminGetClients = url => {
   return getDataWithToken(url, onAdminGetClients);
 }
-
+// admin get clients appointments under admin
+export const getAppointments = url => {
+  return getDataWithToken(url, onGetAppoinments);
+}
+// admin confirm client appointment 
+export const confirmAppointment = (url, payload) => {
+  return postDataWithToken(url, payload, onConfirmAppoinment);
+}
 
 // superadmin get all clients
 export const getClient = url => {

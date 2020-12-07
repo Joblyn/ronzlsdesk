@@ -109,3 +109,13 @@ export const adminUploadDocToClient = {
   isSuccessful: false,
   result: {}
 }
+
+export const adminConfirmAppointment = {
+  isSuccessful: false,
+  result: {}
+}
+
+export const adminGetAppointments = {
+  isSuccessful: false,
+  appointments: []
+}
