@@ -65,18 +65,16 @@ function Header() {
 
   const dispatch = useDispatch();
   const adminData = useSelector(state => state.adminData);
-  const userData = useSelector(state => state.userData); 
+  const userData = useSelector(state => state.userData.data);
+
   useEffect(() => {
-    const role = window.localStorage.getItem('role');
-    if (role === 'superadmin' || 'admin') {
+    const role = localStorage.getItem('role');
+    if (role === ('superadmin' || 'admin')) {
       dispatch(getAdminData(getAllAdmin));
-      console.log(adminData);
     } else if (role === 'user') {
       dispatch(getUser(getUserData));
-      console.log(userData);
     }
   }, []);
-
   // const toggleNotificationPopover = () => {
   //   setIsOpenNotificationPopover(isOpenNotificationPopover => !isOpenNotificationPopover);
 

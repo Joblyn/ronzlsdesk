@@ -29,7 +29,7 @@ export default function Profile() {
             <ul className="profile-ul">
             <li>
                 <div><p>Role:</p></div>
-                <div className="green"><p>{userData.role.charAt(0).toUpperCase + userData.role.slice(1)}</p></div>
+                <div className="green"><p>{userData.role.charAt(0).toUpperCase() + userData.role.slice(1)}</p></div>
               </li>
               <li>
                 <div><p>Account Status:</p></div>

@@ -10,7 +10,7 @@ import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
 
 //components
 import InputField from '../../components/InputField';
-import Button from '../../components/button';
+// import Button from '../../components/button';
 import { useDispatch, useSelector } from 'react-redux';
 import InputDropdown from '../../components/InputDropdown';
 
@@ -26,33 +26,19 @@ const Register = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(userReg);
     if (userReg.isSuccessful) {
-      history.push('/user/login');
+      history.push('/user/dashboard');
     }
   }, [userReg]);
 
   const handleInputChange = (event, count) => {
-    //const { name, value } = event.target;
-    // const list = [...inputList];
-    // list[index][name] = value;
-    // setInputList(list);
-    // const n = [event.target.name] + count;
-    // setInputList1({
-    //   ...inputList1,
-    //   inputList1: {fullName: n, date: }
-    // })
     obj[event.target.name] = event.target.value;
     setManagerControl({
       ...managerControl,
-      // ...inputList,
-
       [event.target.name]: event.target.value,
     });
-    // console.log("Res: "+JSON.stringify(obj));
   };
 
-  // console.log({ ...inputList, ...control });
   // handle click event of the Remove button
   const handleRemoveClick = index => {
     const list = [...inputList];
@@ -98,6 +84,7 @@ const Register = () => {
         className="intro-x login__input input my-2 input--lg border border-gray-300 block"
         placeholder="Full Name"
         value={managerControl.fullName}
+        required
       />
       <InputField
         type="text"
@@ -108,6 +95,7 @@ const Register = () => {
         className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
         placeholder="Date of Birth"
         value={managerControl.dateOfBirth}
+        required
       />
       <div className="flex justify-between">
         {inputList.length !== 1 && (
@@ -123,16 +111,14 @@ const Register = () => {
   const handleChange = event => {
     setControl({
       ...control,
-      // ...inputList,
       [event.target.name]: event.target.value,
     });
   };
 
-  const handleClick = event => {
+  const handleSubmit = event => {
     event.preventDefault();
     let managers = prepareManager(managerControl);
     let payload = { director: managers, ...control };
-    console.log('Result: ' + JSON.stringify(payload));
     dispatch(registerUser(userRegister, payload));
   };
 
@@ -164,12 +150,9 @@ const Register = () => {
               <img
                 alt="Ronzl background"
                 className="-intro-x w-1/2 -mt-16"
-                // src={bgImage}
                 src={bgImage}
               />
               <div className="-intro-x text-gray-700 font-medium text-4xl leading-tight mt-10">
-                {/* A few more clicks to
-                <br /> */}
                 Create your account.
               </div>
               <div className="-intro-x mt-5 text-lg text-gray-700">
@@ -177,7 +160,7 @@ const Register = () => {
               </div>
             </div>
           </div>
-          <div className="h-screen xl:h-auto flex py-5 xl:py-0 xl:my-0">
+          <div className="xl:h-auto flex py-5 xl:py-0 xl:my-0">
             <div className="my-auto mx-auto xl:ml-20 bg-white xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
               <div className="lg:hidden">
                 <Link to="/" className="-intro-x flex items-center">
@@ -187,162 +170,179 @@ const Register = () => {
               <h2 className="intro-x font-bold text-2xl xl:text-3xl xl:text-left">
                 Register
               </h2>
-              {/* <div className="intro-x mt-2 text-gray-500 xl:hidden">
-                A few more clicks to sign in to your account. Manage all your
-                e-commerce accounts in one place
-              </div> */}
-              <div className="intro-x mt-8">
-                {inputList.map((x, i) => {
-                  return addNewDirector(i);
-                })}
+              <form id="register" onSubmit={handleSubmit}>
+                <div className="intro-x mt-8">
 
-                <InputDropdown
-                  onChange={handleChange}
-                  name="accountType"
-                  className="intro-x login__input input input--lg my-2 border border-gray-300 block mt-4"
-                  dropdownElements={dropdownData}
-                />
-                <InputField
-                  type="text"
-                  name="companyName"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Company Name"
-                />
-                <InputField
-                  type="text"
-                  name="companyAddress"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Company Address"
-                />
-                <InputField
-                  type="text"
-                  name="city"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="City"
-                />
-                <InputField
-                  type="text"
-                  name="postalCode"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Postal Code"
-                />
-                <InputField
-                  type="text"
-                  name="country"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Country"
-                />
-                <InputField
-                  type="tel"
-                  name="phoneNumber"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Phone Number"
-                />
-                <InputField
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Email"
-                />
-                <InputField
-                  type="text"
-                  name="websiteUrl"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Website Url"
-                />
-                <InputField
-                  type="text"
-                  name="companyBegin"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Company Begin"
-                />
-                <InputField
-                  type="text"
-                  name="companyRegNo"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Company Reg No"
-                />
-                <InputField
-                  type="text"
-                  name="utrNo"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="UTR Number"
-                />
-                <InputField
-                  type="text"
-                  name="vatSubmitType"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Vat Submit Type"
-                />
-                <InputField
-                  type="text"
-                  name="vatScheme"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="VAT Scheme"
-                />
-                <InputField
-                  type="text"
-                  name="vatRegNo"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="VAT Reg No"
-                />
-                <InputField
-                  type="text"
-                  name="vatRegDate"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="VAT Reg Date"
-                />
-                <InputField
-                  type="text"
-                  name="insuranceNumber"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Insurance Number"
-                />
-                <InputField
-                  type="text"
-                  name="payeeRefNo"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Payee Ref No"
-                />
-                <InputField
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                  placeholder="Password"
-                />
-              </div>
-              <div className="intro-x mt-5 xl:mt-8 xl:text-left">
-                <Button
-                  type="button"
-                  onClick={handleClick}
-                  className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"
-                  value="Register"
-                />
-                {/* <Link
-                  to="/dashboard"
-                  className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"
-                >
-                  Login
-                </Link> */}
-              </div>
+                  {inputList.map((x, i) => {
+                    return addNewDirector(i);
+                  })}
+
+                  <InputDropdown
+                    onChange={handleChange}
+                    name="accountType"
+                    className="intro-x login__input input input--lg my-2 border border-gray-300 block mt-4"
+                    dropdownElements={dropdownData}
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="companyName"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Company Name"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="companyAddress"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Company Address"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="city"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="City"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="postalCode"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Postal Code"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="country"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Country"
+                    required
+                  />
+                  <InputField
+                    type="tel"
+                    name="phoneNumber"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Phone Number"
+                    required
+                  />
+                  <InputField
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Email"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="websiteUrl"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Website Url"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="companyBegin"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Company Begin"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="companyRegNo"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Company Reg No"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="utrNo"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="UTR Number"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="vatSubmitType"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Vat Submit Type"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="vatScheme"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="VAT Scheme"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="vatRegNo"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="VAT Reg No"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="vatRegDate"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="VAT Reg Date"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="insuranceNumber"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Insurance Number"
+                    required
+                  />
+                  <InputField
+                    type="text"
+                    name="payeeRefNo"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Payee Ref No"
+                    required
+                  />
+                  <InputField
+                    type="password"
+                    name="password"
+                    onChange={handleChange}
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    placeholder="Password"
+                    required 
+                  />
+                  <p style={{
+                    fontSize: '.8rem', 
+                    color:'grey',
+                    opacity: 1,
+                    transition: 'opactiy .2s 1s'
+                    }}>Must have at least five characters</p>
+                </div>
+                <div className="intro-x mt-5 xl:mt-8 xl:text-left">
+                  <InputField
+                    type="submit"
+                    className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"
+                    value="Register"
+                  />
+                </div>
+              </form>
               <div className="intro-x mt-6 xl:mt-10 text-lg text-gray-700 xl:text-left">
                 Already have an account?
                 <Link
@@ -352,17 +352,6 @@ const Register = () => {
                   Login
                 </Link>
               </div>
-              {/* <div className="intro-x mt-10 xl:mt-24 text-gray-700 text-center xl:text-left">
-                By signin up, you agree to our
-                <br />
-                <a className="text-theme-1" href="#">
-                  Terms and Conditions
-                </a>
-                &
-                <a className="text-theme-1" href="#">
-                  Privacy Policy
-                </a>
-              </div> */}
             </div>
           </div>
         </div>

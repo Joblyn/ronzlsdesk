@@ -29,10 +29,6 @@ if (localStorage.jwtToken) {
   if (decoded.exp < currentTime) {
     //logout user
     store.dispatch(logOutAction());
-    //clear current profile
-    // store.dispatch(clearCurrentProfileAction());
-    //redirect to login
-    window.location.href = '/';
   }
 }
 

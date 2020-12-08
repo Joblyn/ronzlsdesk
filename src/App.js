@@ -148,14 +148,57 @@ const App = ({ breakpoint }) => {
         </IsUserRedirect>
 
         {/* admin auth */}
-        <Route path="/admin/login" component={AdminLogin} />
-        <Route path="/admin/forgot-password" component={AdminForgotPassword} />
-        <Route path="/admin/confirm-password" component={AdminConfirmPassword} />
+        <IsUserRedirect
+          path="/admin/login"
+          role={role}
+          exact 
+        >
+          <AdminLogin />
+        </IsUserRedirect>
+        <IsUserRedirect
+          path="/admin/forgot-password"
+          role={role}
+          exact
+        >
+         <AdminForgotPassword /> 
+        </IsUserRedirect>
+        <IsUserRedirect
+          path="/admin/confirm-password"
+          role={role}
+          exact
+        >
+          <AdminConfirmPassword />
+        </IsUserRedirect>
+        
         {/* user auth */}
-        <Route path="/user/login" component={Login} />
-        <Route path="/user/register" component={Register} />
-        <Route path="/user/forgot-password" component={ForgotPassword} />
-        <Route path="/user/confirm-password" component={ConfirmPassword} />
+        <IsUserRedirect 
+          path="/user/login"
+          role={role}
+          exact
+        >
+          <Login />
+        </IsUserRedirect>
+        <IsUserRedirect
+          path="/user/register"
+          role={role}
+          exact
+        >
+          <Register />
+        </IsUserRedirect>
+        <IsUserRedirect
+          path="/user/forgot-password"
+          role={role}
+          exact
+        >
+          <ForgotPassword />
+        </IsUserRedirect>
+        <IsUserRedirect
+          path="/user/confirm-password"
+          role={role}
+          exact
+        >
+          <ConfirmPassword />
+        </IsUserRedirect>
 
         {/* User Routes */}
         {(auth && role === 'user') ? (

@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import jwt_decode from 'jwt-decode';
+// import { Redirect } from 'react-router-dom';
 
 import logo from '../../assets/images/logo.png';
 import bgImage from '../../assets/images/illustration.png';
 
 //components
 import InputField from '../../components/InputField';
-import Button from '../../components/button';
 
 import {
   login,
@@ -31,7 +31,6 @@ const AdminLogin = () => {
   };
 
   useEffect(() => {
-    console.log('AdminLogin', adminLog.result);
     if (adminLog.isSuccessful) {
       //save to local storage
       const { token } = adminLog.result;
@@ -43,14 +42,14 @@ const AdminLogin = () => {
       setAuthToken(token);
       //decode token to get user data
       const decoded = jwt_decode(token);
-      console.log(decoded);
       //set current user
       dispatch(setCurrentAdminUser(decoded));
       history.push(`/${role}/dashboard`);
+      // ertir<Redirect to={`/${role}/dashboard`}/>
     } 
   }, [adminLog]);
-
-  const handleClick = event => {
+  
+  const handleSubmit = event => {
     event.preventDefault();
     dispatch(login(adminLogin, control));
   };
@@ -81,7 +80,7 @@ const AdminLogin = () => {
               </div>
             </div>
           </div>
-          <div className="h-screen xl:h-auto flex py-5 xl:py-0 xl:my-0">
+          <div className="xl:h-auto flex py-5 xl:py-0 xl:my-0">
             <div className="my-auto mx-auto xl:ml-20 bg-white xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
               <div className="lg:hidden">
                 <Link to="/" className="-intro-x flex items-center">
@@ -95,6 +94,7 @@ const AdminLogin = () => {
                 Login to your account. <br />
                 Manage all your e-commerce accounts in one place
               </div>
+              <form onSubmit={handleSubmit}>
               <div className="intro-x mt-8">
                 <InputField
                   type="email"
@@ -102,6 +102,7 @@ const AdminLogin = () => {
                   onChange={handleChange}
                   className="intro-x login__input input input--lg border border-gray-300 block"
                   placeholder="Email"
+                  required
                 />
                 <InputField
                   type="password"
@@ -109,6 +110,7 @@ const AdminLogin = () => {
                   onChange={handleChange}
                   className="intro-x login__input input input--lg border border-gray-300 block mt-4"
                   placeholder="Password"
+                  required
                 />
               </div>
               <div className="intro-x flex text-gray-700 text-xs sm:text-sm mt-4">
@@ -117,13 +119,13 @@ const AdminLogin = () => {
                 </Link>
               </div>
               <div className="intro-x mt-5 xl:mt-8 xl:text-left">
-                <Button
-                  type="button"
-                  onClick={handleClick}
+                <InputField 
+                  type="submit"
                   className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"
                   value="Login"
                 />
               </div>
+              </form>
             </div>
           </div>
         </div>

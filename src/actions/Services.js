@@ -69,7 +69,6 @@ export const postData = (url, payload, done) => {
       method: 'POST',
       body: JSON.stringify(payload),
       credentials: 'same-origin',
-      //mode: 'no-cors',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -85,10 +84,10 @@ export const postData = (url, payload, done) => {
         if (data.data) {
           nprogress.done();
           nprogress.remove();
-          console.log(data.data);
           dispatch(done(data.data));
         } else if (data.error) {
           nprogress.done();
+          nprogress.remove();
           alert(data.error);
         }
       })

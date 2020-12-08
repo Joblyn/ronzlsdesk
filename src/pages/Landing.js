@@ -11,8 +11,6 @@ export default function Landing() {
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
     const role = localStorage.getItem('role');
-    console.log('Auth: ' + token);
-    console.log('Role: ' + role);
     token && history.push(`/${role}/dashboard`);
   }, []);
 

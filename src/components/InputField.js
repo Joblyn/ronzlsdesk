@@ -12,6 +12,7 @@ const InputField = ({
   placeholder,
   onFocus,
   onBlur,
+  ...restProps
 }) => {
   const refs = useRef(null);
   return (
@@ -28,6 +29,7 @@ const InputField = ({
       onChange={onChange}
       disabled={disabled}
       onClick={onClick}
+      {...restProps}
     />
   );
 };

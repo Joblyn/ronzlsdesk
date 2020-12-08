@@ -37,14 +37,6 @@ export const onGetAdminData = payload => {
     payload,
   }
 }
-// 
-
-// const onAllUsers = payload => {
-//   return {
-//     type: ActionType.GET_USERS,
-//     payload,
-//   };
-// };
 
 export const register = (url, payload) => {
   return postDataWithToken(url, payload, onRegister);
@@ -58,30 +50,13 @@ export const login = (url, payload) => {
 export const getAdminData = (url) => {
   return getDataWithToken(url, onGetAdminData);
 }
-// 
 
 export const forgotPassword = (url, payload) => {
   return postData(url, payload, onForgotPassword);
 };
 
 export const logOutAction = () => {
-  window.localStorage.removeItem('jwtToken');
-  window.localStorage.removeItem('role');
   window.localStorage.clear();
   setAuthToken(false);
-  window.location.href = '/';
 };
 
-// export const logoutAdminAction = () => dispatch => {
-//   //remove token from local storage
-//   localStorage.removeItem('jwtToken');
-//   localStorage.removeItem('role');
-//   //remove auth header for feature request
-//   setAuthToken(false);
-//   //set current user to {} which will set isAuthenticated to false
-//   dispatch(setCurrentAdminUser({}));
-// };
-
-// export const getAllUser = url => {
-//   return getData(url, onAllUsers);
-// };

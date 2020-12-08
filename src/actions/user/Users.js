@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom';
 import * as ActionType from '../Types';
 import setAuthToken from '../../utils/setAuthToken';
 import { 
@@ -105,13 +106,9 @@ export const forgotPasswordUser = (url, payload) => {
 };
 
 export const logOutAction = () => {
-  localStorage.removeItem('jwtToken');
-  localStorage.clear();
-  //remove auth header for feature request
+  window.localStorage.clear();
   setAuthToken(false);
-  window.location.href = '/';
 };
-
 
 // get User Data 
 export const getUser = (url) =>  {
