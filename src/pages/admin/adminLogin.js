@@ -7,9 +7,7 @@ import jwt_decode from 'jwt-decode';
 import logo from '../../assets/images/logo.png';
 import bgImage from '../../assets/images/illustration.png';
 
-//components
 import InputField from '../../components/InputField';
-
 import {
   login,
   setCurrentAdminUser,
@@ -45,7 +43,6 @@ const AdminLogin = () => {
       //set current user
       dispatch(setCurrentAdminUser(decoded));
       history.push(`/${role}/dashboard`);
-      // ertir<Redirect to={`/${role}/dashboard`}/>
     } 
   }, [adminLog]);
   

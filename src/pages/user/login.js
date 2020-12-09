@@ -9,7 +9,6 @@ import setAuthToken from '../../utils/setAuthToken';
 
 //components
 import InputField from '../../components/InputField';
-import Button from '../../components/button';
 
 import { loginUser, setCurrentUser } from '../../actions/user/Users';
 import { userLogin } from '../../apiConstants/apiConstants';
@@ -26,15 +25,7 @@ const Login = () => {
       [event.target.name]: event.target.value,
     });
   };
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem('jwtToken');
-  //   const role = localStorage.getItem('role');
-  //   if (token && role === 'user') {
-  //     history.push('/user/dashboard');
-  //   }
-  // }, []);
-
+  
   useEffect(() => {
     if (userLog.isSuccessful) {
       //save to local storage

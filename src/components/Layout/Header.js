@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Avatar from 'components/Avatar';
 import { UserCard } from 'components/Card';
+import Portrait from '../../portrait.png';
+
 // import Notifications from 'components/Notifications';
 // import SearchInput from 'components/SearchInput';
 // import { notificationsData } from 'demos/header';
@@ -140,6 +142,7 @@ function Header() {
             <Avatar
               onClick={toggleUserCardPopover}
               className="can-click"
+              src={Portrait}
             />
           </NavLink>
           <Popover

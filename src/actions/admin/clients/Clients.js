@@ -146,10 +146,4 @@ export const getAllRequests = (url) => {
 export const uploadDoc = (url, payload) =>{
   return postDataWithToken(url, payload, onUploadDoc)
 }
-// export const login = (url, payload) => {
-//   return postData(url, payload, onLogin);
-// };
 
-// export const forgotPassword = (url, payload) => {
-//   return postData(url, payload, onForgotPassword);
-// };

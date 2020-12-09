@@ -74,13 +74,9 @@ export const postData = (url, payload, done) => {
         'Content-Type': 'application/json',
       }
     })
-      .then(res => {
-        let data = res.json()
-        console.log(data);
-        return data
-      })
+      .then(res => res.json())
       .then(data => {
-        console.log(data.data)
+        console.log(data);
         if (data.data) {
           nprogress.done();
           nprogress.remove();
@@ -92,9 +88,10 @@ export const postData = (url, payload, done) => {
         }
       })
       .catch(err => {
-        alert('Oopps!! An error occurred, please try again.')
-        console.log(err);
         nprogress.done();
+        nprogress.remove();
+        console.log(err);
+        alert('Oopps!! An error occurred, please try again.')
       });
   };
 };
@@ -127,14 +124,15 @@ export const postDataWithToken = (url, payload, done) => {
         } else if (data.error) {
           nprogress.done();
           nprogress.remove();
-          alert(`An error occured: ${data.error}`);
+          alert(data.error);
+          window.location.reload();
         }
       })
       .catch(err => {
         console.log(err);
         nprogress.done();
         nprogress.remove();
-        alert('Oopps!! An error occured, please try again.');
+        alert(err);
       });
   };
 };

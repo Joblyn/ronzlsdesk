@@ -1,4 +1,3 @@
-import { useHistory } from 'react-router-dom';
 import * as ActionType from '../Types';
 import setAuthToken from '../../utils/setAuthToken';
 import { 
