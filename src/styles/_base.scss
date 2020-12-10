@@ -60,7 +60,7 @@ button,
 .cont {
   display: flex;
   flex-direction: row; 
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   max-width: 600px;
@@ -157,8 +157,18 @@ button,
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
 
-.admin-up-doc {
-  // float: right;
+.show_only_on_mobile {
+  @media (min-width: 768px) {
+    display: none;
+  }
 }
 
-.inp-select {}
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-gap: 20px;
+}
+
+.link {
+  text-decoration: none;
+} 

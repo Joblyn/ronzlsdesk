@@ -11,8 +11,11 @@ export let adminForgotPassword = 'admin/forgetpassword';
 export let adminResetForgotPassword = 'admin/resetforgetpassword';
 export let adminResetPassword = 'admin/resetpassword';
 
-//Get All Admins
+//Get Admin data
 export let getAllAdmin = 'admin';
+
+// Get all admins 
+export let superAdminGetAllAdmins = 'admin/allAdmins';
 
 //superadmin view all clients
 export let getAllClients = 'admin/actions/users';
@@ -40,6 +43,10 @@ export let adminGetRequests = 'admin/request';
 
 //Superadmin update client subscription
 export let adminUpdateSubscription = 'admin/actions/date/'
+
+// superadmin assign client to admin 
+export let addUserToAdmin = 'admin/actions/addUserToAdmin/';
+
 
 //User
 //Authentication

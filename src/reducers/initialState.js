@@ -119,3 +119,13 @@ export const adminGetAppointments = {
   isSuccessful: false,
   appointments: []
 }
+
+export const superAdminGetAllAdmins = {
+  isSuccessful: false,
+  admins: []
+}
+
+export const addClientToAdmin = {
+  isSuccessful: false,
+  result: {} 
+}

@@ -28,6 +28,7 @@
     "react-feather": "^2.0.8",
     "react-ga": "^2.5.7",
     "react-html-table-to-excel": "^2.0.0",
+    "react-html5-camera-photo": "^1.5.4",
     "react-icons": "^3.5.0",
     "react-infinite-calendar": "^2.3.1",
     "react-notification-system": "^0.4.0",

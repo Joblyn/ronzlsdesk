@@ -20,7 +20,7 @@ const AdminClient = () => {
     dispatch(getClient(getAllClients));
   }, []);
   
-  if (adminGetClient.isSuccessful === true) {
+  if (adminGetClient.isSuccessful) {
     console.log('Check: ' + adminGetClient.users);
   }
 

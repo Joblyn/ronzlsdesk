@@ -30,11 +30,27 @@ export const onForgotPassword = payload => {
   };
 };
 
-// edit
+// get admin data
 export const onGetAdminData = payload => {
   return {
     type: ActionType.GET_ADMIN_DATA,
     payload,
+  }
+}
+
+// get all admins 
+export const onGetAllAdmins = payload => {
+  return {
+    type: ActionType.GET_ALL_ADMINS,
+    payload,
+  }
+}
+
+// add client to admin 
+export const onSuperAdminAddClientToAdmin = payload => {
+  return {
+    type: ActionType.ADD_CLIENT_TO_ADMIN,
+    payload
   }
 }
 
@@ -46,11 +62,6 @@ export const login = (url, payload) => {
   return postData(url, payload, onLogin);
 };
 
-// edit
-export const getAdminData = (url) => {
-  return getDataWithToken(url, onGetAdminData);
-}
-
 export const forgotPassword = (url, payload) => {
   return postData(url, payload, onForgotPassword);
 };
@@ -60,3 +71,15 @@ export const logOutAction = () => {
   setAuthToken(false);
 };
 
+// edit
+export const getAdminData = (url) => {
+  return getDataWithToken(url, onGetAdminData);
+}
+
+export const getAllAdmins = (url) => {
+  return getDataWithToken(url, onGetAllAdmins)
+}
+
+export const superAdminAddClientToAdmin = (url, payload) => {
+  return postDataWithToken(url, payload, onSuperAdminAddClientToAdmin)
+} 

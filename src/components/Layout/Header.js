@@ -155,6 +155,7 @@ function Header() {
           >
             <PopoverBody className="p-0 border-light">
               <UserCard
+                avatar={Portrait}
                 title={adminData.fullName || userData.companyName}
                 subtitle={adminData.email || userData.email}
                 text="Last updated 3 mins ago"

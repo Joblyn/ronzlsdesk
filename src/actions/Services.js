@@ -92,6 +92,7 @@ export const postData = (url, payload, done) => {
         nprogress.remove();
         console.log(err);
         alert('Oopps!! An error occurred, please try again.')
+        window.location.reload();
       });
   };
 };
