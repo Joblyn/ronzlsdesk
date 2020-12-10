@@ -82,9 +82,6 @@ export default function allAdmins() {
               <CardText>{admin.fullName}</CardText>
               <CardText>{admin.email}</CardText>
               <CardText>{admin.phoneNumber}</CardText>
-              <Button color="success" className="m-1">
-                <Link to="/admin/clients" className="link text-decoration-none" style={{color: 'inherit'}}>Assign Client</Link>
-              </Button>
               <Button outline color="success" className="m-1">
                 <Link to="/admin/clients" className="link text-decoration-none" style={{color: 'inherit'}}>View Clients</Link>
               </Button>
