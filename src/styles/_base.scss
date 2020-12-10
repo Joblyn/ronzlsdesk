@@ -172,3 +172,40 @@ button,
 .link {
   text-decoration: none;
 } 
+
+
+
+input[type='radio']:after {
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+  transition: all .1s ease;
+  cursor: pointer;
+}
+
+input[type='radio']:checked:after {
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #45b649;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid #d1d3d1;
+  cursor: pointer;
+}
+
+.assign:hover {
+  background: #45b649;
+}

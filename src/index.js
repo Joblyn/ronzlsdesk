@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode'; 
 import * as serviceWorker from './serviceWorker';
-import { useHistory } from 'react-router-dom';
 
 import store from './store';
 

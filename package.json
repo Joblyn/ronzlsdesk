@@ -40,6 +40,7 @@
     "reactstrap": "^7.1.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^5.2.1",
     "tailwindcss": "^1.8.5",
     "victory": "^32.0.0",
     "webcam-easy": "^1.0.5"
