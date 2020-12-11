@@ -103,7 +103,6 @@ export const postDataWithToken = (url, payload, done) => {
   console.log('Payload:' + JSON.stringify(payload));
   const token = localStorage.getItem('jwtToken');
   const bearerToken = 'Bearer ' + token;
-  console.log(bearerToken);
   nprogress.start();
   return dispatch => {
     fetch(endpoint, {
@@ -126,7 +125,7 @@ export const postDataWithToken = (url, payload, done) => {
           nprogress.done();
           nprogress.remove();
           alert(data.error);
-          window.location.reload();
+          // window.location.reload();
         }
       })
       .catch(err => {

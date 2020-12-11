@@ -45,7 +45,7 @@ export let adminGetRequests = 'admin/request';
 export let adminUpdateSubscription = 'admin/actions/date/'
 
 // superadmin assign client to admin 
-export let addUserToAdmin = 'admin/actions/addUserToAdmin/';
+export let addUserToAdmin = 'admin/actions/assignUsersToAdmin/';
 
 
 //User

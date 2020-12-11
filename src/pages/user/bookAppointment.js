@@ -14,7 +14,7 @@ export default function CreateAppointment() {
   const secondaryColor = getColor('secondary');
   
   const today = new Date();
-  const [date, setDate] = useState(today.toLocaleString());
+  const [date, setDate] = useState(today.toDateString());
   const [message, setMessage] = useState('');
   const dispatch = useDispatch();
   const userBookAppointment = useSelector(state => state.userBookAppointment);
@@ -75,7 +75,7 @@ export default function CreateAppointment() {
               todayColor: secondaryColor,
               weekdayColor: primaryColor,
             }}
-            onSelect={ date => setDate(date.toLocaleString())}
+            onSelect={date => setDate(date.toDateString())}
           />
         </div>
         <FormGroup className="form-group">

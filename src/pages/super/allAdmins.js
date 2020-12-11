@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {Row, Card, CardImg, CardBody, CardText, Button } from 'reactstrap';
+import { Row, Card, CardImg, CardBody, CardText, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {
   superAdminGetAllAdmins,
@@ -26,7 +26,7 @@ export default function allAdmins() {
   const [admins, setAdmins] = useState([]);
 
   const [admin, setAdmin] = useState();
-  const [client, setClient] = useState();
+  const [client, setClient] = useState([]);
 
   useEffect(() => {
     dispatch(getAllAdmins(superAdminGetAllAdmins));
@@ -36,9 +36,11 @@ export default function allAdmins() {
   useEffect(() => {
     if (AllAdmins.isSuccessful && AllClients.isSuccessful) {
       setAdmins(AllAdmins.admins);
-      setAdmin(AllAdmins.admins[1]._id);
+      setAdmin(AllAdmins.admins[0]._id);
       console.log(AllClients.users);
-      setClient(AllClients.users[1]._id);
+      setClient([
+        AllClients.users[13]._id,
+      ]);
     }
   }, [AllAdmins, AllClients]);
   console.log(admins);
@@ -50,16 +52,13 @@ export default function allAdmins() {
   }, [AddClientToAdmin]);
 
   const addClient = () => {
-    const endpoint = `${addUserToAdmin}${client}/${admin}`;
+    const endpoint = `${addUserToAdmin}${admin}`;
     console.log(endpoint);
     const payload = {
-      admin_id: admin,
-      user_id: client,
+      users: client,
     };
-    console.log(payload);
     dispatch(superAdminAddClientToAdmin(endpoint, payload));
   };
-  console.log(addClient);
 
   if (!admins.length) {
     return <PageSpinner />;
@@ -67,6 +66,9 @@ export default function allAdmins() {
 
   return (
     <Page title="Dropdowns" breadcrumbs={[{ name: 'Admins', active: true }]}>
+      <button type="button" onClick={addClient}>
+        Click
+      </button>
       <Row className="admin-grid p-3">
         {admins.map((admin, i) => (
           <Card
@@ -75,7 +77,12 @@ export default function allAdmins() {
           >
             <CardImg
               src={Portrait}
-              style={{ width: '150px', height: 'auto', borderRadius: '50%', border:'1px solid #45b649'}}
+              style={{
+                width: '150px',
+                height: 'auto',
+                borderRadius: '50%',
+                border: '1px solid #45b649',
+              }}
               className="p-1"
             />
             <CardBody className="px-0 w-100">
@@ -83,7 +90,13 @@ export default function allAdmins() {
               <CardText>{admin.email}</CardText>
               <CardText>{admin.phoneNumber}</CardText>
               <Button outline color="success" className="m-1">
-                <Link to="/admin/clients" className="link text-decoration-none" style={{color: 'inherit'}}>View Clients</Link>
+                <Link
+                  to="/admin/clients"
+                  className="link text-decoration-none"
+                  style={{ color: 'inherit' }}
+                >
+                  View Clients
+                </Link>
               </Button>
             </CardBody>
           </Card>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from 'reactstrap';
 
 // camera libraries
@@ -9,15 +9,19 @@ import { MdPhotoCamera, MdFileUpload, MdClear } from 'react-icons/md';
 
 import Page from 'components/Page';
 import InputField from '../../components/InputField';
-import { userUploaDocToAdmin } from '../../apiConstants/apiConstants';
+import { superAdminGetAllAdmins, userUploaDocToAdmin } from '../../apiConstants/apiConstants';
 import { uploadDoc } from '../../actions/user/Users';
 import { FormGroup } from '@material-ui/core';
+import { getAllAdmins } from '../../actions/admin/authAction/Users';
 
 export default function UploadDocument() {
   const [doc, setDoc] = useState();
   const [fileName, setFileName] = useState('');
   const [form, setForm] = useState(false);
   const dispatch = useDispatch();
+
+  // edit
+  const AllAdmins = useSelector(state => state.superAdminGetAllAdmins.admins);
 
   const handleDocChange = target => {
     setDoc({
@@ -26,22 +30,31 @@ export default function UploadDocument() {
     });
   };
 
+  useEffect(() => {
+    dispatch(getAllAdmins(superAdminGetAllAdmins))
+  }, []);
+
   const handleSubmit = e => {
     e.preventDefault();
 
     if (doc && fileName) {
       // with docContentUrl
-      const docEndpoint = userUploaDocToAdmin + 'admin_id';
-      dispatch(uploadDoc(docEndpoint, doc));
-
+      console.log(AllAdmins[0]);
+      // dispatch(uploadDoc(docEndpoint, doc));
+      
       // with FormData
-      // const formData = new FormData();
-      // const inpFile = document.getElementById("inpFile");
-      // formData.append("inpFile", inpFile.files[0]);
-      // fetch(docEndpoint, {
-      //   method: "post",
-      //   body: "formData"
-      // }).catch(console.error);
+      const baseUrl= 'https://node.codecradle.co/api/v1/';
+      const docEndpoint = baseUrl + userUploaDocToAdmin;
+      const formData = new FormData();
+      const inpFile = document.getElementById("inpFile");
+      formData.append("inpFile", inpFile.files[0]);
+      console.log(formData);
+      fetch(docEndpoint, {
+        method: "post",
+        body: "formData"
+      })
+      .then(res => console.log(res))
+      .catch(console.error);
     }
   };
 
