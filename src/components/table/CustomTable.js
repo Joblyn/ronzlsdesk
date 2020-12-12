@@ -198,7 +198,8 @@ export default function CustomTable({
                   align={column.align}
                   className={classes.cell}
                   style={{
-                     color: column.color(value),
+                    //  color: column.color(value),
+                    color: 'blue'
                   }}
                 >
                   {column.type && column.type === 'link' ? (

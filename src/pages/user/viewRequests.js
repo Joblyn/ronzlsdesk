@@ -37,12 +37,15 @@ export default function ViewRequests() {
     data && data.map((request, i) => (
       rows.push({
         id: i + 1,
-        // other data
+        requestTitle: request.requestTitle,
+        requestDescription: request.requestDescription,
+        date: request.created_dt,
+        document: request.attachedFileName || '- -',
         view: <Link
           onClick={handleClick}
-          to="#"
+          to={`${request.attachedFileUrl}`}
           className="bg-green-700 text-white rounded-full px-2 py-2"
-        ></Link>
+        >View Document</Link>
       })
     ));
     return rows;

@@ -33,6 +33,8 @@ export let adminGetDocumentsReceivedFromUser = 'admin/document/user';
 export let getClientAppointments = '';
 // admin confirm appointment 
 export let confirmClientAppointment = 'admin/appointment/';
+// get requests of clients under him
+export let getClientsRequests = 'admin/request/userResquests';
 
 
 // Superadmin get all documents

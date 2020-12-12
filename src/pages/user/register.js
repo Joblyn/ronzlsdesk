@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
 
 import logo from '../../assets/images/logo.png';
 import bgImage from '../../assets/images/illustration.png';
 
-import { registerUser } from '../../actions/user/Users';
+import { registerUser, setCurrentUser } from '../../actions/user/Users';
 import { userRegister } from '../../apiConstants/apiConstants';
-import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
+import setAuthToken from '../../utils/setAuthToken';
 
 //components
 import InputField from '../../components/InputField';
@@ -27,6 +29,13 @@ const Register = () => {
 
   useEffect(() => {
     if (userReg.isSuccessful) {
+      const { token } = userReg.result;
+      const { role } = userReg.result;
+      localStorage.setItem('jwtToken', token);
+      localStorage.setItem('role', role);
+      setAuthToken(token);
+      const decoded = jwt_decode(token);
+      dispatch(setCurrentUser(decoded));
       history.push('/user/dashboard');
     }
   }, [userReg]);
@@ -82,7 +91,7 @@ const Register = () => {
         name={'fullName' + count}
         onChange={e => handleInputChange(e, count)}
         className="intro-x login__input input my-2 input--lg border border-gray-300 block"
-        placeholder="Full Name"
+        placeholder="Full Name e.g. 'John Okoye'"
         value={managerControl.fullName}
         required
       />
@@ -108,10 +117,10 @@ const Register = () => {
     </div>
   );
 
-  const handleChange = event => {
+  const  handleChange = target => {
     setControl({
       ...control,
-      [event.target.name]: event.target.value,
+      [target.name]: target.value,
     });
   };
 
@@ -178,7 +187,7 @@ const Register = () => {
                   })}
 
                   <InputDropdown
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     name="accountType"
                     className="intro-x login__input input input--lg my-2 border border-gray-300 block mt-4"
                     dropdownElements={dropdownData}
@@ -187,143 +196,143 @@ const Register = () => {
                   <InputField
                     type="text"
                     name="companyName"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="Company Name"
+                    placeholder="Company Name e.g. 'Samsung Ng'"
                     required
                   />
                   <InputField
                     type="text"
                     name="companyAddress"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="Company Address"
+                    placeholder="Company Address e.g. 'No. 2, Lagos street, Lagos'"
                     required
                   />
                   <InputField
                     type="text"
                     name="city"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="City"
+                    placeholder="City e.g. 'Lagos'"
                     required
                   />
                   <InputField
                     type="text"
                     name="postalCode"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="Postal Code"
+                    placeholder="Postal Code e.g. '100001'"
                     required
                   />
                   <InputField
                     type="text"
                     name="country"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="Country"
+                    placeholder="Country e.g. 'Nigeria"
                     required
                   />
                   <InputField
                     type="tel"
                     name="phoneNumber"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="Phone Number"
+                    placeholder="Phone Number e.g. '0123456789'"
                     required
                   />
                   <InputField
                     type="email"
                     name="email"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="Email"
+                    placeholder="Email e.g. 'example@example.com"
                     required
                   />
                   <InputField
                     type="text"
                     name="websiteUrl"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="Website Url"
+                    placeholder="Website Url e.g. 'www.example.com'"
                     required
                   />
                   <InputField
                     type="text"
                     name="companyBegin"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="Company Begin"
+                    placeholder="Company Begin e.g '2020-12-25'"
                     required
                   />
                   <InputField
                     type="text"
                     name="companyRegNo"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="Company Reg No"
+                    placeholder="Company Reg No e.g. '1234'"
                     required
                   />
                   <InputField
                     type="text"
                     name="utrNo"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="UTR Number"
+                    placeholder="UTR Number e.g. '1234'"
                     required
                   />
                   <InputField
                     type="text"
                     name="vatSubmitType"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="Vat Submit Type"
+                    placeholder="Vat Submit Type e.g. 'Non-VAT Registered'"
                     required
                   />
                   <InputField
                     type="text"
                     name="vatScheme"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="VAT Scheme"
+                    placeholder="VAT Scheme e.g. 'Annually'"
                     required
                   />
                   <InputField
                     type="text"
                     name="vatRegNo"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="VAT Reg No"
+                    placeholder="VAT Reg No e.g. '1234'"
                     required
                   />
                   <InputField
                     type="text"
                     name="vatRegDate"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="VAT Reg Date"
+                    placeholder="VAT Reg Date e.g. '2020-12-25'"
                     required
                   />
                   <InputField
                     type="text"
                     name="insuranceNumber"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="Insurance Number"
+                    placeholder="Insurance Number e.g '12AB34CD56EF"
                     required
                   />
                   <InputField
                     type="text"
                     name="payeeRefNo"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
-                    placeholder="Payee Ref No"
+                    placeholder="Payee Ref No e.g. '12AB34CD56EF'"
                     required
                   />
                   <InputField
                     type="password"
                     name="password"
-                    onChange={handleChange}
+                    onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
                     placeholder="Password"
                     required 

@@ -2,16 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Card, CardImg, CardBody, CardText, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import {
-  superAdminGetAllAdmins,
-  getAllClients,
-  addUserToAdmin,
-} from '../../apiConstants/apiConstants';
-import {
-  getAllAdmins,
-  superAdminAddClientToAdmin,
-} from '../../actions/admin/authAction/Users';
-import { getClient } from '../../actions/admin/clients/Clients';
+import { superAdminGetAllAdmins } from '../../apiConstants/apiConstants';
+import { getAllAdmins } from '../../actions/admin/authAction/Users';
 import Page from 'components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import Portrait from '../../portrait.png';
@@ -19,46 +11,17 @@ import Portrait from '../../portrait.png';
 export default function allAdmins() {
   const dispatch = useDispatch();
   const AllAdmins = useSelector(state => state.superAdminGetAllAdmins);
-  const AllClients = useSelector(state => state.adminGetAllClient);
-  const AddClientToAdmin = useSelector(
-    state => state.superAdminAddClientToAdmin,
-  );
   const [admins, setAdmins] = useState([]);
-
-  const [admin, setAdmin] = useState();
-  const [client, setClient] = useState([]);
 
   useEffect(() => {
     dispatch(getAllAdmins(superAdminGetAllAdmins));
-    dispatch(getClient(getAllClients));
   }, []);
 
   useEffect(() => {
-    if (AllAdmins.isSuccessful && AllClients.isSuccessful) {
+    if (AllAdmins.isSuccessful) {
       setAdmins(AllAdmins.admins);
-      setAdmin(AllAdmins.admins[0]._id);
-      console.log(AllClients.users);
-      setClient([
-        AllClients.users[13]._id,
-      ]);
     }
-  }, [AllAdmins, AllClients]);
-  console.log(admins);
-
-  useEffect(() => {
-    if (AddClientToAdmin.isSuccessful) {
-      console.log(AddClientToAdmin.result);
-    }
-  }, [AddClientToAdmin]);
-
-  const addClient = () => {
-    const endpoint = `${addUserToAdmin}${admin}`;
-    console.log(endpoint);
-    const payload = {
-      users: client,
-    };
-    dispatch(superAdminAddClientToAdmin(endpoint, payload));
-  };
+  }, [AllAdmins]);
 
   if (!admins.length) {
     return <PageSpinner />;
@@ -66,9 +29,6 @@ export default function allAdmins() {
 
   return (
     <Page title="Dropdowns" breadcrumbs={[{ name: 'Admins', active: true }]}>
-      <button type="button" onClick={addClient}>
-        Click
-      </button>
       <Row className="admin-grid p-3">
         {admins.map((admin, i) => (
           <Card
@@ -91,7 +51,13 @@ export default function allAdmins() {
               <CardText>{admin.phoneNumber}</CardText>
               <Button outline color="success" className="m-1">
                 <Link
-                  to="/admin/clients"
+                  to={{
+                    pathname: `/superadmin/${admin._id}/clients`,
+                    state: {
+                      adminId: admin._id,
+                      clients: admin.users,
+                    },
+                  }}
                   className="link text-decoration-none"
                   style={{ color: 'inherit' }}
                 >

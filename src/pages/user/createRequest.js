@@ -1,25 +1,16 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, FormGroup } from 'reactstrap';
 import { MdAttachment } from 'react-icons/md';
+import { useHistory } from 'react-router-dom';
 
 import { userCreateRequest } from '../../apiConstants/apiConstants';
-import { createRequest } from '../../actions/user/Users';
 import InputField from '../../components/InputField';
 import Page from 'components/Page';
 
 export default function CreateRequest() {
   const [requestData, setRequestData] = useState('');
   const [isValid, setIsValid] = useState();
-  const dispatch = useDispatch();
-  const request = useSelector(state => state.userCreatedRequest);
-  const doc = useSelector(state => state.userUploadDoc);
-
-  if (request.isSuccessful || doc.isSuccessful) {
-    alert('Succcessfully created Request');
-    console.log(request.request);
-    console.log(doc.data);
-  }
+  const history = useHistory();
 
   const handleChange = target => {
     setRequestData(prevState => ({
@@ -30,7 +21,7 @@ export default function CreateRequest() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const { requestDescription, requestTitle } = requestData;
+    const { requestDescription, requestTitle, attachedFileName } = requestData;
     let inValidData = requestDescription && requestTitle;
     if (inValidData) {
       setIsValid(true);
@@ -39,8 +30,7 @@ export default function CreateRequest() {
       formData.append('requestTitle', requestTitle);
       formData.append('requestDescription', requestDescription);
       formData.append('attachedFileUrl', requestFile.files[0]);
-
-      // dispatch(createRequest(userCreateRequest, payload));
+      formData.append('attachedFileName', attachedFileName);
 
       let localURL = 'https://node.codecradle.co/api/v1/';
       let prodURL = 'https://node.codecradle.co/api/v1/';
@@ -48,19 +38,17 @@ export default function CreateRequest() {
       const endpoint = baseUrl + userCreateRequest;
       const token = localStorage.getItem('jwtToken');
       const bearerToken = 'Bearer ' + token;
-      console.log(bearerToken);
       fetch(endpoint, {
         method: 'POST',
         body: formData,
         credentials: 'same-origin',
         headers: new Headers({
-          'Content-Type': 'multipart/form-data',
           Authorization: bearerToken,
         }),
       })
-        .then(res => console.log(res))
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
+        .then(res => res.json())
+        .then(history.push('/user/requests'))
+        .catch(console.error);
     } else {
       setIsValid(false);
     }
@@ -105,18 +93,17 @@ export default function CreateRequest() {
               placeholder="Attach Document"
               type="file"
               id="requestFile"
-              // onChange={({ target}) => handleChange(target)}
             />
           </FormGroup>
-          {/* <FormGroup>
-              <InputField
-                required
-                placeholder="File Name"
-                type="text"
-                name="attachedFileName"
-                onChange={({ target}) => handleChange(target)} 
-              />
-            </FormGroup> */}
+          <FormGroup>
+            <InputField
+              required
+              placeholder="File Name"
+              type="text"
+              name="attachedFileName"
+              onChange={({ target }) => handleChange(target)}
+            />
+          </FormGroup>
           <Button type="submit" className="form-button" form="create-request">
             CREATE REQUEST
           </Button>

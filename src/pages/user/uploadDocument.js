@@ -15,20 +15,12 @@ import { FormGroup } from '@material-ui/core';
 import { getAllAdmins } from '../../actions/admin/authAction/Users';
 
 export default function UploadDocument() {
-  const [doc, setDoc] = useState();
   const [fileName, setFileName] = useState('');
   const [form, setForm] = useState(false);
   const dispatch = useDispatch();
 
   // edit
   const AllAdmins = useSelector(state => state.superAdminGetAllAdmins.admins);
-
-  const handleDocChange = target => {
-    setDoc({
-      docName: target.name,
-      docContentUrl: target.value,
-    });
-  };
 
   useEffect(() => {
     dispatch(getAllAdmins(superAdminGetAllAdmins))
@@ -37,21 +29,30 @@ export default function UploadDocument() {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (doc && fileName) {
+    if (fileName) {
       // with docContentUrl
-      console.log(AllAdmins[0]);
+      // console.log(AllAdmins[0]);
       // dispatch(uploadDoc(docEndpoint, doc));
       
       // with FormData
-      const baseUrl= 'https://node.codecradle.co/api/v1/';
-      const docEndpoint = baseUrl + userUploaDocToAdmin;
       const formData = new FormData();
       const inpFile = document.getElementById("inpFile");
-      formData.append("inpFile", inpFile.files[0]);
-      console.log(formData);
-      fetch(docEndpoint, {
-        method: "post",
-        body: "formData"
+      formData.append('fileName', fileName);
+      formData.append("fileUrl", inpFile.files[0]);
+
+      let localURL = 'https://node.codecradle.co/api/v1/';
+      let prodURL = 'https://node.codecradle.co/api/v1/';
+      let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
+      const endpoint = baseUrl + userUploaDocToAdmin;
+      const token = localStorage.getItem('jwtToken');
+      const bearerToken = 'Bearer ' + token; 
+      fetch(endpoint, {
+        method: "POST",
+        body: formData,
+        credentials: 'same-origin',
+        headers: new Headers({
+          Authorization: bearerToken,
+        })
       })
       .then(res => console.log(res))
       .catch(console.error);
@@ -122,7 +123,6 @@ export default function UploadDocument() {
                     required
                     type="file"
                     name="doc"
-                    onChange={({ target }) => handleDocChange(target)}
                     id="inpFile"
                     className="inp mt-4"
                   />

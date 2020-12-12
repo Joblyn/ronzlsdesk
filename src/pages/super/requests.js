@@ -9,8 +9,6 @@ import CustomTable from '../../components/table/CustomTable';
 import { getAllRequests } from '../../actions/admin/clients/Clients';
 import { adminGetRequests } from '../../apiConstants/apiConstants';
 
-// import Modal from '../../components/Modal';
-
 export default function Requests() {
   const dispatch = useDispatch();
   const adminGetAllRequests = useSelector(state => state.getAllRequests);

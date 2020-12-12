@@ -25,6 +25,9 @@ export default function ViewAppointments() {
     data && data.map((appointment, i) => (
       rows.push({
         id: i + 1,
+        message: appointment.appointmentMessage,
+        dateScheduled: appointment.appointmentDate,
+        dateCreated: appointment.created_dt
       })
     ));
     return rows;

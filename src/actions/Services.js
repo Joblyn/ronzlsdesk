@@ -85,6 +85,10 @@ export const postData = (url, payload, done) => {
           nprogress.done();
           nprogress.remove();
           alert(data.error);
+        } else if (data.errors) {
+          nprogress.done();
+          nprogress.remove();
+          alert('Errors in input details, please fill in all fields correctly.');
         }
       })
       .catch(err => {
@@ -125,7 +129,7 @@ export const postDataWithToken = (url, payload, done) => {
           nprogress.done();
           nprogress.remove();
           alert(data.error);
-          // window.location.reload();
+          window.location.reload();
         }
       })
       .catch(err => {

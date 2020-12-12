@@ -7,7 +7,10 @@ import Page from 'components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import CustomTable from '../../components/table/CustomTable';
 import { getAllRequests } from '../../actions/admin/clients/Clients';
-import { adminGetRequests } from '../../apiConstants/apiConstants';
+import { 
+  adminGetRequests,
+  // getClientsRequests
+ } from '../../apiConstants/apiConstants';
 
 export default function AdminRequests() {
   const dispatch = useDispatch();
@@ -16,17 +19,24 @@ export default function AdminRequests() {
   useEffect(() => {
     dispatch(getAllRequests(adminGetRequests));
   }, []);
-
+  console.log(adminGetAllRequests.requests);
+  
   const getRows = requests => {
     let rows = [];
     requests && requests.map((request, i) => (
       rows.push({
         id: i+1,
-        // other data
+        requestTitle: request.requestTitle,
+        requestDescription: request.requestDescription,
+        date: request.created_dt,
+        document: request.attachedFileName || '- -',
         view: (<Button
-          className="bg-green-700 text-white rounded-full px-2 py-2"
+          color="secondary"
+                size="sm"
+                className="p-1"
+                style={{ fontSize: '.9rem', minWidth: '110px' }}
         >
-          View Document
+          View File
         </Button>)      
       })
     ));

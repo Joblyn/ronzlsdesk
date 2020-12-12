@@ -1,46 +1,74 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components/macro';
 
 import Page from 'components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import CustomTable from '../../components/table/CustomTable';
 import { getClient } from '../../actions/admin/clients/Clients';
 import {
+  addUserToAdmin,
   getAllClients,
   superAdminGetAllAdmins,
 } from '../../apiConstants/apiConstants';
 import { Button } from 'reactstrap';
 import { Form, Label } from 'reactstrap';
 import InputField from '../../components/InputField';
-import { getAllAdmins } from '../../actions/admin/authAction/Users';
-
-const Select = styled.div``;
+import { getAllAdmins, superAdminAddClientToAdmin } from '../../actions/admin/authAction/Users';
 
 const AdminClient = () => {
   const dispatch = useDispatch();
   const adminGetClient = useSelector(state => state.adminGetAllClient);
   const [showModal, setShowModal] = useState(false);
   const [checked, setChecked] = useState();
+  const [selectedAdmin, setSelectedAdmin] = useState({});
+  const [client, setclient] = useState({});
   const admins = useSelector(state => state.superAdminGetAllAdmins.admins);
+  const AddClientToAdmin = useSelector(
+    state => state.superAdminAddClientToAdmin,
+  );
 
   useEffect(() => {
     dispatch(getClient(getAllClients));
   }, []);
 
+  useEffect(() => {
+    if (AddClientToAdmin.isSuccessful) {
+      alert(`Added ${client.name} to Account Officer-${selectedAdmin.name}`);
+      setShowModal(false);
+    }
+  }, [AddClientToAdmin]);
+
   const viewDetails = id => {
     localStorage.setItem('client_id', id);
   };
 
-  const handleClick = id => {
+  const handleClick = (id, name)  => {
+    setclient({
+      id, 
+      name
+    });
     setShowModal(true);
-    dispatch(getAllAdmins(superAdminGetAllAdmins));
+    dispatch(getAllAdmins(superAdminGetAllAdmins));   
+  };
+
+  const handleSelect = (id, name) => {
+    setSelectedAdmin({
+      id,
+      name
+    });
+  }
+
+  const assignAdmin = () => {
+    const endpoint = addUserToAdmin + selectedAdmin.id;
+    const payload = {
+      users: [client.id] 
+    }
+    dispatch(superAdminAddClientToAdmin(endpoint, payload));
   };
 
   const getRows = data => {
     let rows = [];
-
     data &&
       data.map((user, index) =>
         rows.push({
@@ -67,7 +95,8 @@ const AdminClient = () => {
                 size="sm"
                 className="p-1"
                 style={{ fontSize: '.9rem', minWidth: '110px' }}
-                onClick={() => handleClick(user._id)}
+                onClick={() => handleClick(user._id, user.companyName)}
+                disabled={user.accountOfficer ? true : false}
               >
                 Assign Admin
               </Button>
@@ -184,18 +213,18 @@ const AdminClient = () => {
                         style={{ maxHeight: '300px' }}
                       >
                         {admins.map((admin, i) => (
-                          <Select
+                          <div
                             className="border-b border-solid border-gray-300 cursor-pointer"
-                            key={`admin-${i + 1}`}
-                            onClick={() => setChecked(true)}
+                            key={`admin-${i+1}`}
                           >
                             <InputField
                               className="m-3"
                               type="radio"
-                              id={admin.fullName + i + 1}
+                              id={admin.fullName+i+1}
                               name="admins"
-                              value={admin.fullName}
+                              value={admin._id}
                               checked={checked}
+                              onChange={() => handleSelect(admin._id, admin.fullName)}
                             />
                             <Label
                               className="cursor-pointer"
@@ -203,17 +232,17 @@ const AdminClient = () => {
                             >
                               {admin.fullName}
                             </Label>
-                          </Select>
+                          </div>
                         ))}
                       </Form>
                     )}
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
-                  {checked && <button
+                  {selectedAdmin.id && <button
                       className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 assign"
                       type="button"
                       style={{ transition: 'all .15s ease' }}
-                      // onClick={() => setShowModal(false)}
+                      onClick={assignAdmin}
                     >
                       Assign
                     </button>
