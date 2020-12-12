@@ -31,7 +31,7 @@ if (localStorage.jwtToken) {
   if (decoded.exp < currentTime) {
     //logout user
     store.dispatch(logOutAction());
-    // change to pathname before deployment
+    // change to pathname before deployment to production
     window.location.hash = '#/';
   }
 }
