@@ -13,43 +13,37 @@ export default function Requests() {
   const dispatch = useDispatch();
   const adminGetAllRequests = useSelector(state => state.getAllRequests);
 
-  const handleClick2 = id => {
-  };
-  const onLinkClicked = (e, payload) => {
-  };
+  const handleClick2 = id => {};
+  const onLinkClicked = (e, payload) => {};
 
   useEffect(() => {
     dispatch(getAllRequests(adminGetRequests));
   }, []);
 
-  const getRows = data => {
+  const getRows = requests => {
     let rows = [];
-    // console.log('Data: ' + JSON.stringify(data));
-    data &&
-      data.map((user, index) => (
-        rows.push({
-          id: index + 1,
-          user: user.companyName,
-          accountType: user.accountType,
-          companyAddress: user.companyAddress,
-          phoneNumber: user.phoneNumber,
-          email: user.email,
-          website: user.websiteUrl,
-          view: (<Link
-              // to={`/admin/client/details/${user._id}`}
-              onClick={() => handleClick2(user._id)}
-              to={`/superadmin/client/details/userId=${user._id}`}
+    requests &&
+      requests.reverse().map((request, i) => {
+        return rows.push({
+          id: i + 1,
+          requestTitle: request.requestTitle,
+          requestDescription: request.requestDescription,
+          date: request.created_dt,
+          document: request.attachedFileName || '- -',
+          view: (
+            <Link
+              to="#"
+              onClick={() => handleClick2(request._id)}
               className="bg-green-700 text-white rounded-full px-2 py-2"
             >
-              View Document
-            </Link>)
-          })
-        )
-      );
+              View File
+            </Link>
+          ),
+        });
+      });
     return rows;
   };
   const onActionClicked = (e, payload) => {
-    // alert(JSON.stringify(payload));
     console.log(payload);
   };
   if (!adminGetAllRequests.isSuccessful) {
@@ -69,44 +63,50 @@ export default function Requests() {
             {
               id: 'id',
               label: 'ID',
+              align: 'center',
               minWidth: 20,
               color: value => 'blue',
             },
             {
-              id: 'user',
+              id: 'client',
               label: 'Client',
+              align: 'center',
               minWidth: 100,
               color: value => 'blue',
             },
             {
               id: 'requestTitle',
               label: 'Request Title',
+              align: 'center',
               minWidth: 100,
               color: value => 'blue',
             },
             {
               id: 'requestDescription',
               label: 'Request Description',
+              align: 'center',
               minWidth: 150,
               color: value => 'blue',
             },
             {
-              id: 'documentUploaded',
+              id: 'document',
               label: 'Document Uploaded',
+              align: 'center',
               minWidth: 100,
-              color: value => 'blue'
+              color: value => 'blue',
             },
             {
-              id:'view',
+              id: 'view',
               label: 'Action',
-              minWidth: 100,
+              minWidth: 150,
               align: 'center',
               color: value => 'blue',
-              type: 'link'
+              type: 'link',
             },
             {
               id: 'date',
               label: 'Date Created',
+              align: 'center',
               minWidth: 100,
               color: value => 'black',
             },
@@ -117,5 +117,5 @@ export default function Requests() {
         />
       </div>
     </Page>
-  )
+  );
 }

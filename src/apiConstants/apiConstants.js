@@ -30,12 +30,11 @@ export let adminGetDocumentsSentToUser = 'admin/document'
 // admin get documenst received
 export let adminGetDocumentsReceivedFromUser = 'admin/document/user';
 // admin get appoinments from clients under admin
-export let getClientAppointments = '';
+export let getClientAppointments = 'admin/appointment';
 // admin confirm appointment 
 export let confirmClientAppointment = 'admin/appointment/';
 // get requests of clients under him
 export let getClientsRequests = 'admin/request/userResquests';
-
 
 // Superadmin get all documents
 export let adminGetDocuments = 'admin/document/user';

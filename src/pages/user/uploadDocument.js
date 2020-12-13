@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+// import { useDispatch } from 'react-redux';
 import { Button, Form } from 'reactstrap';
 
 // camera libraries
@@ -9,22 +9,25 @@ import { MdPhotoCamera, MdFileUpload, MdClear } from 'react-icons/md';
 
 import Page from 'components/Page';
 import InputField from '../../components/InputField';
-import { superAdminGetAllAdmins, userUploaDocToAdmin } from '../../apiConstants/apiConstants';
-import { uploadDoc } from '../../actions/user/Users';
+import {
+  // superAdminGetAllAdmins,
+  userUploaDocToAdmin,
+} from '../../apiConstants/apiConstants';
+// import { uploadDoc } from '../../actions/user/Users';
 import { FormGroup } from '@material-ui/core';
-import { getAllAdmins } from '../../actions/admin/authAction/Users';
+// import { getAllAdmins } from '../../actions/admin/authAction/Users';
 
 export default function UploadDocument() {
   const [fileName, setFileName] = useState('');
   const [form, setForm] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // edit
-  const AllAdmins = useSelector(state => state.superAdminGetAllAdmins.admins);
+  // const AllAdmins = useSelector(state => state.superAdminGetAllAdmins.admins);
 
-  useEffect(() => {
-    dispatch(getAllAdmins(superAdminGetAllAdmins))
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllAdmins(superAdminGetAllAdmins))
+  // }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -33,29 +36,29 @@ export default function UploadDocument() {
       // with docContentUrl
       // console.log(AllAdmins[0]);
       // dispatch(uploadDoc(docEndpoint, doc));
-      
+
       // with FormData
       const formData = new FormData();
-      const inpFile = document.getElementById("inpFile");
+      const inpFile = document.getElementById('inpFile');
       formData.append('fileName', fileName);
-      formData.append("fileUrl", inpFile.files[0]);
+      formData.append('fileUrl', inpFile.files[0]);
 
       let localURL = 'https://node.codecradle.co/api/v1/';
       let prodURL = 'https://node.codecradle.co/api/v1/';
       let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
       const endpoint = baseUrl + userUploaDocToAdmin;
       const token = localStorage.getItem('jwtToken');
-      const bearerToken = 'Bearer ' + token; 
+      const bearerToken = 'Bearer ' + token;
       fetch(endpoint, {
-        method: "POST",
+        method: 'POST',
         body: formData,
         credentials: 'same-origin',
         headers: new Headers({
           Authorization: bearerToken,
-        })
+        }),
       })
-      .then(res => console.log(res))
-      .catch(console.error);
+        .then(res => console.log(res))
+        .catch(console.error);
     }
   };
 
@@ -151,11 +154,7 @@ export default function UploadDocument() {
         </div>
       </div>
 
-      {source && <img 
-        src={source} 
-        alt="captured" 
-        width="250" 
-      />}
+      {source && <img src={source} alt="captured" width="250" />}
     </Page>
   );
 }

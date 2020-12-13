@@ -32,7 +32,6 @@ export const getDataWithToken = (url, done) => {
   const bearerToken = 'Bearer ' + token;
   console.log(bearerToken);
   nprogress.start();
-  
   return dispatch => {
     fetch(endpoint, {
       method: 'GET',

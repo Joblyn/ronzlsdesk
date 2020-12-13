@@ -20,7 +20,6 @@ const AdminClient = () => {
   const dispatch = useDispatch();
   const adminGetClient = useSelector(state => state.adminGetAllClient);
   const [showModal, setShowModal] = useState(false);
-  const [checked, setChecked] = useState();
   const [selectedAdmin, setSelectedAdmin] = useState({});
   const [client, setclient] = useState({});
   const admins = useSelector(state => state.superAdminGetAllAdmins.admins);
@@ -70,7 +69,7 @@ const AdminClient = () => {
   const getRows = data => {
     let rows = [];
     data &&
-      data.map((user, index) =>
+      data.reverse().map((user, index) =>
         rows.push({
           id: index + 1,
           user: user.companyName,
@@ -223,7 +222,6 @@ const AdminClient = () => {
                               id={admin.fullName+i+1}
                               name="admins"
                               value={admin._id}
-                              checked={checked}
                               onChange={() => handleSelect(admin._id, admin.fullName)}
                             />
                             <Label

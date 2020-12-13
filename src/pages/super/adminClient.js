@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import InputField from '../../components/InputField';
-import InputDropdown from '../../components/InputDropdown';
 import PageSpinner from '../../components/PageSpinner';
 import { getClientDetail } from '../../apiConstants/apiConstants';
 import { getClientDetails } from '../../actions/admin/clients/Clients';

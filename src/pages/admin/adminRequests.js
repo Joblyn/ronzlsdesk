@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from "reactstrap";
+import { Button } from 'reactstrap';
 
 import Page from 'components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import CustomTable from '../../components/table/CustomTable';
 import { getAllRequests } from '../../actions/admin/clients/Clients';
-import { 
+import {
   adminGetRequests,
   // getClientsRequests
- } from '../../apiConstants/apiConstants';
+} from '../../apiConstants/apiConstants';
 
 export default function AdminRequests() {
   const dispatch = useDispatch();
@@ -20,41 +20,41 @@ export default function AdminRequests() {
     dispatch(getAllRequests(adminGetRequests));
   }, []);
   console.log(adminGetAllRequests.requests);
-  
+
   const getRows = requests => {
     let rows = [];
-    requests && requests.map((request, i) => (
-      rows.push({
-        id: i+1,
-        requestTitle: request.requestTitle,
-        requestDescription: request.requestDescription,
-        date: request.created_dt,
-        document: request.attachedFileName || '- -',
-        view: (<Button
-          color="secondary"
-                size="sm"
-                className="p-1"
-                style={{ fontSize: '.9rem', minWidth: '110px' }}
-        >
-          View File
-        </Button>)      
-      })
-    ));
-    return rows; 
-  }
+    requests &&
+      requests.map((request, i) =>
+        rows.push({
+          id: i + 1,
+          requestTitle: request.requestTitle,
+          requestDescription: request.requestDescription,
+          date: request.created_dt,
+          document: request.attachedFileName || '- -',
+          view: (
+            <Button
+              color="secondary"
+              size="sm"
+              className="p-1"
+              style={{ fontSize: '.9rem', minWidth: '110px' }}
+            >
+              View File
+            </Button>
+          ),
+        }),
+      );
+    return rows;
+  };
 
   const onViewDocument = (e, payload) => {
     // function to view document
-  }
+  };
 
-  if(!adminGetAllRequests.isSuccessful) {
-    return <PageSpinner />
+  if (!adminGetAllRequests.isSuccessful) {
+    return <PageSpinner />;
   }
   return (
-    <Page
-      title="Dropdowns"
-      breadcrumbs={[{ name: 'Requests', active: true }]}
-    >
+    <Page title="Dropdowns" breadcrumbs={[{ name: 'Requests', active: true }]}>
       <div style={{ overflowX: 'auto' }}>
         <CustomTable
           pagination
@@ -93,7 +93,7 @@ export default function AdminRequests() {
               align: 'center',
               label: 'Document Uploaded',
               minWidth: 100,
-              color: value => 'blue'
+              color: value => 'blue',
             },
             {
               id: 'date',
@@ -103,11 +103,11 @@ export default function AdminRequests() {
               color: value => 'black',
             },
             {
-              id:'view',
+              id: 'view',
               align: 'center',
               label: 'Action',
               minWidth: 150,
-              type: 'link'
+              type: 'link',
             },
           ]}
           rows={getRows(adminGetAllRequests.requests)}
@@ -115,5 +115,5 @@ export default function AdminRequests() {
         />
       </div>
     </Page>
-  )
+  );
 }
