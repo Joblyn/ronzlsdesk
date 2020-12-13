@@ -1,57 +1,59 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Button } from "reactstrap";
+import { Button } from "reactstrap";
 
-import { confirmClientAppointment, getClientAppointments } from '../../apiConstants/apiConstants';
-import { confirmAppointment, getAppointments } from '../../actions/admin/clients/Clients';
-import Page from 'components/Page'; 
+import {
+  confirmClientAppointment,
+  getClientAppointments,
+} from '../../apiConstants/apiConstants';
+import {
+  confirmAppointment,
+  getAppointments,
+} from '../../actions/admin/clients/Clients';
+import Page from 'components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import CustomTable from '../../components/table/CustomTable';
 
 export default function AdminAppointments() {
   const dispatch = useDispatch();
   const adminGetAppointments = useSelector(state => state.adminGetAppointments);
-  const adminConfirmAppointment = useSelector(state => state.adminConfirmAppointment);
+  const adminConfirmAppointment = useSelector(
+    state => state.adminConfirmAppointment,
+  );
 
   useEffect(() => {
-    dispatch(getAppointments(getClientAppointments))
+    dispatch(getAppointments(getClientAppointments));
   }, []);
 
   // action to confirm appointment
-  const onConfirmAppointment = () =>  {
+  const onConfirmAppointment = () => {
     let appointmentId = '';
     let endpoint = confirmClientAppointment + appointmentId;
     dispatch(confirmAppointment(endpoint, appointmentId));
   };
 
-  if(adminConfirmAppointment.isSuccessful){
+  if (adminConfirmAppointment.isSuccessful) {
     console.log(adminConfirmAppointment.result);
   }
 
-  // const rows = [
-  //   {
-  //     id: 1,
-  //     user: 'Job',
-  //     message: "Job's Appointment",
-  //     dateScheduled: '20-12-2020',
-  //     status: 'pending',
-  //     dateCreated: '07-12-2020',
-  //     action: <Button className="bg-green-700 text-white rounded-full m-0">Confirm</Button>,
-  //   }
-  // ];
-
   const getRows = appointments => {
     let rows = [];
-    appointments && appointments.map((appointment, i) => (
-      rows.push({
-      id: i + 1,
-      })
-    ));
+    appointments &&
+      appointments.reverse().map((appointment, i) =>
+        rows.push({
+          id: i + 1,
+          action: (
+            <Button className="bg-green-700 text-white rounded-full m-0">
+              Confirm
+            </Button>
+          ),
+        }),
+      );
     return rows;
   };
 
-  if(!adminGetAppointments.isSuccessful) {
-    return <PageSpinner />
+  if (!adminGetAppointments.isSuccessful) {
+    return <PageSpinner />;
   }
   return (
     <Page
@@ -91,12 +93,12 @@ export default function AdminAppointments() {
               minWidth: 100,
               color: value => 'blue',
             },
-            { 
+            {
               id: 'status',
               label: 'Status',
               align: 'center',
               minWidth: 100,
-              color: value => 'blue'
+              color: value => 'blue',
             },
             {
               id: 'dateCreated',
@@ -107,12 +109,12 @@ export default function AdminAppointments() {
             },
             //action to confirm appointment if not confirmed
             {
-              id:'action',
+              id: 'action',
               label: 'Actions',
               minWidth: 100,
               align: 'center',
               color: value => 'green',
-              type: 'link'
+              type: 'link',
             },
           ]}
           rows={getRows(adminGetAppointments.appointments)}
@@ -120,5 +122,5 @@ export default function AdminAppointments() {
         />
       </div>
     </Page>
-  )
+  );
 }

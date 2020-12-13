@@ -52,7 +52,7 @@ const Documents = () => {
     console.log('Data: ' + JSON.stringify(data));
     // let data = adminGetAllDocuments.users && adminGetAllDocuments.users;
     data &&
-      data.map((user, index) => {
+      data.reverse().map((user, index) => {
         rows.push({
           id: index + 1,
           user: user.companyName,

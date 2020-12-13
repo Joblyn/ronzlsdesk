@@ -24,7 +24,7 @@ export default function AdminRequests() {
   const getRows = requests => {
     let rows = [];
     requests &&
-      requests.map((request, i) =>
+      requests.reverse().map((request, i) =>
         rows.push({
           id: i + 1,
           requestTitle: request.requestTitle,

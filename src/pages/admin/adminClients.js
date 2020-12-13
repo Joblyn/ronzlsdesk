@@ -27,7 +27,7 @@ export default function AdminClients() {
   const getRows = data => {
     let rows = [];
     data &&
-      data.map((client, i) => (
+      data.reverse().map((client, i) => (
         rows.push({
           id: i + 1,
           user: client.companyName,

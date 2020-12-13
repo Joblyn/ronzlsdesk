@@ -52,7 +52,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="login">
+    <div className="login h-screen">
       <div className="container sm:px-10">
         <div className="block xl:grid grid-cols-2 gap-4">
           <div className="hidden xl:flex flex-col min-h-screen">

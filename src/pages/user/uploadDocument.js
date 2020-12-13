@@ -46,14 +46,14 @@ export default function UploadDocument() {
       let localURL = 'https://node.codecradle.co/api/v1/';
       let prodURL = 'https://node.codecradle.co/api/v1/';
       let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
-      const endpoint = baseUrl + userUploaDocToAdmin;
+      const endpoint = baseUrl + userUploaDocToAdmin + '5fc39233de6fbc1361ef4c60';
       const token = localStorage.getItem('jwtToken');
       const bearerToken = 'Bearer ' + token;
       fetch(endpoint, {
         method: 'POST',
         body: formData,
         credentials: 'same-origin',
-        headers: new Headers({
+        headers: new Headers({          
           Authorization: bearerToken,
         }),
       })

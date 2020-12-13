@@ -16,7 +16,7 @@ export default function AdminClients(props) {
     let rows = [];
 
     clients &&
-      clients.map((client, i) =>
+      clients.reverse().map((client, i) =>
         rows.push({
           id: i + 1,
           client: client.companyName,

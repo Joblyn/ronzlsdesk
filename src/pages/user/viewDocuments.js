@@ -30,7 +30,7 @@ export default function ViewDocuments() {
   const getRows = (documents) => {
     let rows = [];
 
-    documents && documents.map((document, i) => (
+    documents && documents.reverse().map((document, i) => (
       rows.push({
         id: i + 1,
       })

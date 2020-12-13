@@ -34,7 +34,7 @@ export default function ViewRequests() {
   const getRows = data => {
     let rows = [];
 
-    data && data.map((request, i) => (
+    data && data.reverse().map((request, i) => (
       rows.push({
         id: i + 1,
         requestTitle: request.requestTitle,

@@ -30,7 +30,7 @@ export default function allAdmins() {
   return (
     <Page title="Dropdowns" breadcrumbs={[{ name: 'Admins', active: true }]}>
       <Row className="admin-grid p-3">
-        {admins.map((admin, i) => (
+        {admins.reverse().map((admin, i) => (
           <Card
             className="d-flex justify-content-center align-items-center text-center pt-2 box-border"
             key={`admin-${i}`}

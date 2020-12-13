@@ -21,15 +21,16 @@ export default function ViewAppointments() {
 
   const getRows = data => {
     let rows = [];
-
-    data && data.map((appointment, i) => (
+    data && data.reverse().map((appointment, i) => {
+      return (
       rows.push({
         id: i + 1,
         message: appointment.appointmentMessage,
         dateScheduled: appointment.appointmentDate,
         dateCreated: appointment.created_dt
       })
-    ));
+    )}
+    );
     return rows;
   }
 
@@ -68,13 +69,13 @@ export default function ViewAppointments() {
             minWidth: 150,
             color: value => 'blue',
           },
-          {
-            id: 'status',
-            label: 'Status',
-            align: 'center',
-            minWidth: 100,
-            color: value => 'blue',
-          },
+          // {
+          //   id: 'status',
+          //   label: 'Status',
+          //   align: 'center',
+          //   minWidth: 100,
+          //   color: value => 'blue',
+          // },
           {
             id: 'dateCreated',
             label: 'Date Created',
