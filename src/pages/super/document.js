@@ -32,8 +32,18 @@ const Documents = () => {
     let rows = [];
     data &&
       data.reverse().map((document, i) => {
-        rows.push({
+        let sender;
+        let receiver;
+        if (document.sender) {
+          sender = document.sender.companyName
+        }
+        if (document.receiver) {
+          receiver = document.receiver.fullName
+        }
+        return rows.push({
           id: i + 1,
+          client: sender || 'null',
+          admin: receiver || 'null',
           docName: document.docName,
           date: document.created_dt,
           view: (
@@ -49,7 +59,6 @@ const Documents = () => {
             </Button>
           )
         });
-        return null
       });
     return rows;
   };

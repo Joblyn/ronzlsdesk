@@ -18,9 +18,6 @@ import CustomTable from '../../components/table/CustomTable';
 export default function AdminAppointments() {
   const dispatch = useDispatch();
   const adminGetAppointments = useSelector(state => state.adminGetAppointments);
-  // const adminConfirmAppointment = useSelector(
-  // state => state.adminConfirmAppointment,
-  // );
 
   useEffect(() => {
     dispatch(getAppointments(getClientAppointments));
@@ -44,7 +41,6 @@ export default function AdminAppointments() {
 
   const getRows = appointments => {
     let rows = [];
-    console.log(appointments);
     appointments &&
       appointments.reverse().map((appointment, i) =>
         rows.push({

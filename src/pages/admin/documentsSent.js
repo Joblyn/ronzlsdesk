@@ -22,9 +22,14 @@ export default function AdminSentDocuments() {
   const getRows = documents => {
     let rows = [];
     documents &&
-      documents.reverse().map((document, i) =>
-        rows.push({
+      documents.reverse().map((document, i) => { 
+        let client;
+        if (document.receiver) {
+          client = document.receiver.companyName;
+        }
+         return rows.push({
           id: i + 1,
+          client: client || 'null',
           docName: document.docName,
           date: document.created_dt,
           view: (
@@ -39,7 +44,7 @@ export default function AdminSentDocuments() {
               View
             </Button>
           ),
-        }),
+        })}
       );
     return rows;
   };
@@ -101,6 +106,7 @@ export default function AdminSentDocuments() {
               align: 'center',
               label: 'Action',
               minWidth: 100,
+              color: value => 'blue',
             },
           ]}
           rows={getRows(adminGetSentDocuments.documents)}

@@ -54,13 +54,13 @@ const AdminClient = () => {
   const handleSelect = (id, name) => {
     setSelectedAdmin({ id, name });
   };
-
+  
   const assignAdmin = () => {
     const endpoint = addUserToAdmin + selectedAdmin.id;
     const payload = { users: [client.id] };
     dispatch(superAdminAddClientToAdmin(endpoint, payload));
   };
-
+ 
   const getRows = data => {
     let rows = [];
     data &&

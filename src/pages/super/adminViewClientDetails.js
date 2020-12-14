@@ -163,8 +163,10 @@ const AdminViewClientDetails = () => {
       subscriptionBegin,
       subscriptionEnd
     }
+    console.log(id);
     let endpoint = `${adminUpdateSubscription}${id}`;
-    console.log("endpoint: " + endpoint);
+    console.log(endpoint);
+    console.log(payload);
     dispatch(updateClientSubscription(endpoint, payload));
   };
 

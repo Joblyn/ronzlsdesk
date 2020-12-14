@@ -27,14 +27,19 @@ export default function Appointments() {
   const getRows = appointments => {
     let rows = [];
     appointments &&
-      appointments.reverse().map((appointment, i) =>
-        rows.push({
+      appointments.reverse().map((appointment, i) =>{
+        let status;
+        if(appointment.status) {
+          status = appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1); 
+        }
+        return rows.push({
           id: i + 1,
           client: appointment.client.companyName,
           message: appointment.appointmentMessage || '- -',
           dateScheduled: appointment.appointmentDate,
+          status: status || 'Pending',
           dateCreated: appointment.created_dt,
-        }),
+        })}
       );
     return rows;
   };

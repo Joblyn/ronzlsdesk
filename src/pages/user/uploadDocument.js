@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'reactstrap';
 
 // camera library
-import 'react-html5-camera-photo/build/css/index.css';
+// import 'react-html5-camera-photo/build/css/index.css';
 
 import { MdPhotoCamera, MdFileUpload, MdClear } from 'react-icons/md';
 
@@ -52,6 +52,7 @@ export default function UploadDocument() {
           alert('Successfully sent document to Account Officer.');
           setIsLoading(false);
           setForm(false);
+          setSource('');
           nProgress.done();
           nProgress.remove();
         })
@@ -65,7 +66,6 @@ export default function UploadDocument() {
 
   const handleSubmit = e => {
     e.preventDefault();
-
     if (fileName) {
       setIsLoading(true);
       const formData = new FormData();
@@ -175,9 +175,9 @@ export default function UploadDocument() {
           )}
         </div>
       </div>
-      {!source && (
-        <div className="overlay">
-          <Form className="form py-5" id="capture-form" onSubmit={handleSubmit2}>
+      {source && (
+        <div className="overlay" style={{zIndex: '50'}}>
+          <Form className="form py-5" id="capture-form" onSubmit={handleSubmit2} style={{zIndex: '100'}}>
             <FormGroup className="form-group">
               <InputField
                 required

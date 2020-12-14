@@ -6,14 +6,7 @@ import {
 } from 'reactstrap';
 
 import { AnnouncementCard } from 'components/Card';
-<<<<<<< HEAD
-import Page from 'components/Page';;
-
-class DashboardPage extends React.Component {
-=======
 import Page from 'components/Page';
-
->>>>>>> 87431120e1a7bc4273b58bc6897bff64968efef9
 
 class DashboardPage extends React.Component {
   render() {
