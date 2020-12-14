@@ -14,7 +14,7 @@ export default function CreateAppointment() {
   const secondaryColor = getColor('secondary');
   
   const today = new Date();
-  const [date, setDate] = useState(today.toLocaleString());
+  const [date, setDate] = useState(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`);
   const [message, setMessage] = useState('');
   const dispatch = useDispatch();
   const userBookAppointment = useSelector(state => state.userBookAppointment);
@@ -33,11 +33,11 @@ export default function CreateAppointment() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const payload = {
-      message,
-      date
+      appointmentDate: date,
+      appointmentMessage: message
     };
     console.log(payload);
-    dispatch(bookAppointment(userBookAppointmentWithAdmin, payload))
+    dispatch(bookAppointment(userBookAppointmentWithAdmin, payload));
   }
 
   if(userBookAppointment.isSuccessful) {
@@ -75,7 +75,7 @@ export default function CreateAppointment() {
               todayColor: secondaryColor,
               weekdayColor: primaryColor,
             }}
-            onSelect={ date => setDate(date.toLocaleString())}
+            onSelect={date => setDate(`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`)}
           />
         </div>
         <FormGroup className="form-group">

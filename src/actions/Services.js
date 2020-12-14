@@ -32,7 +32,6 @@ export const getDataWithToken = (url, done) => {
   const bearerToken = 'Bearer ' + token;
   console.log(bearerToken);
   nprogress.start();
-  
   return dispatch => {
     fetch(endpoint, {
       method: 'GET',
@@ -55,7 +54,6 @@ export const getDataWithToken = (url, done) => {
       .catch(err => {
         console.log(err);
         nprogress.remove();
-        alert('Oopps!! An error occured, please try again.');
       });
   };
 };
@@ -70,30 +68,34 @@ export const postData = (url, payload, done) => {
       method: 'POST',
       body: JSON.stringify(payload),
       credentials: 'same-origin',
-      //mode: 'no-cors',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       }
     })
-      .then(res => {
-        let data = res.json()
-        console.log(data);
-        return data
-      })
+      .then(res => res.json())
       .then(data => {
-        console.log(data.data)
+        console.log(data);
         if (data.data) {
           nprogress.done();
           nprogress.remove();
-          console.log(data.data);
           dispatch(done(data.data));
+        } else if (data.error) {
+          nprogress.done();
+          nprogress.remove();
+          alert(data.error);
+        } else if (data.errors) {
+          nprogress.done();
+          nprogress.remove();
+          alert('Errors in input details, please fill in all fields correctly.');
         }
       })
       .catch(err => {
-        console.log(err);
+        nprogress.done();
         nprogress.remove();
-        alert('Oopps!! An error occured, please try again.');
+        console.log(err);
+        alert('Oopps!! An error occurred, please try again.')
+        window.location.reload();
       });
   };
 };
@@ -104,7 +106,6 @@ export const postDataWithToken = (url, payload, done) => {
   console.log('Payload:' + JSON.stringify(payload));
   const token = localStorage.getItem('jwtToken');
   const bearerToken = 'Bearer ' + token;
-  console.log(bearerToken);
   nprogress.start();
   return dispatch => {
     fetch(endpoint, {
@@ -116,20 +117,25 @@ export const postDataWithToken = (url, payload, done) => {
         Authorization: bearerToken,
       }),
     })
-      .then(res => res.json())
-      .then(data => {
+    .then(res => res.json())
+    .then(data => {
         console.log(data);
-        console.log(data.data);
         if (data.data) {
           nprogress.done();
           nprogress.remove();
           dispatch(done(data.data));
+        } else if (data.error) {
+          nprogress.done();
+          nprogress.remove();
+          alert(data.error);
+          // window.location.reload();
         }
       })
       .catch(err => {
         console.log(err);
+        nprogress.done();
         nprogress.remove();
-        alert('Oopps!! An error occured, please try again.');
+        alert(err);
       });
   };
 };

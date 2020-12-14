@@ -21,16 +21,20 @@ export default function ViewAppointments() {
 
   const getRows = data => {
     let rows = [];
-
-    data && data.map((appointment, i) => (
+    data && data.reverse().map((appointment, i) => {
+      return (
       rows.push({
         id: i + 1,
+        message: appointment.appointmentMessage,
+        dateScheduled: appointment.appointmentDate,
+        dateCreated: appointment.created_dt
       })
-    ));
+    )}
+    );
     return rows;
   }
 
-  if(!getUserAppointments.appointments) {
+  if(!getUserAppointments.isSuccessful) {
     return <PageSpinner />
   }
   return (
@@ -39,7 +43,7 @@ export default function ViewAppointments() {
       title="Dashboard"
       breadcrumbs={[{ name: 'View Appointments', active: true }]} 
     >
-    {getUserAppointments.appointments.length ? 
+    <div style={{overflowX:'auto'}}>
      <CustomTable
         pagination
         pagerows
@@ -47,40 +51,42 @@ export default function ViewAppointments() {
           {
             id: 'id',
             label: 'ID',
+            align: 'center',
             minWidth: 20,
             color: value => 'blue',
           },
           {
             id: 'message',
             label: 'Appointment Message',
+            align: 'center',
             minWidth: 150,
             color: value => 'blue',
           },
           {
             id: 'dateScheduled',
-            label: 'Appointment Date',
+            label: 'Date Scheduled',
+            align: 'center',
             minWidth: 150,
             color: value => 'blue',
           },
-          {
-            id: 'status',
-            label: 'Status',
-            minWidth: 100,
-            color: value => 'blue',
-          },
+          // {
+          //   id: 'status',
+          //   label: 'Status',
+          //   align: 'center',
+          //   minWidth: 100,
+          //   color: value => 'blue',
+          // },
           {
             id: 'dateCreated',
             label: 'Date Created',
+            align: 'center',
             minWidth: 100,
             color: value => 'black',
           },
         ]}
         rows={getRows(getUserAppointments.appointments)}
       /> 
-      : <div className="empty-table">
-        <p><em>No appointments created</em></p>
       </div>
-    } 
     </Page>
   )
 }

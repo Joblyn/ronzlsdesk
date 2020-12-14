@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Avatar from 'components/Avatar';
 import { UserCard } from 'components/Card';
+import Portrait from '../../portrait.png';
+
 // import Notifications from 'components/Notifications';
 // import SearchInput from 'components/SearchInput';
 // import { notificationsData } from 'demos/header';
@@ -65,18 +67,16 @@ function Header() {
 
   const dispatch = useDispatch();
   const adminData = useSelector(state => state.adminData);
-  const userData = useSelector(state => state.userData.data); 
+  const userData = useSelector(state => state.userData.data);
+
   useEffect(() => {
     const role = localStorage.getItem('role');
-    if (role === ('superadmin' || 'admin')) {
+    if ((role === 'superadmin') || (role === 'admin')) {
       dispatch(getAdminData(getAllAdmin));
-      console.log(adminData);
     } else if (role === 'user') {
       dispatch(getUser(getUserData));
-      console.log(userData);
     }
   }, []);
-
   // const toggleNotificationPopover = () => {
   //   setIsOpenNotificationPopover(isOpenNotificationPopover => !isOpenNotificationPopover);
 
@@ -142,6 +142,7 @@ function Header() {
             <Avatar
               onClick={toggleUserCardPopover}
               className="can-click"
+              src={Portrait}
             />
           </NavLink>
           <Popover
@@ -154,6 +155,7 @@ function Header() {
           >
             <PopoverBody className="p-0 border-light">
               <UserCard
+                avatar={Portrait}
                 title={adminData.fullName || userData.companyName}
                 subtitle={adminData.email || userData.email}
                 text="Last updated 3 mins ago"

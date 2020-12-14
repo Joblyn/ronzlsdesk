@@ -9,11 +9,11 @@ const adminLoginReducer = (state = login, action) => {
       return {
         ...state,
         result: action.payload,
-        isLaoding: false,
+        isLoading: false,
         isSuccessful: true,
       };
     case ActionTypes.ADMIN_LOGIN_FAIL:
-      return { ...state, errror: action.payload, isLoading: false };
+      return { ...state, error: action.payload, isLoading: false };
     case ActionTypes.ADMIN_LOGIN_CLEANUP:
       return { ...state, error: null, isLoading: false };
     default:

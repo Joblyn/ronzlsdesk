@@ -104,14 +104,14 @@ export const forgotPasswordUser = (url, payload) => {
   return postData(url, payload, onForgotPasswordUser);
 };
 
-export const logOutAction = () => {
-  localStorage.removeItem('jwtToken');
-  localStorage.clear();
-  //remove auth header for feature request
+export const logOutAction = (payload) => {
+  window.localStorage.clear();
   setAuthToken(false);
-  window.location.href = '/';
+  return {
+    type: ActionType.SET_CURRENT_ADMIN_USER,
+    payload 
+  }
 };
-
 
 // get User Data 
 export const getUser = (url) =>  {

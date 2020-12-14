@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode'; 
+import * as serviceWorker from './serviceWorker';
 
 import store from './store';
 
@@ -16,6 +17,7 @@ import {
   setCurrentAdminUser,
 } from './actions/admin/authAction/Users';
 
+
 if (localStorage.jwtToken) {
   //set Auth token header auth
   setAuthToken(localStorage.jwtToken);
@@ -24,15 +26,13 @@ if (localStorage.jwtToken) {
   //set user and authenticated
   store.dispatch(setCurrentAdminUser(decoded));
 
-  //check for expired token
+  // check for expired token
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
     //logout user
     store.dispatch(logOutAction());
-    //clear current profile
-    // store.dispatch(clearCurrentProfileAction());
-    //redirect to login
-    window.location.href = '/';
+    // change to pathname before deployment to production
+    window.location.hash = '#/';
   }
 }
 
@@ -41,4 +41,6 @@ ReactDOM.render(
     <App />
   </Provider>,
   document.getElementById('root'),
-);
+); 
+
+serviceWorker.register();

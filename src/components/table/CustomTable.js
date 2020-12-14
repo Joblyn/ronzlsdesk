@@ -145,7 +145,7 @@ export default function CustomTable({
         <TableCell
           key={column.id + id}
           align={column.align}
-          style={{ minWidth: column.minWidth }}
+          style={{ minWidth: column.minWidth, fontSize: column.fontSize }}
         >
           {column.label}
         </TableCell>
@@ -157,7 +157,7 @@ export default function CustomTable({
         <TableCell
           key={nColumn.id + id}
           align={nColumn.align}
-          style={{ minWidth: nColumn.minWidth }}
+          style={{ minWidth: nColumn.minWidth, fontSize: nColumn.fontSize }}
         >
           Actions
         </TableCell>
@@ -198,7 +198,8 @@ export default function CustomTable({
                   align={column.align}
                   className={classes.cell}
                   style={{
-                    color: column.color(value),
+                     color: column.color(value),
+                    // color: 'blue'
                   }}
                 >
                   {column.type && column.type === 'link' ? (
@@ -217,7 +218,7 @@ export default function CustomTable({
                         alignItems: 'center',
                       }}
                     >
-                      <Avatar src={row.src && row.src} className="small" />{' '}
+                      <Avatar src={row.src && row.src} className="small" />{''}
                       <span className="px-4">{value}</span>
                     </span>
                   ) : (
@@ -273,7 +274,7 @@ export default function CustomTable({
     }
   };
   return (
-    <Grid conatiner={true} className="w-full">
+    <Grid container={true} className="w-full" style={{display:'flex', flexDirection:'column'}}>
       <Grid item>
         <Grid container={true} justify="space-between" alignItems="flex-start">
           <Grid item>

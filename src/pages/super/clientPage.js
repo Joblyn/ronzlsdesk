@@ -1,180 +1,270 @@
-import Page from 'components/Page';
-import React, { useEffect, 
-  // useRef 
-} from 'react';
-import { Link, 
-  // useHistory, 
-  // useParams
- } from 'react-router-dom';
-import PageSpinner from '../../components/PageSpinner';
-// import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-// import {
-  // Button,
-  // Card,
-  // CardBody,
-  // CardHeader,
-  // Col,
-  // DropdownItem,
-  // DropdownMenu,
-  // DropdownToggle,
-  // Row,
-  // UncontrolledButtonDropdown,
-// } from 'reactstrap';
-// import { getThemeColors } from 'utils/colors';
-import CustomTable from '../../components/table/CustomTable';
-
-import {
-  getClient,
-  getClientDetails,
-} from '../../actions/admin/clients/Clients';
-import {
-  getAllClients,
-  getClientDetail,
-} from '../../apiConstants/apiConstants';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import ExcelTable from '../../components/ExportToExcel';
-import Modal from '../../components/Modal';
+import { Link } from 'react-router-dom';
 
-// const colors = getThemeColors();
+import Page from 'components/Page';
+import PageSpinner from '../../components/PageSpinner';
+import CustomTable from '../../components/table/CustomTable';
+import { getClient } from '../../actions/admin/clients/Clients';
+import {
+  addUserToAdmin,
+  getAllClients,
+  superAdminGetAllAdmins,
+} from '../../apiConstants/apiConstants';
+import { Button } from 'reactstrap';
+import { Form, Label } from 'reactstrap';
+import InputField from '../../components/InputField';
+import {
+  getAllAdmins,
+  superAdminAddClientToAdmin,
+} from '../../actions/admin/authAction/Users';
 
 const AdminClient = () => {
-  // const history = useHistory();
   const dispatch = useDispatch();
   const adminGetClient = useSelector(state => state.adminGetAllClient);
-  // const { params } = useParams();
+  const [showModal, setShowModal] = useState(false);
+  const [selectedAdmin, setSelectedAdmin] = useState({});
+  const [client, setclient] = useState({});
+  const admins = useSelector(state => state.superAdminGetAllAdmins.admins);
+  const AddClientToAdmin = useSelector(
+    state => state.superAdminAddClientToAdmin,
+  );
 
-  console.log('Payload:' + adminGetClient.users);
-
-  // useEffect(()=> {
-
-  // },[adminGetClient])
-  const handleClick2 = id => {
-    const endpoint = getClientDetail + id; //'5f5265a3d74c2bb6428f73ce';
-    dispatch(getClientDetails(endpoint));
-  };
-
-  const onLinkClicked = (e, payload) => {
-    // console.log(JSON.stringify(payload));
-    // history.push('/admin/client/details');
-  };
-  // const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getClient(getAllClients));
   }, []);
 
-  if (adminGetClient.isSuccessful === true) {
-    console.log('Check: ' + adminGetClient.users);
-  }
+  useEffect(() => {
+    if (AddClientToAdmin.isSuccessful) {
+      alert(`Added ${client.name} to Account Officer-${selectedAdmin.name}`);
+      setShowModal(false);
+    }
+  }, [AddClientToAdmin]);
+
+  const viewDetails = id => {
+    localStorage.setItem('client_id', id);
+  };
+
+  const handleClick = (id, name) => {
+    setclient({ id, name });
+    setShowModal(true);
+    dispatch(getAllAdmins(superAdminGetAllAdmins));
+  };
+
+  const handleSelect = (id, name) => {
+    setSelectedAdmin({ id, name });
+  };
+
+  const assignAdmin = () => {
+    const endpoint = addUserToAdmin + selectedAdmin.id;
+    const payload = { users: [client.id] };
+    dispatch(superAdminAddClientToAdmin(endpoint, payload));
+  };
 
   const getRows = data => {
     let rows = [];
-    console.log('Data: ' + JSON.stringify(data));
-    //let data = adminGetClient.users && adminGetClient.users;
     data &&
-      data.map((user, index) => {
-        rows.push({
+      data.reverse().map((user, index) => {
+        let admin;
+        if(user.accountOfficer) {
+          admin = user.accountOfficer.fullName
+        }
+        return rows.push({
           id: index + 1,
           user: user.companyName,
           accountType: user.accountType,
+          admin: admin,
           companyAddress: user.companyAddress,
           phoneNumber: user.phoneNumber,
           email: user.email,
           website: user.websiteUrl,
-          view: (
-            <Link
-              // to={`/admin/client/details/${user._id}`}
-              onClick={() => handleClick2(user._id)}
-              to={`/superadmin/client/details/userId=${user._id}`}
-              className="bg-green-700 text-white rounded-full px-2 py-2"
-            >
-              View Details
-            </Link>
+          actions: (
+            <div className="d-flex justify-content-around">
+              <Link
+                onClick={() => viewDetails(user._id)}
+                to={`/superadmin/client/details/userId=${user._id}`}
+                className="button bg-green-700 text-white rounded-full px-2 py-2"
+                style={{ minWidth: '110px' }}
+              >
+                View Details
+              </Link>
+              <Button
+                color="secondary"
+                size="sm"
+                className="p-1"
+                style={{ fontSize: '.9rem', minWidth: '110px' }}
+                onClick={() => handleClick(user._id, user.companyName)}
+                disabled={user.accountOfficer ? true : false}
+              >
+                Assign Admin
+              </Button>
+            </div>
           ),
         });
-        return null
       });
     return rows;
   };
-  const onActionClicked = (e, payload) => {
-    alert(JSON.stringify(payload));
-  };
+
   if (adminGetClient.users.length === 0) {
     return <PageSpinner />;
   }
   return (
-    <Page
-      title="Dropdowns"
-      breadcrumbs={[{ name: 'All Clients', active: true }]}
-    >
-      <Modal action="Upload Document"/>
-      <CustomTable
-        pagination
-        pagerows
-        columns={[
-          {
-            id: 'id',
-            label: 'ID',
-            minWidth: 20,
-            color: value => 'blue',
-          },
+    <Page title="Dropdowns" breadcrumbs={[{ name: 'Clients', active: true }]}>
+      <div
+        style={{
+          overflowX: 'auto',
+          overflowY: 'hidden',
+        }}
+      >
+        <CustomTable
+          pagination
+          pagerows
+          columns={[
+            {
+              id: 'id',
+              align: 'center',
+              label: 'ID',
+              minWidth: 20,
+              color: value => 'blue',
+            },
 
-          {
-            id: 'user',
-            label: 'User',
-            minWidth: 100,
-            color: value => 'blue',
-          },
-          {
-            id: 'accountType',
-            label: 'Account Type',
-            minWidth: 50,
-            color: value => 'blue',
-          },
-          {
-            id: 'companyAddress',
-            label: 'Address',
-            minWidth: 150,
-            align: 'center',
-            color: value => 'blue',
-          },
-          {
-            id: 'phoneNumber',
-            label: 'Phone Number',
-            minWidth: 50,
-            align: 'center',
-            color: value => 'blue',
-          },
-          {
-            id: 'email',
-            label: 'Email',
-            minWidth: 100,
-            align: 'center',
-            color: value => 'blue',
-          },
-          {
-            id: 'website',
-            label: 'Website',
-            minWidth: 80,
-            align: 'center',
-            color: value => 'blue',
-          },
-          {
-            id: 'view',
-            label: 'Actions',
-            minWidth: 150,
-            align: 'center',
-            color: value => 'blue',
-            type: 'link',
-          },
-        ]}
-        rows={getRows(adminGetClient.users)}
-        handleActionClick={onActionClicked}
-        handleLinkClick={onLinkClicked}
-      />
-      
+            {
+              id: 'user',
+              align: 'center',
+              label: 'Client',
+              minWidth: 100,
+              color: value => 'blue',
+            },
+            {
+              id: 'accountType',
+              align: 'center',
+              label: 'Account Type',
+              minWidth: 50,
+              color: value => 'blue',
+            },
+            {
+              id: 'companyAddress',
+              label: 'Address',
+              minWidth: 150,
+              align: 'center',
+              color: value => 'blue',
+            },
+            {
+              id: 'phoneNumber',
+              label: 'Phone Number',
+              minWidth: 50,
+              align: 'center',
+              color: value => 'blue',
+            },
+            {
+              id: 'email',
+              label: 'Email',
+              minWidth: 100,
+              align: 'center',
+              color: value => 'blue',
+            },
+            {
+              id: 'website',
+              label: 'Website',
+              minWidth: 80,
+              align: 'center',
+              color: value => 'blue',
+            },
+            {
+              id: 'admin',
+              label: 'Account Officer',
+              minWidth: 150,
+              align: 'center',
+              color: value => 'blue',
+            },
+            {
+              id: 'actions',
+              label: 'Actions',
+              minWidth: 'fit-content',
+              align: 'center',
+              color: value => 'blue',
+            },
+          ]}
+          rows={getRows(adminGetClient.users)}
+        />
+
+        {showModal && (
+          <>
+            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+              <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                  <div className="flex items-start justify-center p-4 border-b border-solid border-gray-300 rounded-t">
+                    <h3
+                      className="text-2xl font-semibold"
+                      style={{ color: 'rgba(0,0,0,.7)' }}
+                    >
+                      Select Admin to assign
+                    </h3>
+                  </div>
+                  <div
+                    className="relative p-0 flex-auto"
+                    style={{ color: 'black' }}
+                  >
+                    {admins.length !== 0 && (
+                      <Form
+                        className="p-0 overflow-y-auto"
+                        style={{ maxHeight: '300px' }}
+                      >
+                        {admins.map((admin, i) => (
+                          <div
+                            className="border-b border-solid border-gray-300 cursor-pointer"
+                            key={`admin-${i + 1}`}
+                          >
+                            <InputField
+                              className="m-3"
+                              type="radio"
+                              id={admin.fullName + i + 1}
+                              name="admins"
+                              value={admin._id}
+                              onChange={() =>
+                                handleSelect(admin._id, admin.fullName)
+                              }
+                            />
+                            <Label
+                              className="cursor-pointer"
+                              for={admin.fullName + i + 1}
+                            >
+                              {admin.fullName}
+                            </Label>
+                          </div>
+                        ))}
+                      </Form>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
+                    {selectedAdmin.id && (
+                      <button
+                        className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 assign"
+                        type="button"
+                        style={{ transition: 'all .15s ease' }}
+                        onClick={assignAdmin}
+                      >
+                        Assign
+                      </button>
+                    )}
+                    <button
+                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                      style={{ transition: 'all .15s ease' }}
+                      onClick={() => setShowModal(false)}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          </>
+        )}
+      </div>
     </Page>
   );
 };
 
 export default AdminClient;
-

@@ -38,73 +38,45 @@ import AdminConfirmPassword from './pages/admin/adminConfirmPassword';
 // } from './actions/admin/authAction/Users';
 import { ProtectedRoute } from './validations/protectedRoute';
 import { IsUserRedirect } from './validations/isUserRedirect';
-// // import { useDispatch } from 'react-redux';
-// import { getClient } from './actions/admin/clients/Clients';
-// import { getAllClients } from './apiConstants/apiConstants';
 
 //Admin
-// const AdminRegister = React.lazy(() => import('pages/admin/adminRegister'));
-const AdminViewClientDetails = React.lazy(() => import('pages/admin/AdminViewClientDetails'));
-const adminClient = React.lazy(() => import('pages/admin/adminClient'));
-const adminDashboard = React.lazy(() => import('pages/admin/adminDashboard'));
-const adminAlertPage = React.lazy(() => import('pages/admin/adminAlertPage'));
-const adminBadgePage = React.lazy(() => import('pages/admin/adminBadgePage'));
-const adminButtonGroupPage = React.lazy(() =>import('pages/admin/adminButtonGroupPage'));
-const adminButtonPage = React.lazy(() => import('pages/admin/adminButtonPage'));
-const adminCardPage = React.lazy(() => import('pages/admin/adminCardPage'));
-const adminChartPage = React.lazy(() => import('pages/admin/adminChartPage'));
-const adminDashboardPage = React.lazy(() => import('pages/admin/adminDashboardPage'));
-const adminDropdownPage = React.lazy(() => import('pages/admin/adminDropdownPage'));
-const adminFormPage = React.lazy(() => import('pages/admin/adminFormPage'));
-const adminInputGroupPage = React.lazy(() => import('pages/admin/adminInputGroupPage'));
-const adminModalPage = React.lazy(() => import('pages/admin/adminModalPage'));
-const adminProgressPage = React.lazy(() => import('pages/admin/adminProgressPage'));
-const adminTablePage = React.lazy(() => import('pages/admin/adminTablePage'));
-const adminTypographyPage = React.lazy(() => import('pages/admin/adminTypographyPage'));
-const adminWidgetPage = React.lazy(() => import('pages/admin/adminWidgetPage'));
+const AdminDashboard = React.lazy(() => import('pages/admin/adminDashboard'));
+const AdminProfile = React.lazy(() => import('pages/admin/adminProfile'));
+const AdminClients = React.lazy(() => import('pages/admin/adminClients'));
+const AdminReceivedDocuments = React.lazy(() => import('pages/admin/documentsReceived'));
+const AdminSentDocuments =React.lazy(() => import('pages/admin/documentsSent'))
+const AdminRequests = React.lazy(() => import('pages/admin/adminRequests'));
+const AdminAppointments = React.lazy(() => import('pages/admin/adminAppointments'));
+const AdminViewClientDetails = React.lazy(() => import('pages/admin/adminViewClientDetails'));
 
 //User
 const DashboardPage = React.lazy(() => import('pages/user/DashboardPage'));
 const Profile = React.lazy(() => import('pages/user/profile'));
 const CreateNewRequest = React.lazy(() => import('pages/user/createRequest'));
-const UserViewRequests = React.lazy(() => import('pages/user/viewRequests'))
-const UserViewDocuments = React.lazy(() => import('pages/user/viewDocuments'));
+const UserViewRequests = React.lazy(() => import('pages/user/viewRequests'));
+const UserViewReceivedDocuments = React.lazy(() => import('pages/user/viewReceivedDocuments'));
+const UserViewSentDocuments = React.lazy(() => import('pages/user/viewSentDocuments'));
 const UserUploadDocument = React.lazy(() => import('pages/user/uploadDocument'));
 const UserViewAppointments = React.lazy(() => import('pages/user/viewAppointments'));
 const BookAppointment = React.lazy(() => import('pages/user/bookAppointment'));
-
-// unneccessary 
-const AlertPage = React.lazy(() => import('pages/user/AlertPage'));
-const AuthModalPage = React.lazy(() => import('pages/user/AuthModalPage'));
-const BadgePage = React.lazy(() => import('pages/user/BadgePage'));
-const ButtonGroupPage = React.lazy(() => import('pages/user/ButtonGroupPage'));
-const ButtonPage = React.lazy(() => import('pages/user/ButtonPage'));
-const CardPage = React.lazy(() => import('pages/user/CardPage'));
-const ChartPage = React.lazy(() => import('pages/user/ChartPage'));
-const DropdownPage = React.lazy(() => import('pages/user/DropdownPage'));
-const FormPage = React.lazy(() => import('pages/user/FormPage'));
-const InputGroupPage = React.lazy(() => import('pages/user/InputGroupPage'));
-const ModalPage = React.lazy(() => import('pages/user/ModalPage'));
-const ProgressPage = React.lazy(() => import('pages/user/ProgressPage'));
-const TablePage = React.lazy(() => import('pages/user/TablePage'));
-const TypographyPage = React.lazy(() => import('pages/user/TypographyPage'));
-const WidgetPage = React.lazy(() => import('pages/user/WidgetPage'));
-
 
 // superAdmin
 const superAdminDashboard = React.lazy(() => import('pages/super/adminDashboard'));
 const superAdminRegisterAdmin = React.lazy(() => import('pages/super/adminRegister'));
 const superAdminAllAdmins = React.lazy(() => import('pages/super/allAdmins'));
+const superAdmin_Admin_Clients = React.lazy(() => import('pages/super/adminClients'));
+const superAdmin_Admin_Client = React.lazy(() => import('pages/super/adminClient'));
 const superAdminProfile = React.lazy(() => import('pages/super/profile'));
 const superAdminRequests = React.lazy(() => import('pages/super/requests'));
 const superAdminAppointments = React.lazy(() => import('pages/super/appointments'));
+const superAdminDocumentPage = React.lazy(() => import('pages/super/document')); 
+const superAdminClientPage = React.lazy(() => import('pages/super/clientPage'));
+const superAdminViewClientDetails = React.lazy(() => import('pages/super/adminViewClientDetails'));
 
 const superAdminButtonGroupPage = React.lazy(() =>import('pages/super/adminButtonGroupPage'));
 const superAdminButtonPage = React.lazy(() => import('pages/super/adminButtonPage'));
 const superAdminCardPage = React.lazy(() => import('pages/super/adminCardPage'));
 const superAdminChartPage = React.lazy(() => import('pages/super/adminChartPage'));
-const superAdminClientPage = React.lazy(() => import('pages/super/clientPage'));
-const superAdminViewClientDetails = React.lazy(() => import('pages/super/adminViewClientDetails'));
 // const superAdminDashboardPage = React.lazy(() =>import('pages/super/adminDashboardPage'));
 const superAdminDropdownPage = React.lazy(() =>import('pages/super/adminDropdownPage'));
 const superAdminFormPage = React.lazy(() => import('pages/super/adminFormPage'));
@@ -119,14 +91,13 @@ const superAuthModal = React.lazy(() => import('pages/super/superAuthModal'));
 const superAuthModalPage = React.lazy(() => import('pages/super/superAuthModalPage')); 
 const superAuthPage = React.lazy(() => import('pages/super/superAuthPage')); 
 const superAdminBadgePage = React.lazy(() => import('pages/super/superBadgePage')); 
-const superAdminDocumentPage = React.lazy(() => import('pages/super/document')); 
 // end of superAdmin
 
 
-const getBasename = () => {
-  return `/${process.env.PUBLIC_URL.split('/').pop()}`;
-};
-console.log(getBasename);
+// const getBasename = () => {
+//   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
+// };
+// console.log(getBasename);
 const auth = localStorage.getItem('jwtToken');
 const role = localStorage.getItem('role');
 
@@ -143,14 +114,57 @@ const App = ({ breakpoint }) => {
         </IsUserRedirect>
 
         {/* admin auth */}
-        <Route path="/admin/login" component={AdminLogin} />
-        <Route path="/admin/forgot-password" component={AdminForgotPassword} />
-        <Route path="/admin/confirm-password" component={AdminConfirmPassword} />
+        <IsUserRedirect
+          path="/admin/login"
+          role={role}
+          exact 
+        >
+          <AdminLogin />
+        </IsUserRedirect>
+        <IsUserRedirect
+          path="/admin/forgot-password"
+          role={role}
+          exact
+        >
+         <AdminForgotPassword /> 
+        </IsUserRedirect>
+        <IsUserRedirect
+          path="/admin/confirm-password"
+          role={role}
+          exact
+        >
+          <AdminConfirmPassword />
+        </IsUserRedirect>
+        
         {/* user auth */}
-        <Route path="/user/login" component={Login} />
-        <Route path="/user/register" component={Register} />
-        <Route path="/user/forgot-password" component={ForgotPassword} />
-        <Route path="/user/confirm-password" component={ConfirmPassword} />
+        <IsUserRedirect 
+          path="/user/login"
+          role={role}
+          exact
+        >
+          <Login />
+        </IsUserRedirect>
+        <IsUserRedirect
+          path="/user/register"
+          role={role}
+          exact
+        >
+          <Register />
+        </IsUserRedirect>
+        <IsUserRedirect
+          path="/user/forgot-password"
+          role={role}
+          exact
+        >
+          <ForgotPassword />
+        </IsUserRedirect>
+        <IsUserRedirect
+          path="/user/confirm-password"
+          role={role}
+          exact
+        >
+          <ConfirmPassword />
+        </IsUserRedirect>
 
         {/* User Routes */}
         {(auth && role === 'user') ? (
@@ -169,7 +183,10 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/user/requests" component={UserViewRequests}/>
               </ProtectedRoute>
               <ProtectedRoute>
-                <Route exact path="/user/documents" component={UserViewDocuments}/>
+                <Route exact path="/user/documents/received" component={UserViewReceivedDocuments}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/documents/sent" component={UserViewSentDocuments}/>
               </ProtectedRoute>
               <ProtectedRoute>
                 <Route exact path="/user/upload-document" component={UserUploadDocument}/>
@@ -181,78 +198,37 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/user/book-appointment" component={BookAppointment}/>
               </ProtectedRoute>
 
-              {/* unneccessary */}
-              <ProtectedRoute>
-                <Route exact path="/user/login-modal" component={AuthModalPage} />
-              </ProtectedRoute>
-              <ProtectedRoute>
-                <Route exact path="/user/buttons" component={ButtonPage} />
-              </ProtectedRoute>
-              <ProtectedRoute>
-                <Route exact path="/user/cards" component={CardPage} />
-              </ProtectedRoute>
-              <ProtectedRoute>
-                <Route exact path="/user/widgets" component={WidgetPage} />
-              </ProtectedRoute>
-              <ProtectedRoute>
-                <Route exact path="/user/typography" component={TypographyPage} />
-              </ProtectedRoute>
-              <ProtectedRoute>
-                <Route exact path="/user/alerts" component={AlertPage} />
-              </ProtectedRoute> 
-              <ProtectedRoute>
-                <Route exact path="/user/tables" component={TablePage} />
-              </ProtectedRoute>
-              <ProtectedRoute>
-                <Route exact path="/user/badges" component={BadgePage} />
-              </ProtectedRoute>
-              <ProtectedRoute>
-                <Route exact path="/user/button-groups" component={ButtonGroupPage}/>
-              </ProtectedRoute>
-              <ProtectedRoute>
-                <Route exact path="/user/dropdowns" component={DropdownPage} />
-              </ProtectedRoute> 
-              <ProtectedRoute>
-                <Route exact path="/user/progress" component={ProgressPage} />
-              </ProtectedRoute>
-              <ProtectedRoute>
-                <Route exact path="/user/modals" component={ModalPage} />
-              </ProtectedRoute> 
-              <ProtectedRoute>
-                <Route exact path="/user/forms" component={FormPage} />
-              </ProtectedRoute>
-              <ProtectedRoute>
-                <Route exact path="/user/input-groups" component={InputGroupPage} />
-              </ProtectedRoute>
-              <ProtectedRoute>
-                <Route exact path="/user/charts" component={ChartPage} />
-              </ProtectedRoute>
-
             </React.Suspense>
           </MainLayout>
         ) : ((auth && role === 'admin') ? 
           // Admin Routes
           (<AdminMainLayout breakpoint={breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
-              <Route exact path="/admin/dashboard" component={adminDashboard} />
-              <Route exact path="/admin/client/details/:userId" component={AdminViewClientDetails} /> 
+              <ProtectedRoute>
+                <Route exact path="/admin/dashboard" component={AdminDashboard} />
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/profile" component={AdminProfile}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/clients" component={AdminClients}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/documents/received" component={AdminReceivedDocuments}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/documents/sent" component={AdminSentDocuments}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/requests" component={AdminRequests}/> 
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/appointments" component={AdminAppointments}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/client/details/:userId" component={AdminViewClientDetails} /> 
+              </ProtectedRoute>
 
-              <Route exact path="/admin/dashboardold" component={adminDashboardPage} />
-              <Route exact path="/admin/buttons" component={adminButtonPage} />
-              <Route exact path="/admin/cards" component={adminCardPage} />
-              <Route exact path="/admin/widgets" component={adminWidgetPage} />
-              <Route exact path="/admin/typography" component={adminTypographyPage}/>
-              <Route exact path="/admin/alerts" component={adminAlertPage} />
-              <Route exact path="/admin/tables" component={adminTablePage} />
-              <Route exact path="/admin/badges" component={adminBadgePage} />
-              <Route exact path="/admin/button-groups" component={adminButtonGroupPage} />
-              <Route exact path="/admin/dropdowns" component={adminDropdownPage} />
-              <Route exact path="/admin/progress" component={adminProgressPage} />
-              <Route exact path="/admin/modals" component={adminModalPage} />
-              <Route exact path="/admin/forms" component={adminFormPage} />
-              <Route exact path="/admin/input-groups" component={adminInputGroupPage} />
-              <Route exact path="/admin/charts" component={adminChartPage} />
-              <Route exact path="/admin/client" component={adminClient} />
             </React.Suspense>
           </AdminMainLayout>
           ) : ( (auth && role === 'superadmin') ?
@@ -266,6 +242,12 @@ const App = ({ breakpoint }) => {
                 </ProtectedRoute>
                 <ProtectedRoute>
                 <Route exact path="/superadmin/admins" component={superAdminAllAdmins} />
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/:adminId/clients" component={superAdmin_Admin_Clients}/>
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/:adminId/clients/:clientId" component={superAdmin_Admin_Client}/>
                 </ProtectedRoute>
                 <ProtectedRoute>
                   <Route exact path="/superadmin/client" component={superAdminClientPage} />
@@ -306,6 +288,7 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/superadmin/authmodalpage" component={superAuthModalPage} /> 
                 <Route exact path="/superadmin/auth" component={superAuthPage} /> 
                 <Route exact path="/superadmin/badges" component={superAdminBadgePage} /> 
+                {/* end of unneccessary */}
               </React.Suspense>
             </AdminMainLayout> )
             : null

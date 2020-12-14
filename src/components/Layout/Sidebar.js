@@ -1,37 +1,16 @@
 import logo200Image from 'assets/images/logo.png';
 import sidebarBgImage from 'assets/img/sidebar/sidebar-4.jpg';
 import React from 'react';
-// import { FaGithub } from 'react-icons/fa';
 import {
-  // MdAccountCircle,
-  // MdArrowDropDownCircle,
-  // MdBorderAll,
-  // MdBrush,
-  // MdChromeReaderMode,
   MdDashboard,
-  // MdExtension,
-  // MdGroupWork,
-  // MdInsertChart,
   MdKeyboardArrowDown,
-  // MdNotificationsActive,
-  // MdPages,
-  // MdRadioButtonChecked,
   MdSend,
-  // MdStar,
-  // MdTextFields,
-  // MdViewCarousel,
-  // MdViewDay,
-  // MdViewList,
-  // MdWeb,
-  // MdWidgets,
-  MdExitToApp,
   MdPersonPin,
   MdFolder,
-  MdSchedule
+  MdSchedule,
 } from 'react-icons/md';
 import { NavLink, Link } from 'react-router-dom';
 import {
-  // UncontrolledTooltip,
   Collapse,
   Nav,
   Navbar,
@@ -39,7 +18,6 @@ import {
   NavLink as BSNavLink,
 } from 'reactstrap';
 import bn from 'utils/bemnames';
-import { logOutAction } from '../../actions/user/Users';
 
 const sidebarBackground = {
   backgroundImage: `url("${sidebarBgImage}")`,
@@ -48,73 +26,56 @@ const sidebarBackground = {
 };
 
 const navComponents = [
-  { 
-    to: '/user/upload-document', 
-    name: 'Upload Document', 
-    exact: true, 
-    // Icon: MdRadioButtonChecked 
-},
   {
-    to: '/user/documents',
+    to: '/user/upload-document',
+    name: 'Upload Document',
+    exact: true,
+  },
+  {
+    to: '/user/documents/received',
     name: 'View Documents',
     exact: true,
-    // Icon: MdGroupWork,
   },
-  // { to: '/user/forms', name: 'forms', exact: false, Icon: MdChromeReaderMode },
-  // { to: '/user/input-groups', name: 'input groups', exact: false, Icon: MdViewList },
-  // {
-  //   to: '/user/dropdowns',
-  //   name: 'dropdowns',
-  //   exact: false,
-  //   Icon: MdArrowDropDownCircle,
-  // },
-  // { to: '/user/badges', name: 'badges', exact: false, Icon: MdStar },
-  // { to: '/user/alerts', name: 'alerts', exact: false, Icon: MdNotificationsActive },
-  // { to: '/user/progress', name: 'progress', exact: false, Icon: MdBrush },
-  // { to: '/user/modals', name: 'modals', exact: false, Icon: MdViewDay },
 ];
 
 const navContents = [
-  { 
-    to: '/user/create-new-request', 
-    name: 'Create New Request', 
-    exact: false, 
-    Icon: ''
+  {
+    to: '/user/create-new-request',
+    name: 'Create New Request',
+    exact: false,
   },
-  { 
-    to: '/user/requests', 
-    name: 'View Requests', 
-    exact: false, 
+  {
+    to: '/user/requests',
+    name: 'View Requests',
+    exact: false,
   },
 ];
 
 const pageContents = [
-  { 
-    to: '/user/book-appointment', 
-    name: 'Book Appointment', 
-    exact: false, 
-    // Icon: MdAccountCircle 
+  {
+    to: '/user/book-appointment',
+    name: 'Book Appointment',
+    exact: false,
   },
   {
     to: '/user/view-appointments',
     name: 'View Appointments',
     exact: false,
-    // Icon: MdViewCarousel,
   },
 ];
 
 const navItems = [
-  { 
-    to: '/user/dashboard', 
-    name: 'Dashboard', 
-    exact: true, 
-    Icon: MdDashboard 
+  {
+    to: '/user/dashboard',
+    name: 'Dashboard',
+    exact: true,
+    Icon: MdDashboard,
   },
-  { 
-    to: '/user/profile', 
-    name: 'Profile', 
-    exact: true, 
-    Icon: MdPersonPin, 
+  {
+    to: '/user/profile',
+    name: 'Profile',
+    exact: true,
+    Icon: MdPersonPin,
   },
 ];
 
@@ -169,7 +130,7 @@ class Sidebar extends React.Component {
                 </BSNavLink>
               </NavItem>
             ))}
-              
+
             <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Pages')}
@@ -209,7 +170,7 @@ class Sidebar extends React.Component {
                 </NavItem>
               ))}
             </Collapse>
-            
+
             <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Components')}
@@ -290,16 +251,16 @@ class Sidebar extends React.Component {
               ))}
             </Collapse>
 
-
-            <NavItem
-              className={bem.e('nav-item')}
-              onClick={logOutAction}
-            >
-              <BSNavLink className={bem.e('nav-item-collapse')}>
+            {/* <NavItem className={bem.e('nav-item')}>
+              <BSNavLink
+                className={bem.e('nav-item-collapse')}
+                onClick={logOutAction}
+                style={{ color: 'red', opacity: '.8'}}
+              >
                 <div className="d-flex">
                   <MdExitToApp className={bem.e('nav-item-icon')} />
                   <span className="">LOGOUT</span>
-                </div>
+                </div> */}
                 {/* <MdKeyboardArrowDown
                   className={bem.e('nav-item-icon')}
                   style={{
@@ -311,8 +272,8 @@ class Sidebar extends React.Component {
                     transitionProperty: 'transform',
                   }}
                 /> */}
-              </BSNavLink>
-            </NavItem>
+              {/* </BSNavLink>
+            </NavItem> */}
             {/* <Collapse isOpen={this.state.isOpenPages}>
               {pageContents.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>

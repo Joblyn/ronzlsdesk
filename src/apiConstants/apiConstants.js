@@ -11,24 +11,48 @@ export let adminForgotPassword = 'admin/forgetpassword';
 export let adminResetForgotPassword = 'admin/resetforgetpassword';
 export let adminResetPassword = 'admin/resetpassword';
 
-//Get All Admins
+//Get Admin data
 export let getAllAdmin = 'admin';
 
-//view all clients
+// Get all admins 
+export let superAdminGetAllAdmins = 'admin/allAdmins';
+
+//superadmin view all clients
 export let getAllClients = 'admin/actions/users';
+// superadmin view client details
 export let getClientDetail = 'admin/user/';
 
+// admin view clients under admin
+export let getClientsUnderAdmin = 'admin/actions/user';
 //Admin Doc Upload
-export let adminUploadDoc = 'admin/actions/uploadDocToUser/{user_id}';
+export let adminUploadDoc = 'admin/document/';
 
-// Admin get all documents
+// admin get documents sent
+export let adminGetDocumentsSentToUser = 'admin/document';
+
+// admin get documenst received
+export let adminGetDocumentsReceivedFromUser = 'admin/document/user';
+// admin get appoinments from clients under admin
+export let getClientAppointments = 'admin/appointment';
+// admin confirm appointment 
+export let confirmClientAppointment = 'admin/appointment/';
+// admin reject appointment
+export let rejectClientAppointment = 'admin/appointment/reject/'
+// get requests of clients under him
+export let getClientsRequests = 'admin/request/userResquests';
+
+// Superadmin get all documents
 export let adminGetDocuments = 'admin/document/user';
 
-// Admin get requests 
+// Superadmin get requests 
 export let adminGetRequests = 'admin/request';
 
-//Admin update client subscription
+//Superadmin update client subscription
 export let adminUpdateSubscription = 'admin/actions/date/'
+
+// superadmin assign client to admin 
+export let addUserToAdmin = 'admin/actions/assignUsersToAdmin/';
+
 
 //User
 //Authentication

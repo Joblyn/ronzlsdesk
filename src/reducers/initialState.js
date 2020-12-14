@@ -19,6 +19,10 @@ export const logOut = {
   user: {},
 };
 
+export const token = {
+  token: false
+};
+
 export const forgotPassword = {
   isLoading: false,
   error: null,
@@ -88,4 +92,44 @@ export const userBookAppointment = {
 export const userGetAppointments = {
   isSuccessful: false,
   appointments: []
+}
+
+export const adminGetClients = {
+  isSuccessful: false,
+  clients: []
+}
+
+export const adminGetSentDocuments = {
+  isSuccessful: false,
+  documents: []
+}
+
+export const adminGetReceivedDocuments = {
+  isSuccessful: false,
+  documents: []
+}
+
+export const adminUploadDocToClient = {
+  isSuccessful: false,
+  result: {}
+}
+
+export const adminConfirmAppointment = {
+  isSuccessful: false,
+  result: {}
+}
+
+export const adminGetAppointments = {
+  isSuccessful: false,
+  appointments: []
+}
+
+export const superAdminGetAllAdmins = {
+  isSuccessful: false,
+  admins: []
+}
+
+export const addClientToAdmin = {
+  isSuccessful: false,
+  result: {} 
 }
