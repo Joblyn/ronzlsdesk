@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from "reactstrap";
+import { Button } from 'reactstrap';
 
 import {
   confirmClientAppointment,
@@ -17,33 +17,39 @@ import CustomTable from '../../components/table/CustomTable';
 export default function AdminAppointments() {
   const dispatch = useDispatch();
   const adminGetAppointments = useSelector(state => state.adminGetAppointments);
-  const adminConfirmAppointment = useSelector(
-    state => state.adminConfirmAppointment,
-  );
+  // const adminConfirmAppointment = useSelector(
+    // state => state.adminConfirmAppointment,
+  // );
 
   useEffect(() => {
     dispatch(getAppointments(getClientAppointments));
   }, []);
 
-  // action to confirm appointment
-  const onConfirmAppointment = () => {
-    let appointmentId = '';
-    let endpoint = confirmClientAppointment + appointmentId;
-    dispatch(confirmAppointment(endpoint, appointmentId));
+  const onConfirmAppointment = id => {
+    let endpoint = confirmClientAppointment + id;
+    const payload = {
+      appointment_id: id,
+    };
+    console.log(endpoint);
+    dispatch(confirmAppointment(endpoint, payload));
   };
-
-  if (adminConfirmAppointment.isSuccessful) {
-    console.log(adminConfirmAppointment.result);
-  }
 
   const getRows = appointments => {
     let rows = [];
+    console.log(appointments);
     appointments &&
       appointments.reverse().map((appointment, i) =>
         rows.push({
           id: i + 1,
+          client: appointment.client.companyName,
+          message: appointment.appointmentMessage,
+          dateScheduled: appointment.appointmentDate,
+          dateCreated: appointment.created_dt,
           action: (
-            <Button className="bg-green-700 text-white rounded-full m-0">
+            <Button
+              className="bg-green-700 text-white rounded-full m-0"
+              onClick={() => onConfirmAppointment(appointment._id)}
+            >
               Confirm
             </Button>
           ),
@@ -73,7 +79,7 @@ export default function AdminAppointments() {
               color: value => 'blue',
             },
             {
-              id: 'user',
+              id: 'client',
               label: 'Client',
               align: 'center',
               minWidth: 150,
@@ -107,18 +113,15 @@ export default function AdminAppointments() {
               minWidth: 100,
               color: value => 'black',
             },
-            //action to confirm appointment if not confirmed
             {
               id: 'action',
               label: 'Actions',
               minWidth: 100,
               align: 'center',
               color: value => 'green',
-              type: 'link',
             },
           ]}
           rows={getRows(adminGetAppointments.appointments)}
-          handleLinkClick={onConfirmAppointment}
         />
       </div>
     </Page>

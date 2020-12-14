@@ -104,9 +104,13 @@ export const forgotPasswordUser = (url, payload) => {
   return postData(url, payload, onForgotPasswordUser);
 };
 
-export const logOutAction = () => {
+export const logOutAction = (payload) => {
   window.localStorage.clear();
   setAuthToken(false);
+  return {
+    type: ActionType.SET_CURRENT_ADMIN_USER,
+    payload 
+  }
 };
 
 // get User Data 

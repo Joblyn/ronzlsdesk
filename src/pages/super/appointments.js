@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getAppointments } from '../../actions/admin/clients/Clients';
 import {
-  // baseUrl,
   getClientAppointments,
 } from '../../apiConstants/apiConstants';
 
@@ -31,6 +30,10 @@ export default function Appointments() {
       appointments.reverse().map((appointment, i) =>
         rows.push({
           id: i + 1,
+          client: appointment.client.companyName,
+          message: appointment.appointmentMessage || '- -',
+          dateScheduled: appointment.appointmentDate,
+          dateCreated: appointment.created_dt,
         }),
       );
     return rows;
@@ -59,7 +62,7 @@ export default function Appointments() {
                 color: value => 'blue',
               },
               {
-                id: 'user',
+                id: 'client',
                 label: 'Client',
                 align: 'center',
                 minWidth: 150,

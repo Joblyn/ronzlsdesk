@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button } from 'reactstrap';
 
 import Page from 'components/Page';
 import PageSpinner from '../../components/PageSpinner';
@@ -12,9 +12,6 @@ import { adminGetRequests } from '../../apiConstants/apiConstants';
 export default function Requests() {
   const dispatch = useDispatch();
   const adminGetAllRequests = useSelector(state => state.getAllRequests);
-
-  const handleClick2 = id => {};
-  const onLinkClicked = (e, payload) => {};
 
   useEffect(() => {
     dispatch(getAllRequests(adminGetRequests));
@@ -31,21 +28,22 @@ export default function Requests() {
           date: request.created_dt,
           document: request.attachedFileName || '- -',
           view: (
-            <Link
-              to="#"
-              onClick={() => handleClick2(request._id)}
-              className="bg-green-700 text-white rounded-full px-2 py-2"
+            <Button
+              color="secondary"
+              size="sm"
+              className="p-1"
+              style={{ fontSize: '.9rem', minWidth: '110px' }}
+              href={request.attachedFileUrl}
+              target="_blank"
             >
               View File
-            </Link>
+            </Button>
           ),
         });
       });
     return rows;
   };
-  const onActionClicked = (e, payload) => {
-    console.log(payload);
-  };
+
   if (!adminGetAllRequests.isSuccessful) {
     return <PageSpinner />;
   }
@@ -54,7 +52,6 @@ export default function Requests() {
       title="Dropdowns"
       breadcrumbs={[{ name: 'All Clients', active: true }]}
     >
-      {/* <Modal action="Show"/> */}
       <div style={{ overflowX: 'auto' }}>
         <CustomTable
           pagination
@@ -101,7 +98,6 @@ export default function Requests() {
               minWidth: 150,
               align: 'center',
               color: value => 'blue',
-              type: 'link',
             },
             {
               id: 'date',
@@ -112,8 +108,6 @@ export default function Requests() {
             },
           ]}
           rows={getRows(adminGetAllRequests.requests)}
-          handleActionClick={onActionClicked}
-          handleLinkClick={onLinkClicked}
         />
       </div>
     </Page>

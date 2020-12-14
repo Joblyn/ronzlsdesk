@@ -58,8 +58,7 @@ const AdminLogin = () => {
       const decoded = jwt_decode(token);
       //set current user
       dispatch(setCurrentAdminUser(decoded));
-
-      history.push('/admin/dashboard');
+      history.push(`/${role}/dashboard`);
     }
   }, [adminLog]);
 

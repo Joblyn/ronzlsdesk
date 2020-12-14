@@ -23,6 +23,15 @@ export const setCurrentAdminUser = decoded => {
   };
 };
 
+export const logOutAction = (payload) => {
+  window.localStorage.clear();
+  setAuthToken(false);
+  return {
+    type: ActionType.SET_CURRENT_ADMIN_USER,
+    payload
+  }
+};
+
 export const onForgotPassword = payload => {
   return {
     type: ActionType.ADMIN_FORGOT_PASSWORD_SUCCESS,
@@ -64,11 +73,6 @@ export const login = (url, payload) => {
 
 export const forgotPassword = (url, payload) => {
   return postData(url, payload, onForgotPassword);
-};
-
-export const logOutAction = () => {
-  window.localStorage.clear();
-  setAuthToken(false);
 };
 
 // edit

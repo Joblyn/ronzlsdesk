@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
 
 import { getRequests } from '../../actions/user/Users';
 import { userGetRequests } from "../../apiConstants/apiConstants";
@@ -21,16 +21,6 @@ export default function ViewRequests() {
     console.log(getUserRequests.requests);
   }
 
-  const onLinkClicked = (e, payload) => {}
-
-  const onActionClicked = (e, payload) => {
-    alert(JSON.stringify(payload));
-  };
-
-  const handleClick = () => {
-    // function to view document
-  }
-
   const getRows = data => {
     let rows = [];
 
@@ -41,11 +31,18 @@ export default function ViewRequests() {
         requestDescription: request.requestDescription,
         date: request.created_dt,
         document: request.attachedFileName || '- -',
-        view: <Link
-          onClick={handleClick}
-          to={`${request.attachedFileUrl}`}
-          className="bg-green-700 text-white rounded-full px-2 py-2"
-        >View Document</Link>
+        view: (
+          <Button
+            color="secondary"
+            size="sm"
+            className="p-1"
+            style={{ fontSize: '.9rem', minWidth: '110px' }}
+            href={request.attachedFileUrl}
+            target="_blank"
+          >
+            View File
+          </Button>
+          ),
       })
     ));
     return rows;
@@ -99,7 +96,6 @@ export default function ViewRequests() {
               minWidth: 100,
               align: 'center',
               color: value => 'blue',
-              type: 'link'
             },
             {
               id: 'date',
@@ -110,8 +106,6 @@ export default function ViewRequests() {
             },
           ]}
           rows={getRows(getUserRequests.requests)}
-          handleActionClick={onActionClicked}
-          handleLinkClick={onLinkClicked}
         />
       </div>
     </Page>

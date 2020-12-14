@@ -43,26 +43,18 @@ const AdminClient = () => {
   };
 
   const handleClick = (id, name)  => {
-    setclient({
-      id, 
-      name
-    });
+    setclient({ id, name });
     setShowModal(true);
     dispatch(getAllAdmins(superAdminGetAllAdmins));   
   };
 
   const handleSelect = (id, name) => {
-    setSelectedAdmin({
-      id,
-      name
-    });
+    setSelectedAdmin({ id, name });
   }
 
   const assignAdmin = () => {
     const endpoint = addUserToAdmin + selectedAdmin.id;
-    const payload = {
-      users: [client.id] 
-    }
+    const payload = { users: [client.id] };
     dispatch(superAdminAddClientToAdmin(endpoint, payload));
   };
 
@@ -74,7 +66,7 @@ const AdminClient = () => {
           id: index + 1,
           user: user.companyName,
           accountType: user.accountType,
-          admin: user.admin || '- -',
+          admin: user.accountOfficer || '- -',
           companyAddress: user.companyAddress,
           phoneNumber: user.phoneNumber,
           email: user.email,

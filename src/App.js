@@ -43,7 +43,8 @@ import { IsUserRedirect } from './validations/isUserRedirect';
 const AdminDashboard = React.lazy(() => import('pages/admin/adminDashboard'));
 const AdminProfile = React.lazy(() => import('pages/admin/adminProfile'));
 const AdminClients = React.lazy(() => import('pages/admin/adminClients'));
-const AdminDocuments = React.lazy(() => import('pages/admin/adminDocuments'));
+const AdminReceivedDocuments = React.lazy(() => import('pages/admin/documentsReceived'));
+const AdminSentDocuments =React.lazy(() => import('pages/admin/documentsSent'))
 const AdminRequests = React.lazy(() => import('pages/admin/adminRequests'));
 const AdminAppointments = React.lazy(() => import('pages/admin/adminAppointments'));
 const AdminViewClientDetails = React.lazy(() => import('pages/admin/adminViewClientDetails'));
@@ -53,7 +54,8 @@ const DashboardPage = React.lazy(() => import('pages/user/DashboardPage'));
 const Profile = React.lazy(() => import('pages/user/profile'));
 const CreateNewRequest = React.lazy(() => import('pages/user/createRequest'));
 const UserViewRequests = React.lazy(() => import('pages/user/viewRequests'));
-const UserViewDocuments = React.lazy(() => import('pages/user/viewDocuments'));
+const UserViewReceivedDocuments = React.lazy(() => import('pages/user/viewReceivedDocuments'));
+const UserViewSentDocuments = React.lazy(() => import('pages/user/viewSentDocuments'));
 const UserUploadDocument = React.lazy(() => import('pages/user/uploadDocument'));
 const UserViewAppointments = React.lazy(() => import('pages/user/viewAppointments'));
 const BookAppointment = React.lazy(() => import('pages/user/bookAppointment'));
@@ -181,7 +183,10 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/user/requests" component={UserViewRequests}/>
               </ProtectedRoute>
               <ProtectedRoute>
-                <Route exact path="/user/documents" component={UserViewDocuments}/>
+                <Route exact path="/user/documents/received" component={UserViewReceivedDocuments}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/documents/sent" component={UserViewSentDocuments}/>
               </ProtectedRoute>
               <ProtectedRoute>
                 <Route exact path="/user/upload-document" component={UserUploadDocument}/>
@@ -209,7 +214,10 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/admin/clients" component={AdminClients}/>
               </ProtectedRoute>
               <ProtectedRoute>
-                <Route exact path="/admin/documents" component={AdminDocuments}/>
+                <Route exact path="/admin/documents/received" component={AdminReceivedDocuments}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/documents/sent" component={AdminSentDocuments}/>
               </ProtectedRoute>
               <ProtectedRoute>
                 <Route exact path="/admin/requests" component={AdminRequests}/> 

@@ -71,7 +71,7 @@ function Header() {
 
   useEffect(() => {
     const role = localStorage.getItem('role');
-    if (role === ('superadmin' || 'admin')) {
+    if ((role === 'superadmin') || (role === 'admin')) {
       dispatch(getAdminData(getAllAdmin));
     } else if (role === 'user') {
       dispatch(getUser(getUserData));

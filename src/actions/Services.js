@@ -128,7 +128,7 @@ export const postDataWithToken = (url, payload, done) => {
           nprogress.done();
           nprogress.remove();
           alert(data.error);
-          window.location.reload();
+          // window.location.reload();
         }
       })
       .catch(err => {

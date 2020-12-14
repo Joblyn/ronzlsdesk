@@ -32,7 +32,7 @@ class DashboardAdmin extends React.Component {
           </Link>
           </Col>
           <Col lg="12" md="12" sm="12" xs="12" className="d-flex align-items-center justify-content-center mb-3">
-            <Link to="/admin/documents" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none', fontSize: '1.2rem'}}>
+            <Link to="/admin/documents/received" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none', fontSize: '1.2rem'}}>
               <AnnouncementCard
                 color="gradient-secondary"
                 text="Documents"

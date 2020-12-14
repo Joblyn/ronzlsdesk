@@ -4,23 +4,15 @@ import {
   MdDashboard,
   MdSend,
   MdSchedule,
-  MdExitToApp,
   MdPersonPin,
-  MdFolder
+  MdFolder,
 } from 'react-icons/md';
-import { HiUserGroup } from 'react-icons/hi'
-import {
-  Nav,
-  Navbar,
-  NavItem,
-  NavLink as BSNavLink,
-} from 'reactstrap';
+import { HiUserGroup } from 'react-icons/hi';
+import { Nav, Navbar, NavItem, NavLink as BSNavLink } from 'reactstrap';
 import bn from 'utils/bemnames';
 
 import logo200Image from 'assets/images/logo.png';
 import sidebarBgImage from 'assets/img/sidebar/sidebar-4.jpg';
-
-import { logOutAction } from '../../actions/admin/authAction/Users';
 
 const sidebarBackground = {
   backgroundImage: `url("${sidebarBgImage}")`,
@@ -36,18 +28,18 @@ const navItems = [
     exact: true,
     Icon: MdPersonPin,
   },
-  { 
-    to: '/admin/clients', 
-    name: 'clients', 
-    exact: true, 
-    Icon: HiUserGroup 
+  {
+    to: '/admin/clients',
+    name: 'clients',
+    exact: true,
+    Icon: HiUserGroup,
   },
   {
-    to: '/admin/documents',
+    to: '/admin/documents/received',
     name: 'Documents',
     exact: true,
     Icon: MdFolder,
-  }, 
+  },
   {
     to: '/admin/requests',
     name: 'Requests',
@@ -59,7 +51,7 @@ const navItems = [
     name: 'Appointments',
     exact: true,
     Icon: MdSchedule,
-  }, 
+  },
 ];
 
 const bem = bn.create('sidebar');
@@ -114,19 +106,19 @@ class Sidebar extends React.Component {
               </NavItem>
             ))}
 
-
-            <NavItem
-              className={bem.e('nav-item')}
-              onClick={logOutAction}
-            >
-              <BSNavLink className={bem.e('nav-item-collapse')}>
+            {/* <NavItem className={bem.e('nav-item')}>
+              <BSNavLink
+                className={bem.e('nav-item-collapse')}
+                onClick={logOutAction}
+                to="/"
+                style={{ color: 'red' }}
+              >
                 <div className="d-flex">
                   <MdExitToApp className={bem.e('nav-item-icon')} />
                   <span className="">LOGOUT</span>
                 </div>
-               
               </BSNavLink>
-            </NavItem>
+            </NavItem> */}
           </Nav>
         </div>
       </aside>

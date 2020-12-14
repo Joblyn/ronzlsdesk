@@ -19,6 +19,10 @@ export const logOut = {
   user: {},
 };
 
+export const token = {
+  token: false
+};
+
 export const forgotPassword = {
   isLoading: false,
   error: null,

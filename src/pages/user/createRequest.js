@@ -48,7 +48,10 @@ export default function CreateRequest() {
       })
         .then(res => res.json())
         .then(history.push('/user/requests'))
-        .catch(console.error);
+        .catch(err => {
+          alert('Opps, An error occurred, please try again!');
+          console.error()
+        });
     } else {
       setIsValid(false);
     }

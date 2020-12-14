@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-// import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'reactstrap';
 
-// camera libraries
+// camera library
 import 'react-html5-camera-photo/build/css/index.css';
 
 import { MdPhotoCamera, MdFileUpload, MdClear } from 'react-icons/md';
@@ -10,65 +9,87 @@ import { MdPhotoCamera, MdFileUpload, MdClear } from 'react-icons/md';
 import Page from 'components/Page';
 import InputField from '../../components/InputField';
 import {
-  // superAdminGetAllAdmins,
+  getUserData,
   userUploaDocToAdmin,
 } from '../../apiConstants/apiConstants';
-// import { uploadDoc } from '../../actions/user/Users';
 import { FormGroup } from '@material-ui/core';
-// import { getAllAdmins } from '../../actions/admin/authAction/Users';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../../actions/user/Users';
+import nProgress from 'nprogress';
 
 export default function UploadDocument() {
   const [fileName, setFileName] = useState('');
   const [form, setForm] = useState(false);
-  // const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const [source, setSource] = useState();
+  const accountOfficer = useSelector(
+    state => state.userData.data.accountOfficer,
+  );
+  const dispatch = useDispatch();
 
-  // edit
-  // const AllAdmins = useSelector(state => state.superAdminGetAllAdmins.admins);
+  useEffect(() => {
+    dispatch(getUser(getUserData));
+  }, []);
 
-  // useEffect(() => {
-  //   dispatch(getAllAdmins(superAdminGetAllAdmins))
-  // }, []);
+  const upload = (formData) => {
+    let localURL = 'https://node.codecradle.co/api/v1/';
+      let prodURL = 'https://node.codecradle.co/api/v1/';
+      let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
+      const endpoint = baseUrl + userUploaDocToAdmin + accountOfficer._id;
+      const token = localStorage.getItem('jwtToken');
+      const bearerToken = 'Bearer ' + token;
+      nProgress.start();
+      fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+        credentials: 'same-origin',
+        headers: new Headers({
+          Authorization: bearerToken,
+        }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          alert('Successfully sent document to Account Officer.');
+          setIsLoading(false);
+          setForm(false);
+          nProgress.done();
+          nProgress.remove();
+        })
+        .catch(err => {
+          alert('Opps, An error occurred, please try again!');
+          console.error();
+          nProgress.done();
+          nProgress.remove();
+        });
+  } 
 
   const handleSubmit = e => {
     e.preventDefault();
 
     if (fileName) {
-      // with docContentUrl
-      // console.log(AllAdmins[0]);
-      // dispatch(uploadDoc(docEndpoint, doc));
-
-      // with FormData
+      setIsLoading(true);
       const formData = new FormData();
       const inpFile = document.getElementById('inpFile');
-      formData.append('fileName', fileName);
-      formData.append('fileUrl', inpFile.files[0]);
-
-      let localURL = 'https://node.codecradle.co/api/v1/';
-      let prodURL = 'https://node.codecradle.co/api/v1/';
-      let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
-      const endpoint = baseUrl + userUploaDocToAdmin + '5fc39233de6fbc1361ef4c60';
-      const token = localStorage.getItem('jwtToken');
-      const bearerToken = 'Bearer ' + token;
-      fetch(endpoint, {
-        method: 'POST',
-        body: formData,
-        credentials: 'same-origin',
-        headers: new Headers({          
-          Authorization: bearerToken,
-        }),
-      })
-        .then(res => console.log(res))
-        .catch(console.error);
+      formData.append('docName', fileName);
+      formData.append('docContentUrl', inpFile.files[0]);
+      upload(formData);
     }
   };
+  
+  const handleSubmit2 = e => {
+    e.preventDefault();
+    setIsLoading(true);
+    const formData = new FormData();
+    formData.append('docName', fileName);
+    formData.append('docContentUrl', source);
+    upload(formData);
+  }
 
-  const [source, setSource] = useState('');
   const handleCapture = target => {
     if (target.files) {
       if (target.files.length !== 0) {
-        const file = target.files[0];
-        const newUrl = URL.createObjectURL(file);
-        setSource(newUrl);
+        const capturedFile = target.files[0];
+        setSource(capturedFile);
       }
     }
   };
@@ -145,6 +166,7 @@ export default function UploadDocument() {
                   form="doc-form"
                   className="appt-button mt-3"
                   style={{ padding: '.7rem', fontSize: '1.2rem' }}
+                  disabled={isLoading}
                 >
                   Upload
                 </Button>
@@ -153,8 +175,31 @@ export default function UploadDocument() {
           )}
         </div>
       </div>
-
-      {source && <img src={source} alt="captured" width="250" />}
+      {!source && (
+        <div className="overlay">
+          <Form className="form py-5" id="capture-form" onSubmit={handleSubmit2}>
+            <FormGroup className="form-group">
+              <InputField
+                required
+                type="text"
+                name="file-name"
+                placeholder="Set file name"
+                className="mt-2"
+                onChange={({ target }) => setFileName(target.value)}
+              />
+            </FormGroup>
+            <Button
+              type="submit"
+              form="capture-form"
+              className="appt-button mt-3"
+              style={{ padding: '.7rem', fontSize: '1.2rem' }}
+              disabled={isLoading}
+            >
+              Upload
+            </Button>
+          </Form>
+        </div>
+      )}
     </Page>
   );
 }

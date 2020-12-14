@@ -19,12 +19,13 @@ export let superAdminGetAllAdmins = 'admin/allAdmins';
 
 //superadmin view all clients
 export let getAllClients = 'admin/actions/users';
+// superadmin view client details
 export let getClientDetail = 'admin/user/';
 
 // admin view clients under admin
 export let getClientsUnderAdmin = 'admin/actions/user';
 //Admin Doc Upload
-export let adminUploadDoc = 'admin/actions/uploadDocToUser/';
+export let adminUploadDoc = 'admin/document/';
 // admin get documents sent
 export let adminGetDocumentsSentToUser = 'admin/document'
 // admin get documenst received

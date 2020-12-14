@@ -87,12 +87,6 @@ const onConfirmAppoinment = (payload) => {
 //   };
 // };
 
-// export const setCurrentAdminUser = decoded => {
-//   return {
-//     type: ActionType.SET_CURRENT_ADMIN_USER,
-//     payload: decoded,
-//   };
-// };
 
 // export const onForgotPassword = payload => {
 //   return {

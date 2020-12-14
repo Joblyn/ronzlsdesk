@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-// import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'reactstrap';
 
@@ -7,10 +6,7 @@ import Page from 'components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import CustomTable from '../../components/table/CustomTable';
 import { getAllRequests } from '../../actions/admin/clients/Clients';
-import {
-  adminGetRequests,
-  // getClientsRequests
-} from '../../apiConstants/apiConstants';
+import { adminGetRequests } from '../../apiConstants/apiConstants';
 
 export default function AdminRequests() {
   const dispatch = useDispatch();
@@ -37,6 +33,8 @@ export default function AdminRequests() {
               size="sm"
               className="p-1"
               style={{ fontSize: '.9rem', minWidth: '110px' }}
+              href={request.attachedFileUrl}
+              target="_blank"
             >
               View File
             </Button>
@@ -44,10 +42,6 @@ export default function AdminRequests() {
         }),
       );
     return rows;
-  };
-
-  const onViewDocument = (e, payload) => {
-    // function to view document
   };
 
   if (!adminGetAllRequests.isSuccessful) {
@@ -89,9 +83,9 @@ export default function AdminRequests() {
               color: value => 'blue',
             },
             {
-              id: 'documentUploaded',
+              id: 'document',
               align: 'center',
-              label: 'Document Uploaded',
+              label: 'Document',
               minWidth: 100,
               color: value => 'blue',
             },
@@ -107,11 +101,9 @@ export default function AdminRequests() {
               align: 'center',
               label: 'Action',
               minWidth: 150,
-              type: 'link',
             },
           ]}
           rows={getRows(adminGetAllRequests.requests)}
-          handleLinkClick={onViewDocument}
         />
       </div>
     </Page>
