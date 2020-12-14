@@ -14,7 +14,10 @@ import {
 import { Button } from 'reactstrap';
 import { Form, Label } from 'reactstrap';
 import InputField from '../../components/InputField';
-import { getAllAdmins, superAdminAddClientToAdmin } from '../../actions/admin/authAction/Users';
+import {
+  getAllAdmins,
+  superAdminAddClientToAdmin,
+} from '../../actions/admin/authAction/Users';
 
 const AdminClient = () => {
   const dispatch = useDispatch();
@@ -42,15 +45,15 @@ const AdminClient = () => {
     localStorage.setItem('client_id', id);
   };
 
-  const handleClick = (id, name)  => {
+  const handleClick = (id, name) => {
     setclient({ id, name });
     setShowModal(true);
-    dispatch(getAllAdmins(superAdminGetAllAdmins));   
+    dispatch(getAllAdmins(superAdminGetAllAdmins));
   };
 
   const handleSelect = (id, name) => {
     setSelectedAdmin({ id, name });
-  }
+  };
 
   const assignAdmin = () => {
     const endpoint = addUserToAdmin + selectedAdmin.id;
@@ -61,12 +64,16 @@ const AdminClient = () => {
   const getRows = data => {
     let rows = [];
     data &&
-      data.reverse().map((user, index) =>
-        rows.push({
+      data.reverse().map((user, index) => {
+        let admin;
+        if(user.accountOfficer) {
+          admin = user.accountOfficer.fullName
+        }
+        return rows.push({
           id: index + 1,
           user: user.companyName,
           accountType: user.accountType,
-          admin: user.accountOfficer || '- -',
+          admin: admin,
           companyAddress: user.companyAddress,
           phoneNumber: user.phoneNumber,
           email: user.email,
@@ -93,8 +100,8 @@ const AdminClient = () => {
               </Button>
             </div>
           ),
-        }),
-      );
+        });
+      });
     return rows;
   };
 
@@ -165,10 +172,10 @@ const AdminClient = () => {
             },
             {
               id: 'admin',
-              label: 'Admin',
-              minWidth: 100,
+              label: 'Account Officer',
+              minWidth: 150,
               align: 'center',
-              color: value => 'black',
+              color: value => 'blue',
             },
             {
               id: 'actions',
@@ -206,15 +213,17 @@ const AdminClient = () => {
                         {admins.map((admin, i) => (
                           <div
                             className="border-b border-solid border-gray-300 cursor-pointer"
-                            key={`admin-${i+1}`}
+                            key={`admin-${i + 1}`}
                           >
                             <InputField
                               className="m-3"
                               type="radio"
-                              id={admin.fullName+i+1}
+                              id={admin.fullName + i + 1}
                               name="admins"
                               value={admin._id}
-                              onChange={() => handleSelect(admin._id, admin.fullName)}
+                              onChange={() =>
+                                handleSelect(admin._id, admin.fullName)
+                              }
                             />
                             <Label
                               className="cursor-pointer"
@@ -228,15 +237,16 @@ const AdminClient = () => {
                     )}
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
-                  {selectedAdmin.id && <button
-                      className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 assign"
-                      type="button"
-                      style={{ transition: 'all .15s ease' }}
-                      onClick={assignAdmin}
-                    >
-                      Assign
-                    </button>
-                  }
+                    {selectedAdmin.id && (
+                      <button
+                        className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 assign"
+                        type="button"
+                        style={{ transition: 'all .15s ease' }}
+                        onClick={assignAdmin}
+                      >
+                        Assign
+                      </button>
+                    )}
                     <button
                       className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                       type="button"

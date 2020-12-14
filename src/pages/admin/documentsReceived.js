@@ -22,11 +22,11 @@ export default function AdminReceivedDocumnents() {
 
   const getRows = documents => {
     let rows = [];
-    console.log(documents);
     documents &&
       documents.reverse().map((document, i) =>
         rows.push({
           id: i + 1,
+          client: document.sender.companyName,
           docName: document.docName,
           date: document.created_dt,
           view: (
@@ -100,13 +100,14 @@ export default function AdminReceivedDocumnents() {
               align: 'center',
               label: 'Date Received',
               minWidth: 100,
-              color: value => 'black',
+              color: value => 'blue',
             },
             {
               id: 'view',
               align: 'center',
               label: 'Action',
               minWidth: 100,
+              color: value => 'black',
             },
           ]}
           rows={getRows(adminGetReceivedDocuments.documents)}

@@ -23,6 +23,7 @@ export default function AdminRequests() {
       requests.reverse().map((request, i) =>
         rows.push({
           id: i + 1,
+          client: request.client.companyName,
           requestTitle: request.requestTitle,
           requestDescription: request.requestDescription,
           date: request.created_dt,
@@ -101,6 +102,7 @@ export default function AdminRequests() {
               align: 'center',
               label: 'Action',
               minWidth: 150,
+              color: value => 'black',
             },
           ]}
           rows={getRows(adminGetAllRequests.requests)}

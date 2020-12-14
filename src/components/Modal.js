@@ -4,12 +4,14 @@ import { useSelector } from 'react-redux';
 import { Button } from 'reactstrap';
 import InputField from '../components/InputField';
 import { adminUploadDoc } from '../apiConstants/apiConstants';
+import nProgress from 'nprogress';
 
 export default function Modal({ action, color }) {
   const [showModal, setShowModal] = useState(false);
   const [client, setClient] = useState('');
   const [fileName, setFileName] = useState('');
   const [file, setFile] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const clients = useSelector(state => state.adminData.users);
   const adminUploadDocToClient = useSelector(
@@ -29,11 +31,14 @@ export default function Modal({ action, color }) {
     let localURL = 'https://node.codecradle.co/api/v1/';
     let prodURL = 'https://node.codecradle.co/api/v1/';
     let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
+    console.log(client);
     const endpoint = baseUrl + adminUploadDoc + client;
     console.log(client);
     console.log(endpoint);
     const token = localStorage.getItem('jwtToken');
     const bearerToken = 'Bearer ' + token;
+    nProgress.start();
+    setIsLoading(true);
     fetch(endpoint, {
       method: 'POST',
       body: formData,
@@ -44,21 +49,25 @@ export default function Modal({ action, color }) {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        nProgress.done();
+        nProgress.remove();
         alert(`Successfully uploaded file.`);
-        // setShowModal(false);
+        setShowModal(false);
+        setIsLoading(false);
       })
       .catch(err => {
+        nProgress.done();
+        nProgress.remove();
         alert('Opps, An error occurred, please try again!');
         console.error();
+        setIsLoading(false);
+        setShowModal(false);
       });
   };
 
   if (adminUploadDocToClient.isSuccessful) {
     alert('Document successfully sent to client');
   }
-
-  console.log(clients);
   return (
     <>
       <Button
@@ -131,12 +140,9 @@ export default function Modal({ action, color }) {
                         onChange={({ target }) => setClient(target.value)}
                       >
                         <option value="send to">Send to</option>
-                        <option value="Williams Oaikhenah">
-                          Williams Oaikhenah
-                        </option>
                         {clients.map((client, i) => (
-                          <option key={i + 1} value={client}>
-                            {client}
+                          <option key={i + 1} value={client._id}>
+                            {client.companyName}
                           </option>
                         ))}
                       </select>
@@ -144,14 +150,13 @@ export default function Modal({ action, color }) {
                     <Button
                       type="submit"
                       form="doc-form"
-                      disabled={isInvalid}
+                      disabled={isInvalid || isLoading} 
                       style={{ marginRight: 'auto' }}
                     >
                       Upload
                     </Button>
                   </Form>
                 </div>
-                {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
                   <button
                     className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"

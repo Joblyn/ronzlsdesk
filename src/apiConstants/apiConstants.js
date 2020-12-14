@@ -26,14 +26,18 @@ export let getClientDetail = 'admin/user/';
 export let getClientsUnderAdmin = 'admin/actions/user';
 //Admin Doc Upload
 export let adminUploadDoc = 'admin/document/';
+
 // admin get documents sent
-export let adminGetDocumentsSentToUser = 'admin/document'
+export let adminGetDocumentsSentToUser = 'admin/document';
+
 // admin get documenst received
 export let adminGetDocumentsReceivedFromUser = 'admin/document/user';
 // admin get appoinments from clients under admin
 export let getClientAppointments = 'admin/appointment';
 // admin confirm appointment 
 export let confirmClientAppointment = 'admin/appointment/';
+// admin reject appointment
+export let rejectClientAppointment = 'admin/appointment/reject/'
 // get requests of clients under him
 export let getClientsRequests = 'admin/request/userResquests';
 

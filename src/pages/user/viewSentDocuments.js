@@ -7,13 +7,14 @@ import PageSpinner from '../../components/PageSpinner';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDocumentSentByUser } from '../../actions/user/Users';
+import { userGetDocumentSentByUser } from '../../apiConstants/apiConstants';
 
 export default function ViewSentDocuments() {
   const dispatch = useDispatch();
-  const userGetDocumentsSentByUser = useSelector(state => state.userGetDocumentsSentByUser)
+  const userGetDocumentsSent = useSelector(state => state.userGetDocumentsSentByUser)
 
   useEffect(() => {
-    dispatch(getDocumentSentByUser(userGetDocumentsSentByUser));
+    dispatch(getDocumentSentByUser(userGetDocumentSentByUser));
   }, []);
 
   const getRows = documents => {
@@ -42,7 +43,7 @@ export default function ViewSentDocuments() {
     return rows;
   };
 
-  if (!userGetDocumentsSentByUser.isSuccessful) {
+  if (!userGetDocumentsSent.isSuccessful) {
     return <PageSpinner />
   }
   return (
@@ -94,7 +95,7 @@ export default function ViewSentDocuments() {
               color: value => 'blue',
             },
           ]}
-          rows={getRows(userGetDocumentsSentByUser.documents)}
+          rows={getRows(userGetDocumentsSent.documents)}
         />
       </div>
     </Page>

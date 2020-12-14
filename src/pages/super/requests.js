@@ -23,6 +23,7 @@ export default function Requests() {
       requests.reverse().map((request, i) => {
         return rows.push({
           id: i + 1,
+          client: request.client.companyName,
           requestTitle: request.requestTitle,
           requestDescription: request.requestDescription,
           date: request.created_dt,

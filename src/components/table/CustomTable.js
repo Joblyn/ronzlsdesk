@@ -145,7 +145,7 @@ export default function CustomTable({
         <TableCell
           key={column.id + id}
           align={column.align}
-          style={{ minWidth: column.minWidth }}
+          style={{ minWidth: column.minWidth, fontSize: column.fontSize }}
         >
           {column.label}
         </TableCell>
@@ -157,7 +157,7 @@ export default function CustomTable({
         <TableCell
           key={nColumn.id + id}
           align={nColumn.align}
-          style={{ minWidth: nColumn.minWidth }}
+          style={{ minWidth: nColumn.minWidth, fontSize: nColumn.fontSize }}
         >
           Actions
         </TableCell>
@@ -198,8 +198,8 @@ export default function CustomTable({
                   align={column.align}
                   className={classes.cell}
                   style={{
-                    //  color: column.color(value),
-                    color: 'blue'
+                     color: column.color(value),
+                    // color: 'blue'
                   }}
                 >
                   {column.type && column.type === 'link' ? (

@@ -5,25 +5,13 @@ import React, { useEffect,
 import { Button } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner';
 // import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-// import {
-  // Button,
-  // Card,
-  // CardBody,
-  // CardHeader,
-  // Col,
-  // DropdownItem,
-  // DropdownMenu,
-  // DropdownToggle,
-  // Row,
-  // UncontrolledButtonDropdown,
-// } from 'reactstrap';
 import CustomTable from '../../components/table/CustomTable';
 
 import {
   getAllDocuments,
 } from '../../actions/admin/clients/Clients';
 import {
-  adminGetDocuments
+  adminGetDocuments,
 } from '../../apiConstants/apiConstants';
 import { useDispatch, useSelector } from 'react-redux';
 // import ExcelTable from '../../components/ExportToExcel';
