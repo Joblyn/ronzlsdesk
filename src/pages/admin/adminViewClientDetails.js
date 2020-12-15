@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-import { updateClientSubscription } from '../../actions/admin/clients/Clients';
-import { 
-  adminUpdateSubscription, 
-  getClientDetail 
-} from '../../apiConstants/apiConstants';
+import { getClientDetail } from '../../apiConstants/apiConstants';
 import PageSpinner from '../../components/PageSpinner';
 
 //components
 import InputField from '../../components/InputField';
-import Button from '../../components/button';
 import { useDispatch, useSelector } from 'react-redux';
 import InputDropdown from '../../components/InputDropdown';
 import { getClientDetails } from '../../actions/admin/clients/Clients';
 
 const AdminViewClientDetails = () => {
-  const [disabled, setDisabled] = useState(true);
   const dispatch = useDispatch();
   const clientDetails = useSelector(state => state.adminGetAllClient.user);
 
@@ -81,29 +75,6 @@ const AdminViewClientDetails = () => {
     );
   });
 
-  const [subscriptionBegin, setSubscriptionBegin] = useState("2020-11-03");
-  const [subscriptionEnd, setSubscriptionEnd] = useState("2021-11-03");
-  const updatedSubscription = useSelector(state => state.adminUpdateSubscription);
-
-  useEffect(() => {
-    if (updatedSubscription.isSuccesful) {
-      let result = updatedSubscription.result;
-      console.log(result);
-      // continue from here
-    }
-  }, [updatedSubscription]);
-
-  const updateSubscription = (e, id) => {
-    e.preventDefault(); 
-    const payload = {
-      subscriptionBegin,
-      subscriptionEnd
-    }
-    let endpoint = `${adminUpdateSubscription}${id}`;
-    console.log("endpoint: " + endpoint);
-    dispatch(updateClientSubscription(endpoint, payload));
-  };
-
   if (data === null) {
     return <PageSpinner />;
   }
@@ -114,41 +85,6 @@ const AdminViewClientDetails = () => {
         <div className="intro-x">
           <div className="block xl:grid grid-cols-2 gap-4 mt-3">
             <div className="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto ">
-              <div className="mb-3">
-                <header className="font-semibold">Subscription</header>
-                <div className="mb-2 d-flex" style={{justifyContent: "space-between"}}>
-                  <div>Start:</div>
-                  <div><input type="date"
-                    name="subscriptionBegin"
-                    value={subscriptionBegin}
-                    onChange={({target}) => setSubscriptionBegin(target.value)}
-                    disabled={disabled}
-                    style={{ backgroundColor: "inherit" }}
-                  />
-                  </div>
-                </div>
-                <div className="mb-2 d-flex" style={{ justifyContent: "space-between" }}>
-                  <div>End:</div>
-                  <div><input type="date"
-                    name="subscriptionEnd"
-                    value={subscriptionEnd}
-                    onChange={({ target }) => setSubscriptionEnd(target.value)}
-                    disabled={disabled}
-                    style={{ backgroundColor: "inherit" }} />
-                  </div>
-                </div>
-                {disabled ? <Button
-                  type="button"
-                  onClick={() => setDisabled(!disabled)}
-                  className="button button--md text-white bg-theme-1 xl:mr-3"
-                  value="Set Subscription" />
-                  : <Button
-                    type="button"
-                    onClick={(e) => updateSubscription(e, data._id)}
-                    className="button button--md text-white bg-theme-1 xl:mr-3"
-                    value="Update"
-                  />}
-              </div>
               {data.director &&
                 data.director.map((data, i) => {
                   return addNewDirector(i, i);

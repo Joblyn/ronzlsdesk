@@ -2,6 +2,13 @@ import * as ActionType from '../../Types';
 import { getDataWithToken, postDataWithToken } from '../../Services';
 
 // superadmin-client actions
+export const setAdminClients = payload => {
+  return {
+    type: ActionType.SET_ADMIN_CLIENTS,
+    payload
+  };
+};
+
 const onGetClient = payload => {
   return {
     type: ActionType.ADMIN_GET_CLIENT_SUCCESS,
@@ -80,21 +87,6 @@ const onConfirmAppoinment = (payload) => {
   }
 }
 
-// const onLogin = payload => {
-//   return {
-//     type: ActionType.ADMIN_LOGIN_SUCCESS,
-//     payload,
-//   };
-// };
-
-
-// export const onForgotPassword = payload => {
-//   return {
-//     type: ActionType.ADMIN_FORGOT_PASSWORD_SUCCESS,
-//     payload,
-//   };
-// };
-
 // get clients under admin
 export const adminGetClients = url => {
   return getDataWithToken(url, onAdminGetClients);
@@ -140,4 +132,3 @@ export const getAllRequests = (url) => {
 export const uploadDoc = (url, payload) =>{
   return postDataWithToken(url, payload, onUploadDoc)
 }
-

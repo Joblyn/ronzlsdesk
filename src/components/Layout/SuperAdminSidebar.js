@@ -65,12 +65,6 @@ const navItems = [
     exact: true,
     Icon: MdSchedule,
   },
-  // {
-  //   to: '/superadmin/registerclient',
-  //   name: 'Register Client',
-  //   exact: false,
-  //   Icon: MdAccountCircle,
-  // },
 ];
 
 const bem = bn.create('sidebar');

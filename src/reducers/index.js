@@ -16,6 +16,7 @@ import adminConfirmAppointmentReducer from './admin/confirmAppointment';
 import adminGetAppointmentsReducer from './admin/getAppoinments';
 import superAdminGetAllAdminsReducer from './admin/superAdminGetAllAdmins';
 import superAdminAddClientToAdminReducer from './admin/superAdminAddClientToAdmin';
+import setAdminClientsReducer from './admin/setAdminClients';
 // import adminGetClientDetails from './admin/getClientDetailsReducer';
 
 import userRegisterReducer from './user/userRegister';
@@ -48,6 +49,8 @@ export default combineReducers({
   adminGetAppointments:adminGetAppointmentsReducer,
   superAdminGetAllAdmins:superAdminGetAllAdminsReducer,
   superAdminAddClientToAdmin:superAdminAddClientToAdminReducer,
+  adminClients:setAdminClientsReducer,
+
   // adminGetClientDetails: adminGetClientDetails,
   
   //user Reducer

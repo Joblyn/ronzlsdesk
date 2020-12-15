@@ -8,8 +8,10 @@ import CustomTable from '../../components/table/CustomTable';
 import { getClient } from '../../actions/admin/clients/Clients';
 import {
   addUserToAdmin,
+  baseUrl,
   getAllClients,
   superAdminGetAllAdmins,
+  uploadBulkUsers,
 } from '../../apiConstants/apiConstants';
 import { Button } from 'reactstrap';
 import { Form, Label } from 'reactstrap';
@@ -18,6 +20,9 @@ import {
   getAllAdmins,
   superAdminAddClientToAdmin,
 } from '../../actions/admin/authAction/Users';
+
+import ExcelTable from '../../components/ExportToExcel';
+import nProgress from 'nprogress';
 
 const AdminClient = () => {
   const dispatch = useDispatch();
@@ -54,26 +59,26 @@ const AdminClient = () => {
   const handleSelect = (id, name) => {
     setSelectedAdmin({ id, name });
   };
-  
+
   const assignAdmin = () => {
     const endpoint = addUserToAdmin + selectedAdmin.id;
     const payload = { users: [client.id] };
     dispatch(superAdminAddClientToAdmin(endpoint, payload));
   };
- 
+
   const getRows = data => {
     let rows = [];
     data &&
       data.reverse().map((user, index) => {
         let admin;
-        if(user.accountOfficer) {
-          admin = user.accountOfficer.fullName
+        if (user.accountOfficer) {
+          admin = user.accountOfficer.fullName;
         }
         return rows.push({
           id: index + 1,
           user: user.companyName,
           accountType: user.accountType,
-          admin: admin,
+          admin: admin || '- -',
           companyAddress: user.companyAddress,
           phoneNumber: user.phoneNumber,
           email: user.email,
@@ -105,11 +110,68 @@ const AdminClient = () => {
     return rows;
   };
 
+  const handleUpload = target => {
+    if (target.files) {
+      if (target.files.length !== 0) {
+        const formData = new FormData();
+        formData.append('BulkExcel', target.files[0]);
+        const endpoint = baseUrl + uploadBulkUsers;
+        const token = localStorage.getItem('jwtToken');
+        const bearerToken = 'Bearer ' + token;
+        nProgress.start();
+        fetch(endpoint, {
+          method: 'POST',
+          body: formData,
+          credentials: 'same-origin',
+          headers: new Headers({
+            Authorization: bearerToken,
+          }),
+        })
+          .then(res => res.json())
+          .then(data => {
+            alert('Users added successfully!')
+            nProgress.done();
+            nProgress.remove();
+          })
+          .catch(err => {
+            alert('Opps, An error occurred, please try again!');
+            console.error();
+            nProgress.done();
+            nProgress.remove();
+          });
+      }
+    }
+  };
+
   if (adminGetClient.users.length === 0) {
     return <PageSpinner />;
   }
   return (
     <Page title="Dropdowns" breadcrumbs={[{ name: 'Clients', active: true }]}>
+      <div className="d-flex align-items-center m-3 cursor-pointer">
+        <Button
+          color="success"
+          className="mr-4 position-relative"
+          style={{
+            borderRadius: '0',
+          }}
+        >
+          IMPORT USERS
+          <InputField
+            className="position-absolute left-0 top-0 opacity-0 z-10 w-100 h-100"
+            type="file"
+            onChange={({ target }) => handleUpload(target)}
+            style={{
+              cursor: 'pointer!important',
+            }}
+          />
+        </Button>
+        <ExcelTable
+          exportData={adminGetClient.users}
+          id="clients"
+          fileName="clientsFile"
+        />
+      </div>
       <div
         style={{
           overflowX: 'auto',
@@ -172,7 +234,7 @@ const AdminClient = () => {
             },
             {
               id: 'admin',
-              label: 'Account Officer',
+              label: 'Admin',
               minWidth: 150,
               align: 'center',
               color: value => 'blue',

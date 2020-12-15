@@ -22,7 +22,7 @@ class DashboardPage extends React.Component {
             <Link to="/user/profile" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none', fontSize: '1.2rem'}}>
               <AnnouncementCard
                 color="gradient-secondary"
-                text="View Profile"
+                text="Profile"
                 buttonProps={{
                   children: 'View',
                 }}
@@ -33,7 +33,7 @@ class DashboardPage extends React.Component {
           <Link to="/user/view-appointments" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none'}}>
             <AnnouncementCard
               color="gradient-secondary"
-              text="View Appointments"
+              text="Appointments"
               buttonProps={{
                 children: 'View',
               }}
@@ -45,7 +45,7 @@ class DashboardPage extends React.Component {
             <Link to="/user/documents/received" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none', fontSize: '1.2rem'}}>
               <AnnouncementCard
                 color="gradient-secondary"
-                text="View Documents"
+                text="Documents"
                 buttonProps={{
                   children: 'View',
                 }}
@@ -56,7 +56,7 @@ class DashboardPage extends React.Component {
             <Link to="/user/requests" style={{ height: 'fit-content', width: '100%', maxWidth: '500px', cursor: 'pointer', textDecoration: 'none', fontSize: '1.2rem'}}>
               <AnnouncementCard
                 color="gradient-secondary"
-                text="View Requests"
+                text="Requests"
                 buttonProps={{
                   children: 'View',
                 }}

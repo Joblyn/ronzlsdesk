@@ -4,6 +4,7 @@ import { Row, Card, CardImg, CardBody, CardText, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { superAdminGetAllAdmins } from '../../apiConstants/apiConstants';
 import { getAllAdmins } from '../../actions/admin/authAction/Users';
+import { setAdminClients } from '../../actions/admin/clients/Clients';
 import Page from 'components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import Portrait from '../../portrait.png';
@@ -22,6 +23,10 @@ export default function allAdmins() {
       setAdmins(AllAdmins.admins);
     }
   }, [AllAdmins]);
+
+  const setClients = (clients) => {
+    dispatch(setAdminClients(clients))
+  }
 
   if (!admins.length) {
     return <PageSpinner />;
@@ -51,12 +56,9 @@ export default function allAdmins() {
               <CardText>{admin.phoneNumber}</CardText>
               <Button outline color="success" className="m-1">
                 <Link
+                  onClick={() => setClients(admin.users)}
                   to={{
                     pathname: `/superadmin/${admin._id}/clients`,
-                    state: {
-                      adminId: admin._id,
-                      clients: admin.users,
-                    },
                   }}
                   className="link text-decoration-none"
                   style={{ color: 'inherit' }}

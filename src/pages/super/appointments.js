@@ -36,9 +36,9 @@ export default function Appointments() {
           id: i + 1,
           client: appointment.client.companyName,
           message: appointment.appointmentMessage || '- -',
-          dateScheduled: appointment.appointmentDate,
+          dateScheduled: appointment.appointmentDate.slice(0, 10),
           status: status || 'Pending',
-          dateCreated: appointment.created_dt,
+          dateCreated: appointment.created_dt.slice(0, 10),
         })}
       );
     return rows;

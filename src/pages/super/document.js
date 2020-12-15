@@ -4,7 +4,6 @@ import React, { useEffect,
 } from 'react';
 import { Button } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner';
-// import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import CustomTable from '../../components/table/CustomTable';
 
 import {
@@ -14,7 +13,6 @@ import {
   adminGetDocuments,
 } from '../../apiConstants/apiConstants';
 import { useDispatch, useSelector } from 'react-redux';
-// import ExcelTable from '../../components/ExportToExcel';
 
 const Documents = () => {
   const dispatch = useDispatch();
@@ -45,7 +43,7 @@ const Documents = () => {
           client: sender || 'null',
           admin: receiver || 'null',
           docName: document.docName,
-          date: document.created_dt,
+          date: document.created_dt.slice(0, 10),
           view: (
             <Button
               color="secondary"

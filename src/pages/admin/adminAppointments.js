@@ -42,21 +42,29 @@ export default function AdminAppointments() {
   const getRows = appointments => {
     let rows = [];
     appointments &&
-      appointments.reverse().map((appointment, i) =>
-        rows.push({
+      appointments.reverse().map((appointment, i) => {
+        let status;
+        let disabled = false;
+        if (appointment.status) {
+          disabled = true;
+          status =
+            appointment.status.charAt(0).toUpperCase() +
+            appointment.status.slice(1);
+        }
+        return rows.push({
           id: i + 1,
           client: appointment.client.companyName,
           message: appointment.appointmentMessage,
-          dateScheduled: appointment.appointmentDate,
-          status: appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1),
-          dateCreated: appointment.created_dt,
+          dateScheduled: appointment.appointmentDate.slice(0, 10),
+          status: status || 'Pending',
+          dateCreated: appointment.created_dt.slice(0, 10),
           action: (
             <div className="d-flex justify-content-around">
               <Button
                 className="bg-green-700 text-white rounded-full m-0 p-1"
                 size="sm"
-                disabled={() => appointment.status === 'true' ? false : true}
-                style={{ fontSize: '.9rem', minWidth: '110px' }}
+                disabled={disabled}
+                style={{ fontSize: '.9rem', minWidth: '90px' }}
                 onClick={() => onConfirmAppointment(appointment._id)}
               >
                 Confirm
@@ -65,16 +73,16 @@ export default function AdminAppointments() {
                 color="danger"
                 size="sm"
                 className="bg-green-700 text-white rounded-full m-0 p-1"
-                disabled={() => appointment.status === 'true' ? false : true}
-                style={{ fontSize: '.9rem', minWidth: '110px' }}
+                disabled={disabled}
+                style={{ fontSize: '.9rem', minWidth: '90px' }}
                 onClick={() => onRejectAppointment(appointment._id)}
               >
                 Reject
               </Button>
             </div>
           ),
-        }),
-      );
+        });
+      });
     return rows;
   };
 

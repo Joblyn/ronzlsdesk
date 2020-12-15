@@ -29,7 +29,7 @@ export default function ViewRequests() {
         id: i + 1,
         requestTitle: request.requestTitle,
         requestDescription: request.requestDescription,
-        date: request.created_dt,
+        date: request.created_dt.slice(0,10),
         document: request.attachedFileName || '- -',
         view: (
           <Button

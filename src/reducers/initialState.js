@@ -133,3 +133,7 @@ export const addClientToAdmin = {
   isSuccessful: false,
   result: {} 
 }
+
+export const setAdminClients = {
+  clients : []
+}

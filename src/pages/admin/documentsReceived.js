@@ -28,7 +28,7 @@ export default function AdminReceivedDocumnents() {
           id: i + 1,
           client: document.sender.companyName,
           docName: document.docName,
-          date: document.created_dt,
+          date: document.created_dt.slice(0,10),
           view: (
             <Button
               color="secondary"

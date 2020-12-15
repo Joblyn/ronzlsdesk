@@ -38,6 +38,7 @@ export const getDataWithToken = (url, done) => {
       credentials: 'same-origin',
       headers: new Headers({
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
         Authorization: bearerToken,
       }),
     })
@@ -60,22 +61,19 @@ export const getDataWithToken = (url, done) => {
 
 export const postData = (url, payload, done) => {
   const endpoint = baseUrl + url;
-  console.log('Endpoint: ' + endpoint);
-  console.log('Payload:' + JSON.stringify(payload));
   nprogress.start();
   return dispatch => {
     fetch(endpoint, {
       method: 'POST',
       body: JSON.stringify(payload),
       credentials: 'same-origin',
-      headers: {
-        'Accept': 'application/json',
+      headers: new Headers({
         'Content-Type': 'application/json',
-      }
+        'Accept': 'application/json',
+      }),
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data.data) {
           nprogress.done();
           nprogress.remove();
@@ -87,14 +85,16 @@ export const postData = (url, payload, done) => {
         } else if (data.errors) {
           nprogress.done();
           nprogress.remove();
-          alert('Errors in input details, please fill in all fields correctly.');
+          alert(
+            'Errors in input details, please fill in all fields correctly.',
+          );
         }
       })
       .catch(err => {
         nprogress.done();
         nprogress.remove();
-        console.log(err);
-        alert('Oopps!! An error occurred, please try again.')
+        console.error();
+        alert('Oopps!! An error occurred, please try again.');
         window.location.reload();
       });
   };
@@ -117,8 +117,8 @@ export const postDataWithToken = (url, payload, done) => {
         Authorization: bearerToken,
       }),
     })
-    .then(res => res.json())
-    .then(data => {
+      .then(res => res.json())
+      .then(data => {
         console.log(data);
         if (data.data) {
           nprogress.done();
@@ -128,7 +128,7 @@ export const postDataWithToken = (url, payload, done) => {
           nprogress.done();
           nprogress.remove();
           alert(data.error);
-          // window.location.reload();
+          window.location.reload();
         }
       })
       .catch(err => {

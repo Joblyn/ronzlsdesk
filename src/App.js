@@ -1,8 +1,4 @@
-// import { STATE_LOGIN, STATE_SIGNUP } from 'components/AuthForm';
-// import GAListener from 'components/GAListener';
 import {
-  // EmptyLayout,
-  // LayoutRoute,
   MainLayout,
   AdminMainLayout,
 } from './components/Layout';
@@ -11,7 +7,6 @@ import React from 'react';
 import componentQueries from 'react-component-queries';
 import {
   HashRouter as Router,
-  // Redirect,
   Route,
   Switch,
 } from 'react-router-dom';
@@ -20,22 +15,15 @@ import Landing from './pages/Landing';
 
 // user pages
 import Login from './pages/user/login';
-import Register from './pages/user/register'
-;
+import Register from './pages/user/register';
 import ForgotPassword from './pages/user/forgotPassword';
 import ConfirmPassword from './pages/user/confirmPassword';
-
 
 // admin pages
 import AdminLogin from './pages/admin/adminLogin';
 import AdminForgotPassword from './pages/admin/adminForgotPassword';
 import AdminConfirmPassword from './pages/admin/adminConfirmPassword';
 
-
-// import {
-  // logoutAdminAction,
-  // setCurrentAdminUser,
-// } from './actions/admin/authAction/Users';
 import { ProtectedRoute } from './validations/protectedRoute';
 import { IsUserRedirect } from './validations/isUserRedirect';
 
@@ -73,31 +61,6 @@ const superAdminDocumentPage = React.lazy(() => import('pages/super/document'));
 const superAdminClientPage = React.lazy(() => import('pages/super/clientPage'));
 const superAdminViewClientDetails = React.lazy(() => import('pages/super/adminViewClientDetails'));
 
-const superAdminButtonGroupPage = React.lazy(() =>import('pages/super/adminButtonGroupPage'));
-const superAdminButtonPage = React.lazy(() => import('pages/super/adminButtonPage'));
-const superAdminCardPage = React.lazy(() => import('pages/super/adminCardPage'));
-const superAdminChartPage = React.lazy(() => import('pages/super/adminChartPage'));
-// const superAdminDashboardPage = React.lazy(() =>import('pages/super/adminDashboardPage'));
-const superAdminDropdownPage = React.lazy(() =>import('pages/super/adminDropdownPage'));
-const superAdminFormPage = React.lazy(() => import('pages/super/adminFormPage'));
-const superAdminInputGroupPage = React.lazy(() =>import('pages/super/adminInputGroupPage'));
-const superAdminModalPage = React.lazy(() => import('pages/super/adminModalPage'));
-const superAdminProgressPage = React.lazy(() =>import('pages/super/adminProgressPage'));
-const superAdminTablePage = React.lazy(() => import('pages/super/adminTablePage'));
-const superAdminTypographyPage = React.lazy(() =>import('pages/super/adminTypographyPage'));
-const superAdminWidgetPage = React.lazy(() => import('pages/super/adminWidgetPage')); 
-const superAdminAlertPage = React.lazy(() => import('pages/super/superAlertPage')); 
-const superAuthModal = React.lazy(() => import('pages/super/superAuthModal')); 
-const superAuthModalPage = React.lazy(() => import('pages/super/superAuthModalPage')); 
-const superAuthPage = React.lazy(() => import('pages/super/superAuthPage')); 
-const superAdminBadgePage = React.lazy(() => import('pages/super/superBadgePage')); 
-// end of superAdmin
-
-
-// const getBasename = () => {
-//   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
-// };
-// console.log(getBasename);
 const auth = localStorage.getItem('jwtToken');
 const role = localStorage.getItem('role');
 
@@ -267,28 +230,6 @@ const App = ({ breakpoint }) => {
                 <ProtectedRoute>
                   <Route exact path="/superadmin/appointments" component={superAdminAppointments}/>
                 </ProtectedRoute>
-
-                {/* unnecessary */} 
-                <Route exact path="/superadmin/buttons" component={superAdminButtonPage} />
-                <Route exact path="/superadmin/cards" component={superAdminCardPage} />
-                <Route exact path="/superadmin/widgets" component={superAdminWidgetPage} />
-                <Route exact path="/superadmin/typography" component={superAdminTypographyPage}/>
-                <Route exact path="/superadmin/alerts" component={superAdminAlertPage} />
-                <Route exact path="/superadmin/tables" component={superAdminTablePage} />
-                <Route exact path="/superadmin/badges" component={superAdminBadgePage} />
-                <Route exact path="/superadmin/button-groups" component={superAdminButtonGroupPage} />
-                <Route exact path="/superadmin/dropdowns" component={superAdminDropdownPage} />
-                <Route exact path="/superadmin/progress" component={superAdminProgressPage} />
-                <Route exact path="/superadmin/modals" component={superAdminModalPage} />
-                <Route exact path="/superadmin/forms" component={superAdminFormPage} />
-                <Route exact path="/superadmin/input-groups" component={superAdminInputGroupPage} />
-                <Route exact path="/superadmin/charts" component={superAdminChartPage} />
-                <Route exact path="/superadmin/alert" component={superAdminAlertPage} /> 
-                <Route exact path="/superadmin/authmodal" component={superAuthModal} /> 
-                <Route exact path="/superadmin/authmodalpage" component={superAuthModalPage} /> 
-                <Route exact path="/superadmin/auth" component={superAuthPage} /> 
-                <Route exact path="/superadmin/badges" component={superAdminBadgePage} /> 
-                {/* end of unneccessary */}
               </React.Suspense>
             </AdminMainLayout> )
             : null

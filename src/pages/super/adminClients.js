@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Page from 'components/Page';
 import PageSpinner from '../../components/PageSpinner';
@@ -6,7 +7,8 @@ import CustomTable from '../../components/table/CustomTable';
 import { Link } from 'react-router-dom';
 
 export default function AdminClients(props) {
-  const { adminId, clients } = props.location.state;
+  const { adminId } = props.match.params;
+  const clients = useSelector(state => state.adminClients.clients);
 
   const viewDetails = id => {
     localStorage.setItem('client_id', id);

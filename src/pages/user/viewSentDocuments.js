@@ -37,7 +37,7 @@ export default function ViewSentDocuments() {
               View
             </Button>
           ),
-          date: document.created_dt,
+          date: document.created_dt.slice(0,10),
         }),
       );
     return rows;

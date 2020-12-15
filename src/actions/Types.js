@@ -97,3 +97,6 @@ export const ADMIN_UPDATE_CLIENT_SUBSRCIPTION = 'ADMIN_UPDATE_CLIENT_SUBSCRIPTIO
 export const GET_ALL_ADMINS = 'GET_ALL_ADMINS';
 // superadmin add user to admin
 export const ADD_CLIENT_TO_ADMIN = 'ADD_CLIENT_TO_ADMIN';
+
+// set admin clients
+export const SET_ADMIN_CLIENTS = 'SET_ADMIN_CLIENTS';

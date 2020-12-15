@@ -31,14 +31,14 @@ export default function AdminSentDocuments() {
           id: i + 1,
           client: client || 'null',
           docName: document.docName,
-          date: document.created_dt,
+          date: document.created_dt.slice(0,10),
           view: (
             <Button
               color="secondary"
               size="sm"
               className="p-1"
               style={{ fontSize: '.9rem', minWidth: '110px' }}
-              href={document.attachedFileUrl}
+              href={document.docContentUrl}
               target="_blank"
             >
               View
