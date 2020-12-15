@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 
@@ -16,7 +16,6 @@ import { userLogin } from '../../apiConstants/apiConstants';
 const Login = () => {
   const [control, setControl] = useState({});
   const dispatch = useDispatch();
-  const history = useHistory();
   const userLog = useSelector(state => state.userLoginAuth);
 
   const handleChange = event => {
@@ -40,7 +39,7 @@ const Login = () => {
       const decoded = jwt_decode(token);
       //set current user
       dispatch(setCurrentUser(decoded));
-      history.push('/user/dashboard');
+      window.location.pathname = '/user/dashboard';
     }
   }, [userLog]);
 

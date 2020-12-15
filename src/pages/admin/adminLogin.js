@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import jwt_decode from 'jwt-decode';
-// import { Redirect } from 'react-router-dom';
 
 import logo from '../../assets/images/logo.png';
 import bgImage from '../../assets/images/illustration.png';
@@ -18,7 +17,6 @@ import setAuthToken from '../../utils/setAuthToken';
 const AdminLogin = () => {
   const [control, setControl] = useState({});
   const dispatch = useDispatch();
-  const history = useHistory();
   const adminLog = useSelector(state => state.adminLoginAuth);
 
   const handleChange = event => {
@@ -42,10 +40,15 @@ const AdminLogin = () => {
       const decoded = jwt_decode(token);
       //set current user
       dispatch(setCurrentAdminUser(decoded));
-      history.push(`/${role}/dashboard`);
-    } 
+      if (role === 'admin') {
+        window.location.pathname = '/admin/dashboard';
+      }
+      if (role === 'superadmin') {
+        window.location.pathname = '/superadmin/dashboard';
+      }
+    }
   }, [adminLog]);
-  
+
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(login(adminLogin, control));
@@ -92,36 +95,39 @@ const AdminLogin = () => {
                 Manage all your e-commerce accounts in one place
               </div>
               <form onSubmit={handleSubmit}>
-              <div className="intro-x mt-8">
-                <InputField
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  className="intro-x login__input input input--lg border border-gray-300 block"
-                  placeholder="Email"
-                  required
-                />
-                <InputField
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  className="intro-x login__input input input--lg border border-gray-300 block mt-4"
-                  placeholder="Password"
-                  required
-                />
-              </div>
-              <div className="intro-x flex text-gray-700 text-xs sm:text-sm mt-4">
-                <Link to="/admin/forgot-password" className="text-green-500 font-semibold px-2 hover:underline">
-                  Forgot Password
-                </Link>
-              </div>
-              <div className="intro-x mt-5 xl:mt-8 xl:text-left">
-                <InputField 
-                  type="submit"
-                  className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"
-                  value="Login"
-                />
-              </div>
+                <div className="intro-x mt-8">
+                  <InputField
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                    className="intro-x login__input input input--lg border border-gray-300 block"
+                    placeholder="Email"
+                    required
+                  />
+                  <InputField
+                    type="password"
+                    name="password"
+                    onChange={handleChange}
+                    className="intro-x login__input input input--lg border border-gray-300 block mt-4"
+                    placeholder="Password"
+                    required
+                  />
+                </div>
+                <div className="intro-x flex text-gray-700 text-xs sm:text-sm mt-4">
+                  <Link
+                    to="/admin/forgot-password"
+                    className="text-green-500 font-semibold px-2 hover:underline"
+                  >
+                    Forgot Password
+                  </Link>
+                </div>
+                <div className="intro-x mt-5 xl:mt-8 xl:text-left">
+                  <InputField
+                    type="submit"
+                    className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"
+                    value="Login"
+                  />
+                </div>
               </form>
             </div>
           </div>

@@ -1,7 +1,6 @@
 {
   "name": "ronkl",
   "version": "1.1.0",
-  "homepage": "https://Joblyn.github.io/ronzlsdesk",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -17,7 +16,7 @@
     "jwt-decode": "^3.0.0-beta.2",
     "nprogress": "^0.2.0",
     "postcss": "^8.0.7",
-    "postcss-cli": "^7.1.2",
+    "postcss-cli": "^7.1.2", 
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-calendar": "^3.2.1",
@@ -61,7 +60,6 @@
     "build": "npm run build:css && react-scripts build",
     "serve": "serve -s build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject --env=jsdom",
     "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",

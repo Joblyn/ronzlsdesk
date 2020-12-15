@@ -6,7 +6,7 @@ import PageSpinner from './components/PageSpinner';
 import React from 'react';
 import componentQueries from 'react-component-queries';
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
 } from 'react-router-dom';
