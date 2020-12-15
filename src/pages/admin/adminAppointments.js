@@ -43,20 +43,34 @@ export default function AdminAppointments() {
     let rows = [];
     appointments &&
       appointments.reverse().map((appointment, i) => {
-        let status;
+        let status = 'Pending';
         let disabled = false;
+        let color;
         if (appointment.status) {
           disabled = true;
           status =
             appointment.status.charAt(0).toUpperCase() +
             appointment.status.slice(1);
         }
+        switch (status) {
+          case 'Pending':
+            color = 'orange';
+            break;
+          case 'Confirmed':
+            color = 'green';
+            break;
+          case 'Rejected':
+            color = 'red';
+            break;
+          default:
+            color = '';
+        }
         return rows.push({
           id: i + 1,
           client: appointment.client.companyName,
           message: appointment.appointmentMessage,
           dateScheduled: appointment.appointmentDate.slice(0, 10),
-          status: status || 'Pending',
+          status: <p style={{ color }}>{status}</p>,
           dateCreated: appointment.created_dt.slice(0, 10),
           action: (
             <div className="d-flex justify-content-around">

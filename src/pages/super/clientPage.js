@@ -72,6 +72,7 @@ const AdminClient = () => {
       data.reverse().map((user, index) => {
         let admin;
         let status;
+        let color;
         if (user.accountOfficer) {
           admin = user.accountOfficer.fullName;
         }
@@ -80,6 +81,19 @@ const AdminClient = () => {
             user.accountStatus.charAt(0).toUpperCase() +
             user.accountStatus.slice(1);
         }
+        switch(status) {
+          case 'Prospect':
+            color = 'orange';
+           break
+          case 'Active':
+            color = 'green';
+            break
+          case 'Inactive':
+            color = 'red';
+            break
+          default :
+            color = '';
+        }
         return rows.push({
           id: index + 1,
           user: user.companyName,
@@ -87,7 +101,7 @@ const AdminClient = () => {
           admin: admin || '- -',
           companyAddress: user.companyAddress,
           phoneNumber: user.phoneNumber,
-          status: status,
+          status: <p style={{color}}>{status}</p>,
           email: user.email,
           website: user.websiteUrl,
           actions: (

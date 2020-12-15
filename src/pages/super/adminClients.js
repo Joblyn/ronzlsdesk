@@ -20,15 +20,29 @@ export default function AdminClients(props) {
     clients &&
       clients.reverse().map((client, i) =>{
         let status = 'Prospect';
+        let color;
         if(client.accountStatus) {
           status =  client.accountStatus.charAt(0).toUpperCase() + client.accountStatus.slice(1);
+        }
+        switch(status) {
+          case 'Prospect':
+            color = 'orange';
+           break
+          case 'Active':
+            color = 'green';
+            break
+          case 'Inactive':
+            color = 'red';
+            break
+          default :
+            color = '';
         }
         return rows.push({
           id: i + 1,
           client: client.companyName,
           accountType: client.accountType,
           companyAddress: client.companyAddress,
-          status: status,
+          status: <p style={{color}}>{status}</p>,
           phoneNumber: client.phoneNumber,
           email: client.email,
           website: client.websiteUrl,

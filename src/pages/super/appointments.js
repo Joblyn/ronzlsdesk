@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getAppointments } from '../../actions/admin/clients/Clients';
-import {
-  getClientAppointments,
-} from '../../apiConstants/apiConstants';
+import { getClientAppointments } from '../../apiConstants/apiConstants';
 
 import Page from 'components/Page';
 import PageSpinner from '../../components/PageSpinner';
@@ -27,31 +25,47 @@ export default function Appointments() {
   const getRows = appointments => {
     let rows = [];
     appointments &&
-      appointments.reverse().map((appointment, i) =>{
-        let status;
+      appointments.reverse().map((appointment, i) => {
+        let status = 'Pending';
         let date;
-        if(appointment.status) {
-          status = appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1); 
+        let color;
+        if (appointment.status) {
+          status =
+            appointment.status.charAt(0).toUpperCase() +
+            appointment.status.slice(1);
         }
         if (appointment.appointmentDate) {
           date = appointment.appointmentDate.slice(0, 10);
+        }
+        switch (status) {
+          case 'Pending':
+            color = 'orange';
+            break;
+          case 'Confirmed':
+            color = 'green';
+            break;
+          case 'Rejected':
+            color = 'red';
+            break;
+          default:
+            color = '';
         }
         return rows.push({
           id: i + 1,
           client: appointment.client.companyName,
           message: appointment.appointmentMessage || '- -',
           dateScheduled: date,
-          status: status || 'Pending',
+          status: <p style={{ color }}>{status}</p>,
           dateCreated: appointment.created_dt.slice(0, 10),
-        })}
-      );
+        });
+      });
     return rows;
   };
 
   if (!adminGetAppointments.isSuccessful) {
     return <PageSpinner />;
   }
-  
+
   return (
     <>
       <Page

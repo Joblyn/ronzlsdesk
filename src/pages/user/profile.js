@@ -53,7 +53,7 @@ export default function Profile() {
                       Account Officer
                     </h3>
                   </div>
-                  <div
+                  {userData.accountOfficer ? <div
                     className="relative p-0 flex-auto"
                     style={{ color: 'black', width: '500px' }}
                   >
@@ -104,7 +104,11 @@ export default function Profile() {
                         </div>
                       </li>
                     </ul>
+                  </div> : 
+                  <div style={{height: '40vh'}} className="p-4 d-flex justify-content-center align-items-center">
+                    <em className="text-gray-700 text-xl">Not yet assigned to an account officer </em>
                   </div>
+                  }
                   <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
                     <button
                       className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"

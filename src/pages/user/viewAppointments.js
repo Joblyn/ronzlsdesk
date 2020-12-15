@@ -23,18 +23,32 @@ export default function ViewAppointments() {
     let rows = [];
     data &&
       data.reverse().map((appointment, i) => {
-        let status;
+        let status = 'Pending';
+        let color;
         if (appointment.status) {
           status =
             appointment.status.charAt(0).toUpperCase() +
             appointment.status.slice(1);
         }
+        switch (status) {
+          case 'Pending':
+            color = 'orange';
+            break;
+          case 'Confirmed':
+            color = 'green';
+            break;
+          case 'Rejected':
+            color = 'red';
+            break;
+          default:
+            color = '';
+        }
         return rows.push({
           id: i + 1,
-          message: appointment.appointmentMessage,
+          message: appointment.appointmentMessage || '- -',
           dateScheduled: appointment.appointmentDate.slice(0, 10),
           dateCreated: appointment.created_dt.slice(0, 10),
-          status: status || 'Pending',
+          status: <p style={{color}}>{status}</p>,
         });
       });
     return rows;
