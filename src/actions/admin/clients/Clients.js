@@ -1,5 +1,5 @@
 import * as ActionType from '../../Types';
-import { getDataWithToken, postDataWithToken } from '../../Services';
+import { getDataWithToken, postDataWithToken, patchDataWithToken } from '../../Services';
 
 // superadmin-client actions
 export const setAdminClients = payload => {
@@ -110,7 +110,7 @@ export const getClientDetails = url => {
 };
 
 export const updateClientSubscription = (url, payload) => {
-  return postDataWithToken(url, payload, onUpdateClientSubscription);
+  return patchDataWithToken(url, payload, onUpdateClientSubscription);
 }
 
 export const getAllDocuments = (url) => {

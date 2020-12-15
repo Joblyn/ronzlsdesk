@@ -82,7 +82,7 @@ export default function AdminSentDocuments() {
             },
             {
               id: 'client',
-              label: 'client',
+              label: 'Client',
               align: 'center',
               minWidth: 100,
               color: value => 'blue',

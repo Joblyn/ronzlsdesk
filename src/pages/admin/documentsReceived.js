@@ -83,7 +83,7 @@ export default function AdminReceivedDocumnents() {
             },
             {
               id: 'client',
-              label: 'client',
+              label: 'Client',
               align: 'center',
               minWidth: 150,
               color: value => 'blue',

@@ -18,12 +18,17 @@ export default function AdminClients(props) {
     let rows = [];
 
     clients &&
-      clients.reverse().map((client, i) =>
-        rows.push({
+      clients.reverse().map((client, i) =>{
+        let status = 'Prospect';
+        if(client.accountStatus) {
+          status =  client.accountStatus.charAt(0).toUpperCase() + client.accountStatus.slice(1);
+        }
+        return rows.push({
           id: i + 1,
           client: client.companyName,
           accountType: client.accountType,
           companyAddress: client.companyAddress,
+          status: status,
           phoneNumber: client.phoneNumber,
           email: client.email,
           website: client.websiteUrl,
@@ -36,7 +41,7 @@ export default function AdminClients(props) {
               View Details
             </Link>
           ),
-        }),
+        })}
       );
     return rows;
   };
@@ -106,6 +111,13 @@ export default function AdminClients(props) {
               id: 'website',
               label: 'Website',
               minWidth: 80,
+              align: 'center',
+              color: value => 'blue',
+            },
+            {
+              id: 'status',
+              label: 'status',
+              minWidth: 100,
               align: 'center',
               color: value => 'blue',
             },

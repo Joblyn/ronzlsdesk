@@ -71,8 +71,14 @@ const AdminClient = () => {
     data &&
       data.reverse().map((user, index) => {
         let admin;
+        let status;
         if (user.accountOfficer) {
           admin = user.accountOfficer.fullName;
+        }
+        if (user.accountStatus) {
+          status =
+            user.accountStatus.charAt(0).toUpperCase() +
+            user.accountStatus.slice(1);
         }
         return rows.push({
           id: index + 1,
@@ -81,6 +87,7 @@ const AdminClient = () => {
           admin: admin || '- -',
           companyAddress: user.companyAddress,
           phoneNumber: user.phoneNumber,
+          status: status,
           email: user.email,
           website: user.websiteUrl,
           actions: (
@@ -129,7 +136,7 @@ const AdminClient = () => {
         })
           .then(res => res.json())
           .then(data => {
-            alert('Users added successfully!')
+            alert('Users added successfully!');
             nProgress.done();
             nProgress.remove();
           })
@@ -229,6 +236,13 @@ const AdminClient = () => {
               id: 'website',
               label: 'Website',
               minWidth: 80,
+              align: 'center',
+              color: value => 'blue',
+            },
+            {
+              id: 'status',
+              label: 'Status',
+              minWidth: 100,
               align: 'center',
               color: value => 'blue',
             },

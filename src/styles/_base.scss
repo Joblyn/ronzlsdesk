@@ -209,3 +209,9 @@ input[type='radio']:checked:after {
 .assign:hover {
   background: #45b649;
 }
+
+.screen-edit {
+  @media (min-width: 1279px) {
+    height: 100vh;
+  }
+}

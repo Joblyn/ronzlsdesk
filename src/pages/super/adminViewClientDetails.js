@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-// import { 
-  // Link,
-  // useHistory, 
-  // useLocation,
-  // useParams
+// import {
+// Link,
+// useHistory,
+// useLocation,
+// useParams
 // } from 'react-router-dom';
 
 // import logo from '../../assets/images/logo.png';
@@ -11,9 +11,11 @@ import React, { useEffect, useState } from 'react';
 
 // import { registerUser } from '../../actions/user/Users';
 import { updateClientSubscription } from '../../actions/admin/clients/Clients';
-import { 
-  // userRegister, 
-  adminUpdateSubscription, getClientDetail } from '../../apiConstants/apiConstants';
+import {
+  // userRegister,
+  adminUpdateSubscription,
+  getClientDetail,
+} from '../../apiConstants/apiConstants';
 // import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
 import PageSpinner from '../../components/PageSpinner';
 
@@ -39,17 +41,38 @@ const AdminViewClientDetails = () => {
 
   const [data, setData] = useState({});
   const [director, setDirector] = useState([{}]);
-
+  const [subscriptionBegin, setSubscriptionBegin] = useState('');
+  const [subscriptionEnd, setSubscriptionEnd] = useState('');
   useEffect(() => {
     let client_id = localStorage.getItem('client_id');
     let endpoint = getClientDetail + client_id;
     dispatch(getClientDetails(endpoint));
   }, []);
 
+  const [color, setColor] = useState('');
   useEffect(() => {
     setData(clientDetails);
     setDirector(clientDetails.director);
+    if (clientDetails.subscriptionBegin || clientDetails.subscriptionEnd) {
+      setSubscriptionBegin(clientDetails.subscriptionBegin.slice(0, 10));
+      setSubscriptionEnd(clientDetails.subscriptionEnd.slice(0, 10));
+    }
   }, [clientDetails]);
+
+  useEffect(() => {
+    if (data.accountStatus) {
+      switch (data.accountStatus) {
+        case 'prospect':
+          return setColor('orange');
+        case 'active':
+          return setColor('green');
+        case 'inactive':
+          return setColor('red');
+        default:
+          return 'inherit';
+      }
+    }
+  }, [data]);
   // const handleInputChange = (event, count) => {
   //   obj[event.target.name] = event.target.value;
   //   setManagerControl({
@@ -122,7 +145,6 @@ const AdminViewClientDetails = () => {
     </div>
   );
 
-
   // const handleClick = event => {
   //   event.preventDefault();
   //   let managers = prepareManager(managerControl);
@@ -145,25 +167,12 @@ const AdminViewClientDetails = () => {
     );
   });
 
-  const [subscriptionBegin, setSubscriptionBegin] = useState("2020-11-03");
-  const [subscriptionEnd, setSubscriptionEnd] = useState("2021-11-03");
-  const updatedSubscription = useSelector(state => state.adminUpdateSubscription);
-
-  useEffect(() => {
-    if (updatedSubscription.isSuccesful) {
-      let result = updatedSubscription.result;
-      console.log(result);
-      // continue from here
-    }
-  }, [updatedSubscription]);
-
   const updateSubscription = (e, id) => {
-    e.preventDefault(); 
+    e.preventDefault();
     const payload = {
       subscriptionBegin,
-      subscriptionEnd
-    }
-    console.log(id);
+      subscriptionEnd,
+    };
     let endpoint = `${adminUpdateSubscription}${id}`;
     console.log(endpoint);
     console.log(payload);
@@ -179,41 +188,75 @@ const AdminViewClientDetails = () => {
       <div className="container sm:px-10">
         <div className="intro-x">
           <div className="block xl:grid grid-cols-2 gap-4 mt-3">
-            <div className="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto ">
+            <div
+              className="my-auto mx-auto xl:ml-20 px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto"
+              style={{ background: '#fff' }}
+            >
               <div className="mb-3">
+                <div className={`mb-3`}>
+                  Status:{' '}
+                  <span
+                    style={{ fontWeight: '500', color: color }}
+                    className="text-lg"
+                  >
+                    {data.accountStatus
+                      ? data.accountStatus.charAt(0).toUpperCase() +
+                        data.accountStatus.slice(1)
+                      : ''}
+                  </span>
+                </div>
                 <header className="font-semibold">Subscription</header>
-                <div className="mb-2 d-flex" style={{justifyContent: "space-between"}}>
+                <div
+                  className="mb-2 d-flex"
+                  style={{ justifyContent: 'space-between' }}
+                >
                   <div>Start:</div>
-                  <div><input type="date"
-                    name="subscriptionBegin"
-                    value={subscriptionBegin}
-                    onChange={({target}) => setSubscriptionBegin(target.value)}
-                    disabled={disabled}
-                    style={{ backgroundColor: "inherit" }}
-                  />
+                  <div>
+                    <input
+                      type="date"
+                      name="subscriptionBegin"
+                      value={subscriptionBegin}
+                      onChange={({ target }) =>
+                        setSubscriptionBegin(target.value)
+                      }
+                      disabled={disabled}
+                      style={{ backgroundColor: 'inherit' }}
+                    />
                   </div>
                 </div>
-                <div className="mb-2 d-flex" style={{ justifyContent: "space-between" }}>
+                <div
+                  className="mb-2 d-flex"
+                  style={{ justifyContent: 'space-between' }}
+                >
                   <div>End:</div>
-                  <div><input type="date"
-                    name="subscriptionEnd"
-                    value={subscriptionEnd}
-                    onChange={({ target }) => setSubscriptionEnd(target.value)}
-                    disabled={disabled}
-                    style={{ backgroundColor: "inherit" }} />
+                  <div>
+                    <input
+                      type="date"
+                      name="subscriptionEnd"
+                      value={subscriptionEnd}
+                      onChange={({ target }) =>
+                        setSubscriptionEnd(target.value)
+                      }
+                      disabled={disabled}
+                      style={{ backgroundColor: 'inherit' }}
+                    />
                   </div>
                 </div>
-                {disabled ? <Button
-                  type="button"
-                  onClick={() => setDisabled(!disabled)}
-                  className="button button--md text-white bg-theme-1 xl:mr-3"
-                  value="Set Subscription" />
-                  : <Button
+                {disabled ? (
+                  <Button
                     type="button"
-                    onClick={(e) => updateSubscription(e, data._id)}
+                    onClick={() => setDisabled(!disabled)}
+                    className="button button--md text-white bg-theme-1 xl:mr-3"
+                    value="Set Subscription"
+                  />
+                ) : (
+                  <Button
+                    type="button"
+                    onClick={e => updateSubscription(e, data._id)}
                     className="button button--md text-white bg-theme-1 xl:mr-3"
                     value="Update"
-                  />}
+                  />
+                )}
               </div>
               {data.director &&
                 data.director.map((data, i) => {
@@ -293,7 +336,10 @@ const AdminViewClientDetails = () => {
                 disabled
               />
             </div>
-            <div className="xl:h-auto flex xl:py-0 xl:my-0 mb-5">
+            <div
+              className="xl:h-auto flex xl:py-0 xl:my-0 mb-5"
+              style={{ background: '#fff' }}
+            >
               <div className="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto ">
                 <label className="font-semibold mt-2">Website:</label>
                 <InputField

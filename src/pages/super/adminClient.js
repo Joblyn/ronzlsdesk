@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import InputField from '../../components/InputField';
 import PageSpinner from '../../components/PageSpinner';
@@ -10,7 +10,7 @@ export default function AdminClient() {
   const dispatch = useDispatch();
   const data = useSelector(state => state.adminGetAllClient.user);
   const [clientData, setClientData] = useState({});
-
+  const [color, setColor] = useState('');
   useEffect(() => {
     let client_id = localStorage.getItem('client_id');
     let endpoint = getClientDetail + client_id;
@@ -20,6 +20,20 @@ export default function AdminClient() {
   useEffect(() => {
     setClientData(data);
   }, [data]);
+  useEffect(() => {
+    if (clientData.accountStatus) {
+      switch (clientData.accountStatus) {
+        case 'prospect':
+          return setColor('orange');
+        case 'active':
+          return setColor('green');
+        case 'inactive':
+          return setColor('red');
+        default:
+          return 'inherit';
+      }
+    }
+  }, [clientData]);
 
   const _onFocus = event => {
     event.currentTarget.type = 'date';
@@ -63,7 +77,62 @@ export default function AdminClient() {
       <div className="container sm:px-10">
         <div className="intro-x">
           <div className="block xl:grid grid-cols-2 gap-4 mt-3">
-            <div className="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto ">
+            <div className="my-auto mx-auto xl:ml-20 px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto bg-white">
+              <div className="mb-3">
+                <div className="mb-3">
+                  Status:{' '}
+                  <span
+                    style={{ fontWeight: '500', color: color }}
+                    className={`text-lg`}
+                  >
+                    {clientData.accountStatus
+                      ? clientData.accountStatus.charAt(0).toUpperCase() +
+                        clientData.accountStatus.slice(1)
+                      : ''}
+                  </span>
+                </div>
+                <header className="font-semibold">Subscription</header>
+                <div
+                  className="mb-2 d-flex"
+                  style={{ justifyContent: 'space-between' }}
+                >
+                  <div>Start:</div>
+                  <div>
+                    <input
+                      type="date"
+                      name="subscriptionBegin"
+                      value={
+                        clientData.subscriptionBegin
+                          ? clientData.subscriptionBegin.slice(0, 10)
+                          : ''
+                      }
+                      disabled
+                      style={{ backgroundColor: 'inherit' }}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div
+                    className="mb-2 d-flex"
+                    style={{ justifyContent: 'space-between' }}
+                  >
+                    <div>End:</div>
+                    <div>
+                      <input
+                        type="date"
+                        name="subscriptionEnd"
+                        value={
+                          clientData.subscriptionEnd
+                            ? clientData.subscriptionEnd.slice(0, 10)
+                            : ''
+                        }
+                        disabled
+                        style={{ backgroundColor: 'inherit' }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
               {clientData.director &&
                 clientData.director.map((clientData, i) => {
                   return addNewDirector(i, i);
@@ -134,7 +203,7 @@ export default function AdminClient() {
                 disabled
               />
             </div>
-            <div className="xl:h-auto flex xl:py-0 xl:my-0 mb-5">
+            <div className="xl:h-auto flex xl:py-0 xl:my-0 mb-5 bg-white">
               <div className="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto ">
                 <label className="font-semibold mt-2">Website:</label>
                 <InputField

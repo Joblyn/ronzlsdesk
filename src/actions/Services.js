@@ -139,3 +139,43 @@ export const postDataWithToken = (url, payload, done) => {
       });
   };
 };
+
+export const patchDataWithToken = (url, payload, done) => {
+  const endpoint = baseUrl + url;
+  console.log('Endpoint: ' + endpoint);
+  console.log('Payload:' + JSON.stringify(payload));
+  const token = localStorage.getItem('jwtToken');
+  const bearerToken = 'Bearer ' + token;
+  nprogress.start();
+  return dispatch => {
+    fetch(endpoint, {
+      method: 'PATCH',
+      body: JSON.stringify(payload),
+      credentials: 'same-origin',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        Authorization: bearerToken,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data.data) {
+          nprogress.done();
+          nprogress.remove();
+          dispatch(done(data.data));
+          window.location.reload();
+        } else if (data.error) {
+          nprogress.done();
+          nprogress.remove();
+          alert(data.error);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        nprogress.done();
+        nprogress.remove();
+        alert(err);
+      });
+  }; 
+}

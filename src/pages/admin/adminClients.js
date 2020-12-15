@@ -13,7 +13,7 @@ export default function AdminClients() {
   const getClientsForAdmin = useSelector(state => state.getClientsForAdmin);
 
   useEffect(() => {
-    dispatch(adminGetClients(getClientsUnderAdmin))
+    dispatch(adminGetClients(getClientsUnderAdmin));
   }, []);
 
   if (getClientsForAdmin.isSuccessful) {
@@ -22,13 +22,19 @@ export default function AdminClients() {
 
   const handleClick = id => {
     localStorage.setItem('client_id', id);
-  }
+  };
 
   const getRows = data => {
     let rows = [];
     data &&
-      data.reverse().map((client, i) => (
-        rows.push({
+      data.reverse().map((client, i) => {
+        let status = 'Prospect'; 
+        if(client.accountStatus) {
+          status =
+            client.accountStatus.charAt(0).toUpperCase() +
+            client.accountStatus.slice(1);
+        }
+        return rows.push({
           id: i + 1,
           user: client.companyName,
           accountType: client.accountType,
@@ -36,29 +42,29 @@ export default function AdminClients() {
           phoneNumber: client.phoneNumber,
           email: client.email,
           website: client.websiteUrl,
-          view: <Link
+          status: status,
+          view: (
+            <Link
               onClick={() => handleClick(client._id)}
               to={`/admin/client/details/userID=${client._id}`}
               className="bg-green-700 text-white rounded-full px-2 py-2"
             >
               View Details
             </Link>
-        })
-      ));
+          ),
+        });
+      });
     return rows;
-  }
+  };
 
   if (!getClientsForAdmin.isSuccessful) {
-    return <PageSpinner />
+    return <PageSpinner />;
   }
   return (
-    <Page
-      title="Dropdowns"
-      breadcrumbs={[{ name: 'Clients', active: true }]}
-    >
+    <Page title="Dropdowns" breadcrumbs={[{ name: 'Clients', active: true }]}>
       <div
         style={{
-          overflowX: 'auto'
+          overflowX: 'auto',
         }}
       >
         <CustomTable
@@ -72,7 +78,6 @@ export default function AdminClients() {
               minWidth: 20,
               color: value => 'blue',
             },
-
             {
               id: 'user',
               label: 'Client',
@@ -116,6 +121,13 @@ export default function AdminClients() {
               color: value => 'blue',
             },
             {
+              id: 'status',
+              label: 'Status',
+              minWidth: 100,
+              align: 'center',
+              color: value => 'blue',
+            },
+            {
               id: 'view',
               label: 'Actions',
               minWidth: 150,
@@ -127,5 +139,5 @@ export default function AdminClients() {
         />
       </div>
     </Page>
-  )
+  );
 }

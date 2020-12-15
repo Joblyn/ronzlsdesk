@@ -12,10 +12,25 @@ export default function Profile() {
   const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
   const userData = useSelector(state => state.userData.data);
-
+  const [color, setColor] = useState();
   useEffect(() => {
     dispatch(getUser(getUserData));
   }, []);
+
+  useEffect(() => {
+    if (userData.accountStatus) {
+      switch (userData.accountStatus) {
+        case 'prospect':
+          return setColor('orange');
+        case 'active':
+          return setColor('green');
+        case 'inactive':
+          return setColor('red');
+        default:
+          return 'inherit';
+      }
+    }
+  }, [userData]);
 
   if (!userData.role) {
     return <PageSpinner />;
@@ -115,18 +130,20 @@ export default function Profile() {
                   <p>Role:</p>
                 </div>
                 <div className="green">
-                  <p>
-                    {userData.role.charAt(0).toUpperCase() +
-                      userData.role.slice(1)}
-                  </p>
+                  <p>{userData.role === 'user' && 'Client'}</p>
                 </div>
               </li>
               <li>
                 <div>
                   <p>Account Status:</p>
                 </div>
-                <div className="yellow">
-                  <p>{userData.accountStatus}</p>
+                <div style={{ color: color }}>
+                  <p>
+                    {userData.accountStatus
+                      ? userData.accountStatus.charAt(0).toUpperCase() +
+                        userData.accountStatus.slice(1)
+                      : ''}
+                  </p>
                 </div>
               </li>
               <li>
