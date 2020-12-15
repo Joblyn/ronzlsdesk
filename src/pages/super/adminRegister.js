@@ -50,14 +50,14 @@ const AdminRegister = () => {
       <div className="container sm:px-10">
         <div className="block xl:grid gap-4">
           <div className="xl:h-auto flex py-5 xl:py-0 xl:my-0">
-            <div className="my-auto mx-auto xl:ml-2 bg-white xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
+            <div className="my-auto mx-auto xl:ml-2 bg-white xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto min-h-screen">
               <form onSubmit={handleSubmit}>
                 <div className="intro-x mt-8">
                   <InputField
                     type="text"
                     name="fullName"
                     onChange={handleChange}
-                    className="intro-x login__input input input--lg border border-gray-300 block"
+                    className="intro-x login__input input input--lg border border-gray-300 block w-100"
                     placeholder="Full Name"
                     required
                   />
@@ -65,7 +65,7 @@ const AdminRegister = () => {
                     type="tel"
                     name="phoneNumber"
                     onChange={handleChange}
-                    className="intro-x login__input input input--lg border border-gray-300 block mt-4"
+                    className="intro-x login__input input input--lg border border-gray-300 block mt-4 w-100"
                     placeholder="Phone Number"
                     required
                   />
@@ -73,14 +73,14 @@ const AdminRegister = () => {
                     type="email"
                     name="email"
                     onChange={handleChange}
-                    className="intro-x login__input input input--lg border border-gray-300 block mt-4"
+                    className="intro-x login__input input input--lg border border-gray-300 block mt-4 w-100"
                     placeholder="Email"
                     required
                   />
                   <InputDropdown
                     onChange={handleChange}
                     name="role"
-                    className="intro-x login__input input input--lg border border-gray-300 block mt-4"
+                    className="intro-x login__input input input--lg border border-gray-300 block mt-4 w-100"
                     dropdownElements={dropdownData}
                     required
                   />
@@ -88,7 +88,7 @@ const AdminRegister = () => {
                     type="password"
                     name="password"
                     onChange={handleChange}
-                    className="intro-x login__input input input--lg border border-gray-300 block mt-4"
+                    className="intro-x login__input input input--lg border border-gray-300 block mt-4 w-100"
                     placeholder="Password"
                     required
                   />

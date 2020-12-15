@@ -1,6 +1,7 @@
 // page
 .cr-page {
   min-height: 100vh;
+  padding-top: $spacer * .5;
   &__header {
     @include media-breakpoint-down(sm) {
       flex-direction: column;

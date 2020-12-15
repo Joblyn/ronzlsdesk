@@ -36,7 +36,7 @@ const Register = () => {
       const decoded = jwt_decode(token);
       dispatch(setCurrentUser(decoded));
       setIsLoading(false);
-      history.push('/user/dashboard');
+      window.location.pathname = '/user/dashboard';
     }
   }, [userReg]);
 
@@ -90,7 +90,7 @@ const Register = () => {
         type="text"
         name={'fullName' + count}
         onChange={e => handleInputChange(e, count)}
-        className="intro-x login__input input my-2 input--lg border border-gray-300 block"
+        className="intro-x login__input input my-2 input--lg border border-gray-300 block w-100"
         placeholder="Full Name e.g. 'John Okoye'"
         value={managerControl.fullName}
         required
@@ -101,7 +101,7 @@ const Register = () => {
         onFocus={_onFocus}
         onBlur={_onBlur}
         onChange={e => handleInputChange(e, count)}
-        className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+        className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
         placeholder="Date of Birth"
         value={managerControl.dateOfBirth}
         required
@@ -190,7 +190,7 @@ const Register = () => {
                   <InputDropdown
                     onChange={({target}) => handleChange(target)}
                     name="accountType"
-                    className="intro-x login__input input input--lg my-2 border border-gray-300 block mt-4"
+                    className="intro-x login__input input input--lg my-2 border border-gray-300 block mt-4 w-100"
                     dropdownElements={dropdownData}
                     required
                   />
@@ -198,7 +198,7 @@ const Register = () => {
                     type="text"
                     name="companyName"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Company Name e.g. 'Samsung Ng'"
                     required
                   />
@@ -206,7 +206,7 @@ const Register = () => {
                     type="text"
                     name="companyAddress"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Company Address e.g. 'No. 2, Lagos street, Lagos'"
                     required
                   />
@@ -214,7 +214,7 @@ const Register = () => {
                     type="text"
                     name="city"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="City e.g. 'Lagos'"
                     required
                   />
@@ -222,7 +222,7 @@ const Register = () => {
                     type="text"
                     name="postalCode"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Postal Code e.g. '100001'"
                     required
                   />
@@ -230,7 +230,7 @@ const Register = () => {
                     type="text"
                     name="country"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Country e.g. 'Nigeria"
                     required
                   />
@@ -238,7 +238,7 @@ const Register = () => {
                     type="tel"
                     name="phoneNumber"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Phone Number e.g. '0123456789'"
                     required
                   />
@@ -246,7 +246,7 @@ const Register = () => {
                     type="email"
                     name="email"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Email e.g. 'example@example.com"
                     required
                   />
@@ -254,7 +254,7 @@ const Register = () => {
                     type="text"
                     name="websiteUrl"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Website Url e.g. 'www.example.com'"
                     required
                   />
@@ -262,7 +262,7 @@ const Register = () => {
                     type="text"
                     name="companyBegin"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Company Begin e.g '2020-12-25'"
                     required
                   />
@@ -270,7 +270,7 @@ const Register = () => {
                     type="text"
                     name="companyRegNo"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Company Reg No e.g. '1234'"
                     required
                   />
@@ -278,7 +278,7 @@ const Register = () => {
                     type="text"
                     name="utrNo"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="UTR Number e.g. '1234'"
                     required
                   />
@@ -286,7 +286,7 @@ const Register = () => {
                     type="text"
                     name="vatSubmitType"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Vat Submit Type e.g. 'Non-VAT Registered'"
                     required
                   />
@@ -294,7 +294,7 @@ const Register = () => {
                     type="text"
                     name="vatScheme"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="VAT Scheme e.g. 'Annually'"
                     required
                   />
@@ -302,7 +302,7 @@ const Register = () => {
                     type="text"
                     name="vatRegNo"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="VAT Reg No e.g. '1234'"
                     required
                   />
@@ -310,7 +310,7 @@ const Register = () => {
                     type="text"
                     name="vatRegDate"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="VAT Reg Date e.g. '2020-12-25'"
                     required
                   />
@@ -318,7 +318,7 @@ const Register = () => {
                     type="text"
                     name="insuranceNumber"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Insurance Number e.g '12AB34CD56EF"
                     required
                   />
@@ -326,7 +326,7 @@ const Register = () => {
                     type="text"
                     name="payeeRefNo"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Payee Ref No e.g. '12AB34CD56EF'"
                     required
                   />
@@ -334,7 +334,7 @@ const Register = () => {
                     type="password"
                     name="password"
                     onChange={({target}) => handleChange(target)}
-                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
+                    className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Password"
                     required 
                   />
