@@ -12,15 +12,14 @@ import setAuthToken from '../../utils/setAuthToken';
 
 //components
 import InputField from '../../components/InputField';
-// import Button from '../../components/button';
 import { useDispatch, useSelector } from 'react-redux';
 import InputDropdown from '../../components/InputDropdown';
 
 const Register = () => {
   const [inputList, setInputList] = useState([1]);
-  // const [inputList1, setInputList1] = useState([]);
   const [managerControl, setManagerControl] = useState({});
   const [count, setCount] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   let obj = {};
   const [control, setControl] = useState({});
   const dispatch = useDispatch();
@@ -36,6 +35,7 @@ const Register = () => {
       setAuthToken(token);
       const decoded = jwt_decode(token);
       dispatch(setCurrentUser(decoded));
+      setIsLoading(false);
       history.push('/user/dashboard');
     }
   }, [userReg]);
@@ -126,6 +126,7 @@ const Register = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
+    setIsLoading(true);
     let managers = prepareManager(managerControl);
     let payload = { director: managers, ...control };
     dispatch(registerUser(userRegister, payload));
@@ -349,6 +350,7 @@ const Register = () => {
                     type="submit"
                     className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"
                     value="Register"
+                    disabled={isLoading}
                   />
                 </div>
               </form>

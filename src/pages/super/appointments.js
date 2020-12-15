@@ -29,14 +29,18 @@ export default function Appointments() {
     appointments &&
       appointments.reverse().map((appointment, i) =>{
         let status;
+        let date;
         if(appointment.status) {
           status = appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1); 
+        }
+        if (appointment.appointmentDate) {
+          date = appointment.appointmentDate.slice(0, 10);
         }
         return rows.push({
           id: i + 1,
           client: appointment.client.companyName,
           message: appointment.appointmentMessage || '- -',
-          dateScheduled: appointment.appointmentDate.slice(0, 10),
+          dateScheduled: date,
           status: status || 'Pending',
           dateCreated: appointment.created_dt.slice(0, 10),
         })}
@@ -99,7 +103,7 @@ export default function Appointments() {
                 align: 'center',
                 label: 'Date Created',
                 minWidth: 100,
-                color: value => 'black',
+                color: value => 'blue',
               },
             ]}
             rows={getRows(adminGetAppointments.appointments)}

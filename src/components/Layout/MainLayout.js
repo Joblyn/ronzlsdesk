@@ -1,10 +1,6 @@
 import { Content, Footer, Header, Sidebar } from 'components/Layout';
 import React from 'react';
-import {
-  MdImportantDevices,
-  // MdCardGiftcard,
-  // MdLoyalty,
-} from 'react-icons/md';
+import { MdImportantDevices } from 'react-icons/md';
 import NotificationSystem from 'react-notification-system';
 import { NOTIFICATION_SYSTEM_STYLE } from 'utils/constants';
 
@@ -35,7 +31,6 @@ class MainLayout extends React.Component {
         level: 'info',
       });
     }, 1500);
-
   }
 
   // close sidebar when

@@ -98,14 +98,14 @@ const Login = () => {
                     type="email"
                     name="email"
                     onChange={handleChange}
-                    className="intro-x login__input input input--lg border border-gray-300 block"
+                    className="intro-x login__input input input--lg border border-gray-300 block w-100"
                     placeholder="Email"
                   />
                   <InputField
                     type="password"
                     name="password"
                     onChange={handleChange}
-                    className="intro-x login__input input input--lg border border-gray-300 block mt-4"
+                    className="intro-x login__input input input--lg border border-gray-300 block mt-4 w-100"
                     placeholder="Password"
                   />
                 </div>
