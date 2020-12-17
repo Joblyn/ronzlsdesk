@@ -14,7 +14,7 @@ export default function CreateAppointment() {
   const secondaryColor = getColor('secondary');
   
   const today = new Date();
-  const [date, setDate] = useState(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`);
+  const [date, setDate] = useState(today);
   const [message, setMessage] = useState('');
   const dispatch = useDispatch();
   const userBookAppointment = useSelector(state => state.userBookAppointment);
@@ -32,16 +32,26 @@ export default function CreateAppointment() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (date === today) {
+      return alert('Please set a date beyond today.')
+    }
+    let year = date.getFullYear();
+    let m = date.getMonth()+1;
+    let d = date.getDate();
+    let month = (m < 10) ? `0${m}` : m; 
+    let newDate = (d.toString().length < 2) ? `0${d}` : d;
     const payload = {
-      appointmentDate: date,
+      appointmentDate: `${year}-${month}-${newDate}`,
       appointmentMessage: message
     };
+    // .toDateString()
     console.log(payload);
+    
     dispatch(bookAppointment(userBookAppointmentWithAdmin, payload));
   }
 
   if(userBookAppointment.isSuccessful) {
-    alert(`Successfully booked appointment with admin on ${date}`);
+    alert(`Booked an appoinment with account officer on ${date.toDateString()}`);
     console.log(userBookAppointment.result);
   }
 
@@ -53,9 +63,19 @@ export default function CreateAppointment() {
     >
     <main className="appt-main">
       <Form className="appt-form" id="appt-form" onSubmit={handleSubmit}>
+        <FormGroup className="form-group" style={{width:'85%'}}>
+          <InputField 
+            required
+            type="text"
+            name="message"
+            placeholder="Appointment Message"
+            className="mt-2 border"
+            onChange={({ target }) => setMessage(target.value)}
+          />
+        </FormGroup>
         <div className="calender">
           <InfiniteCalendar
-            selected={today}
+            selected={date}
             minDate={lastWeek}
             width={'100%'}
             height={300}
@@ -75,19 +95,9 @@ export default function CreateAppointment() {
               todayColor: secondaryColor,
               weekdayColor: primaryColor,
             }}
-            onSelect={date => setDate(`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`)}
+            onSelect={date => setDate(new Date(date))}
           />
         </div>
-        <FormGroup className="form-group">
-          <InputField 
-            required
-            type="text"
-            name="message"
-            placeholder="Appointment Message"
-            className="inp mt-2"
-            onChange={({ target }) => setMessage(target.value)}
-          />
-        </FormGroup>
         <Button className="button mt-3" form="appt-form" type="submit" style={{ fontSize: '1rem'}} disabled={isInvalid}>Book Appointment</Button>
       </Form>
     </main>

@@ -7,7 +7,6 @@ import { getDocumentsReceivedFromUser } from '../../actions/admin/clients/Client
 import Page from 'components/Page';
 import CustomTable from '../../components/table/CustomTable';
 import PageSpinner from '../../components/PageSpinner';
-import Modal from '../../components/Modal';
 import { Button } from 'reactstrap';
 
 export default function AdminReceivedDocumnents() {
@@ -28,7 +27,7 @@ export default function AdminReceivedDocumnents() {
           id: i + 1,
           client: document.sender.companyName,
           docName: document.docName,
-          date: document.created_dt.slice(0,10),
+          date: document.created_dt.slice(0, 10),
           view: (
             <Button
               color="secondary"
@@ -55,15 +54,10 @@ export default function AdminReceivedDocumnents() {
       title="Dashboard"
       breadcrumbs={[{ name: 'Documents', active: true }]}
     >
-      <div className="d-flex  align-items-center flex-row-reverse justify-content-between mb-2">
-        <div style={{ textAlign: 'end' }}>
-          <Modal color="#fff" action="Upload Document" />
-        </div>
-        <div className="links">
-          <Link className="active m-0" to="/admin/documents/sent">
-            View sent documents
-          </Link>
-        </div>
+      <div className="links">
+        <Link className="active m-0" to="/admin/documents/sent">
+          View sent documents
+        </Link>
       </div>
       <div
         style={{

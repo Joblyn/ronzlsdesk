@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
 
@@ -24,7 +24,6 @@ const Register = () => {
   const [control, setControl] = useState({});
   const dispatch = useDispatch();
   const userReg = useSelector(state => state.userRegisterauth);
-  const history = useHistory();
 
   useEffect(() => {
     if (userReg.isSuccessful) {

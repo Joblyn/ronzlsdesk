@@ -68,6 +68,7 @@ const AdminClient = () => {
 
   const getRows = data => {
     let rows = [];
+    // let prospect = data.filter(user => user.accountStatus === 'active');
     data &&
       data.reverse().map((user, index) => {
         let admin;
@@ -81,17 +82,17 @@ const AdminClient = () => {
             user.accountStatus.charAt(0).toUpperCase() +
             user.accountStatus.slice(1);
         }
-        switch(status) {
+        switch (status) {
           case 'Prospect':
             color = 'orange';
-           break
+            break;
           case 'Active':
             color = 'green';
-            break
+            break;
           case 'Inactive':
             color = 'red';
-            break
-          default :
+            break;
+          default:
             color = '';
         }
         return rows.push({
@@ -101,7 +102,7 @@ const AdminClient = () => {
           admin: admin || '- -',
           companyAddress: user.companyAddress,
           phoneNumber: user.phoneNumber,
-          status: <p style={{color}}>{status}</p>,
+          status: <p style={{ color }}>{status}</p>,
           email: user.email,
           website: user.websiteUrl,
           actions: (
@@ -169,15 +170,15 @@ const AdminClient = () => {
   }
   return (
     <Page title="Dropdowns" breadcrumbs={[{ name: 'Clients', active: true }]}>
-      <div className="d-flex align-items-center m-3 cursor-pointer">
+      <div className="d-flex align-items-center cursor-pointer">
         <Button
           color="success"
-          className="mr-4 position-relative"
+          className="m-2 position-relative"
           style={{
             borderRadius: '0',
           }}
         >
-          IMPORT USERS
+          IMPORT CLIENTS
           <InputField
             className="position-absolute left-0 top-0 opacity-0 z-10 w-100 h-100"
             type="file"
@@ -191,6 +192,8 @@ const AdminClient = () => {
           exportData={adminGetClient.users}
           id="clients"
           fileName="clientsFile"
+          className="m-2"
+          exportHead="ALL CLIENTS"
         />
       </div>
       <div
@@ -275,7 +278,7 @@ const AdminClient = () => {
               color: value => 'blue',
             },
           ]}
-          rows={getRows(adminGetClient.users)}
+          rows={() => getRows(adminGetClient.users)}
         />
 
         {showModal && (

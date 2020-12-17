@@ -194,7 +194,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
             <Collapse isOpen={this.state.isOpenComponents}>
-              {navComponents.map(({ to, name, exact, Icon }, index) => (
+              {navComponents.map(({ to, name, exact }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
@@ -204,7 +204,6 @@ class Sidebar extends React.Component {
                     activeClassName="active"
                     exact={exact}
                   >
-                    {/* <Icon className={bem.e('nav-item-icon')} /> */}
                     <span className="">{name}</span>
                   </BSNavLink>
                 </NavItem>
@@ -234,7 +233,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
             <Collapse isOpen={this.state.isOpenContents}>
-              {navContents.map(({ to, name, exact, Icon }, index) => (
+              {navContents.map(({ to, name, exact }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}

@@ -59,6 +59,9 @@ const superAdminRequests = React.lazy(() => import('pages/super/requests'));
 const superAdminAppointments = React.lazy(() => import('pages/super/appointments'));
 const superAdminDocumentPage = React.lazy(() => import('pages/super/document')); 
 const superAdminClientPage = React.lazy(() => import('pages/super/clientPage'));
+const superAdminClients_Active = React.lazy(() => import('pages/super/activeClients'));
+const superAdminClients_InActive = React.lazy(() => import('pages/super/inactiveClients'));
+const superAdminClients_Prospect = React.lazy(() => import('pages/super/prospectClients'));
 const superAdminViewClientDetails = React.lazy(() => import('pages/super/adminViewClientDetails'));
 
 const auth = localStorage.getItem('jwtToken');
@@ -213,7 +216,16 @@ const App = ({ breakpoint }) => {
                   <Route exact path="/superadmin/:adminId/clients/:clientId" component={superAdmin_Admin_Client}/>
                 </ProtectedRoute>
                 <ProtectedRoute>
-                  <Route exact path="/superadmin/client" component={superAdminClientPage} />
+                  <Route exact path="/superadmin/clients" component={superAdminClientPage} />
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/clients/active" component={superAdminClients_Active} />
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/clients/inactive" component={superAdminClients_InActive} />
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Route exact path="/superadmin/clients/prospect" component={superAdminClients_Prospect} />
                 </ProtectedRoute>
                 <ProtectedRoute>
                   <Route exact path="/superadmin/documents" component={superAdminDocumentPage} /> 

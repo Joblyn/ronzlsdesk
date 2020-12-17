@@ -8,6 +8,7 @@ import { getDocumentsSentToUser } from '../../actions/admin/clients/Clients';
 import { adminGetDocumentsSentToUser } from '../../apiConstants/apiConstants';
 import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import Modal from '../../components/Modal';
 
 export default function AdminSentDocuments() {
   const dispatch = useDispatch();
@@ -22,16 +23,16 @@ export default function AdminSentDocuments() {
   const getRows = documents => {
     let rows = [];
     documents &&
-      documents.reverse().map((document, i) => { 
+      documents.reverse().map((document, i) => {
         let client;
         if (document.receiver) {
           client = document.receiver.companyName;
         }
-         return rows.push({
+        return rows.push({
           id: i + 1,
           client: client || 'null',
           docName: document.docName,
-          date: document.created_dt.slice(0,10),
+          date: document.created_dt.slice(0, 10),
           view: (
             <Button
               color="secondary"
@@ -44,8 +45,8 @@ export default function AdminSentDocuments() {
               View
             </Button>
           ),
-        })}
-      );
+        });
+      });
     return rows;
   };
 
@@ -59,11 +60,17 @@ export default function AdminSentDocuments() {
       title="Dashboard"
       breadcrumbs={[{ name: 'Documents', active: true }]}
     >
-      <div className="links">
-        <Link className="active" to="/admin/documents/received">
-          View received documents
-        </Link>
+      <div className="d-flex align-items-center flex-row-reverse justify-content-between mb-2">
+        <div style={{ textAlign: 'end' }}>
+          <Modal color="#fff" action="Upload Document" />
+        </div>
+        <div className="links">
+          <Link className="active" to="/admin/documents/received">
+            View received documents
+          </Link>
+        </div>
       </div>
+
       <div
         style={{
           overflowX: 'auto',

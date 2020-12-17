@@ -9,15 +9,11 @@ import {
   MdSchedule,
   MdPersonPin,
   MdFolder,
+  MdKeyboardArrowDown
 } from 'react-icons/md';
 import { HiUserGroup } from 'react-icons/hi';
 import { NavLink, Link } from 'react-router-dom';
-import {
-  Nav,
-  Navbar,
-  NavItem,
-  NavLink as BSNavLink,
-} from 'reactstrap';
+import { Collapse, Nav, Navbar, NavItem, NavLink as BSNavLink } from 'reactstrap';
 import bn from 'utils/bemnames';
 
 const sidebarBackground = {
@@ -26,7 +22,7 @@ const sidebarBackground = {
   backgroundRepeat: 'no-repeat',
 };
 
-const navItems = [
+const navComponents_1 = [
   {
     to: '/superadmin/dashboard',
     name: 'dashboard',
@@ -39,8 +35,14 @@ const navItems = [
     exact: true,
     Icon: MdPersonPin,
   },
-  { to: '/superadmin/admins', name: 'admins', exact: false, Icon: MdWeb },
-  { to: '/superadmin/client', name: 'clients', exact: true, Icon: HiUserGroup },
+  { 
+    to: '/superadmin/admins', 
+    name: 'admins', 
+    exact: false, 
+    Icon: MdWeb 
+  },
+];
+const navComponents_2 = [
   {
     to: '/superadmin/registeradmin',
     name: 'Register Admin',
@@ -66,13 +68,35 @@ const navItems = [
     Icon: MdSchedule,
   },
 ];
+const navContents = [
+  {
+    to: '/superadmin/clients',
+    name:'All',
+    exact: true,
+  },
+  {
+    to: '/superadmin/clients/active',
+    name:'Active',
+    exact: true,
+  },
+  {
+    to: '/superadmin/clients/prospect',
+    name:'Prospect',
+    exact: true,
+  },
+  {
+    to: '/superadmin/clients/inactive',
+    name:'Inactive',
+    exact: true,
+  },
+]
 
 const bem = bn.create('sidebar');
 
 class Sidebar extends React.Component {
   state = {
-    isOpenComponents: true,
-    isOpenContents: true,
+    isOpenComponents: false,
+    isOpenContents: false,
     isOpenPages: true,
   };
 
@@ -96,14 +120,67 @@ class Sidebar extends React.Component {
               <img
                 src={logo200Image}
                 width="192"
-                // height="50"
                 className="pr-2 bg-white rounded-lg bg-opacity-75"
                 alt=""
               />
             </Link>
           </Navbar>
           <Nav vertical>
-            {navItems.map(({ to, name, exact, Icon }, index) => (
+            {navComponents_1.map(({ to, name, exact, Icon }, index) => (
+              <NavItem key={index} className={bem.e('nav-item')}>
+                <BSNavLink
+                  id={`navItem-${name}-${index}`}
+                  className="text-uppercase"
+                  tag={NavLink}
+                  to={to}
+                  activeClassName="active"
+                  exact={exact}
+                >
+                  <Icon className={bem.e('nav-item-icon')} />
+                  <span className="">{name}</span>
+                </BSNavLink>
+              </NavItem>
+            ))}
+            <NavItem
+              className={bem.e('nav-item')}
+              onClick={this.handleClick('Contents')} 
+            >
+              <BSNavLink className={bem.e('nav-item-collapse')}>
+              <div className="d-flex">
+                <HiUserGroup className={bem.e('nav-item-icon')}/>
+                <span className=" align-self-start text-uppercase">clients</span>
+              </div>
+              <MdKeyboardArrowDown
+                  className={bem.e('nav-item-icon')}
+                  style={{
+                    padding: 0,
+                    transform: this.state.isOpenContents
+                      ? 'rotate(0deg)'
+                      : 'rotate(-90deg)',
+                    transitionDuration: '0.3s',
+                    transitionProperty: 'transform',
+                  }}
+                />
+              </BSNavLink>
+            </NavItem>
+            <Collapse isOpen={this.state.isOpenContents}>
+              {navContents.map(({ to, name, exact }, i) => (
+                <NavItem key={i} className={bem.e('nav-item')}>
+                <BSNavLink
+                    id={`navItem-${name}-${i}`}
+                    // className="text-uppercase"
+                    tag={NavLink}
+                    to={to}
+                    activeClassName="active"
+                    exact={exact}
+                    className="text-uppercase"
+                  >
+                    <span>{name}</span>
+                  </BSNavLink>
+                </NavItem>
+              ))}
+            </Collapse>
+            {navComponents_2.map(({ to, name, exact, Icon }, index) => (
               <NavItem key={index} className={bem.e('nav-item')}>
                 <BSNavLink
                   id={`navItem-${name}-${index}`}

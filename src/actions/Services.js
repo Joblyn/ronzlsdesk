@@ -27,10 +27,8 @@ export const getData = (url, done) => {
 //get data with bearer token
 export const getDataWithToken = (url, done) => {
   const endpoint = baseUrl + url;
-  console.log('Endpoint: ' + endpoint);
   const token = localStorage.getItem('jwtToken');
   const bearerToken = 'Bearer ' + token;
-  console.log(bearerToken);
   nprogress.start();
   return dispatch => {
     fetch(endpoint, {
@@ -44,8 +42,6 @@ export const getDataWithToken = (url, done) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-        console.log(data.data);
         if (data.status === 'success') {
           nprogress.done();
           nprogress.remove();
@@ -102,10 +98,11 @@ export const postData = (url, payload, done) => {
 
 export const postDataWithToken = (url, payload, done) => {
   const endpoint = baseUrl + url;
-  console.log('Endpoint: ' + endpoint);
-  console.log('Payload:' + JSON.stringify(payload));
+  // console.log('Endpoint: ' + endpoint);
+  // console.log('Payload:' + JSON.stringify(payload));
   const token = localStorage.getItem('jwtToken');
   const bearerToken = 'Bearer ' + token;
+  // console.log(bearerToken);
   nprogress.start();
   return dispatch => {
     fetch(endpoint, {
@@ -119,15 +116,16 @@ export const postDataWithToken = (url, payload, done) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data.data) {
           nprogress.done();
           nprogress.remove();
           dispatch(done(data.data));
+          window.location.reload();
         } else if (data.error) {
           nprogress.done();
           nprogress.remove();
           alert(data.error);
+          console.log(data.error);
           window.location.reload();
         }
       })
@@ -142,8 +140,6 @@ export const postDataWithToken = (url, payload, done) => {
 
 export const patchDataWithToken = (url, payload, done) => {
   const endpoint = baseUrl + url;
-  console.log('Endpoint: ' + endpoint);
-  console.log('Payload:' + JSON.stringify(payload));
   const token = localStorage.getItem('jwtToken');
   const bearerToken = 'Bearer ' + token;
   nprogress.start();
@@ -159,7 +155,6 @@ export const patchDataWithToken = (url, payload, done) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data.data) {
           nprogress.done();
           nprogress.remove();

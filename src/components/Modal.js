@@ -54,6 +54,7 @@ export default function Modal({ action, color }) {
         alert(`Successfully uploaded file.`);
         setShowModal(false);
         setIsLoading(false);
+        window.location.reload();
       })
       .catch(err => {
         nProgress.done();
@@ -62,6 +63,7 @@ export default function Modal({ action, color }) {
         console.error();
         setIsLoading(false);
         setShowModal(false);
+        window.location.reload();
       });
   };
 
