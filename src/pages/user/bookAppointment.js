@@ -63,17 +63,16 @@ export default function CreateAppointment() {
     >
     <main className="appt-main">
       <Form className="appt-form" id="appt-form" onSubmit={handleSubmit}>
-        <FormGroup className="form-group" style={{width:'85%'}}>
+        <FormGroup className="form-group w-100">
           <InputField 
-            required
             type="text"
             name="message"
             placeholder="Appointment Message"
-            className="mt-2 border"
+            className="mt-2"
             onChange={({ target }) => setMessage(target.value)}
           />
         </FormGroup>
-        <div className="calender">
+        <div className="calender w-100">
           <InfiniteCalendar
             selected={date}
             minDate={lastWeek}

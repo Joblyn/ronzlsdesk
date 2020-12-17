@@ -58,6 +58,7 @@ export const getDataWithToken = (url, done) => {
 export const postData = (url, payload, done) => {
   const endpoint = baseUrl + url;
   nprogress.start();
+  console.log(payload)
   return dispatch => {
     fetch(endpoint, {
       method: 'POST',
@@ -70,6 +71,7 @@ export const postData = (url, payload, done) => {
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         if (data.data) {
           nprogress.done();
           nprogress.remove();
@@ -81,9 +83,8 @@ export const postData = (url, payload, done) => {
         } else if (data.errors) {
           nprogress.done();
           nprogress.remove();
-          alert(
-            'Errors in input details, please fill in all fields correctly.',
-          );
+          console.log(data.errors);
+          alert(Object.values(data.errors[0]));
         }
       })
       .catch(err => {
@@ -120,13 +121,12 @@ export const postDataWithToken = (url, payload, done) => {
           nprogress.done();
           nprogress.remove();
           dispatch(done(data.data));
-          window.location.reload();
+          // window.location.reload();
         } else if (data.error) {
           nprogress.done();
           nprogress.remove();
           alert(data.error);
-          console.log(data.error);
-          window.location.reload();
+          // window.location.reload();
         }
       })
       .catch(err => {

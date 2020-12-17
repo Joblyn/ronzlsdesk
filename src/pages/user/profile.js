@@ -7,6 +7,7 @@ import { getUserData } from 'apiConstants/apiConstants';
 import { getUser } from '../../actions/user/Users';
 import { useEffect } from 'react';
 import { Button } from 'reactstrap';
+import InputField from '../../components/InputField';
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -53,62 +54,69 @@ export default function Profile() {
                       Account Officer
                     </h3>
                   </div>
-                  {userData.accountOfficer ? <div
-                    className="relative p-0 flex-auto"
-                    style={{ color: 'black', width: '500px' }}
-                  >
-                    <ul className="profile-ul">
-                      <li className="border-0">
-                        <div>
-                          <p>Full Name:</p>
-                        </div>
-                        <div>
-                          <p
-                            className="mb-0"
-                            style={{
-                              fontSize: '1.1rem',
-                            }}
-                          >
-                            {userData.accountOfficer.fullName}
-                          </p>
-                        </div>
-                      </li>
-                      <li className="border-0">
-                        <div>
-                          <p>Email:</p>
-                        </div>
-                        <div>
-                          <p
-                            className="mb-0"
-                            style={{
-                              fontSize: '1.1rem',
-                            }}
-                          >
-                            {userData.accountOfficer.email}
-                          </p>
-                        </div>
-                      </li>
-                      <li className="border-0">
-                        <div>
-                          <p>Phone Number:</p>
-                        </div>
-                        <div>
-                          <p
-                            className="mb-0"
-                            style={{
-                              fontSize: '1.1rem',
-                            }}
-                          >
-                            {userData.accountOfficer.phoneNumber}
-                          </p>
-                        </div>
-                      </li>
-                    </ul>
-                  </div> : 
-                  <div style={{height: '40vh'}} className="p-4 d-flex justify-content-center align-items-center">
-                    <em className="text-gray-700 text-xl">Not yet assigned to an account officer </em>
-                  </div>
-                  }
+                  {userData.accountOfficer ? (
+                    <div
+                      className="relative p-0 flex-auto"
+                      style={{ color: 'black', width: '500px' }}
+                    >
+                      <ul className="profile-ul">
+                        <li className="border-0">
+                          <div>
+                            <p>Full Name:</p>
+                          </div>
+                          <div>
+                            <p
+                              className="mb-0"
+                              style={{
+                                fontSize: '1.1rem',
+                              }}
+                            >
+                              {userData.accountOfficer.fullName}
+                            </p>
+                          </div>
+                        </li>
+                        <li className="border-0">
+                          <div>
+                            <p>Email:</p>
+                          </div>
+                          <div>
+                            <p
+                              className="mb-0"
+                              style={{
+                                fontSize: '1.1rem',
+                              }}
+                            >
+                              {userData.accountOfficer.email}
+                            </p>
+                          </div>
+                        </li>
+                        <li className="border-0">
+                          <div>
+                            <p>Phone Number:</p>
+                          </div>
+                          <div>
+                            <p
+                              className="mb-0"
+                              style={{
+                                fontSize: '1.1rem',
+                              }}
+                            >
+                              {userData.accountOfficer.phoneNumber}
+                            </p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  ) : (
+                    <div
+                      style={{ height: '40vh' }}
+                      className="p-4 d-flex justify-content-center align-items-center"
+                    >
+                      <em className="text-gray-700 text-xl">
+                        Not yet assigned to an account officer{' '}
+                      </em>
+                    </div>
+                  )}
                   <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
                     <button
                       className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
@@ -160,10 +168,13 @@ export default function Profile() {
               </li>
               <li>
                 <div>
-                  <p>Date Created:</p>
+                  <p>Date Registered:</p>
                 </div>
                 <div>
-                  <p>{userData.created_dt}</p>
+                  <p>
+                    {userData.created_dt.slice(0, 10)}{' '}
+                    <em className="ml">(yyyy-mm-dd)</em>
+                  </p>
                 </div>
               </li>
               <li>
@@ -171,7 +182,9 @@ export default function Profile() {
                   <p>Company Name:</p>
                 </div>
                 <div>
-                  <p>{userData.companyName}</p>
+                  <p>
+                    <InputField type="text" value={userData.companyName}/>
+                  </p>
                 </div>
               </li>
               <li>
