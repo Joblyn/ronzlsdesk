@@ -77,10 +77,12 @@ export const postData = (url, payload, done) => {
         if (data.data) {
           nprogress.done();
           nprogress.remove();
+          console.log(data);
           dispatch(done(data.data));
         } else if (data.error) {
           nprogress.done();
           nprogress.remove();
+          console.log(data.error);
           alert(data.error);
         } else if (data.errors) {
           nprogress.done();

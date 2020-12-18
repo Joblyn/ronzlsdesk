@@ -23,7 +23,6 @@ const InputDropdown = ({
         {dropdownElements && dropdownElements}
         {dropdownElementsUser && dropdownElementsUser()}
       </select>
-      {required && <span style={{float:'right', color:'red', marginLeft:2}}>*</span>}
     </div>
   );
 };

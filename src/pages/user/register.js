@@ -257,7 +257,7 @@ const Register = () => {
                     name="websiteUrl"
                     onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Website Url e.g. 'www.example.com'"
+                    placeholder="Website Url. If null, type 'null"
                     
                   />
                   <InputField
@@ -265,7 +265,7 @@ const Register = () => {
                     name="companyBegin"
                     onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Company Begin e.g '2020-12-25'"
+                    placeholder="Company Begin. If null, type '0000'"
                     
                   />
                   <InputField
@@ -273,7 +273,7 @@ const Register = () => {
                     name="companyRegNo"
                     onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Company Reg No e.g. '1234'"
+                    placeholder="Company Reg No. If null, type '0000'"
                     
                   />
                   <InputField
@@ -281,7 +281,7 @@ const Register = () => {
                     name="utrNo"
                     onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="UTR Number e.g. '1234'"
+                    placeholder="UTR Number. If null, type '0000'"
                     
                   />
                   <InputField
@@ -289,7 +289,7 @@ const Register = () => {
                     name="vatSubmitType"
                     onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Vat Submit Type e.g. 'Non-VAT Registered'"
+                    placeholder="Vat Submit Type. If null, type 'null'"
                     
                   />
                   <InputField
@@ -297,7 +297,7 @@ const Register = () => {
                     name="vatScheme"
                     onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="VAT Scheme e.g. 'Annually'"
+                    placeholder="VAT Scheme. If null, type 'null'"
                     
                   />
                   <InputField
@@ -305,7 +305,7 @@ const Register = () => {
                     name="vatRegNo"
                     onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="VAT Reg No e.g. '1234'"
+                    placeholder="VAT Reg No. If null, type '000'"
                     
                   />
                   <InputField
@@ -313,7 +313,7 @@ const Register = () => {
                     name="vatRegDate"
                     onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="VAT Reg Date e.g. '2020-12-25'"
+                    placeholder="VAT Reg Date. If null, type '0000'"
                     
                   />
                   <InputField
@@ -321,7 +321,7 @@ const Register = () => {
                     name="insuranceNumber"
                     onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Insurance Number e.g '12AB34CD56EF"
+                    placeholder="Insurance Number. If null, type '0000'"
                     
                   />
                   <InputField
@@ -329,7 +329,7 @@ const Register = () => {
                     name="payeeRefNo"
                     onChange={({target}) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Payee Ref No e.g. '12AB34CD56EF'"
+                    placeholder="Payee Ref No. If null, type '0000'"
                     
                   />
                   <InputField
