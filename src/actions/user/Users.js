@@ -3,7 +3,8 @@ import setAuthToken from '../../utils/setAuthToken';
 import { 
   postData,
   getDataWithToken,
-  postDataWithToken
+  postDataWithToken,
+  patchDataWithToken
 } from '../Services';
 
 const onRegisterUser = payload => {
@@ -37,6 +38,13 @@ export const onForgotPasswordUser = payload => {
 export const onGetUser = (payload) => {
   return {
     type: ActionType.GET_USER_DATA,
+    payload
+  }
+}
+
+export const onUpdateData = (payload) => {
+  return {
+    type: ActionType.USER_UPDATE_DATA,
     payload
   }
 }
@@ -117,6 +125,10 @@ export const logOutAction = (payload) => {
 export const getUser = (url) =>  {
   return getDataWithToken(url, onGetUser)
 }
+// update user data 
+export const updateData = (url, payload) => {
+  return patchDataWithToken(url, payload, onUpdateData);
+}  
 
 // upload request 
 export const createRequest = (url, payload) => {

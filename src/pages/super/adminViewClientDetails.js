@@ -174,8 +174,6 @@ const AdminViewClientDetails = () => {
       subscriptionEnd,
     };
     let endpoint = `${adminUpdateSubscription}${id}`;
-    console.log(endpoint);
-    console.log(payload);
     dispatch(updateClientSubscription(endpoint, payload));
   };
 
@@ -215,7 +213,7 @@ const AdminViewClientDetails = () => {
                     <input
                       type="date"
                       name="subscriptionBegin"
-                      value={subscriptionBegin}
+                      defaultValue={subscriptionBegin}
                       onChange={({ target }) =>
                         setSubscriptionBegin(target.value)
                       }
@@ -233,7 +231,7 @@ const AdminViewClientDetails = () => {
                     <input
                       type="date"
                       name="subscriptionEnd"
-                      value={subscriptionEnd}
+                      defaultValue={subscriptionEnd}
                       onChange={({ target }) =>
                         setSubscriptionEnd(target.value)
                       }

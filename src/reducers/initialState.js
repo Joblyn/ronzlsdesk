@@ -137,3 +137,8 @@ export const addClientToAdmin = {
 export const setAdminClients = {
   clients : []
 }
+
+export const userUpdateData = {
+  isSuccessful:false,
+  data: {}
+}

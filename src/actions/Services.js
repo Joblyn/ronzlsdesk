@@ -29,6 +29,7 @@ export const getDataWithToken = (url, done) => {
   const endpoint = baseUrl + url;
   const token = localStorage.getItem('jwtToken');
   const bearerToken = 'Bearer ' + token;
+  console.log(bearerToken);
   nprogress.start();
   return dispatch => {
     fetch(endpoint, {

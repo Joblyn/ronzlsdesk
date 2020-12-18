@@ -30,6 +30,7 @@ import userGetDocumentsSentByAdminReducer from './user/getDocumentSentByAdmin';
 import userGetDocumentsSentByUserReducer from './user/getDocumentSentByUser';
 import userBookAppointmentReducer from './user/userBookAppointment';
 import userGetAppointmentsReducer from './user/getAppointments';
+import updateDataReducer from './user/updateData';
 
 export default combineReducers({
   //Admin Reducer
@@ -65,6 +66,7 @@ export default combineReducers({
   userGetDocumentsSentByUser:userGetDocumentsSentByUserReducer,
   userBookAppointment:userBookAppointmentReducer,
   userGetAppointments:userGetAppointmentsReducer,
+  updateData: updateDataReducer;
   //Error
   errors: errorReducer,
 });
