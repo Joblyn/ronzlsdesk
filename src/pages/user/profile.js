@@ -7,7 +7,8 @@ import { getUserData } from 'apiConstants/apiConstants';
 import { getUser } from '../../actions/user/Users';
 import { useEffect } from 'react';
 import InputField from '../../components/InputField';
-import { Button, Form, FormGroup } from 'reactstrap';
+import InputDropdown from '../../components/InputDropdown';
+import { Button, FormGroup } from 'reactstrap';
 import { MdAddCircleOutline, MdRemoveCircleOutline } from 'react-icons/md';
 import { updateUserData } from '../../apiConstants/apiConstants';
 import { updateData } from '../../actions/user/Users';
@@ -26,9 +27,10 @@ export default function Profile() {
   useEffect(() => {
     dispatch(getUser(getUserData));
   }, []);
-
+  
   useEffect(() => {
     setDetails(userData);
+    userData.director && setDirectorControl([...userData.director]);
     if (userData.accountStatus) {
       switch (userData.accountStatus) {
         case 'prospect':
@@ -43,9 +45,8 @@ export default function Profile() {
     }
   }, [userData]);
 
-  const createDirector = type => {
-    let length = directorControl.length;
-    setDirectorControl([...directorControl, length + 1]);
+  const createDirector = () => {
+    setDirectorControl([...directorControl, { fullName: '', dateOfBirth: '' }]);
   };
 
   const removeDirector = () => {
@@ -59,17 +60,52 @@ export default function Profile() {
     });
   };
 
+  const handleDirectorChange = (i, target) => {
+    setDirectorControl([
+      ...directorControl.slice(0, i),
+      {
+        ...directorControl[i],
+        [target.name]: target.value,
+      },
+      ...directorControl.slice(i + 1),
+    ]);
+  };
+
+  const AccountTypeDatas = [
+    ['Individual', 'individual'],
+    ['Company', 'company'],
+  ];
+
+  const AccountTypeDropdownData = (currentType) => {
+    let opts =  AccountTypeDatas.map((data, id) => {
+      let selected = currentType === data[1] ? true : false;
+      return (
+        <option value={data[1]} key={id} selected={selected}>
+          {data[0]}
+        </option>
+      );
+    });
+    return opts;
+  };
+
   const handleUpdate = () => {
-    const payload = {};
-    // set this
-    dispatch(updateData(updateUserData, payload))
+    const payload = details;
+    payload.director = directorControl;
+    delete payload.director[0]._id;
+    delete payload.role;
+    delete payload.accountOfficer;
+    delete payload.accountStatus;
+    delete payload.created_dt;
+    delete payload._id;
+    dispatch(updateData(updateUserData, payload));
+    update.isSuccessful && window.location.reload();
   };
 
   const handleClick = () => {
-    disabled ? setDisabled(false) : handleUpdate();
+    setDisabled(false);
   };
 
-  let border = disabled ? 'border-0' : '';
+  let border = disabled ? 'border-0' : 'border-1';
 
   if (!details.role) {
     return <PageSpinner />;
@@ -81,7 +117,7 @@ export default function Profile() {
             View accout Officer
           </Button>
           <Button className="mx-3 mb-3" onClick={handleClick}>
-            {disabled ? 'Edit Profile' : 'Update'}
+            Edit Profile
           </Button>
         </div>
         {showPopup && (
@@ -185,7 +221,7 @@ export default function Profile() {
                   <p>Role:</p>
                 </div>
                 <div className="green">
-                  <p>{userData.role === 'user' && 'Client'}</p>
+                  <p className="m-0">{userData.role === 'user' && 'Client'}</p>
                 </div>
               </li>
               <li className="my-0 py-2">
@@ -193,7 +229,7 @@ export default function Profile() {
                   <p>Account Status:</p>
                 </div>
                 <div style={{ color: color }}>
-                  <p>
+                  <p className="m-0">
                     {details.accountStatus
                       ? details.accountStatus.charAt(0).toUpperCase() +
                         details.accountStatus.slice(1)
@@ -203,21 +239,35 @@ export default function Profile() {
               </li>
               <li className="my-0 py-2">
                 <div>
-                  <p>Account Type:</p>
-                </div>
-                <div>
-                  <p>{details.accountType}</p>
-                </div>
-              </li>
-              <li className="my-0 py-2">
-                <div>
                   <p>Date Registered:</p>
                 </div>
                 <div>
                   <p>
-                    {details.created_dt.slice(0, 10)}{' '}
+                    {details.created_dt.slice(0, 10)}
                     <em className="ml-2 text-gray-500">(yyyy-mm-dd)</em>
                   </p>
+                </div>
+              </li>
+              <li className="my-0 py-2">
+                <div>
+                  <p>Account Type:</p>
+                </div>
+                <div>
+                  <FormGroup className="w-100 m-0">
+                    <InputDropdown
+                      userProfile
+                      className="inp border-grey-300 w-100"
+                      style={{
+                        background: 'inherit',
+                        borderBottom: `${!disabled && '2px grey solid'}`,
+                      }}
+                      defaultValue={details.accountType}
+                      name="accountType"
+                      dropdownElementsUser={() => AccountTypeDropdownData(details.accountType)}
+                      disabled={disabled}
+                      onChange={({ target }) => handleChange(target)}
+                    />
+                  </FormGroup>
                 </div>
               </li>
               <li className="my-0 py-2">
@@ -229,6 +279,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.companyName}
+                      name="companyName"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -236,11 +287,11 @@ export default function Profile() {
                   </FormGroup>
                 </div>
               </li>
-              {details.director && (
+              {directorControl.length !== 0 && (
                 <>
                   <li className="my-0 py-2 flex-column align-items-start">
                     <ul className="director-ul">
-                      {details.director.map((director, i) => (
+                      {directorControl.map((director, i) => (
                         <li key={'director' + (i + 1)} className="">
                           <p className="font-semibold mb-0">{`Director ${
                             i + 1
@@ -251,9 +302,13 @@ export default function Profile() {
                               <FormGroup className="w-100 m-0">
                                 <InputField
                                   type="text"
+                                  name="fullName"
                                   defaultValue={director.fullName}
                                   disabled={disabled}
                                   className={border}
+                                  onChange={({ target }) =>
+                                    handleDirectorChange(i, target)
+                                  }
                                 />
                               </FormGroup>
                             </div>
@@ -262,9 +317,16 @@ export default function Profile() {
                               <FormGroup className="w-100 m-0">
                                 <InputField
                                   type="text"
-                                  defaultValue={director.dateOfBirth}
+                                  name="dateOfBirth"
+                                  defaultValue={director.dateOfBirth.slice(
+                                    0,
+                                    10,
+                                  )}
                                   disabled={disabled}
                                   className={border}
+                                  onChange={({ target }) =>
+                                    handleDirectorChange(i, target)
+                                  }
                                 />
                               </FormGroup>
                             </div>
@@ -273,56 +335,20 @@ export default function Profile() {
                       ))}
                     </ul>
                     {disabled ? null : (
-                      <MdAddCircleOutline
-                        className={`cursor-pointer ${display}`}
-                        onClick={() => createDirector(1)}
-                      />
+                      <div className="d-flex">
+                        <MdAddCircleOutline
+                          className={`cursor-pointer`}
+                          onClick={() => createDirector()}
+                        />
+                        {directorControl.length > 1 && (
+                          <MdRemoveCircleOutline
+                            onClick={removeDirector}
+                            className="mx-2 cursor-pointer"
+                          />
+                        )}
+                      </div>
                     )}
                   </li>
-                  {directorControl.length > 0 && (
-                    <li className="my-0 py-2 flex-column align-items-start">
-                      <ul className="w-100">
-                        {directorControl.map(x => (
-                          <li
-                            key={'director' + (x + 1)}
-                            className="py-2 d-flex flex-column align-items-start my-0"
-                          >
-                            <p className="font-semibold mb-0">{`Director ${
-                              x + 1
-                            }`}</p>
-                            <div className="director-div">
-                              <div className="d-flex align-items-baseline">
-                                <p>Full Name:</p>
-                                <FormGroup className="w-100 m-0">
-                                  <InputField
-                                    type="text"
-                                    className="border-1"
-                                  />
-                                </FormGroup>
-                              </div>
-                              <div className="d-flex align-items-baseline">
-                                <p style={{ fontWeight: 500 }}>
-                                  Date of Birth:
-                                </p>
-                                <FormGroup className="w-100 m-0">
-                                  <InputField
-                                    type="text"
-                                    className="border-1"
-                                  />
-                                </FormGroup>
-                              </div>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="d-flex">
-                        <MdRemoveCircleOutline
-                          onClick={removeDirector}
-                          className="mx-2"
-                        />
-                      </div>
-                    </li>
-                  )}
                 </>
               )}
               <li className="my-0 py-2">
@@ -334,6 +360,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.companyRegNo}
+                      name="companyRegNo"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -350,6 +377,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.companyBegin.slice(0, 10)}
+                      name="companyBegin"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -367,6 +395,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.companyAddress}
+                      name="companyAddress"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -383,6 +412,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.city}
+                      name="city"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -399,6 +429,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.country}
+                      name="country"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -415,6 +446,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.email}
+                      name="email"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -431,6 +463,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.insuranceNumber}
+                      name="insuranceNumber"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -447,6 +480,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.payeeRefNo}
+                      name="payeeRefNo"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -463,6 +497,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={`0${details.phoneNumber}`}
+                      name="phoneNumber"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -479,6 +514,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.postalCode}
+                      name="postalCode"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -495,6 +531,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.utrNo}
+                      name="utrNo"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -511,6 +548,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.vatRegNo}
+                      name="vatRegNo"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -526,7 +564,8 @@ export default function Profile() {
                   <FormGroup className="w-100 m-0">
                     <InputField
                       type="text"
-                      defaultValue={details.vatRegDate}
+                      defaultValue={details.vatRegDate.slice(0, 10)}
+                      name="vatRegDate"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -543,6 +582,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.vatScheme}
+                      name="vatScheme"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -559,6 +599,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.vatSubmitType}
+                      name="vatSubmitType"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -575,6 +616,7 @@ export default function Profile() {
                     <InputField
                       type="text"
                       defaultValue={details.websiteUrl}
+                      name="websiteUrl"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
                       className={border}
@@ -583,6 +625,9 @@ export default function Profile() {
                 </div>
               </li>
             </ul>
+            {disabled === false && (
+              <Button onClick={handleUpdate}>Submit Changes</Button>
+            )}
           </div>
         </main>
       </Page>

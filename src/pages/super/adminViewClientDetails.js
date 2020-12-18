@@ -1,22 +1,10 @@
 import React, { useEffect, useState } from 'react';
-// import {
-// Link,
-// useHistory,
-// useLocation,
-// useParams
-// } from 'react-router-dom';
 
-// import logo from '../../assets/images/logo.png';
-// import bgImage from '../../assets/images/illustration.png';
-
-// import { registerUser } from '../../actions/user/Users';
 import { updateClientSubscription } from '../../actions/admin/clients/Clients';
 import {
-  // userRegister,
   adminUpdateSubscription,
   getClientDetail,
 } from '../../apiConstants/apiConstants';
-// import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
 import PageSpinner from '../../components/PageSpinner';
 
 //components
@@ -24,18 +12,10 @@ import InputField from '../../components/InputField';
 import Button from '../../components/button';
 import { useDispatch, useSelector } from 'react-redux';
 import InputDropdown from '../../components/InputDropdown';
-// import { CodeSharp } from '@material-ui/icons';
 import { getClientDetails } from '../../actions/admin/clients/Clients';
-// import { getClientDetail } from '../../apiConstants/apiConstants';
 
 const AdminViewClientDetails = () => {
-  // const [userState, setUserState] = useState('');
-  // const [inputList, setInputList] = useState([1]);
   const [disabled, setDisabled] = useState(true);
-  // const [managerControl, setManagerControl] = useState({});
-  // const [count, setCount] = useState(1);
-  // let obj = {};
-  // const [control, setControl] = useState();
   const dispatch = useDispatch();
   const clientDetails = useSelector(state => state.adminGetAllClient.user);
 
@@ -43,6 +23,7 @@ const AdminViewClientDetails = () => {
   const [director, setDirector] = useState([{}]);
   const [subscriptionBegin, setSubscriptionBegin] = useState('');
   const [subscriptionEnd, setSubscriptionEnd] = useState('');
+
   useEffect(() => {
     let client_id = localStorage.getItem('client_id');
     let endpoint = getClientDetail + client_id;
@@ -73,42 +54,6 @@ const AdminViewClientDetails = () => {
       }
     }
   }, [data]);
-  // const handleInputChange = (event, count) => {
-  //   obj[event.target.name] = event.target.value;
-  //   setManagerControl({
-  //     ...managerControl,
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
-  // console.log(handleInputChange);
-  // handle click event of the Remove button
-  // const handleRemoveClick = index => {
-  //   const list = [...inputList];
-  //   list.splice(index, 1);
-  //   setInputList(list);
-  //   setCount(count - 1);
-  // };
-  // console.log(handleRemoveClick);
-
-  // handle click event of the Add button
-  // const handleAddClick = () => {
-  //   setInputList([...inputList, { firstName: '', dateOfBirth: '' }]);
-  //   setCount(count + 1);
-  // };
-  // console.log(handleAddClick);
-
-  // const prepareManager = managers => {
-  //   let newManagers = [];
-  //   let temp = Object.keys(managers);
-  //   for (let i = 0; i < temp.length / 2; i++) {
-  //     let manager = {
-  //       fullName: managers['fullName' + i],
-  //       dateOfBirth: managers['dateOfBirth' + i],
-  //     };
-  //     newManagers.push(manager);
-  //   }
-  //   return newManagers;
-  // };
 
   const _onFocus = event => {
     event.currentTarget.type = 'date';
@@ -145,15 +90,6 @@ const AdminViewClientDetails = () => {
     </div>
   );
 
-  // const handleClick = event => {
-  //   event.preventDefault();
-  //   let managers = prepareManager(managerControl);
-  //   let payload = { director: managers, ...control };
-  //   console.log('Result: ' + JSON.stringify(payload));
-  //   dispatch(registerUser(userRegister, payload));
-  // };
-  // console.log(handleClick);
-
   const AccountTypeDatas = [
     ['Individual', 'individual'],
     ['Company', 'company'],
@@ -175,6 +111,7 @@ const AdminViewClientDetails = () => {
     };
     let endpoint = `${adminUpdateSubscription}${id}`;
     dispatch(updateClientSubscription(endpoint, payload));
+    // adminUpdateSubscription.isSuccessful && window.location.reload()
   };
 
   if (data === null) {
@@ -263,7 +200,6 @@ const AdminViewClientDetails = () => {
               <label className="font-semibold mt-2">Account Type:</label>
               <InputDropdown
                 value={data.accountType || ''}
-                // onChange={e => setData(e.target.value)}
                 name="accountType"
                 className="intro-x login__input input input--lg mb-2 border border-gray-300 block"
                 dropdownElements={AccountTypeDropdownData}
@@ -283,7 +219,6 @@ const AdminViewClientDetails = () => {
                 type="text"
                 name="companyAddress"
                 value={data.companyAddress || ''}
-                // onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                 disabled
               />
@@ -292,7 +227,6 @@ const AdminViewClientDetails = () => {
                 type="text"
                 name="city"
                 value={data.city || ''}
-                // onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                 disabled
               />
@@ -301,7 +235,6 @@ const AdminViewClientDetails = () => {
                 type="text"
                 name="postalCode"
                 value={data.postalCode || ''}
-                // onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                 disabled
               />
@@ -310,7 +243,6 @@ const AdminViewClientDetails = () => {
                 type="text"
                 name="country"
                 value={data.country || ''}
-                // onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                 disabled
               />
@@ -319,7 +251,6 @@ const AdminViewClientDetails = () => {
                 type="tel"
                 name="phoneNumber"
                 value={data.phoneNumber || ''}
-                // onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                 disabled
               />
@@ -329,7 +260,6 @@ const AdminViewClientDetails = () => {
                 type="email"
                 name="email"
                 value={data.email || ''}
-                // onChange={e => setData(e.target.value)}
                 className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                 disabled
               />
@@ -344,7 +274,6 @@ const AdminViewClientDetails = () => {
                   type="text"
                   name="websiteUrl"
                   value={data.websiteUrl || ''}
-                  // onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                   disabled
                 />
@@ -353,7 +282,6 @@ const AdminViewClientDetails = () => {
                   type="text"
                   name="companyBegin"
                   value={data.companyBegin || ''}
-                  // onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                   disabled
                 />
@@ -362,7 +290,6 @@ const AdminViewClientDetails = () => {
                   type="text"
                   name="companyRegNo"
                   value={data.companyRegNo || ''}
-                  // onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                   disabled
                 />
@@ -371,7 +298,6 @@ const AdminViewClientDetails = () => {
                   type="text"
                   name="utrNo"
                   value={data.utrNo || ''}
-                  // onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                   disabled
                 />
@@ -380,7 +306,6 @@ const AdminViewClientDetails = () => {
                   type="text"
                   name="vatSubmitType"
                   value={data.vatSubmitType || ''}
-                  // onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                   disabled
                 />
@@ -389,7 +314,6 @@ const AdminViewClientDetails = () => {
                   type="text"
                   name="vatScheme"
                   value={data.vatScheme || ''}
-                  // onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                   disabled
                 />
@@ -398,7 +322,6 @@ const AdminViewClientDetails = () => {
                   type="text"
                   name="vatRegNo"
                   value={data.vatRegNo || ''}
-                  // onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                   disabled
                 />
@@ -407,7 +330,6 @@ const AdminViewClientDetails = () => {
                   type="text"
                   name="vatRegDate"
                   value={data.vatRegDate || ''}
-                  // onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                   disabled
                 />
@@ -416,7 +338,6 @@ const AdminViewClientDetails = () => {
                   type="text"
                   name="insuranceNumber"
                   value={data.insuranceNumber || ''}
-                  // onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  mb-2 input--lg border border-gray-300 block"
                   disabled
                 />
@@ -425,41 +346,11 @@ const AdminViewClientDetails = () => {
                   type="text"
                   name="payeeRefNo"
                   value={data.payeeRefNo || ''}
-                  // onChange={e => setData(e.target.value)}
                   className="intro-x login__input input  my-2 input--lg border border-gray-300 block"
                   disabled
                 />
               </div>
             </div>
-            {/* <div className="intro-x flex xl:justify-center d-flex justify-content-center">
-              {disabled ? (
-                <Button
-                  type="button"
-                  onClick={handleEditClick}
-                  className="button button--lg xl:w-32 text-white bg-theme-1 xl:mr-3"
-                  value="Edit"
-                  style={{width: '150px', margin:'1rem'}}
-                />
-              ) : (
-                <>
-                  <Button
-                    type="button"
-                    onClick={handleEditClick}
-                    className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"
-                    value="Update"
-                    style={{width: '150px', margin:'1rem'}}
-                  />
-
-                  <Button
-                    type="button"
-                    onClick={handleEditClick}
-                    className="button bg-red-700 button--lg w-full xl:w-32 text-white"
-                    value="Delete"
-                    style={{width: '150px', margin:'1rem'}}
-                  />
-                </>
-              )}
-            </div> */}
           </div>
         </div>
       </div>

@@ -7,19 +7,21 @@ const InputDropdown = ({
   name,
   disabled,
   required,
+  style,
+  userProfile,
+  dropdownElementsUser
 }) => {
   return (
-    <div className="my-2 d-flex">
+    <div className={`${userProfile && 'w-100'} my-2 d-flex`}>
       <select
         onChange={onChange}
         className={className}
         name={name}
         disabled={disabled}
+        style={style}
       >
-        {/* <option value="select" selected>
-          Select an option
-        </option> */}
-        {dropdownElements}
+        {dropdownElements && dropdownElements}
+        {dropdownElementsUser && dropdownElementsUser()}
       </select>
       {required && <span style={{float:'right', color:'red', marginLeft:2}}>*</span>}
     </div>

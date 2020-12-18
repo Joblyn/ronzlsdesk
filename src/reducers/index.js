@@ -66,7 +66,7 @@ export default combineReducers({
   userGetDocumentsSentByUser:userGetDocumentsSentByUserReducer,
   userBookAppointment:userBookAppointmentReducer,
   userGetAppointments:userGetAppointmentsReducer,
-  updateData: updateDataReducer;
+  updateData: updateDataReducer,
   //Error
   errors: errorReducer,
 });
