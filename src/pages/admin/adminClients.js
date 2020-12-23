@@ -50,7 +50,7 @@ export default function AdminClients() {
         }
         return rows.push({
           id: i + 1,
-          user: client.companyName,
+          client: client.companyName,
           accountType: client.accountType,
           companyAddress: client.companyAddress,
           phoneNumber: client.phoneNumber,
@@ -84,6 +84,8 @@ export default function AdminClients() {
         <CustomTable
           pagination
           pagerows
+          search
+          searchType="client"
           columns={[
             {
               id: 'id',
@@ -93,7 +95,7 @@ export default function AdminClients() {
               color: value => 'blue',
             },
             {
-              id: 'user',
+              id: 'client',
               label: 'Client',
               align: 'center',
               minWidth: 100,

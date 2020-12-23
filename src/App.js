@@ -198,7 +198,8 @@ const App = ({ breakpoint }) => {
             </React.Suspense>
           </AdminMainLayout>
           ) : ( (auth && role === 'superadmin') ?
-            (<AdminMainLayout breakpoint={breakpoint}>
+            (
+              <AdminMainLayout breakpoint={breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
                 <ProtectedRoute>
                   <Route exact path="/superadmin/dashboard" component={superAdminDashboard} />
@@ -243,7 +244,8 @@ const App = ({ breakpoint }) => {
                   <Route exact path="/superadmin/appointments" component={superAdminAppointments}/>
                 </ProtectedRoute>
               </React.Suspense>
-            </AdminMainLayout> )
+            </AdminMainLayout> 
+            )
             : null
           )
         )}

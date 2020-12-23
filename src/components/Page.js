@@ -3,7 +3,8 @@ import PropTypes from 'utils/propTypes';
 
 import bn from 'utils/bemnames';
 
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Nav } from 'reactstrap';
+import SearchInput from 'components/SearchInput';
 
 // import Typography from './Typography';
 
@@ -15,34 +16,46 @@ const Page = ({
   tag: Tag,
   className,
   children,
+  searchBar,
+  searchTerm,
+  setSearchTerm,
   ...restProps
 }) => {
   const classes = bem.b('px-3', className);
 
   return (
-    <Tag className={classes} {...restProps}>
-      <div className={bem.e('header')}>
-        {/* {title && typeof title === 'string' ? (
+      <Tag className={classes} {...restProps}>
+        <div
+          className={`${bem.e('header')} ${
+            searchBar && 'd-flex align-items-start'
+          }`}
+        >
+          {/* {title && typeof title === 'string' ? (
           <Typography type="h1" className={bem.e('title')}>
             {title}
           </Typography>
         ) : (
             title
           )} */}
-        {breadcrumbs && (
-          <Breadcrumb className={bem.e('breadcrumb')}>
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            {breadcrumbs.length &&
-              breadcrumbs.map(({ name, active }, index) => (
-                <BreadcrumbItem key={index} active={active}>
-                  {name}
-                </BreadcrumbItem>
-              ))}
-          </Breadcrumb>
-        )}
-      </div>
-      {children}
-    </Tag>
+          {breadcrumbs && (
+            <Breadcrumb className={bem.e('breadcrumb')}>
+              <BreadcrumbItem>Home</BreadcrumbItem>
+              {breadcrumbs.length &&
+                breadcrumbs.map(({ name, active }, index) => (
+                  <BreadcrumbItem key={index} active={active}>
+                    {name}
+                  </BreadcrumbItem>
+                ))}
+            </Breadcrumb>
+          )}
+          {searchBar && (
+            <Nav navbar className="ml-auto">
+              <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+            </Nav>
+          )}
+        </div>
+        {children}
+      </Tag>
   );
 };
 

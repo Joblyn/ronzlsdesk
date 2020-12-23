@@ -15,7 +15,6 @@ export default function AdminRequests() {
   useEffect(() => {
     dispatch(getAllRequests(adminGetRequests));
   }, []);
-  console.log(adminGetAllRequests.requests);
 
   const getRows = requests => {
     let rows = [];
@@ -54,6 +53,8 @@ export default function AdminRequests() {
         <CustomTable
           pagination
           pagerows
+          search
+          searchType="client"
           columns={[
             {
               id: 'id',

@@ -2,7 +2,7 @@ import React from 'react';
 import { MdSearch } from 'react-icons/md';
 import { Form, Input } from 'reactstrap';
 
-const SearchInput = () => {
+const SearchInput = ({ searchTerm, setSearchTerm }) => {
   return (
     <Form inline className="cr-search-form" onSubmit={e => e.preventDefault()}>
       <MdSearch
@@ -13,6 +13,8 @@ const SearchInput = () => {
         type="search"
         className="cr-search-form__input"
         placeholder="Search..."
+        value={searchTerm}
+        onChange={({target})=>setSearchTerm(target.value)}
       />
     </Form>
   );

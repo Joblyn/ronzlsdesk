@@ -88,6 +88,7 @@ const BootstrapInput = withStyles(theme => ({
 export default function CustomTable({
   pagination,
   search,
+  searchType,
   pagerows,
   rows,
   columns,
@@ -103,8 +104,7 @@ export default function CustomTable({
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [items, setItems] = React.useState(rows);
   const [count, setCount] = React.useState(items.length / rowsPerPage);
-  const [filter, setFilter] = React.useState('Name');
-  console.log(filter);
+  // const [filter, setFilter] = React.useState('Name');
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -115,7 +115,7 @@ export default function CustomTable({
   const handleSearchChange = event => {
     let value = event.target.value.toLowerCase();
     if (value) {
-      let search = rows.filter(item => item.name.toLowerCase().includes(value));
+      let search = rows.filter(item => item[searchType] && item[searchType].toLowerCase().includes(value));
 
       setItems(search);
       // Need to correct our pagination to adapt to new search result
@@ -128,10 +128,9 @@ export default function CustomTable({
       setCount(Math.ceil(rows.length / rowsPerPage));
     }
   };
-  const handleFilterChange = event => {
-    setFilter(event.target.value);
-  };
-  console.log(handleFilterChange);
+  // const handleFilterChange = event => {
+  //   setFilter(event.target.value);
+  // };
   const renderTableColumns = () => {
     let nColumn = null;
     let nActions = null;
@@ -277,7 +276,7 @@ export default function CustomTable({
     <Grid container={true} className="w-full" style={{display:'flex', flexDirection:'column'}}>
       <Grid item>
         <Grid container={true} justify="space-between" alignItems="flex-start">
-          <Grid item>
+          <Grid item className="ml-auto">
             {search ? <Search handleSearchChange={handleSearchChange} /> : ''}
           </Grid>
         </Grid>

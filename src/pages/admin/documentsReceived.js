@@ -67,6 +67,8 @@ export default function AdminReceivedDocumnents() {
         <CustomTable
           pagination
           pagerows
+          search
+          searchType="client"
           columns={[
             {
               id: 'id',

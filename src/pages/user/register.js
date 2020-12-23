@@ -14,6 +14,7 @@ import setAuthToken from '../../utils/setAuthToken';
 import InputField from '../../components/InputField';
 import { useDispatch, useSelector } from 'react-redux';
 import InputDropdown from '../../components/InputDropdown';
+import Label from 'reactstrap/lib/Label';
 
 const Register = () => {
   const [inputList, setInputList] = useState([1]);
@@ -84,7 +85,10 @@ const Register = () => {
 
   const addNewDirector = count => (
     <div key={'director' + (count + 1)}>
-      <label className="font-semibold">{`Director ${count + 1}`} </label>
+      <div>
+        <label className="font-semibold">{`Director ${count + 1}`}</label>
+      </div>
+      <Label className="m-0">Full name</Label>
       <InputField
         type="text"
         name={'fullName' + count}
@@ -94,6 +98,7 @@ const Register = () => {
         value={managerControl.fullName}
         required
       />
+      <Label className="m-0">Date of Birth</Label>
       <InputField
         type="text"
         name={'dateOfBirth' + count}
@@ -116,7 +121,7 @@ const Register = () => {
     </div>
   );
 
-  const  handleChange = target => {
+  const handleChange = target => {
     setControl({
       ...control,
       [target.name]: target.value,
@@ -183,169 +188,178 @@ const Register = () => {
               </h2>
               <form id="register" onSubmit={handleSubmit}>
                 <div className="intro-x mt-8">
-
                   {inputList.map((x, i) => {
                     return addNewDirector(i);
                   })}
-
+                  <Label style={{ marginBottom: '-1rem', marginTop: '1rem' }}>
+                    Account Type
+                  </Label>
                   <InputDropdown
-                    onChange={({target}) => handleChange(target)}
+                    style={{ marginTop: '-.2rem' }}
+                    onChange={({ target }) => handleChange(target)}
                     name="accountType"
-                    className="intro-x login__input input input--lg my-2 border border-gray-300 block mt-4 w-100 required-field"
+                    className="intro-x login__input input input--lg my-2 border border-gray-300 block w-100 required-field"
                     dropdownElements={dropdownData}
                     required
-                  /> 
+                  />
+                  <Label className="m-0">Company Name</Label>
                   <InputField
                     type="text"
                     name="companyName"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100 required-field"
-                    placeholder="Company Name e.g. 'Samsung Ng'"
-                    
+                    placeholder="Company Name"
                   />
+                  <Label className="m-0">Company Address</Label>
                   <InputField
                     type="text"
                     name="companyAddress"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Company Address e.g. 'No. 2, Lagos street, Lagos'"
-                    
+                    placeholder="Company Address"
                   />
+                  <Label className="m-0">City</Label>
                   <InputField
                     type="text"
                     name="city"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="City e.g. 'Lagos'"
-                    
+                    placeholder="City"
                   />
                   <span className="iconRequired standard_iconRequired"></span>
+                  <Label className="m-0">Postal Code</Label>
                   <InputField
                     type="text"
                     name="postalCode"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Postal Code e.g. '100001'"
-                    
+                    placeholder="Postal Code"
                   />
+                  <Label className="m-0">Country</Label>
                   <InputField
                     type="text"
                     name="country"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Country e.g. 'Nigeria"
-                    
+                    placeholder="Country"
                   />
+                  <Label className="m-0">Phone Number</Label>
                   <InputField
                     type="tel"
                     name="phoneNumber"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Phone Number e.g. '0123456789'"
+                    placeholder="Phone Number"
                     required
                   />
+                  <Label className="m-0">Email</Label>
                   <InputField
                     type="email"
                     name="email"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Email e.g. 'example@example.com"
+                    placeholder="Email"
                     required
                   />
+                  <Label className="m-0">Website URL</Label>
                   <InputField
                     type="text"
                     name="websiteUrl"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Website Url. If null, type 'null"
-                    
+                    placeholder="If null, type 'null'"
                   />
+                  <Label className="m-0">Company Begin</Label>
                   <InputField
                     type="text"
                     name="companyBegin"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Company Begin. If null, type '0000'"
-                    
+                    placeholder="If null, type '0000'"
                   />
+                  <Label className="m-0">Company Reg. No.</Label>
                   <InputField
                     type="text"
                     name="companyRegNo"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Company Reg No. If null, type '0000'"
-                    
+                    placeholder="If null, type '0000'"
                   />
+                  <Label className="m-0">UTR No.</Label>
                   <InputField
                     type="text"
                     name="utrNo"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="UTR Number. If null, type '0000'"
-                    
+                    placeholder="If null, type '0000'"
                   />
+                  <Label className="m-0">VAT Submit Type</Label>
                   <InputField
                     type="text"
                     name="vatSubmitType"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Vat Submit Type. If null, type 'null'"
-                    
+                    placeholder="If null, type 'null'"
                   />
+                  <Label className="m-0">VAT Scheme</Label>
                   <InputField
                     type="text"
                     name="vatScheme"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="VAT Scheme. If null, type 'null'"
-                    
+                    placeholder="If null, type 'null'"
                   />
+                  <Label className="m-0">Company Name</Label>
                   <InputField
                     type="text"
                     name="vatRegNo"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="VAT Reg No. If null, type '000'"
-                    
+                    placeholder="If null, type '000'"
                   />
+                  <Label className="m-0">VAT Reg. Date</Label>
                   <InputField
                     type="text"
                     name="vatRegDate"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="VAT Reg Date. If null, type '0000'"
-                    
+                    placeholder="If null, type '0000'"
                   />
+                  <Label className="m-0">Insurance Number</Label>
                   <InputField
                     type="text"
                     name="insuranceNumber"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Insurance Number. If null, type '0000'"
-                    
                   />
+                  <Label className="m-0">Payee Ref. No.</Label>
                   <InputField
                     type="text"
                     name="payeeRefNo"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Payee Ref No. If null, type '0000'"
-                    
+                    placeholder="If null, type '0000'"
                   />
+                  <Label className="m-0">Password</Label>
                   <InputField
                     type="password"
                     name="password"
-                    onChange={({target}) => handleChange(target)}
+                    onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="Password"
-                    required 
+                    required
                   />
-                  <p style={{
-                    fontSize: '.8rem', 
-                    color:'grey',
-                    opacity: 1,
-                    transition: 'opactiy .2s 1s'
-                    }}>Must have at least five characters</p>
+                  <p
+                    style={{
+                      fontSize: '.8rem',
+                      color: 'grey',
+                      opacity: 1,
+                      transition: 'opactiy .2s 1s',
+                    }}
+                  >
+                    Must have at least five characters
+                  </p>
                 </div>
                 <div className="intro-x mt-5 xl:mt-8 xl:text-left">
                   <InputField

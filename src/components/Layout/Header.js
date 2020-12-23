@@ -86,7 +86,7 @@ function Header() {
   // };
 
   const toggleUserCardPopover = () => {
-    setIsOpenUserCardPopover(prevState => !prevState);
+    setIsOpenUserCardPopover(isOpenUserCardPopover => !isOpenUserCardPopover);
   };
 
   const handleSidebarControlButton = event => {

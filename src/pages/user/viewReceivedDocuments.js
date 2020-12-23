@@ -63,6 +63,8 @@ export default function ViewReceivedDocuments() {
         <CustomTable
           pagination
           pagerows
+          search
+          searchType="docName"
           columns={[
             {
               id: 'id',

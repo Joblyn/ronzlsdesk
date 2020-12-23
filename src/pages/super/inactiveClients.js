@@ -79,6 +79,8 @@ export default function InActiveClients() {
         <CustomTable
           pagination
           pagerows
+          search
+          searchType="client"
           columns={[
             {
               id: 'id',

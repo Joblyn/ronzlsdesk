@@ -78,6 +78,8 @@ export default function AdminClients(props) {
         <CustomTable
           pagination
           pagerows
+          search
+          searchType="client"
           columns={[
             {
               id: 'id',

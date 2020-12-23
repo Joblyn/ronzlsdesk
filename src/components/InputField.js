@@ -13,6 +13,7 @@ const InputField = ({
   onFocus,
   onBlur,
   required,
+  style,
   ...restProps
 }) => {
   const refs = useRef(null);
@@ -30,6 +31,7 @@ const InputField = ({
         onChange={onChange}
         disabled={disabled}
         onClick={onClick}
+        style={style}
         {...restProps}
       />
   );

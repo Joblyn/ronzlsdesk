@@ -112,6 +112,8 @@ export default function AdminAppointments() {
         <CustomTable
           pagination
           pagerows
+          search
+          searchType="client"
           columns={[
             {
               id: 'id',

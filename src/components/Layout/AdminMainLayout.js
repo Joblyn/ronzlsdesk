@@ -74,7 +74,7 @@ class AdminMainLayout extends React.Component {
   render() {
     const { children } = this.props;
     const role = window.localStorage.getItem('role');
-    console.log(role);
+    
     return (
       <main className="cr-app bg-light">
         {role === "admin" ? <AdminSidebar /> : <SuperAdminSidebar />}

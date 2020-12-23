@@ -57,6 +57,8 @@ export default function Requests() {
         <CustomTable
           pagination
           pagerows
+          search
+          searchType="client"
           columns={[
             {
               id: 'id',

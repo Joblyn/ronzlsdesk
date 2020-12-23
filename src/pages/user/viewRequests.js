@@ -61,6 +61,8 @@ export default function ViewRequests() {
         <CustomTable
           pagination
           pagerows
+          search
+          searchType="requestTitle"
           columns={[
             {
               id: 'id',

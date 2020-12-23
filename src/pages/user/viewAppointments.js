@@ -67,6 +67,8 @@ export default function ViewAppointments() {
         <CustomTable
           pagination
           pagerows
+          search
+          searchType="message"
           columns={[
             {
               id: 'id',

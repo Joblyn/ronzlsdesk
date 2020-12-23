@@ -6,7 +6,6 @@ const InputDropdown = ({
   className,
   name,
   disabled,
-  required,
   style,
   userProfile,
   dropdownElementsUser

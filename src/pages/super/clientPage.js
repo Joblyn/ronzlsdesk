@@ -26,14 +26,12 @@ import nProgress from 'nprogress';
 
 const AdminClient = () => {
   const dispatch = useDispatch();
-  const adminGetClient = useSelector(state => state.adminGetAllClient);
   const [showModal, setShowModal] = useState(false);
   const [selectedAdmin, setSelectedAdmin] = useState({});
   const [client, setclient] = useState({});
+  const adminGetClient = useSelector(state => state.adminGetAllClient);
   const admins = useSelector(state => state.superAdminGetAllAdmins.admins);
-  const AddClientToAdmin = useSelector(
-    state => state.superAdminAddClientToAdmin,
-  );
+  const AddClientToAdmin = useSelector(state => state.superAdminAddClientToAdmin);
 
   useEffect(() => {
     dispatch(getClient(getAllClients));
@@ -41,7 +39,7 @@ const AdminClient = () => {
 
   useEffect(() => {
     if (AddClientToAdmin.isSuccessful) {
-      alert(`Added ${client.name} to Account Officer-${selectedAdmin.name}`);
+      alert(`Added ${client.name} to Account Officer- ${selectedAdmin.name}`);
       setShowModal(false);
     }
   }, [AddClientToAdmin]);
@@ -49,7 +47,7 @@ const AdminClient = () => {
   const viewDetails = id => {
     localStorage.setItem('client_id', id);
   };
-
+  
   const handleClick = (id, name) => {
     setclient({ id, name });
     setShowModal(true);
@@ -65,12 +63,11 @@ const AdminClient = () => {
     const payload = { users: [client.id] };
     dispatch(superAdminAddClientToAdmin(endpoint, payload));
   };
-
+  
   const getRows = data => {
     let rows = [];
-    // let prospect = data.filter(user => user.accountStatus === 'active');
     data &&
-      data.reverse().map((user, index) => {
+    data.reverse().map((user, index) => {
         let admin;
         let status;
         let color;
@@ -79,8 +76,8 @@ const AdminClient = () => {
         }
         if (user.accountStatus) {
           status =
-            user.accountStatus.charAt(0).toUpperCase() +
-            user.accountStatus.slice(1);
+          user.accountStatus.charAt(0).toUpperCase() +
+          user.accountStatus.slice(1);
         }
         switch (status) {
           case 'Prospect':
@@ -92,12 +89,12 @@ const AdminClient = () => {
           case 'Inactive':
             color = 'red';
             break;
-          default:
-            color = '';
-        }
-        return rows.push({
-          id: index + 1,
-          user: user.companyName,
+            default:
+              color = '';
+            }
+            return rows.push({
+              id: index + 1,
+          client: user.companyName,
           accountType: user.accountType,
           admin: admin || '- -',
           companyAddress: user.companyAddress,
@@ -169,7 +166,10 @@ const AdminClient = () => {
     return <PageSpinner />;
   }
   return (
-    <Page title="Dropdowns" breadcrumbs={[{ name: 'Clients', active: true }]}>
+    <Page
+      title="Dropdowns"
+      breadcrumbs={[{ name: 'Clients', active: true }]}
+    >
       <div className="d-flex align-items-center cursor-pointer">
         <Button
           color="success"
@@ -205,6 +205,8 @@ const AdminClient = () => {
         <CustomTable
           pagination
           pagerows
+          search
+          searchType="client"
           columns={[
             {
               id: 'id',
@@ -213,9 +215,8 @@ const AdminClient = () => {
               minWidth: 20,
               color: value => 'blue',
             },
-
             {
-              id: 'user',
+              id: 'client',
               align: 'center',
               label: 'Client',
               minWidth: 100,
@@ -278,7 +279,7 @@ const AdminClient = () => {
               color: value => 'blue',
             },
           ]}
-          rows={() => getRows(adminGetClient.users)}
+          rows={getRows(adminGetClient.users)}
         />
 
         {showModal && (

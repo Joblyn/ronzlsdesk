@@ -75,6 +75,8 @@ const Documents = () => {
       <CustomTable
         pagination
         pagerows
+        search
+        searchType="client"
         columns={[
           {
             id: 'id',
@@ -86,7 +88,7 @@ const Documents = () => {
           {
             id: 'client',
             align: 'center',
-            label: 'User',
+            label: 'Client',
             minWidth: 100,
             color: value => 'blue',
           },
