@@ -41,6 +41,7 @@ const AdminClient = () => {
     if (AddClientToAdmin.isSuccessful) {
       alert(`Added ${client.name} to Account Officer- ${selectedAdmin.name}`);
       setShowModal(false);
+      window.location.reload();
     }
   }, [AddClientToAdmin]);
 

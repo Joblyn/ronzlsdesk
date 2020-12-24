@@ -47,7 +47,10 @@ export default function CreateRequest() {
         }),
       })
         .then(res => res.json())
-        .then(history.push('/user/requests'))
+        .then(() => {
+          alert('Created request with account officer.'); 
+          history.push('/user/requests');
+        })
         .catch(err => {
           alert('Opps, An error occurred, please try again!');
           console.error()

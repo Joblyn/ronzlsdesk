@@ -36,6 +36,7 @@ const AdminSentDocuments =React.lazy(() => import('pages/admin/documentsSent'))
 const AdminRequests = React.lazy(() => import('pages/admin/adminRequests'));
 const AdminAppointments = React.lazy(() => import('pages/admin/adminAppointments'));
 const AdminViewClientDetails = React.lazy(() => import('pages/admin/adminViewClientDetails'));
+const AdminResetPassword = React.lazy(() => import('pages/admin/resetPassword'));
 
 //User
 const DashboardPage = React.lazy(() => import('pages/user/DashboardPage'));
@@ -197,7 +198,9 @@ const App = ({ breakpoint }) => {
               <ProtectedRoute>
                 <Route exact path="/admin/client/details/:userId" component={AdminViewClientDetails} /> 
               </ProtectedRoute>
-
+              <ProtectedRoute>
+                <Route exact path="/admin/reset-password" component={AdminResetPassword}/>
+              </ProtectedRoute>
             </React.Suspense>
           </AdminMainLayout>
           ) : ( (auth && role === 'superadmin') ?

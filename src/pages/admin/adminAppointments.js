@@ -18,6 +18,7 @@ import CustomTable from '../../components/table/CustomTable';
 export default function AdminAppointments() {
   const dispatch = useDispatch();
   const adminGetAppointments = useSelector(state => state.adminGetAppointments);
+  const adminConfirmAppointment = useSelector(state => state.adminConfirmAppointment);
 
   useEffect(() => {
     dispatch(getAppointments(getClientAppointments));
@@ -29,6 +30,7 @@ export default function AdminAppointments() {
       appointment_id: id,
     };
     dispatch(confirmAppointment(endpoint, payload));
+    adminConfirmAppointment.isSuccessful && window.location.reload();
   };
 
   const onRejectAppointment = id => {
@@ -37,6 +39,7 @@ export default function AdminAppointments() {
       appointmen_id: id,
     };
     dispatch(confirmAppointment(endpoint, payload));
+    adminConfirmAppointment.isSuccessful && window.location.reload();
   };
 
   const getRows = appointments => {

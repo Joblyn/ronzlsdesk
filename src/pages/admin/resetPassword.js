@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Page from 'components/Page';
@@ -6,8 +6,8 @@ import InputField from '../../components/InputField';
 import Form from 'reactstrap/lib/Form';
 import Label from 'reactstrap/lib/Label';
 
-import { userResetPassword } from '../../apiConstants/apiConstants';
-import { resetPassword } from '../../actions/user/Users';
+import { adminResetPassword } from '../../apiConstants/apiConstants';
+import { resetPassword } from '../../actions/admin/authAction/Users';
 import PopupSuccess from '../../components/popup-success';
 
 export default function ResetPassword() {
@@ -16,7 +16,7 @@ export default function ResetPassword() {
   const [dontMatch, setDontMatch] = useState(false);
   const [popup, setPopup] = useState(false);
   const dispatch = useDispatch();
-  const userResetPass = useSelector(state => state.userResetPassword);
+  const adminResetPass = useSelector(state => state.adminResetPassword);
 
   const handleChange = ({ target }) => {
     setControl({
@@ -32,14 +32,14 @@ export default function ResetPassword() {
       setDontMatch(true);
     } else {
       setDontMatch(false);
-      dispatch(resetPassword(userResetPassword, control));
+      dispatch(resetPassword(adminResetPassword, control));
     }
   };
-  
-  useEffect(() => {
-    userResetPass.isSuccessful && setPopup(true);
-  }, [userResetPass]);
 
+  useEffect(() => {
+    adminResetPass.isSuccessful && setPopup(true);
+  }, [adminResetPass]);
+  
   let border = { border: '1px solid #dee2e6' };
   if (confirmPassword && confirmPassword === newPassword) {
     border = { border: '2px solid green' };
@@ -103,8 +103,8 @@ export default function ResetPassword() {
         button
         majorText="Changed Password successfully."
         text="Please login with new password"
-        redirect="/user/login"
+        redirect="/admin/login"
       />}
     </Page>
-  );
-}
+  )
+};  

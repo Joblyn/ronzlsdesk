@@ -45,8 +45,6 @@ export default function CreateAppointment() {
       appointmentMessage: message
     };
     // .toDateString()
-    console.log(payload);
-    
     dispatch(bookAppointment(userBookAppointmentWithAdmin, payload));
   }
 

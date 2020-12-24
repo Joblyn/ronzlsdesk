@@ -29,6 +29,7 @@ const AdminRegister = () => {
     dispatch(register(adminRegsiter, control));
     const { fullName } = control;
     adminRegister.isSuccessful && alert(`Registered ${fullName} as Admin Successfully`);
+    window.location.reload();
   };
 
   const datas = [
@@ -65,7 +66,7 @@ const AdminRegister = () => {
                     type="tel"
                     name="phoneNumber"
                     onChange={handleChange}
-                    className="intro-x login__input input input--lg border border-gray-300 block mt-4 w-100"
+                    className="login__input input input--lg border border-gray-300 block mt-4 w-100"
                     placeholder="Phone Number"
                     required
                   />
@@ -73,14 +74,14 @@ const AdminRegister = () => {
                     type="email"
                     name="email"
                     onChange={handleChange}
-                    className="intro-x login__input input input--lg border border-gray-300 block mt-4 w-100"
+                    className="login__input input input--lg border border-gray-300 block mt-4 w-100"
                     placeholder="Email"
                     required
                   />
                   <InputDropdown
                     onChange={handleChange}
                     name="role"
-                    className="intro-x login__input input input--lg border border-gray-300 block mt-4 w-100"
+                    className="login__input input input--lg border border-gray-300 block mt-4 w-100"
                     dropdownElements={dropdownData}
                     required
                   />
@@ -88,12 +89,12 @@ const AdminRegister = () => {
                     type="password"
                     name="password"
                     onChange={handleChange}
-                    className="intro-x login__input input input--lg border border-gray-300 block mt-4 w-100"
+                    className="login__input input input--lg border border-gray-300 block mt-4 w-100"
                     placeholder="Password"
                     required
                   />
                 </div>
-                <div className="intro-x mt-5 xl:mt-8 xl:text-left">
+                <div className="mt-5 xl:mt-8 xl:text-left">
                   <InputField
                     type="submit"
                     className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3"

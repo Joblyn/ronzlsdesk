@@ -378,7 +378,7 @@ const Register = () => {
                     style={border}
                     type="password"
                     onChange={({ target }) => setConfirmPassword(target.value)}
-                    className="intro-x login__input input  my-2 input--lg block w-100"
+                    className="intro-x login__input input my-2 input--lg block w-100"
                     placeholder="Confirm password"
                     required
                   />

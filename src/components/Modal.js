@@ -8,21 +8,17 @@ import nProgress from 'nprogress';
 
 export default function Modal({ action, color }) {
   const [showModal, setShowModal] = useState(false);
-  const [client, setClient] = useState('');
+  const [client, setClient] = useState({});
   const [fileName, setFileName] = useState('');
   const [file, setFile] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const clients = useSelector(state => state.adminData.users);
-  const adminUploadDocToClient = useSelector(
-    state => state.adminUploadDocToClient,
-  );
 
-  const isInvalid = file === '' || fileName === '' || client === '';
+  const isInvalid = file === '' || fileName === '' || client === {};
   const handleSubmit = e => {
     e.preventDefault();
-
-    // with FormData
+    
     const formData = new FormData();
     const inpFile = document.getElementById('file');
     formData.append('docName', fileName);
@@ -31,10 +27,7 @@ export default function Modal({ action, color }) {
     let localURL = 'https://node.codecradle.co/api/v1/';
     let prodURL = 'https://node.codecradle.co/api/v1/';
     let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
-    console.log(client);
-    const endpoint = baseUrl + adminUploadDoc + client;
-    console.log(client);
-    console.log(endpoint);
+    const endpoint = baseUrl + adminUploadDoc + client._id;
     const token = localStorage.getItem('jwtToken');
     const bearerToken = 'Bearer ' + token;
     nProgress.start();
@@ -51,7 +44,7 @@ export default function Modal({ action, color }) {
       .then(data => {
         nProgress.done();
         nProgress.remove();
-        alert(`Successfully uploaded file.`);
+        alert(`Sent document to ${client.companyName}.`);
         setShowModal(false);
         setIsLoading(false);
         window.location.reload();
@@ -67,9 +60,6 @@ export default function Modal({ action, color }) {
       });
   };
 
-  if (adminUploadDocToClient.isSuccessful) {
-    alert('Document successfully sent to client');
-  }
   return (
     <>
       <Button
@@ -143,7 +133,7 @@ export default function Modal({ action, color }) {
                       >
                         <option value="send to">Send to</option>
                         {clients.map((client, i) => (
-                          <option key={i + 1} value={client._id}>
+                          <option key={i + 1} value={client}>
                             {client.companyName}
                           </option>
                         ))}

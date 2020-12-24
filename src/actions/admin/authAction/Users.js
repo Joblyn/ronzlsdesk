@@ -35,9 +35,16 @@ export const logOutAction = (payload) => {
 export const onForgotPassword = payload => {
   return {
     type: ActionType.ADMIN_FORGOT_PASSWORD_SUCCESS,
-    payload,
+    payload
   };
 };
+
+export const onResetPassword = payload => {
+  return { 
+    type: ActionType.ADMIN_RESET_PASSWORD,
+    payload
+  }
+}
 
 // get admin data
 export const onGetAdminData = payload => {
@@ -74,6 +81,10 @@ export const login = (url, payload) => {
 export const forgotPassword = (url, payload) => {
   return postData(url, payload, onForgotPassword);
 };
+
+export const resetPassword = (url, payload) => {
+  return postDataWithToken(url, payload, onResetPassword);
+}
 
 // edit
 export const getAdminData = (url) => {

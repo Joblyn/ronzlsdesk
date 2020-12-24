@@ -3,6 +3,7 @@ import errorReducer from './errorReducer';
 import adminRegisterReducer from './admin/adminRegister';
 import adminLoginReducer from './admin/adminLogin';
 import adminForgotPasswordReducer from './admin/adminForgotPassword';
+import adminResetPasswordReducer from './admin/resetPassword';
 import adminGetAllClient from './admin/getClientsReducer';
 import adminUpdateSubscriptionReducer from './admin/adminUpdateSubscription';
 import adminDataReducer from './admin/getAdminData';
@@ -38,6 +39,7 @@ export default combineReducers({
   adminRegisterAuth: adminRegisterReducer,
   adminLoginAuth: adminLoginReducer,
   adminForgotPassword: adminForgotPasswordReducer,
+  adminResetPassword:adminResetPasswordReducer,
   adminGetAllClient: adminGetAllClient,
   adminData: adminDataReducer,
   adminUpdateSubscription: adminUpdateSubscriptionReducer,

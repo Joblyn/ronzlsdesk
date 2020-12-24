@@ -142,7 +142,7 @@ function Header() {
             <Avatar
               onClick={toggleUserCardPopover}
               className="can-click"
-              src={Portrait}
+              src={userData.profilePics || Portrait}
             />
           </NavLink>
           <Popover
@@ -155,10 +155,9 @@ function Header() {
           >
             <PopoverBody className="p-0 border-light">
               <UserCard
-                avatar={Portrait}
+                avatar={userData.profilePics || Portrait}
                 title={adminData.fullName || userData.companyName}
                 subtitle={adminData.email || userData.email}
-                text="Last updated 3 mins ago"
                 className="border-light"
               >
                 <ListGroup flush>

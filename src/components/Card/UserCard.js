@@ -4,6 +4,7 @@ import PropTypes from 'utils/propTypes';
 import classNames from 'classnames';
 
 import { Card, CardTitle, CardSubtitle, CardText, CardBody } from 'reactstrap';
+// import { MdPhotoCamera } from 'react-icons/md';
 
 import Avatar from '../Avatar';
 
@@ -23,6 +24,11 @@ const UserCard = ({
     <Card inverse className={classes} {...restProps}>
       <CardBody className="d-flex justify-content-center align-items-center flex-column">
         <Avatar src={avatar} size={avatarSize} className="mb-2" />
+        {/* <MdPhotoCamera size={30} style={{
+          position:'relative',
+          top:-15,
+          right:-15
+        }}/> */}
         <CardTitle>{title}</CardTitle>
         <CardSubtitle>{subtitle}</CardSubtitle>
         <CardText>

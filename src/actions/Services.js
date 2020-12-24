@@ -122,7 +122,7 @@ export const postDataWithToken = (url, payload, done) => {
           nprogress.done();
           nprogress.remove();
           dispatch(done(data.data));
-          window.location.reload();
+          // window.location.reload();
         } else if (data.error) {
           nprogress.done();
           nprogress.remove();
