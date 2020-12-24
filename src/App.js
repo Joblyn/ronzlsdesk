@@ -17,7 +17,7 @@ import Landing from './pages/Landing';
 import Login from './pages/user/login';
 import Register from './pages/user/register';
 import ForgotPassword from './pages/user/forgotPassword';
-import ConfirmPassword from './pages/user/confirmPassword';
+import ResetForgotPassword from './pages/user/resetForgotPassword';
 
 // admin pages
 import AdminLogin from './pages/admin/adminLogin';
@@ -47,6 +47,7 @@ const UserViewSentDocuments = React.lazy(() => import('pages/user/viewSentDocume
 const UserUploadDocument = React.lazy(() => import('pages/user/uploadDocument'));
 const UserViewAppointments = React.lazy(() => import('pages/user/viewAppointments'));
 const BookAppointment = React.lazy(() => import('pages/user/bookAppointment'));
+const UserResetPassword = React.lazy(() => import('pages/user/resetPassword'));
 
 // superAdmin
 const superAdminDashboard = React.lazy(() => import('pages/super/adminDashboard'));
@@ -125,11 +126,11 @@ const App = ({ breakpoint }) => {
           <ForgotPassword />
         </IsUserRedirect>
         <IsUserRedirect
-          path="/user/confirm-password"
+          path="/user/forgot-password-reset"
           role={role}
           exact
         >
-          <ConfirmPassword />
+          <ResetForgotPassword />
         </IsUserRedirect>
 
         {/* User Routes */}
@@ -163,7 +164,9 @@ const App = ({ breakpoint }) => {
               <ProtectedRoute>
                 <Route exact path="/user/book-appointment" component={BookAppointment}/>
               </ProtectedRoute>
-
+              <ProtectedRoute>
+                <Route exact path="/user/reset-password" component={UserResetPassword}/>
+              </ProtectedRoute>
             </React.Suspense>
           </MainLayout>
         ) : ((auth && role === 'admin') ? 

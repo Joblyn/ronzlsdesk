@@ -9,6 +9,7 @@ import bgImage from '../../assets/images/illustration.png';
 //components
 import InputField from '../../components/InputField';
 import Button from '../../components/button';
+import { Label } from 'reactstrap';
 
 import { forgotPasswordUser } from '../../actions/user/Users';
 import { userForgotPassword } from '../../apiConstants/apiConstants';
@@ -73,17 +74,17 @@ const ForgotPassword = () => {
                   </Link>
                 </div>
               </div>
-              <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Header</h2>
-              <div className="intro-x mt-2 text-gray-500 xl:hidden text-center">
-                Retrieve your account <br />
-                {/* Manage all your e-commerce accounts in one place */}
-              </div>
+              <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Retrieve your account</h2>
+              {/* <div className="intro-x mt-2 text-gray-500 xl:hidden text-center"> */}
+                {/* Retrieve your account <br /> */}
+              {/* </div> */}
               <div className="intro-x mt-8">
+                <Label>Type in your email</Label>
                 <InputField
                   type="email"
                   name="email"
                   onChange={handleChange}
-                  className="intro-x login__input input input--lg border border-gray-300 block"
+                  className="intro-x login__input input input--lg border border-gray-300 block w-100"
                   placeholder="Email"
                 />
                 {/* <InputField

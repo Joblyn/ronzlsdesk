@@ -9,14 +9,12 @@ import Portrait from '../../portrait.png';
 // import SearchInput from 'components/SearchInput';
 // import { notificationsData } from 'demos/header';
 // import withBadge from 'hocs/withBadge';
-import { 
-  getAllAdmin,
-  getUserData 
-} from 'apiConstants/apiConstants';
+import { getAllAdmin, getUserData } from 'apiConstants/apiConstants';
 
 import {
   MdClearAll,
   MdExitToApp,
+  MdLockOutline,
   // MdHelp,
   // MdInsertChart,
   // MdMessage,
@@ -38,7 +36,10 @@ import {
   PopoverBody,
 } from 'reactstrap';
 import bn from 'utils/bemnames';
-import { getAdminData, logOutAction } from '../../actions/admin/authAction/Users';
+import {
+  getAdminData,
+  logOutAction,
+} from '../../actions/admin/authAction/Users';
 import { getUser } from '../../actions/user/Users';
 
 import Button from '../button';
@@ -58,9 +59,7 @@ const bem = bn.create('header');
 //   children: <small>5</small>,
 // })(MdNotificationsActive);
 
-
 function Header() {
-
   // const [isOpenNotificationPopover, setIsOpenNotificationPopover] = useState(false);
   // const [isNotificationConfirmed, setIsNotificationConfirmed] = useState(false);
   const [isOpenUserCardPopover, setIsOpenUserCardPopover] = useState(false);
@@ -71,7 +70,7 @@ function Header() {
 
   useEffect(() => {
     const role = localStorage.getItem('role');
-    if ((role === 'superadmin') || (role === 'admin')) {
+    if (role === 'superadmin' || role === 'admin') {
       dispatch(getAdminData(getAllAdmin));
     } else if (role === 'user') {
       dispatch(getUser(getUserData));
@@ -99,9 +98,10 @@ function Header() {
   return (
     <Navbar light expand className={bem.b('bg-white')}>
       <Nav navbar className="mr-2">
-        <Button outline 
-          onClick={handleSidebarControlButton} 
-          value={<MdClearAll size={25} />} 
+        <Button
+          outline
+          onClick={handleSidebarControlButton}
+          value={<MdClearAll size={25} />}
         />
       </Nav>
       {/* <Nav navbar>
@@ -166,8 +166,8 @@ function Header() {
                     <Link
                       style={{
                         color: 'inherit',
-                        textDecoration: 'none', 
-                        width: '100%'      
+                        textDecoration: 'none',
+                        width: '100%',
                       }}
                       to={`/${adminData.role || userData.role}/profile`}
                     >
@@ -178,8 +178,25 @@ function Header() {
                     <MdMessage /> Messages
                   </ListGroupItem> */}
                   <ListGroupItem tag="button" action className="border-light">
+                    <MdLockOutline />
+                    <Link
+                      style={{
+                        color: 'inherit',
+                        textDecoration: 'none',
+                        width: '100%',
+                      }}
+                      to={`/${adminData.role || userData.role}/reset-password`}
+                    >
+                      Reset password
+                    </Link>
+                  </ListGroupItem>
+                  <ListGroupItem tag="button" action className="border-light">
                     <MdExitToApp />
-                    <Link to="/" onClick={logOutAction} style={{color: 'red'}}>
+                    <Link
+                      to="/"
+                      onClick={logOutAction}
+                      style={{ color: 'red' }}
+                    >
                       Log Out
                     </Link>
                   </ListGroupItem>

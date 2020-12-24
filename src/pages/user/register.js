@@ -23,6 +23,8 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   let obj = {};
   const [control, setControl] = useState({});
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [dontMatch, setDontMatch] = useState(false);
   const dispatch = useDispatch();
   const userReg = useSelector(state => state.userRegisterauth);
 
@@ -94,7 +96,7 @@ const Register = () => {
         name={'fullName' + count}
         onChange={e => handleInputChange(e, count)}
         className="intro-x login__input input my-2 input--lg border border-gray-300 block w-100 required-field"
-        placeholder="Full Name e.g. 'John Okoye'"
+        placeholder="Full Name"
         value={managerControl.fullName}
         required
       />
@@ -128,15 +130,28 @@ const Register = () => {
     });
   };
 
+  const { password } = control;
   const handleSubmit = event => {
     event.preventDefault();
-    setIsLoading(true);
-    let managers = prepareManager(managerControl);
-    let payload = { director: managers, ...control };
-    console.log(payload);
-    dispatch(registerUser(userRegister, payload));
-    setIsLoading(false);
+    if (confirmPassword !== password) {
+      setDontMatch(true);
+    } else {
+      setDontMatch(false);
+      setIsLoading(true);
+      let managers = prepareManager(managerControl);
+      let payload = { director: managers, ...control };
+      console.log(payload);
+      dispatch(registerUser(userRegister, payload));
+      setIsLoading(false);
+    }
   };
+
+  let border = { border: '1px solid #dee2e6' };
+  if (confirmPassword && confirmPassword === password) {
+    border = { border: '2px solid green' };
+  } else if (confirmPassword && confirmPassword !== password) {
+    border = { border: '2px solid red' };
+  }
 
   const datas = [
     ['Select Account Type', ''],
@@ -195,10 +210,9 @@ const Register = () => {
                     Account Type
                   </Label>
                   <InputDropdown
-                    style={{ marginTop: '-.2rem' }}
                     onChange={({ target }) => handleChange(target)}
                     name="accountType"
-                    className="intro-x login__input input input--lg my-2 border border-gray-300 block w-100 required-field"
+                    className="intro-x login__input input input--lg border border-gray-300 block w-100 required-field"
                     dropdownElements={dropdownData}
                     required
                   />
@@ -309,7 +323,7 @@ const Register = () => {
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
                     placeholder="If null, type 'null'"
                   />
-                  <Label className="m-0">Company Name</Label>
+                  <Label className="m-0">VAT Reg. No.</Label>
                   <InputField
                     type="text"
                     name="vatRegNo"
@@ -360,6 +374,15 @@ const Register = () => {
                   >
                     Must have at least five characters
                   </p>
+                  <InputField
+                    style={border}
+                    type="password"
+                    onChange={({ target }) => setConfirmPassword(target.value)}
+                    className="intro-x login__input input  my-2 input--lg block w-100"
+                    placeholder="Confirm password"
+                    required
+                  />
+                  {dontMatch && <p style={{color: 'red', fontSize:'.8rem'}}>Passwords don't match</p>}
                 </div>
                 <div className="intro-x mt-5 xl:mt-8 xl:text-left">
                   <InputField

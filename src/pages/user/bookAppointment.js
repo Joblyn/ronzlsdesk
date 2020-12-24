@@ -52,7 +52,6 @@ export default function CreateAppointment() {
 
   if(userBookAppointment.isSuccessful) {
     alert(`Booked an appoinment with account officer on ${date.toDateString()}`);
-    console.log(userBookAppointment.result);
   }
 
   return (

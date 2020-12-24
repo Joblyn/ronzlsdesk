@@ -9,7 +9,7 @@ const userForgotPasswordReducer = (state = forgotPassword, action) => {
       return {
         ...state,
         result: action.payload,
-        isLaoding: false,
+        isLoading: false,
         isSuccessful: true,
       };
     case ActionTypes.USER_FORGOT_PASSWORD_FAIL:

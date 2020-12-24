@@ -142,3 +142,8 @@ export const userUpdateData = {
   isSuccessful:false,
   data: {}
 }
+
+export const resetPassword = {
+  isSuccessful: false,
+  data: {}
+}

@@ -35,6 +35,13 @@ export const onForgotPasswordUser = payload => {
   };
 };
 
+export const onResetPassword = payload => {
+  return {
+    type: ActionType.USER_RESET_PASSWORD,
+    payload
+  }
+}
+
 export const onGetUser = (payload) => {
   return {
     type: ActionType.GET_USER_DATA,
@@ -111,6 +118,10 @@ export const loginUser = (url, payload) => {
 export const forgotPasswordUser = (url, payload) => {
   return postData(url, payload, onForgotPasswordUser);
 };
+
+export const resetPassword = (url, payload) => {
+  return postDataWithToken(url, payload, onResetPassword);
+}
 
 export const logOutAction = (payload) => {
   window.localStorage.clear();

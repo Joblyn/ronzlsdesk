@@ -12,7 +12,6 @@ const InputField = ({
   placeholder,
   onFocus,
   onBlur,
-  required,
   style,
   ...restProps
 }) => {
