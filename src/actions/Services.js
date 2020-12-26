@@ -43,7 +43,6 @@ export const getDataWithToken = (url, done) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data.status === 'success') {
           nprogress.done();
           nprogress.remove();

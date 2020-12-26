@@ -67,6 +67,7 @@ export let userResetPassword = 'user/resetpassword';
 //User Data
 export let getUserData = 'user';
 export let updateUserData = 'user';
+export let updateImage = 'user/image';
 
 //User Doc
 export let userUploaDocToAdmin = 'user/document/';

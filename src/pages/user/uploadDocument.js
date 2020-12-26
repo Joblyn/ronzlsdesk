@@ -31,38 +31,38 @@ export default function UploadDocument() {
     dispatch(getUser(getUserData));
   }, []);
 
-  const upload = (formData) => {
+  const upload = formData => {
     let localURL = 'https://node.codecradle.co/api/v1/';
-      let prodURL = 'https://node.codecradle.co/api/v1/';
-      let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
-      const endpoint = baseUrl + userUploaDocToAdmin + accountOfficer._id;
-      const token = localStorage.getItem('jwtToken');
-      const bearerToken = 'Bearer ' + token;
-      nProgress.start();
-      fetch(endpoint, {
-        method: 'POST',
-        body: formData,
-        credentials: 'same-origin',
-        headers: new Headers({
-          Authorization: bearerToken,
-        }),
+    let prodURL = 'https://node.codecradle.co/api/v1/';
+    let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
+    const endpoint = baseUrl + userUploaDocToAdmin + accountOfficer._id;
+    const token = localStorage.getItem('jwtToken');
+    const bearerToken = 'Bearer ' + token;
+    nProgress.start();
+    fetch(endpoint, {
+      method: 'POST',
+      body: formData,
+      credentials: 'same-origin',
+      headers: new Headers({
+        Authorization: bearerToken,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert('Successfully sent document to Account Officer.');
+        setIsLoading(false);
+        setForm(false);
+        setSource('');
+        nProgress.done();
+        nProgress.remove();
       })
-        .then(res => res.json())
-        .then(data => {
-          alert('Successfully sent document to Account Officer.');
-          setIsLoading(false);
-          setForm(false);
-          setSource('');
-          nProgress.done();
-          nProgress.remove();
-        })
-        .catch(err => {
-          alert('Opps, An error occurred, please try again!');
-          console.error();
-          nProgress.done();
-          nProgress.remove();
-        });
-  } 
+      .catch(err => {
+        alert('Opps, An error occurred, please try again!');
+        console.error();
+        nProgress.done();
+        nProgress.remove();
+      });
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -75,7 +75,7 @@ export default function UploadDocument() {
       upload(formData);
     }
   };
-  
+
   const handleSubmit2 = e => {
     e.preventDefault();
     setIsLoading(true);
@@ -83,7 +83,7 @@ export default function UploadDocument() {
     formData.append('docName', fileName);
     formData.append('docContentUrl', source);
     upload(formData);
-  }
+  };
 
   const handleCapture = target => {
     if (target.files) {
@@ -176,8 +176,13 @@ export default function UploadDocument() {
         </div>
       </div>
       {source && (
-        <div className="overlay" style={{zIndex: '50'}}>
-          <Form className="form py-5" id="capture-form" onSubmit={handleSubmit2} style={{zIndex: '100'}}>
+        <div className="overlay" style={{ zIndex: '50' }}>
+          <Form
+            className="form py-5"
+            id="capture-form"
+            onSubmit={handleSubmit2}
+            style={{ zIndex: '100' }}
+          >
             <FormGroup className="form-group">
               <InputField
                 required

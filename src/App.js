@@ -170,7 +170,7 @@ const App = ({ breakpoint }) => {
                 <Route exact path="/user/reset-password" component={UserResetPassword}/>
               </ProtectedRoute>
               <ProtectedRoute>
-                <Route exact path="/user/photo" component={UserPhoto}/>
+                <Route exact path="/user/profile/photo" component={UserPhoto}/>
               </ProtectedRoute>
             </React.Suspense>
           </MainLayout>
