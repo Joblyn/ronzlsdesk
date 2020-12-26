@@ -49,6 +49,7 @@ const UserUploadDocument = React.lazy(() => import('pages/user/uploadDocument'))
 const UserViewAppointments = React.lazy(() => import('pages/user/viewAppointments'));
 const BookAppointment = React.lazy(() => import('pages/user/bookAppointment'));
 const UserResetPassword = React.lazy(() => import('pages/user/resetPassword'));
+const UserPhoto = React.lazy(() => import('pages/user/photo'));
 
 // superAdmin
 const superAdminDashboard = React.lazy(() => import('pages/super/adminDashboard'));
@@ -167,6 +168,9 @@ const App = ({ breakpoint }) => {
               </ProtectedRoute>
               <ProtectedRoute>
                 <Route exact path="/user/reset-password" component={UserResetPassword}/>
+              </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/user/photo" component={UserPhoto}/>
               </ProtectedRoute>
             </React.Suspense>
           </MainLayout>
