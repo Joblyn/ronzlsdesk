@@ -382,7 +382,11 @@ const Register = () => {
                     placeholder="Confirm password"
                     required
                   />
-                  {dontMatch && <p style={{color: 'red', fontSize:'.8rem'}}>Passwords don't match</p>}
+                  {dontMatch && (
+                    <p style={{ color: 'red', fontSize: '.8rem' }}>
+                      Passwords don't match
+                    </p>
+                  )}
                 </div>
                 <div className="intro-x mt-5 xl:mt-8 xl:text-left">
                   <InputField
