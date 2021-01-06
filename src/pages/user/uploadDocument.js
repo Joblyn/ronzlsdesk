@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'reactstrap';
 
-// camera library
-// import 'react-html5-camera-photo/build/css/index.css';
-
 import { MdPhotoCamera, MdFileUpload, MdClear } from 'react-icons/md';
 
 import Page from 'components/Page';

@@ -95,7 +95,6 @@ const UserCard = ({
   };
 
   const handleUpload = target => {
-    console.log(target.files);
     if(target.files) {
       if(target.files.length !== 0) {
         const formData = new FormData();
