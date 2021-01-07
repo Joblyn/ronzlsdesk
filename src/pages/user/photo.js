@@ -20,7 +20,7 @@ const Image = styled.img`
   max-width: 500px;
   height: auto;
   opacity: 1000;
-`; 
+`;
 
 export default function Photo() {
   const photoUrl = localStorage.getItem('photoUrl');
@@ -30,8 +30,18 @@ export default function Photo() {
 
   return (
     <Container>
-      <MdClear size={30} style={{position: 'absolute', top: '15px', left: '15px', color: '#fff', cursor: 'pointer'}} onClick={clear}/> 
-      <Image src={photoUrl}/>
+      <MdClear
+        size={30}
+        style={{
+          position: 'absolute',
+          top: '15px',
+          left: '15px',
+          color: '#fff',
+          cursor: 'pointer',
+        }}
+        onClick={clear}
+      />
+      <Image src={photoUrl} />
     </Container>
-  )
+  );
 }

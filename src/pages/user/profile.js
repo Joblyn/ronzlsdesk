@@ -27,7 +27,7 @@ export default function Profile() {
   useEffect(() => {
     dispatch(getUser(getUserData));
   }, []);
-  
+
   useEffect(() => {
     setDetails(userData);
     userData.director && setDirectorControl([...userData.director]);
@@ -76,8 +76,8 @@ export default function Profile() {
     ['Company', 'company'],
   ];
 
-  const AccountTypeDropdownData = (currentType) => {
-    let opts =  AccountTypeDatas.map((data, id) => {
+  const AccountTypeDropdownData = currentType => {
+    let opts = AccountTypeDatas.map((data, id) => {
       let selected = currentType === data[1] ? true : false;
       return (
         <option value={data[1]} key={id} selected={selected}>
@@ -263,7 +263,9 @@ export default function Profile() {
                       }}
                       defaultValue={details.accountType}
                       name="accountType"
-                      dropdownElementsUser={() => AccountTypeDropdownData(details.accountType)}
+                      dropdownElementsUser={() =>
+                        AccountTypeDropdownData(details.accountType)
+                      }
                       disabled={disabled}
                       onChange={({ target }) => handleChange(target)}
                     />
