@@ -37,6 +37,7 @@ const AdminRequests = React.lazy(() => import('pages/admin/adminRequests'));
 const AdminAppointments = React.lazy(() => import('pages/admin/adminAppointments'));
 const AdminViewClientDetails = React.lazy(() => import('pages/admin/adminViewClientDetails'));
 const AdminResetPassword = React.lazy(() => import('pages/admin/resetPassword'));
+const AdminRegisterClient = React.lazy(() => import('pages/admin/clientRegister'));
 
 //User
 const DashboardPage = React.lazy(() => import('pages/user/DashboardPage'));
@@ -54,6 +55,7 @@ const UserPhoto = React.lazy(() => import('pages/user/photo'));
 // superAdmin
 const superAdminDashboard = React.lazy(() => import('pages/super/adminDashboard'));
 const superAdminRegisterAdmin = React.lazy(() => import('pages/super/adminRegister'));
+const superAdminRegisterClient = React.lazy(() => import('pages/super/clientRegister'))
 const superAdminAllAdmins = React.lazy(() => import('pages/super/allAdmins'));
 const superAdmin_Admin_Clients = React.lazy(() => import('pages/super/adminClients'));
 const superAdmin_Admin_Client = React.lazy(() => import('pages/super/adminClient'));
@@ -205,6 +207,9 @@ const App = ({ breakpoint }) => {
               <ProtectedRoute>
                 <Route exact path="/admin/reset-password" component={AdminResetPassword}/>
               </ProtectedRoute>
+              <ProtectedRoute>
+                <Route exact path="/admin/registerclient" component={AdminRegisterClient}/>
+              </ProtectedRoute>
             </React.Suspense>
           </AdminMainLayout>
           ) : ( (auth && role === 'superadmin') ?
@@ -245,10 +250,13 @@ const App = ({ breakpoint }) => {
                   <Route exact path="/superadmin/registeradmin" component={superAdminRegisterAdmin} /> 
                 </ProtectedRoute>
                 <ProtectedRoute>
+                  <Route eaxact path="/superadmin/registerclient" component={superAdminRegisterClient}/>
+                </ProtectedRoute>
+                <ProtectedRoute>
                   <Route exact path="/superadmin/requests" component={superAdminRequests} />
                 </ProtectedRoute>
                 <ProtectedRoute>
-                  <Route exact path="/superadmin/client/details/:userId" component={superAdminViewClientDetails} /> 
+                  <Route exact path="/superadmin/client/details/:userId" component={superAdminViewClientDetails} />
                 </ProtectedRoute>
                 <ProtectedRoute>
                   <Route exact path="/superadmin/appointments" component={superAdminAppointments}/>

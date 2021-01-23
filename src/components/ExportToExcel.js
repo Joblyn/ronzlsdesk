@@ -11,37 +11,37 @@ const ExcelTable = ({ exportData, exportRow, fileName, exportHead, id }) => {
         <table id={id} className="table">
           <thead>
             <tr>
-              {/* <th rowSpan="2" colSpan="20" className="text-center text-lg">
-                {exportHead}
-              </th> */}
-              {/* <th rowSpan="1">ID</th> */}
-              <th rowSpan="1">Company Name</th>
-              <th rowSpan="1">Director Name</th>
-              <th rowSpan="1">Director DOB</th>
-              <th rowSpan="1">Company Begin</th>
-              <th rowSpan="1">Company Address</th>
-              <th rowSpan="1">City</th>
-              <th rowSpan="1">Country</th>
-              <th rowSpan="1">Company Reg No.</th>
-              <th rowSpan="1">email</th>
-              <th rowSpan="1">Phone Number</th>
-              <th rowSpan="1">Website</th>
-              <th rowSpan="1">Insurance Number</th>
-              <th rowSpan="1">Payee Ref No.</th>
-              <th rowSpan="1">Postal Code</th>
-              <th rowSpan="1">UTR No.</th>
-              <th rowSpan="1">VAT Reg. Date</th>
-              <th rowSpan="1">VAT Reg. No.</th>
-              <th rowSpan="1">VAT Scheme</th>
-              <th rowSpan="1">VAT Submit Type</th>
+              <th rowSpan="2">ID</th>
+              <th rowSpan="2">CompanyName</th>
+              <th colSpan="2">Director</th>
+              <th rowSpan="2">CompanyBegin</th>
+              <th rowSpan="2">CompanyAddress</th>
+              <th rowSpan="2">City</th>
+              <th rowSpan="2">Country</th>
+              <th rowSpan="2">CompanyRegNo.</th>
+              <th rowSpan="2">email</th>
+              <th rowSpan="2">PhoneNumber</th>
+              <th rowSpan="2">Website</th>
+              <th rowSpan="2">InsuranceNumber</th>
+              <th rowSpan="2">PayeeRefNo.</th>
+              <th rowSpan="2">PostalCode</th>
+              <th rowSpan="2">UTRNo.</th>
+              <th rowSpan="2">VATReg.Date</th>
+              <th rowSpan="2">VATReg.No.</th>
+              <th rowSpan="2">VATScheme</th>
+              <th rowSpan="2">VATSubmitType</th>
+              <th rowSpan="2">accountType</th>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>DateofBirth</td>
             </tr>
           </thead>
           <tbody>
             {exportData.map((p, index) => {
               return (
                 <tr key={index}>
-                  {/* <td></td> */}
-                  {/* <td>{index + 1}</td> */}
+                  <td>{index + 1}</td>
                   <td>{p.companyName}</td>
                   <td>{p.director[0].fullName}</td>
                   <td>{p.director[0].dateOfBirth}</td>
@@ -61,6 +61,7 @@ const ExcelTable = ({ exportData, exportRow, fileName, exportHead, id }) => {
                   <td>{p.vatRegNo}</td>
                   <td>{p.vatScheme}</td>
                   <td>{p.vatSubmitType}</td>
+                  <td>{p.accountType}</td>
                 </tr>
               );
             })}

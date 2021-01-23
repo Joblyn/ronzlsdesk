@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import {
+  MdAccountCircle,
   MdDashboard,
   MdSend,
   MdSchedule,
@@ -27,6 +28,12 @@ const navItems = [
     name: 'profile',
     exact: true,
     Icon: MdPersonPin,
+  },
+  {
+    to: '/admin/registerclient',
+    name: 'Register Client',
+    exact: true,
+    Icon: MdAccountCircle,
   },
   {
     to: '/admin/clients',

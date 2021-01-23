@@ -47,6 +47,7 @@ export const getDataWithToken = (url, done) => {
           nprogress.done();
           nprogress.remove();
           dispatch(done(data.data));
+          console.log(data.data);
         }
       })
       .catch(err => {
@@ -59,6 +60,7 @@ export const getDataWithToken = (url, done) => {
 
 export const postData = (url, payload, done) => {
   const endpoint = baseUrl + url;
+  console.log(endpoint);
   console.log(payload);
   nprogress.start();
   return dispatch => {

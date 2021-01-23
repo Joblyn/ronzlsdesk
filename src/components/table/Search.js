@@ -6,7 +6,7 @@ const Search = ({ handleSearchChange }) => {
     <div className="search hidden sm:block" style={{ marginBottom: 15 }}>
       <input
         type="text"
-        class="search__input input placeholder-theme-13"
+        className="search__input input placeholder-theme-13"
         placeholder="Search..."
         onChange={handleSearchChange}
       />

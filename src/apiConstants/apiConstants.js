@@ -3,7 +3,7 @@ let prodURL = 'https://cmsbackend2.herokuapp.com/api/v1/';
 
 export let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
 
-// Admin
+//Admin
 //Authentication
 export let adminRegsiter = 'admin/signup';
 export let adminLogin = 'admin/login';
@@ -48,13 +48,16 @@ export let adminGetDocuments = 'admin/document/user';
 export let adminGetRequests = 'admin/request';
 
 //Superadmin update client subscription
-export let adminUpdateSubscription = 'admin/actions/date/'
+export let adminUpdateSubscription = 'admin/actions/date/';
 
 // superadmin assign client to admin 
 export let addUserToAdmin = 'admin/actions/assignUsersToAdmin/';
 
 // superadmin upload bulk users 
-export let uploadBulkUsers = 'admin/actions/bulkuser'
+export let uploadBulkUsers = 'admin/actions/bulkuser';
+
+// admin create new user
+export let adminCreateNewUser = 'admin/actions/createNewUser';
 
 //User
 //Authentication

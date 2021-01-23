@@ -50,6 +50,12 @@ const navComponents_2 = [
     Icon: MdAccountCircle,
   },
   {
+    to: '/superadmin/registerclient',
+    name: 'Register Client',
+    exact: true,
+    Icon: MdAccountCircle,
+  },
+  {
     to: '/superadmin/documents',
     name: 'Documents',
     exact: true,
