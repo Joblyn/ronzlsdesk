@@ -90,12 +90,12 @@ const Register = () => {
       <div>
         <label className="font-semibold">{`Director ${count + 1}`}</label>
       </div>
-      <Label className="m-0">Full name</Label>
+      <Label className="m-0 required">Full name</Label>
       <InputField
         type="text"
         name={'fullName' + count}
         onChange={e => handleInputChange(e, count)}
-        className="intro-x login__input input my-2 input--lg border border-gray-300 block w-100 required-field"
+        className="intro-x login__input input my-2 input--lg border border-gray-300 block w-100"
         placeholder="Full Name"
         value={managerControl.fullName}
         required
@@ -345,7 +345,7 @@ const Register = () => {
                     name="insuranceNumber"
                     onChange={({ target }) => handleChange(target)}
                     className="intro-x login__input input  my-2 input--lg border border-gray-300 block w-100"
-                    placeholder="Insurance Number. If null, type '0000'"
+                    placeholder="If null, type '0000'"
                   />
                   <Label className="m-0">Payee Ref. No.</Label>
                   <InputField

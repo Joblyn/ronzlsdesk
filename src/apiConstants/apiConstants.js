@@ -1,5 +1,5 @@
-let localURL = 'https://node.codecradle.co/api/v1/';
-let prodURL = 'https://node.codecradle.co/api/v1/';
+let localURL = 'https://cmsbackend2.herokuapp.com/api/v1/';
+let prodURL = 'https://cmsbackend2.herokuapp.com/api/v1/';
 
 export let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
 
