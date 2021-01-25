@@ -1,35 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import logo from '../../assets/images/logo.png';
 import bgImage from '../../assets/images/illustration.png';
+import { resetForgotPassword } from '../../actions/admin/authAction/Users';
+import { adminResetForgotPassword } from '../../apiConstants/apiConstants';
 
 //components
 import InputField from '../../components/InputField';
 import Button from '../../components/button';
 
-// import { login } from "../../actions/User";
-// import { userLogin } from "../../apiConstants/ApiConstant";
 
-const ConfirmPasswordAdmin = () => {
-  // const [control, setControl] = useState({});
+const AdminResetForgotPassword = () => {
+  const [control, setControl] = useState({});
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [dontMatch, setDontMatch] = useState(false);
+  const dispatch = useDispatch();
+  const adminForgotPasswordReset = useSelector(state => state.adminResetForgotPassword);
 
-  // const dispatch = useDispatch();
+  const handleChange = (event) => {
+    setControl({
+      ...control,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-  // const handleChange = (event) => {
-  //   setControl({
-  //     ...control,
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
+  const { password } = control;
 
-  // const handleClick = (event) => {
-  //   event.preventDefault();
-  //   dispatch(login(userLogin, control));
-  //   console.log(control);
-  // };
+  const handleClick = (event) => {
+    event.preventDefault();
+    if (confirmPassword !== password) {
+      setDontMatch(true);
+    } else {
+      setDontMatch(false);
+      dispatch(resetForgotPassword(adminResetForgotPassword, password));
+    }
+  };
+
+  let border = { border: '1px solid #dee2e6'};
+  if (confirmPassword && (confirmPassword === password)) {
+    border = { border: '2px solid green'} 
+  } else if (confirmPassword && (confirmPassword !== password)) {
+    border = { border: '2px solid red'}
+  }
 
   return (
     <div className="login">
@@ -48,13 +63,8 @@ const ConfirmPasswordAdmin = () => {
                 src={bgImage}
               />
               <div className="-intro-x text-gray-700 font-medium text-4xl leading-tight mt-10">
-                {/* A few more clicks to
-                <br /> */}
-                Update account password.
+                Reset account password.
               </div>
-              {/* <div className="-intro-x mt-5 text-lg text-gray-700">
-                Manage all your e-commerce accounts in one place
-              </div> */}
             </div>
           </div>
           <div className="h-screen xl:h-auto flex py-5 xl:py-0 xl:my-0">
@@ -64,35 +74,30 @@ const ConfirmPasswordAdmin = () => {
                   <img alt="Ronzl Logo" className="w-20" src={logo} />
                 </Link>
               </div>
-              <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Header</h2>
-              <div className="intro-x mt-2 text-gray-500 xl:hidden text-center">
-                Update account
-                <br /> password <br />
-                {/* Manage all your e-commerce accounts in one place */}
-              </div>
+              <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Reset account password</h2> 
               <div className="intro-x mt-8">
+                {dontMatch && <p style={{color: 'red', fontSize:'.8rem'}}>Passwords don't match</p>}
                 <InputField
                   type="password"
-                  className="intro-x login__input input input--lg border border-gray-300 block"
-                  placeholder="Old Password"
-                />
-                <InputField
-                  type="password"
-                  className="intro-x login__input input input--lg border border-gray-300 block mt-4"
+                  name="password"
+                  className="intro-x login__input input input--lg border border-gray-300 block mt-4 w-100"
                   placeholder="New Password"
+                  onChange={handleChange}
                 />
                 <InputField
+                  style={border}
                   type="password"
-                  className="intro-x login__input input input--lg border border-gray-300 block mt-4"
+                  className="intro-x login__input input input--lg block mt-4 w-100"
                   placeholder="Confirm New Password"
+                  onChange={({target}) => setConfirmPassword(target.value)}
                 />
               </div>
-
               <div className="intro-x mt-5 xl:mt-8 xl:text-left">
                 <Button
                   type="button"
                   className="button button--lg w-full xl:w-48 text-white bg-theme-1 xl:mr-3"
-                  value="Update Password"
+                  value="Reset Password"
+                  onClick={handleClick}
                 />
               </div>
             </div>
@@ -103,4 +108,4 @@ const ConfirmPasswordAdmin = () => {
   );
 };
 
-export default ConfirmPasswordAdmin;
+export default AdminResetForgotPassword;

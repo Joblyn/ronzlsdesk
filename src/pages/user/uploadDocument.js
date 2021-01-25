@@ -13,15 +13,16 @@ import { FormGroup } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../actions/user/Users';
 import nProgress from 'nprogress';
+import PopupSuccess from '../../components/popup-success';
 
 export default function UploadDocument() {
   const [fileName, setFileName] = useState('');
   const [form, setForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [source, setSource] = useState();
-  const accountOfficer = useSelector(
-    state => state.userData.data.accountOfficer,
-  );
+  const [showPopup, setShowPopup] = useState(false);
+  const accountOfficer = useSelector(state => state.userData.data.accountOfficer);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -63,13 +64,18 @@ export default function UploadDocument() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (fileName) {
-      setIsLoading(true);
-      const formData = new FormData();
-      const inpFile = document.getElementById('inpFile');
-      formData.append('docName', fileName);
-      formData.append('docContentUrl', inpFile.files[0]);
-      upload(formData);
+    if (accountOfficer) {
+      if (fileName) {
+        setIsLoading(true);
+        const formData = new FormData();
+        const inpFile = document.getElementById('inpFile');
+        formData.append('docName', fileName);
+        formData.append('docContentUrl', inpFile.files[0]);
+        upload(formData);
+      };
+    }
+    else {
+      setShowPopup(true);
     }
   };
 
@@ -97,6 +103,12 @@ export default function UploadDocument() {
       title="Dashboard"
       breadcrumbs={[{ name: 'Upload Document', active: true }]}
     >
+      {showPopup && <PopupSuccess 
+        button
+          majorText="You have not yet been assigned to an admin."
+          text="You are unable to upload a document as you have not yet been assigned to an admin. Please wait untill you have been assigned, or contact the management."
+          setShow={setShowPopup}
+      />}
       <div className="main">
         <h3 className="text-center">Upload Document</h3>
         <div className="cont">

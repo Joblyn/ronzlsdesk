@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import InputDropdown from '../../components/InputDropdown';
 import Label from 'reactstrap/lib/Label';
 import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
+import { registerUser } from '../../actions/admin/clients/Clients';
+import { adminCreateNewUser } from '../../apiConstants/apiConstants';
 
 export default function ClientRegister() {
   const [inputList, setInputList] = useState([1]);
@@ -15,6 +17,10 @@ export default function ClientRegister() {
   const [control, setControl] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   let obj = {};
+  const dispatch = useDispatch();
+  const adminRegisterUser = useSelector(state => state.adminRegisteNewUser);
+
+  console.log(adminRegisterUser);
 
   const _onFocus = event => {
     event.currentTarget.type = 'date';
@@ -117,8 +123,32 @@ export default function ClientRegister() {
     );
   });
 
-  const handleSubmit = () => {
-    console.log(control);
+  const prepareManager = managers => {
+    let newManagers = [];
+    let temp = Object.keys(managers);
+    for (let i = 0; i < temp.length / 2; i++) {
+      let manager = {
+        fullName: managers['fullName' + i],
+        dateOfBirth: managers['dateOfBirth' + i],
+      };
+      newManagers.push(manager);
+    }
+    return newManagers;
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (confirmPassword !== password) {
+      setDontMatch(true);
+    } else {
+      setDontMatch(false);
+      setIsLoading(true);
+      let managers = prepareManager(managerControl);
+      let payload = { director: managers, ...control };
+      dispatch(registerUser(adminCreateNewUser, payload));
+      setIsLoading(false);
+      adminRegisterUser.isSuccessful && alert('New client registered!');
+    }
   };
 
   return (

@@ -147,3 +147,28 @@ export const resetPassword = {
   isSuccessful: false,
   data: {}
 }
+
+export const adminRegisterNewUser = {
+  isSuccessful: false,
+  data: {}
+}
+
+export const adminDeleteUser = {
+  isSuccessful: false,
+  data: {}
+}
+
+export const adminEditUserData = {
+  isSuccessful: false,
+  data: {}
+}
+
+export const userResetForgotPassword = {
+  isSuccessful: false,
+  data: {}
+}
+
+export const adminResetForgotPassword = {
+  isSuccessful: false,
+  data: {}
+}

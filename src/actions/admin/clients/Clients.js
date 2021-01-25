@@ -87,6 +87,27 @@ const onConfirmAppoinment = (payload) => {
   }
 }
 
+const onRegisterUser = (payload) => {
+  return {
+    type: ActionType.ADMIN_REGISTER_USER,
+    payload
+  }
+}
+
+const onClientDelete = (payload) => {
+  return {
+    type: ActionType.ADMIN_DELETE_USER,
+    payload
+  }
+}
+
+const onClientDataEdit = (payload) => {
+  return {
+    type: ActionType.ADMIN_EDIT_USER_DATA,
+    payload
+  }
+}
+
 // get clients under admin
 export const adminGetClients = url => {
   return getDataWithToken(url, onAdminGetClients);
@@ -129,6 +150,18 @@ export const getAllRequests = (url) => {
   return getDataWithToken(url, onGetAllRequests);
 }
 
-export const uploadDoc = (url, payload) =>{
+export const uploadDoc = (url, payload) => {
   return postDataWithToken(url, payload, onUploadDoc)
+}
+
+export const registerUser = (url, payload) => {
+  return postDataWithToken(url, payload, onRegisterUser);
+}
+
+export const clientDelete = (url, payload) => {
+  return postDataWithToken(url, payload, onClientDelete);
+}
+
+export const editData = (url, payload) => {
+  return postDataWithToken(url, payload, onClientDataEdit);
 }

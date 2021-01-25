@@ -27,15 +27,11 @@ export default function Appointments() {
     appointments &&
       appointments.reverse().map((appointment, i) => {
         let status = 'Pending';
-        let date;
         let color;
         if (appointment.status) {
           status =
             appointment.status.charAt(0).toUpperCase() +
             appointment.status.slice(1);
-        }
-        if (appointment.appointmentDate) {
-          date = appointment.appointmentDate.slice(0, 10);
         }
         switch (status) {
           case 'Pending':
@@ -50,11 +46,18 @@ export default function Appointments() {
           default:
             color = '';
         }
+        let date = new Date(parseInt(appointment.appointmentDate));
+        let scheduledDate = date.toDateString();
+        let startTime = date.toTimeString();
+        let endTime = new Date(parseInt(appointment.EndDate));
+        endTime = endTime.toTimeString();
         return rows.push({
           id: i + 1,
           client: appointment.client.companyName,
           message: appointment.appointmentMessage || '- -',
-          dateScheduled: date,
+          dateScheduled: scheduledDate,
+          timeStart: startTime.slice(0, 5),
+          timeEnd: endTime.slice(0, 5),
           status: <p style={{ color }}>{status}</p>,
           dateCreated: appointment.created_dt.slice(0, 10),
         });
@@ -103,6 +106,20 @@ export default function Appointments() {
               {
                 id: 'dateScheduled',
                 label: 'Date Scheduled',
+                align: 'center',
+                minWidth: 100,
+                color: value => 'blue',
+              },
+              {
+                id: 'timeStart',
+                label: ' Start Time',
+                align: 'center',
+                minWidth: 100,
+                color: value => 'blue',
+              },
+              {
+                id: 'timeEnd',
+                label: ' End Time',
                 align: 'center',
                 minWidth: 100,
                 color: value => 'blue',

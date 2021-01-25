@@ -30,7 +30,7 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     if (userForgotPass.isSuccessful) {
-      history.push('/user/login');
+      history.push('/user/forgot-password-reset');
     }
   }, [userForgotPass]);
 
@@ -75,9 +75,6 @@ const ForgotPassword = () => {
                 </div>
               </div>
               <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Retrieve your account</h2>
-              {/* <div className="intro-x mt-2 text-gray-500 xl:hidden text-center"> */}
-                {/* Retrieve your account <br /> */}
-              {/* </div> */}
               <div className="intro-x mt-8">
                 <Label>Type in your email</Label>
                 <InputField
@@ -87,11 +84,6 @@ const ForgotPassword = () => {
                   className="intro-x login__input input input--lg border border-gray-300 block w-100"
                   placeholder="Email"
                 />
-                {/* <InputField
-                  type="email"
-                  className="intro-x login__input input input--lg border border-gray-300 block mt-4"
-                  placeholder="Confirm Email"
-                /> */}
               </div>
 
               <div className="intro-x mt-5 xl:mt-8 xl:text-left">

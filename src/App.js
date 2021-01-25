@@ -22,7 +22,7 @@ import ResetForgotPassword from './pages/user/resetForgotPassword';
 // admin pages
 import AdminLogin from './pages/admin/adminLogin';
 import AdminForgotPassword from './pages/admin/adminForgotPassword';
-import AdminConfirmPassword from './pages/admin/adminConfirmPassword';
+import AdminResetForgotPassword from './pages/admin/adminResetForgotPassword';
 
 import { ProtectedRoute } from './validations/protectedRoute';
 import { IsUserRedirect } from './validations/isUserRedirect';
@@ -100,11 +100,11 @@ const App = ({ breakpoint }) => {
          <AdminForgotPassword /> 
         </IsUserRedirect>
         <IsUserRedirect
-          path="/admin/confirm-password"
+          path="/admin/forgot-password-reset"
           role={role}
           exact
         >
-          <AdminConfirmPassword />
+          <AdminResetForgotPassword />
         </IsUserRedirect>
         
         {/* user auth */}

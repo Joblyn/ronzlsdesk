@@ -28,7 +28,7 @@ const AdminRegister = () => {
     event.preventDefault();
     dispatch(register(adminRegsiter, control));
     const { fullName } = control;
-    adminRegister.isSuccessful && alert(`Registered ${fullName} as Admin Successfully`);
+    adminRegister.isSuccessful && alert(`Registered ${fullName} as Admin!`);
     window.location.reload();
   };
 

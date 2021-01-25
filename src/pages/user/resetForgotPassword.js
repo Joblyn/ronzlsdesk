@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import logo from '../../assets/images/logo.png';
 import bgImage from '../../assets/images/illustration.png';
+import { userResetForgotPassword } from '../../apiConstants/apiConstants';
+import { resetForgotPassword } from '../../actions/user/Users';
 
 //components
 import InputField from '../../components/InputField';
@@ -13,8 +15,10 @@ const ResetForgotPassword = () => {
   const [control, setControl] = useState({});
   const [confirmPassword, setConfirmPassword] = useState('');
   const [dontMatch, setDontMatch] = useState(false);
-  // const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
+  const forgotPasswordReset = useSelector(state => state.resetForgotPassword);
+  const userForgotPass = useSelector(state => state.userForgotPassword); 
+  console.log(userForgotPass);
   const handleChange = (event) => {
     setControl({
       ...control,
@@ -30,8 +34,17 @@ const ResetForgotPassword = () => {
       setDontMatch(true);
     } else {
       setDontMatch(false);
-      // function to reset password
+      const payload = {
+        password,
+        token: userForgotPass.result
+      }
+      dispatch(resetForgotPassword(userResetForgotPassword, payload));
     }
+  };
+
+  if(forgotPasswordReset.isSuccessful) {
+    alert('Password changed successfully. Please login with new password.');
+    window.location.pathname = "/user/login";
   };
 
   let border = { border: '1px solid #dee2e6'};
@@ -58,13 +71,8 @@ const ResetForgotPassword = () => {
                 src={bgImage}
               />
               <div className="-intro-x text-gray-700 font-medium text-4xl leading-tight mt-10">
-                {/* A few more clicks to
-                <br /> */}
                 Reset account password.
               </div>
-              {/* <div className="-intro-x mt-5 text-lg text-gray-700">
-                Manage all your e-commerce accounts in one place
-              </div> */}
             </div>
           </div>
           <div className="h-screen xl:h-auto flex py-5 xl:py-0 xl:my-0">

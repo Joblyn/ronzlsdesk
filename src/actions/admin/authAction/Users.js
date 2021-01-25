@@ -70,6 +70,13 @@ export const onSuperAdminAddClientToAdmin = payload => {
   }
 }
 
+export const onResetForgotPassword = payload => {
+  return {
+    type: ActionType.ADMIN_RESET_FORGOT_PASSWORD,
+    payload
+  }
+}
+
 export const register = (url, payload) => {
   return postDataWithToken(url, payload, onRegister);
 };
@@ -81,6 +88,10 @@ export const login = (url, payload) => {
 export const forgotPassword = (url, payload) => {
   return postData(url, payload, onForgotPassword);
 };
+
+export const resetForgotPassword = (url, payload) => {
+  return postData(url,payload, onResetForgotPassword)
+}
 
 export const resetPassword = (url, payload) => {
   return postDataWithToken(url, payload, onResetPassword);

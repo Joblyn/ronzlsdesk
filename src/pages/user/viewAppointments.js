@@ -15,10 +15,6 @@ export default function ViewAppointments() {
     dispatch(getAppointments(userGetAppointments));
   }, []);
 
-  if (getUserAppointments.isSuccessful) {
-    console.log('Check: ' + getUserAppointments.appointments);
-  }
-
   const getRows = data => {
     let rows = [];
     data &&
@@ -43,10 +39,17 @@ export default function ViewAppointments() {
           default:
             color = '';
         }
+        let date = new Date(parseInt(appointment.appointmentDate));
+        let scheduledDate = date.toDateString();
+        let startTime = date.toTimeString();
+        let endTime = new Date(parseInt(appointment.EndDate));
+        endTime = endTime.toTimeString();
         return rows.push({
           id: i + 1,
           message: appointment.appointmentMessage || '- -',
-          dateScheduled: appointment.appointmentDate.slice(0, 10),
+          dateScheduled: scheduledDate,
+          timeStart: startTime.slice(0, 5),
+          timeEnd: endTime.slice(0, 5),
           dateCreated: appointment.created_dt.slice(0, 10),
           status: <p style={{color}}>{status}</p>,
         });
@@ -90,6 +93,20 @@ export default function ViewAppointments() {
               align: 'center',
               minWidth: 150,
               color: value => 'blue',
+            },
+            {
+              id: 'timeStart',
+              label: ' Start Time',
+              align: 'center',
+              minWidth: 100,
+              color: value => 'blue'
+            },
+            {
+              id: 'timeEnd',
+              label: ' End Time',
+              align: 'center',
+              minWidth: 100,
+              color: value => 'blue'
             },
             {
               id: 'status',

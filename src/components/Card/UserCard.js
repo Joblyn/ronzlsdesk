@@ -63,7 +63,7 @@ const UserCard = ({
   const classes = classNames('bg-gradient-theme', className);
   const [showOptions, setShowOptions] = useState(false);
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
 
   localStorage.setItem('photoUrl', avatar)
 

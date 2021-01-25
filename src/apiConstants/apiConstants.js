@@ -59,6 +59,12 @@ export let uploadBulkUsers = 'admin/actions/bulkuser';
 // admin create new user
 export let adminCreateNewUser = 'admin/actions/createNewUser';
 
+// superadmin delete user 
+export const adminDeleteClient = 'admin/actions/deleteUser';
+
+// admin edit user data 
+export const adminEditUserData = "admin/actions/editUserInfo";
+
 //User
 //Authentication
 export let userRegister = 'user/signup';

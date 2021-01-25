@@ -33,7 +33,8 @@ export default function InActiveClients() {
         }
         return rows.push({
           id: i + 1,
-          client: client.companyName,
+          client: client.director[0].fullName,
+          companyName: client.companyName || '- -',
           accountType: client.accountType,
           admin: admin,
           companyAddress: client.companyAddress,
@@ -102,6 +103,13 @@ export default function InActiveClients() {
               align: 'center',
               label: 'Account Type',
               minWidth: 50,
+              color: value => 'blue',
+            },
+            {
+              id: 'companyName',
+              align: 'center',
+              label: 'Company Name',
+              minWidth: 100,
               color: value => 'blue',
             },
             {

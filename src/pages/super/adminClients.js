@@ -39,7 +39,8 @@ export default function AdminClients(props) {
         }
         return rows.push({
           id: i + 1,
-          client: client.companyName,
+          client: client.director[0].fullName,
+          companyName: client.companyName || '- -',
           accountType: client.accountType,
           companyAddress: client.companyAddress,
           status: <p style={{color}}>{status}</p>,
@@ -100,6 +101,13 @@ export default function AdminClients(props) {
               align: 'center',
               label: 'Account Type',
               minWidth: 50,
+              color: value => 'blue',
+            },
+            {
+              id: 'companyName',
+              align: 'center',
+              label: 'Company Name',
+              minWidth: 100,
               color: value => 'blue',
             },
             {

@@ -13,7 +13,7 @@ export default function ActiveClients() {
   const dispatch = useDispatch();
   const adminGetClient = useSelector(state => state.adminGetAllClient);
 
-   useEffect(() => {
+  useEffect(() => {
     dispatch(getClient(getAllClients));
   }, []);
 
@@ -33,7 +33,8 @@ export default function ActiveClients() {
         }
         return rows.push({
           id: i + 1,
-          client: client.companyName,
+          client: client.director[0].fullName,
+          companyName: client.companyName || '- -',
           accountType: client.accountType,
           admin: admin,
           companyAddress: client.companyAddress,
@@ -64,7 +65,9 @@ export default function ActiveClients() {
       breadcrumbs={[{ name: 'Clients/Active', active: true }]}
     >
       <ExcelTable
-        exportData={adminGetClient.users.filter(cl => cl.accountStatus === 'active')}
+        exportData={adminGetClient.users.filter(
+          cl => cl.accountStatus === 'active',
+        )}
         id="clients"
         fileName="clientsFile"
         className="m-2"
@@ -102,6 +105,13 @@ export default function ActiveClients() {
               align: 'center',
               label: 'Account Type',
               minWidth: 50,
+              color: value => 'blue',
+            },
+            {
+              id: 'companyName',
+              align: 'center',
+              label: 'Company Name',
+              minWidth: 100,
               color: value => 'blue',
             },
             {

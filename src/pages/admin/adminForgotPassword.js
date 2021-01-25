@@ -28,7 +28,7 @@ const ForgotPasswordAdmin = () => {
 
   useEffect(() => {
     if (adminForgotPass.isSuccessful) {
-      history.push('/admin/login');
+      history.push('/admin/forgot-password-reset');
     }
   }, [adminForgotPass]);
 
@@ -54,13 +54,8 @@ const ForgotPasswordAdmin = () => {
                 src={bgImage}
               />
               <div className="-intro-x text-gray-700 font-medium text-4xl leading-tight mt-10">
-                {/* A few more clicks to
-                <br /> */}
                 Retrieve your account
               </div>
-              {/* <div className="-intro-x mt-5 text-lg text-gray-700">
-                Manage all your e-commerce accounts in one place
-              </div> */}
             </div>
           </div>
           <div className="h-screen xl:h-auto flex py-5 xl:py-0 xl:my-0">
@@ -72,11 +67,7 @@ const ForgotPasswordAdmin = () => {
                   </Link>
                 </div>
               </div>
-              <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Header</h2>
-              <div className="intro-x mt-2 text-gray-500 xl:hidden text-center">
-                Retrieve your account <br />
-                {/* Manage all your e-commerce accounts in one place */}
-              </div>
+              <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Retrieve your account</h2>
               <div className="intro-x mt-8">
                 <InputField
                   type="email"
@@ -85,11 +76,6 @@ const ForgotPasswordAdmin = () => {
                   className="intro-x login__input input input--lg border border-gray-300 block"
                   placeholder="Email"
                 />
-                {/* <InputField
-                  type="email"
-                  className="intro-x login__input input input--lg border border-gray-300 block mt-4"
-                  placeholder="Confirm Email"
-                /> */}
               </div>
 
               <div className="intro-x mt-5 xl:mt-8 xl:text-left">

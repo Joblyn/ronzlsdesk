@@ -105,6 +105,12 @@ export const onGetAppointments = (payload) => {
   }
 }
 
+export const onResetForgotPassword = payload => {
+  return {
+    type: ActionType.USER_RESET_FORGOT_PASSWORD,
+    payload
+  }
+}
 
 
 export const registerUser = (url, payload) => {
@@ -121,6 +127,10 @@ export const forgotPasswordUser = (url, payload) => {
 
 export const resetPassword = (url, payload) => {
   return postDataWithToken(url, payload, onResetPassword);
+}
+
+export const resetForgotPassword = (url, payload) => {
+  return postData(url, payload, onResetForgotPassword);
 }
 
 export const logOutAction = (payload) => {

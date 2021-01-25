@@ -31,7 +31,9 @@ const AdminClient = () => {
   const [client, setclient] = useState({});
   const adminGetClient = useSelector(state => state.adminGetAllClient);
   const admins = useSelector(state => state.superAdminGetAllAdmins.admins);
-  const AddClientToAdmin = useSelector(state => state.superAdminAddClientToAdmin);
+  const AddClientToAdmin = useSelector(
+    state => state.superAdminAddClientToAdmin,
+  );
 
   useEffect(() => {
     dispatch(getClient(getAllClients));
@@ -48,7 +50,7 @@ const AdminClient = () => {
   const viewDetails = id => {
     localStorage.setItem('client_id', id);
   };
-  
+
   const handleClick = (id, name) => {
     setclient({ id, name });
     setShowModal(true);
@@ -64,11 +66,11 @@ const AdminClient = () => {
     const payload = { users: [client.id] };
     dispatch(superAdminAddClientToAdmin(endpoint, payload));
   };
-  
+
   const getRows = data => {
     let rows = [];
     data &&
-    data.reverse().map((user, index) => {
+      data.reverse().map((user, index) => {
         let admin;
         let status;
         let color;
@@ -77,8 +79,8 @@ const AdminClient = () => {
         }
         if (user.accountStatus) {
           status =
-          user.accountStatus.charAt(0).toUpperCase() +
-          user.accountStatus.slice(1);
+            user.accountStatus.charAt(0).toUpperCase() +
+            user.accountStatus.slice(1);
         }
         switch (status) {
           case 'Prospect':
@@ -90,15 +92,16 @@ const AdminClient = () => {
           case 'Inactive':
             color = 'red';
             break;
-            default:
-              color = '';
-            }
-            return rows.push({
-              id: index + 1,
-          client: user.companyName,
+          default:
+            color = '';
+        }
+        return rows.push({
+          id: index + 1,
+          client: user.director[0].fullName,
+          companyName: user.companyName || '- -',
           accountType: user.accountType,
           admin: admin || '- -',
-          companyAddress: user.companyAddress,
+          companyAddress: user.companyAddress || '- -',
           phoneNumber: user.phoneNumber,
           status: <p style={{ color }}>{status}</p>,
           email: user.email,
@@ -163,14 +166,14 @@ const AdminClient = () => {
     }
   };
 
-  if (adminGetClient.users.length === 0) {
+  if (!adminGetClient.users) {
     return <PageSpinner />;
   }
+  if (!adminGetClient.users.length) {
+    
+  }
   return (
-    <Page
-      title="Dropdowns"
-      breadcrumbs={[{ name: 'Clients', active: true }]}
-    >
+    <Page title="Dropdowns" breadcrumbs={[{ name: 'Clients', active: true }]}>
       <div className="d-flex align-items-center cursor-pointer">
         <Button
           color="success"
@@ -228,6 +231,13 @@ const AdminClient = () => {
               align: 'center',
               label: 'Account Type',
               minWidth: 50,
+              color: value => 'blue',
+            },
+            {
+              id: 'companyName',
+              align: 'center',
+              label: 'Company Name',
+              minWidth: 100,
               color: value => 'blue',
             },
             {

@@ -18,6 +18,10 @@ import adminGetAppointmentsReducer from './admin/getAppoinments';
 import superAdminGetAllAdminsReducer from './admin/superAdminGetAllAdmins';
 import superAdminAddClientToAdminReducer from './admin/superAdminAddClientToAdmin';
 import setAdminClientsReducer from './admin/setAdminClients';
+import adminRegisterNewUserReducer from './admin/adminRegisterUser';
+import adminDeleteUserReducer from './admin/adminDeleteUser';
+import adminEditUserDataReducer from './admin/adminEditUserData';
+import adminResetForgotPasswordReducer from './admin/adminResetForgotPassword';
 // import adminGetClientDetails from './admin/getClientDetailsReducer';
 
 import userRegisterReducer from './user/userRegister';
@@ -33,6 +37,7 @@ import userBookAppointmentReducer from './user/userBookAppointment';
 import userGetAppointmentsReducer from './user/getAppointments';
 import updateDataReducer from './user/updateData';
 import userResetPasswordReducer from './user/resetPassword';
+import resetForgotPasswordReducer from './user/resetForgotPassword';
 
 export default combineReducers({
   //Admin Reducer
@@ -53,8 +58,11 @@ export default combineReducers({
   adminGetAppointments:adminGetAppointmentsReducer,
   superAdminGetAllAdmins:superAdminGetAllAdminsReducer,
   superAdminAddClientToAdmin:superAdminAddClientToAdminReducer,
-  adminClients:setAdminClientsReducer,
-
+  adminClients:setAdminClientsReducer,  
+  adminRegisterNewUser:adminRegisterNewUserReducer,
+  adminDeleteUser:adminDeleteUserReducer,
+  adminEditUserData:adminEditUserDataReducer,
+  adminResetForgotPassword:adminResetForgotPasswordReducer,
   // adminGetClientDetails: adminGetClientDetails,
   
   //user Reducer
@@ -71,6 +79,7 @@ export default combineReducers({
   userGetAppointments:userGetAppointmentsReducer,
   updateData: updateDataReducer,
   userResetPassword:userResetPasswordReducer,
+  resetForgotPassword: resetForgotPasswordReducer,
   //Error
   errors: errorReducer,
 });

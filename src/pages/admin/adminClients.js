@@ -16,10 +16,6 @@ export default function AdminClients() {
     dispatch(adminGetClients(getClientsUnderAdmin));
   }, []);
 
-  if (getClientsForAdmin.isSuccessful) {
-    console.log(getClientsForAdmin.clients);
-  }
-
   const handleClick = id => {
     localStorage.setItem('client_id', id);
   };
@@ -50,7 +46,8 @@ export default function AdminClients() {
         }
         return rows.push({
           id: i + 1,
-          client: client.companyName,
+          client: client.director[0].fullName,
+          companyName: client.companyName || '- -',
           accountType: client.accountType,
           companyAddress: client.companyAddress,
           phoneNumber: client.phoneNumber,
@@ -106,6 +103,13 @@ export default function AdminClients() {
               label: 'Account Type',
               align: 'center',
               minWidth: 50,
+              color: value => 'blue',
+            },
+            {
+              id: 'companyName',
+              align: 'center',
+              label: 'Company Name',
+              minWidth: 100,
               color: value => 'blue',
             },
             {

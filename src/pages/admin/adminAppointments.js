@@ -68,11 +68,18 @@ export default function AdminAppointments() {
           default:
             color = '';
         }
+        let date = new Date(parseInt(appointment.appointmentDate));
+        let scheduledDate = date.toDateString();
+        let startTime = date.toTimeString();
+        let endTime = new Date(parseInt(appointment.EndDate));
+        endTime = endTime.toTimeString();
         return rows.push({
           id: i + 1,
           client: appointment.client.companyName,
           message: appointment.appointmentMessage,
-          dateScheduled: appointment.appointmentDate.slice(0, 10),
+          dateScheduled: scheduledDate,
+          timeStart: startTime.slice(0, 5),
+          timeEnd: endTime.slice(0, 5),
           status: <p style={{ color }}>{status}</p>,
           dateCreated: appointment.created_dt.slice(0, 10),
           action: (
@@ -145,6 +152,20 @@ export default function AdminAppointments() {
               align: 'center',
               minWidth: 100,
               color: value => 'blue',
+            },
+            {
+              id: 'timeStart',
+              label: ' Start Time',
+              align: 'center',
+              minWidth: 100,
+              color: value => 'blue'
+            },
+            {
+              id: 'timeEnd',
+              label: ' End Time',
+              align: 'center',
+              minWidth: 100,
+              color: value => 'blue'
             },
             {
               id: 'status',

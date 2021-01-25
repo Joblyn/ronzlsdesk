@@ -5,11 +5,17 @@ export default function PopupSuccess({
   button,
   majorText,
   text,
-  redirect
+  redirect,
+  setShow
 }) {
   const onClick = () => {
-    logOutAction();
-    window.location.pathname = redirect;
+    if(redirect) {
+      logOutAction();
+      window.location.pathname = redirect;
+    } else {
+      setShow(false);
+    }
+
   }
   return (
     <>
@@ -25,8 +31,8 @@ export default function PopupSuccess({
                   </h3>
                 </div>
                 <div
-                  className="relative flex-auto text-center"
-                  style={{ color: 'black' }}
+                  className="relative flex-auto text-center px-4"
+                  style={{ color: 'black'}}
                 >
                   <p className="m-0">{text}</p>
                 </div>
