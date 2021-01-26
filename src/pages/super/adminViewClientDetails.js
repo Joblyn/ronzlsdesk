@@ -25,7 +25,7 @@ const AdminViewClientDetails = () => {
   const [subDisabled, setSubDisabled] = useState(true);
   const dispatch = useDispatch();
   const clientDetails = useSelector(state => state.adminGetAllClient.user);
-  const adminDeleteUser = useSelector(state => state.adminDeleteUser);
+  // const adminDeleteUser = useSelector(state => state.adminDeleteUser);
 
   const [data, setData] = useState({});
   const [subscriptionBegin, setSubscriptionBegin] = useState('');

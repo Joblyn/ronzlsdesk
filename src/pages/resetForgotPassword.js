@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from "react-redux";
-import logo from '../../assets/images/logo.png';
-import bgImage from '../../assets/images/illustration.png';
-import { userResetForgotPassword } from '../../apiConstants/apiConstants';
-import { resetForgotPassword } from '../../actions/user/Users';
+import logo from '../assets/images/logo.png';
+import bgImage from '../assets/images/illustration.png';
+import { userResetForgotPassword } from '../apiConstants/apiConstants';
+import { resetForgotPassword } from '../actions/user/Users';
 
 //components
-import InputField from '../../components/InputField';
-import Button from '../../components/button';
+import InputField from '../components/InputField';
+import Button from '../components/button';
+import PopupSuccess from '../components/popup-success';
 
 const ResetForgotPassword = () => {
   const [control, setControl] = useState({});
   const [confirmPassword, setConfirmPassword] = useState('');
   const [dontMatch, setDontMatch] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const dispatch = useDispatch();
   const forgotPasswordReset = useSelector(state => state.resetForgotPassword);
-  const userForgotPass = useSelector(state => state.userForgotPassword); 
-  console.log(userForgotPass);
+
   const handleChange = (event) => {
     setControl({
       ...control,
@@ -30,17 +31,27 @@ const ResetForgotPassword = () => {
   
   const handleClick = (event) => {
     event.preventDefault();
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const token = urlParams.get('token');
+
     if (confirmPassword !== password) {
       setDontMatch(true);
     } else {
       setDontMatch(false);
       const payload = {
         password,
-        token: userForgotPass.result
+        token
       }
       dispatch(resetForgotPassword(userResetForgotPassword, payload));
     }
   };
+
+  useEffect(() => {
+    if(forgotPasswordReset.isSuccessful) {
+      setShowPopup(true);
+    }
+  }, []);
 
   if(forgotPasswordReset.isSuccessful) {
     alert('Password changed successfully. Please login with new password.');
@@ -56,6 +67,12 @@ const ResetForgotPassword = () => {
   
   return (
     <div className="login">
+      {showPopup && <PopupSuccess 
+          button
+          majorText="Password changed"
+          text="Password changed successfully. Please login with new password."
+          redirect="/user/login"
+      />}
       <div className="container sm:px-10">
         <div className="block xl:grid grid-cols-2 gap-4">
           <div className="hidden xl:flex flex-col min-h-screen">

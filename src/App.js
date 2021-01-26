@@ -17,12 +17,11 @@ import Landing from './pages/Landing';
 import Login from './pages/user/login';
 import Register from './pages/user/register';
 import ForgotPassword from './pages/user/forgotPassword';
-import ResetForgotPassword from './pages/user/resetForgotPassword';
+import ResetForgotPassword from './pages/resetForgotPassword';
 
 // admin pages
 import AdminLogin from './pages/admin/adminLogin';
 import AdminForgotPassword from './pages/admin/adminForgotPassword';
-import AdminResetForgotPassword from './pages/admin/adminResetForgotPassword';
 
 import { ProtectedRoute } from './validations/protectedRoute';
 import { IsUserRedirect } from './validations/isUserRedirect';
@@ -99,14 +98,6 @@ const App = ({ breakpoint }) => {
         >
          <AdminForgotPassword /> 
         </IsUserRedirect>
-        <IsUserRedirect
-          path="/admin/forgot-password-reset"
-          role={role}
-          exact
-        >
-          <AdminResetForgotPassword />
-        </IsUserRedirect>
-        
         {/* user auth */}
         <IsUserRedirect 
           path="/user/login"
@@ -130,13 +121,12 @@ const App = ({ breakpoint }) => {
           <ForgotPassword />
         </IsUserRedirect>
         <IsUserRedirect
-          path="/user/forgot-password-reset"
+          path={`/resetpage`}
           role={role}
-          exact
+          exact 
         >
           <ResetForgotPassword />
         </IsUserRedirect>
-
         {/* User Routes */}
         {(auth && role === 'user') ? (
           <MainLayout breakpoint={breakpoint}>

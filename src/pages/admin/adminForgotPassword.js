@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,11 +12,12 @@ import Button from '../../components/button';
 
 import { forgotPassword } from '../../actions/admin/authAction/Users';
 import { adminForgotPassword } from '../../apiConstants/apiConstants';
+import PopupSuccess from '../../components/popup-success';
 
 const ForgotPasswordAdmin = () => {
   const [control, setControl] = useState({});
+  const [showPopup, setShowPopup] = useState(false);
   const dispatch = useDispatch();
-  const history = useHistory();
   const adminForgotPass = useSelector(state => state.adminForgotPassword);
 
   const handleChange = event => {
@@ -26,19 +27,26 @@ const ForgotPasswordAdmin = () => {
     });
   };
 
-  useEffect(() => {
-    if (adminForgotPass.isSuccessful) {
-      history.push('/admin/forgot-password-reset');
-    }
-  }, [adminForgotPass]);
-
   const handleClick = event => {
-    event.preventDefault();
+    event.preventDefault(); 
     dispatch(forgotPassword(adminForgotPassword, control));
   };
 
+  useEffect(() => {
+    if (adminForgotPass.isSuccessful) {
+      setShowPopup(true);
+    };
+  }, [adminForgotPass]);
+
   return (
     <div className="login">
+      {showPopup && (
+        <PopupSuccess
+          button
+          text="A link has been sent to your email. Kindly follow the link to reset your password."
+          setShow={setShowPopup}
+        />
+      )}
       <div className="container sm:px-10">
         <div className="block xl:grid grid-cols-2 gap-4">
           <div className="hidden xl:flex flex-col min-h-screen">
@@ -67,7 +75,9 @@ const ForgotPasswordAdmin = () => {
                   </Link>
                 </div>
               </div>
-              <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Retrieve your account</h2>
+              <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
+                Retrieve your account
+              </h2>
               <div className="intro-x mt-8">
                 <InputField
                   type="email"

@@ -156,7 +156,7 @@ function Header() {
             <PopoverBody className="p-0 border-light">
               <UserCard
                 avatar={userData.profilePics || Portrait}
-                title={adminData.fullName || userData.companyName}
+                title={adminData.fullName || userData.companyName || (userData.director && userData.director[0].fullName)}
                 subtitle={adminData.email || userData.email}
                 className="border-light"
               >
@@ -173,9 +173,6 @@ function Header() {
                       <MdPersonPin /> Profile
                     </Link>
                   </ListGroupItem>
-                  {/* <ListGroupItem tag="button" action className="border-light">
-                    <MdMessage /> Messages
-                  </ListGroupItem> */}
                   <ListGroupItem tag="button" action className="border-light">
                     <MdLockOutline />
                     <Link

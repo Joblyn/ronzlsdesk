@@ -166,11 +166,8 @@ const AdminClient = () => {
     }
   };
 
-  if (!adminGetClient.users) {
+  if (adminGetClient.users.length === 0) {
     return <PageSpinner />;
-  }
-  if (!adminGetClient.users.length) {
-    
   }
   return (
     <Page title="Dropdowns" breadcrumbs={[{ name: 'Clients', active: true }]}>

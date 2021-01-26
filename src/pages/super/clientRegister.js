@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import InputField from '../../components/InputField';
 import { useDispatch, useSelector } from 'react-redux';
 import InputDropdown from '../../components/InputDropdown';
