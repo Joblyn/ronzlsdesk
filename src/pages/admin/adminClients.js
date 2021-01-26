@@ -73,7 +73,7 @@ export default function AdminClients() {
   }
   return (
     <Page title="Dropdowns" breadcrumbs={[{ name: 'Clients', active: true }]}>
-      <div
+      {getClientsForAdmin.clients.length ? <div
         style={{
           overflowX: 'auto',
         }}
@@ -157,7 +157,14 @@ export default function AdminClients() {
           ]}
           rows={getRows(getClientsForAdmin.clients)}
         />
-      </div>
+      </div> : <div
+          className="d-flex align-items-center justify-content-center"
+          style={{ height: '50vh' }}
+        >
+          <em style={{ fontSize: '1.2rem', opacity: '.75' }}>
+            No clients have been assigned to you yet.
+          </em>
+        </div>}
     </Page>
   );
 }

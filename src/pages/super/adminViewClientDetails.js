@@ -281,7 +281,7 @@ const AdminViewClientDetails = () => {
                                 <input
                                   type="text"
                                   name="dateOfBirth"
-                                  defaultValue={director.dateOfBirth.slice(0, 10)}
+                                  defaultValue={director.dateOfBirth && director.dateOfBirth.slice(0, 10)}
                                   disabled={disabled}
                                   className={border}
                                   onChange={({ target }) =>

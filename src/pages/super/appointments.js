@@ -53,7 +53,7 @@ export default function Appointments() {
         endTime = endTime.toTimeString();
         return rows.push({
           id: i + 1,
-          client: appointment.client.companyName,
+          client: appointment.client ? appointment.client.director[0].fullName : '- -',
           message: appointment.appointmentMessage || '- -',
           dateScheduled: scheduledDate,
           timeStart: startTime.slice(0, 5),
@@ -75,7 +75,7 @@ export default function Appointments() {
         title="Dropdowns"
         breadcrumbs={[{ name: 'Appointments', active: true }]}
       >
-        <div style={{ overflowX: 'auto' }}>
+        {adminGetAppointments.appointments.length ? <div style={{ overflowX: 'auto' }}>
           <CustomTable
             pagination
             pagerows
@@ -141,7 +141,14 @@ export default function Appointments() {
             ]}
             rows={getRows(adminGetAppointments.appointments)}
           />
-        </div>
+        </div> : <div
+          className="d-flex align-items-center justify-content-center"
+          style={{ height: '50vh' }}
+        >
+          <em style={{ fontSize: '1.2rem', opacity: '.75' }}>
+            No appointments have been made yet.
+          </em>
+        </div>}
       </Page>
     </>
   );

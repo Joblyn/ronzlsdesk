@@ -23,7 +23,7 @@ export default function Requests() {
       requests.reverse().map((request, i) => {
         return rows.push({
           id: i + 1,
-          client: request.client.companyName,
+          client: request.client.director[0].fullName,
           requestTitle: request.requestTitle,
           requestDescription: request.requestDescription,
           date: request.created_dt.slice(0, 10),
@@ -53,66 +53,72 @@ export default function Requests() {
       title="Dropdowns"
       breadcrumbs={[{ name: 'All Clients', active: true }]}
     >
-      <div style={{ overflowX: 'auto' }}>
-        <CustomTable
-          pagination
-          pagerows
-          search
-          searchType="client"
-          columns={[
-            {
-              id: 'id',
-              label: 'ID',
-              align: 'center',
-              minWidth: 20,
-              color: value => 'blue',
-            },
-            {
-              id: 'client',
-              label: 'Client',
-              align: 'center',
-              minWidth: 100,
-              color: value => 'blue',
-            },
-            {
-              id: 'requestTitle',
-              label: 'Request Title',
-              align: 'center',
-              minWidth: 100,
-              color: value => 'blue',
-            },
-            {
-              id: 'requestDescription',
-              label: 'Request Description',
-              align: 'center',
-              minWidth: 150,
-              color: value => 'blue',
-            },
-            {
-              id: 'document',
-              label: 'Document Uploaded',
-              align: 'center',
-              minWidth: 100,
-              color: value => 'blue',
-            },
-            {
-              id: 'view',
-              label: 'Action',
-              minWidth: 150,
-              align: 'center',
-              color: value => 'blue',
-            },
-            {
-              id: 'date',
-              label: 'Date Created',
-              align: 'center',
-              minWidth: 100,
-              color: value => 'black',
-            },
-          ]}
-          rows={getRows(adminGetAllRequests.requests)}
-        />
-      </div>
+      {adminGetAllRequests.requests.length ? (
+        <div style={{ overflowX: 'auto' }}>
+          <CustomTable
+            pagination
+            pagerows
+            search
+            searchType="client"
+            columns={[
+              {
+                id: 'id',
+                label: 'ID',
+                align: 'center',
+                minWidth: 20,
+                color: value => 'blue',
+              },
+              {
+                id: 'client',
+                label: 'Client',
+                align: 'center',
+                minWidth: 100,
+                color: value => 'blue',
+              },
+              {
+                id: 'requestTitle',
+                label: 'Request Title',
+                align: 'center',
+                minWidth: 100,
+                color: value => 'blue',
+              },
+              {
+                id: 'requestDescription',
+                label: 'Request Description',
+                align: 'center',
+                minWidth: 150,
+                color: value => 'blue',
+              },
+              {
+                id: 'document',
+                label: 'Document Uploaded',
+                align: 'center',
+                minWidth: 100,
+                color: value => 'blue',
+              },
+              {
+                id: 'view',
+                label: 'Action',
+                minWidth: 150,
+                align: 'center',
+                color: value => 'blue',
+              },
+              {
+                id: 'date',
+                label: 'Date Created',
+                align: 'center',
+                minWidth: 100,
+                color: value => 'black',
+              },
+            ]}
+            rows={getRows(adminGetAllRequests.requests)}
+          />
+        </div>
+      ) : (
+        <div className="d-flex align-items-center justify-content-center" style={{height: '50vh'}}>
+          <em style={{fontSize: '1.2rem', opacity: '.75'}}>No requests have been made yet.</em>
+        </div>
+      )}
     </Page>
   );
 }

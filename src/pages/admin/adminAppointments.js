@@ -75,14 +75,14 @@ export default function AdminAppointments() {
         endTime = endTime.toTimeString();
         return rows.push({
           id: i + 1,
-          client: appointment.client.companyName,
+          client: appointment.client.director[0].fullName,
           message: appointment.appointmentMessage,
           dateScheduled: scheduledDate,
           timeStart: startTime.slice(0, 5),
           timeEnd: endTime.slice(0, 5),
           status: <p style={{ color }}>{status}</p>,
           dateCreated: appointment.created_dt.slice(0, 10),
-          action: (
+          action: !disabled ? (
             <div className="d-flex justify-content-around">
               <Button
                 className="bg-green-700 text-white rounded-full m-0 p-1"
@@ -104,7 +104,7 @@ export default function AdminAppointments() {
                 Reject
               </Button>
             </div>
-          ),
+          ) : '- -',
         });
       });
     return rows;

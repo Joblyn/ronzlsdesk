@@ -18,9 +18,7 @@ export default function ClientRegister() {
   const [isLoading, setIsLoading] = useState(false);
   let obj = {};
   const dispatch = useDispatch();
-  const adminRegisterUser = useSelector(state => state.adminRegisteNewUser);
-
-  console.log(adminRegisterUser);
+  const adminRegisterUser = useSelector(state => state.adminRegisterNewUser);
 
   const _onFocus = event => {
     event.currentTarget.type = 'date';
@@ -147,9 +145,12 @@ export default function ClientRegister() {
       let payload = { director: managers, ...control };
       dispatch(registerUser(adminCreateNewUser, payload));
       setIsLoading(false);
-      adminRegisterUser.isSuccessful && alert('New client registered!');
     }
   };
+
+  if (adminRegisterUser.isSuccessful) {
+    alert('New client registered!');
+  }
 
   return (
     <div className="login">

@@ -21,8 +21,8 @@ export default function AdminClients(props) {
       clients.reverse().map((client, i) =>{
         let status = 'Prospect';
         let color;
-        if(client.accountStatus) {
-          status =  client.accountStatus.charAt(0).toUpperCase() + client.accountStatus.slice(1);
+        if(client) {
+          status =  client.accountStatus && (client.accountStatus.charAt(0).toUpperCase() + client.accountStatus.slice(1));
         }
         switch(status) {
           case 'Prospect':
@@ -37,7 +37,7 @@ export default function AdminClients(props) {
           default :
             color = '';
         }
-        return rows.push({
+        return client && rows.push({
           id: i + 1,
           client: client.director[0].fullName,
           companyName: client.companyName || '- -',
@@ -70,7 +70,7 @@ export default function AdminClients(props) {
       title="Dropdowns"
       breadcrumbs={[{ name: 'Admin/Clients', active: true }]}
     >
-      <div
+      {clients.length ? <div
         style={{
           overflowX: 'auto',
           overflowY: 'hidden',
@@ -155,7 +155,14 @@ export default function AdminClients(props) {
           ]}
           rows={getRows(clients)}
         />
-      </div>
+      </div> : <div
+          className="d-flex align-items-center justify-content-center"
+          style={{ height: '50vh' }}
+        >
+          <em style={{ fontSize: '1.2rem', opacity: '.75' }}>
+            No clients have been assigned to this admin.
+          </em>
+        </div>}
     </Page>
   );
 }

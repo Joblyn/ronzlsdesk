@@ -121,8 +121,10 @@ const AdminClient = () => {
                 size="sm"
                 className="p-1"
                 style={{ fontSize: '.9rem', minWidth: '110px' }}
-                onClick={() => handleClick(user._id, user.companyName)}
-                disabled={user.accountOfficer ? true : false}
+                onClick={() =>
+                  user.director &&
+                  handleClick(user._id, user.director[0].fullName)
+                }
               >
                 Assign Admin
               </Button>
@@ -197,7 +199,7 @@ const AdminClient = () => {
           exportHead="ALL CLIENTS"
         />
       </div>
-      <div
+      {adminGetClient.users.length ? <div
         style={{
           overflowX: 'auto',
           overflowY: 'hidden',
@@ -289,82 +291,89 @@ const AdminClient = () => {
           ]}
           rows={getRows(adminGetClient.users)}
         />
+      </div> : <div
+          className="d-flex align-items-center justify-content-center"
+          style={{ height: '50vh' }}
+        >
+          <em style={{ fontSize: '1.2rem', opacity: '.75' }}>
+            No clients exist yet.
+          </em>
+        </div>}
 
-        {showModal && (
-          <>
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-              <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                  <div className="flex items-start justify-center p-4 border-b border-solid border-gray-300 rounded-t">
-                    <h3
-                      className="text-2xl font-semibold"
-                      style={{ color: 'rgba(0,0,0,.7)' }}
-                    >
-                      Select Admin to assign
-                    </h3>
-                  </div>
-                  <div
-                    className="relative p-0 flex-auto"
-                    style={{ color: 'black' }}
+      {showModal && (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="flex items-start justify-center p-4 border-b border-solid border-gray-300 rounded-t">
+                  <h3
+                    className="text-2xl font-semibold"
+                    style={{ color: 'rgba(0,0,0,.7)' }}
                   >
-                    {admins.length !== 0 && (
-                      <Form
-                        className="p-0 overflow-y-auto"
-                        style={{ maxHeight: '300px' }}
-                      >
-                        {admins.map((admin, i) => (
-                          <div
-                            className="border-b border-solid border-gray-300 cursor-pointer"
-                            key={`admin-${i + 1}`}
+                    Select Admin to assign
+                  </h3>
+                </div>
+                <div
+                  className="relative p-0 flex-auto"
+                  style={{ color: 'black' }}
+                >
+                  {admins.length !== 0 && (
+                    <Form
+                      className="p-0 overflow-y-auto"
+                      style={{ maxHeight: '300px' }}
+                    >
+                      {admins.map((admin, i) => (
+                        <div
+                          className="border-b border-solid border-gray-300 cursor-pointer"
+                          key={`admin-${i + 1}`}
+                        >
+                          <InputField
+                            className="m-3"
+                            type="radio"
+                            id={admin.fullName + i + 1}
+                            name="admins"
+                            value={admin._id}
+                            onChange={() =>
+                              handleSelect(admin._id, admin.fullName)
+                            }
+                          />
+                          <Label
+                            className="cursor-pointer"
+                            for={admin.fullName + i + 1}
                           >
-                            <InputField
-                              className="m-3"
-                              type="radio"
-                              id={admin.fullName + i + 1}
-                              name="admins"
-                              value={admin._id}
-                              onChange={() =>
-                                handleSelect(admin._id, admin.fullName)
-                              }
-                            />
-                            <Label
-                              className="cursor-pointer"
-                              for={admin.fullName + i + 1}
-                            >
-                              {admin.fullName}
-                            </Label>
-                          </div>
-                        ))}
-                      </Form>
-                    )}
-                  </div>
-                  <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
-                    {selectedAdmin.id && (
-                      <button
-                        className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 assign"
-                        type="button"
-                        style={{ transition: 'all .15s ease' }}
-                        onClick={assignAdmin}
-                      >
-                        Assign
-                      </button>
-                    )}
+                            {admin.fullName}
+                          </Label>
+                        </div>
+                      ))}
+                    </Form>
+                  )}
+                </div>
+                <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
+                  {selectedAdmin.id && (
                     <button
-                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                      className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 assign"
                       type="button"
                       style={{ transition: 'all .15s ease' }}
-                      onClick={() => setShowModal(false)}
+                      onClick={assignAdmin}
                     >
-                      Close
+                      Assign
                     </button>
-                  </div>
+                  )}
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                    type="button"
+                    style={{ transition: 'all .15s ease' }}
+                    onClick={() => setShowModal(false)}
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
             </div>
-            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-          </>
-        )}
-      </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      )}
     </Page>
   );
 };

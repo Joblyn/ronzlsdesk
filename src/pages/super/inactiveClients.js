@@ -13,7 +13,7 @@ export default function InActiveClients() {
   const dispatch = useDispatch();
   const adminGetClient = useSelector(state => state.adminGetAllClient);
 
-   useEffect(() => {
+  useEffect(() => {
     dispatch(getClient(getAllClients));
   }, []);
 
@@ -64,100 +64,117 @@ export default function InActiveClients() {
       title="Dropdowns"
       breadcrumbs={[{ name: 'Clients/Inactive', active: true }]}
     >
+    {adminGetClient.users.filter(cl => cl.accountStatus === 'inactive')
+        .length ? (
+      <>
       <ExcelTable
-        exportData={adminGetClient.users.filter(cl => cl.accountStatus === 'inactive')}
+        exportData={adminGetClient.users.filter(
+          cl => cl.accountStatus === 'inactive',
+        )}
         id="clients"
         fileName="clientsFile"
         className="m-2"
         exportHead="INACTIVE CLIENTS"
       />
-      <div
-        style={{
-          overflowX: 'auto',
-          overflowY: 'hidden',
-        }}
-      >
-        <CustomTable
-          pagination
-          pagerows
-          search
-          searchType="client"
-          columns={[
-            {
-              id: 'id',
-              align: 'center',
-              label: 'ID',
-              minWidth: 20,
-              color: value => 'blue',
-            },
+      
+        <div
+          style={{
+            overflowX: 'auto',
+            overflowY: 'hidden',
+          }}
+        >
+          <CustomTable
+            pagination
+            pagerows
+            search
+            searchType="client"
+            columns={[
+              {
+                id: 'id',
+                align: 'center',
+                label: 'ID',
+                minWidth: 20,
+                color: value => 'blue',
+              },
 
-            {
-              id: 'client',
-              align: 'center',
-              label: 'Client',
-              minWidth: 100,
-              color: value => 'blue',
-            },
-            {
-              id: 'accountType',
-              align: 'center',
-              label: 'Account Type',
-              minWidth: 50,
-              color: value => 'blue',
-            },
-            {
-              id: 'companyName',
-              align: 'center',
-              label: 'Company Name',
-              minWidth: 100,
-              color: value => 'blue',
-            },
-            {
-              id: 'companyAddress',
-              label: 'Address',
-              minWidth: 150,
-              align: 'center',
-              color: value => 'blue',
-            },
-            {
-              id: 'phoneNumber',
-              label: 'Phone Number',
-              minWidth: 50,
-              align: 'center',
-              color: value => 'blue',
-            },
-            {
-              id: 'email',
-              label: 'Email',
-              minWidth: 100,
-              align: 'center',
-              color: value => 'blue',
-            },
-            {
-              id: 'website',
-              label: 'Website',
-              minWidth: 80,
-              align: 'center',
-              color: value => 'blue',
-            },
-            {
-              id: 'admin',
-              label: 'Admin',
-              minWidth: 150,
-              align: 'center',
-              color: value => 'blue',
-            },
-            {
-              id: 'actions',
-              label: 'Actions',
-              minWidth: 150,
-              align: 'center',
-              color: value => 'blue',
-            },
-          ]}
-          rows={getRows(adminGetClient.users)}
-        />
-      </div>
+              {
+                id: 'client',
+                align: 'center',
+                label: 'Client',
+                minWidth: 100,
+                color: value => 'blue',
+              },
+              {
+                id: 'accountType',
+                align: 'center',
+                label: 'Account Type',
+                minWidth: 50,
+                color: value => 'blue',
+              },
+              {
+                id: 'companyName',
+                align: 'center',
+                label: 'Company Name',
+                minWidth: 100,
+                color: value => 'blue',
+              },
+              {
+                id: 'companyAddress',
+                label: 'Address',
+                minWidth: 150,
+                align: 'center',
+                color: value => 'blue',
+              },
+              {
+                id: 'phoneNumber',
+                label: 'Phone Number',
+                minWidth: 50,
+                align: 'center',
+                color: value => 'blue',
+              },
+              {
+                id: 'email',
+                label: 'Email',
+                minWidth: 100,
+                align: 'center',
+                color: value => 'blue',
+              },
+              {
+                id: 'website',
+                label: 'Website',
+                minWidth: 80,
+                align: 'center',
+                color: value => 'blue',
+              },
+              {
+                id: 'admin',
+                label: 'Admin',
+                minWidth: 150,
+                align: 'center',
+                color: value => 'blue',
+              },
+              {
+                id: 'actions',
+                label: 'Actions',
+                minWidth: 150,
+                align: 'center',
+                color: value => 'blue',
+              },
+            ]}
+            rows={getRows(adminGetClient.users)}
+          />
+        </div>
+        </>
+      ) : (
+        <div
+          className="d-flex align-items-center justify-content-center"
+          style={{ height: '50vh' }}
+        >
+          <em style={{ fontSize: '1.2rem', opacity: '.75' }}>
+            There no inactive clients.
+          </em>
+        </div>
+      )}
     </Page>
   );
 }

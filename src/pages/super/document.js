@@ -1,17 +1,14 @@
 import Page from 'components/Page';
-import React, { useEffect, 
-  // useRef 
+import React, {
+  useEffect,
+  // useRef
 } from 'react';
 import { Button } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner';
 import CustomTable from '../../components/table/CustomTable';
 
-import {
-  getAllDocuments,
-} from '../../actions/admin/clients/Clients';
-import {
-  adminGetDocuments,
-} from '../../apiConstants/apiConstants';
+import { getAllDocuments } from '../../actions/admin/clients/Clients';
+import { adminGetDocuments } from '../../apiConstants/apiConstants';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Documents = () => {
@@ -33,10 +30,10 @@ const Documents = () => {
         let sender;
         let receiver;
         if (document.sender) {
-          sender = document.sender.companyName
+          sender = document.sender.director[0].fullName;
         }
         if (document.receiver) {
-          receiver = document.receiver.fullName
+          receiver = document.receiver.fullName;
         }
         return rows.push({
           id: i + 1,
@@ -55,7 +52,7 @@ const Documents = () => {
             >
               View
             </Button>
-          )
+          ),
         });
       });
     return rows;
@@ -65,66 +62,76 @@ const Documents = () => {
     return <PageSpinner />;
   }
   return (
-    <Page
-      title="Dropdowns"
-      breadcrumbs={[{ name: 'Documents', active: true }]}
-    >
-      <div style={{
-        overflowX: 'auto'
-      }}>
-      <CustomTable
-        pagination
-        pagerows
-        search
-        searchType="client"
-        columns={[
-          {
-            id: 'id',
-            align: 'center',
-            label: 'ID',
-            minWidth: 20,
-            color: value => 'blue',
-          },
-          {
-            id: 'client',
-            align: 'center',
-            label: 'Client',
-            minWidth: 100,
-            color: value => 'blue',
-          },
-          {
-            id: 'admin',
-            align: 'center',
-            label: 'Admin',
-            minWidth: 100,
-            color: value => 'blue',
-          },
-          {
-            id:'docName',
-            align: 'center',
-            label: 'Document Name',
-            minWidth: 100,
-            color: value => 'blue',
-          },
-          {
-            id: 'date',
-            align: 'center',
-            label: 'Date Uploaded',
-            minWidth: 150,
-            color: value => 'blue',
-          },
-          {
-            id: 'view',
-            label: 'Action',
-            minWidth: 100,
-            align: 'center',
-            color: value => 'blue',
-          },
-        ]}
-        rows={getRows(adminGetAllDocuments.documents)}
-      /> 
-      </div>    
+    <Page title="Dropdowns" breadcrumbs={[{ name: 'Documents', active: true }]}>
+      {adminGetAllDocuments.documents.length ? (
+        <div
+          style={{
+            overflowX: 'auto',
+          }}
+        >
+          <CustomTable
+            pagination
+            pagerows
+            search
+            searchType="client"
+            columns={[
+              {
+                id: 'id',
+                align: 'center',
+                label: 'ID',
+                minWidth: 20,
+                color: value => 'blue',
+              },
+              {
+                id: 'client',
+                align: 'center',
+                label: 'Client',
+                minWidth: 100,
+                color: value => 'blue',
+              },
+              {
+                id: 'admin',
+                align: 'center',
+                label: 'Admin',
+                minWidth: 100,
+                color: value => 'blue',
+              },
+              {
+                id: 'docName',
+                align: 'center',
+                label: 'Document Name',
+                minWidth: 100,
+                color: value => 'blue',
+              },
+              {
+                id: 'date',
+                align: 'center',
+                label: 'Date Uploaded',
+                minWidth: 150,
+                color: value => 'blue',
+              },
+              {
+                id: 'view',
+                label: 'Action',
+                minWidth: 100,
+                align: 'center',
+                color: value => 'blue',
+              },
+            ]}
+            rows={getRows(adminGetAllDocuments.documents)}
+          />
+        </div>
+      ) : (
+        <div
+          className="d-flex align-items-center justify-content-center"
+          style={{ height: '50vh' }}
+        >
+          <em style={{ fontSize: '1.2rem', opacity: '.75' }}>
+            No documents have been uploaded yet.
+          </em>
+        </div>
+      )}
     </Page>
   );
-}
+};
 export default Documents;
