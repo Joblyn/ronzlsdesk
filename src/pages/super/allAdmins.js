@@ -31,7 +31,7 @@ export default function allAdmins() {
     }
   }, [AllAdmins, searchTerm]);
 
-  const setClients = clients => {
+  const setClients = (clients) => {
     console.log(clients);
     dispatch(setAdminClients(clients));
   };

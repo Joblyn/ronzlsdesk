@@ -1,16 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import InputField from '../../components/InputField';
+// import InputField from '../../components/InputField';
 import PageSpinner from '../../components/PageSpinner';
-import { getClientDetail } from '../../apiConstants/apiConstants';
-import { getClientDetails } from '../../actions/admin/clients/Clients';
+import { Button, FormGroup } from 'reactstrap';
+import InputDropdown from '../../components/InputDropdown';
+import { MdAddCircleOutline, MdRemoveCircleOutline } from 'react-icons/md';
+
+import {
+  adminUpdateSubscription,
+  getClientDetail,
+  adminDeleteClient,
+  adminEditUserData,
+} from '../../apiConstants/apiConstants';
+import {
+  getClientDetails,
+  updateClientSubscription,
+  clientDelete,
+  editData,
+} from '../../actions/admin/clients/Clients';
 
 export default function AdminClient() {
+  const [disabled, setDisabled] = useState(true);
+  const [subDisabled, setSubDisabled] = useState(true);
   const dispatch = useDispatch();
-  const data = useSelector(state => state.adminGetAllClient.user);
-  const [clientData, setClientData] = useState({});
-  const [color, setColor] = useState('');
+  const clientDetails = useSelector(state => state.adminGetAllClient.user);
+  // const adminDeleteUser = useSelector(state => state.adminDeleteUser);
+
+  const [data, setData] = useState({});
+  const [subscriptionBegin, setSubscriptionBegin] = useState('');
+  const [subscriptionEnd, setSubscriptionEnd] = useState('');
+
+  const [control, setControl] = useState({});
+  const [directorControl, setDirectorControl] = useState([]);
+  const adminEdiClientData = useSelector(state => state.adminEditUserData);
 
   useEffect(() => {
     let client_id = localStorage.getItem('client_id');
@@ -18,12 +41,19 @@ export default function AdminClient() {
     dispatch(getClientDetails(endpoint));
   }, []);
 
+  const [color, setColor] = useState('');
   useEffect(() => {
-    setClientData(data);
-  }, [data]);
+    setData(clientDetails);
+    setDirectorControl(clientDetails.director);
+    if (clientDetails.subscriptionBegin || clientDetails.subscriptionEnd) {
+      setSubscriptionBegin(clientDetails.subscriptionBegin.slice(0, 10));
+      setSubscriptionEnd(clientDetails.subscriptionEnd.slice(0, 10));
+    }
+  }, [clientDetails]);
+
   useEffect(() => {
-    if (clientData.accountStatus) {
-      switch (clientData.accountStatus) {
+    if (data.accountStatus) {
+      switch (data.accountStatus) {
         case 'prospect':
           return setColor('orange');
         case 'active':
@@ -34,263 +64,559 @@ export default function AdminClient() {
           return 'inherit';
       }
     }
-  }, [clientData]);
+  }, [data]);
 
-  const _onFocus = event => {
-    event.currentTarget.type = 'date';
+  const AccountTypeDatas = [
+    ['Individual', 'individual'],
+    ['Company', 'company'],
+  ];
+
+  const AccountTypeDropdownData = currentType => {
+    let opts = AccountTypeDatas.map((data, id) => {
+      let selected = currentType === data[1] ? true : false;
+      return (
+        <option value={data[1]} key={id} selected={selected}>
+          {data[0]}
+        </option>
+      );
+    });
+    return opts;
   };
 
-  const _onBlur = event => {
-    event.currentTarget.type = 'text';
-    event.currentTarget.placeholder = 'Date of Birth';
+  const updateSubscription = (e, id) => {
+    e.preventDefault();
+    const payload = {
+      subscriptionBegin,
+      subscriptionEnd,
+    };
+    let endpoint = `${adminUpdateSubscription}${id}`;
+    dispatch(updateClientSubscription(endpoint, payload));
+    // adminUpdateSubscription.isSuccessful && window.location.reload()
   };
 
-  const addNewDirector = (count, name) => (
-    <div key={'director' + (count + 1)}>
-      <label className="font-semibold">{`Director ${count + 1}`} </label>
-      <label className="font-semibold mt-2 block">Full Name:</label>
-      <InputField
-        type="text"
-        name={'fullName' + count}
-        value={clientData.director[name].fullName}
-        className="login__input input mb-2 input--lg border border-gray-300 block"
-        disabled
-      />
-      <label className="font-semibold mt-2">Date of Birth:</label>
-      <InputField
-        type="text"
-        name={'dateOfBirth' + count}
-        value={clientData.director[count].dateOfBirth}
-        onFocus={_onFocus}
-        onBlur={_onBlur}
-        className="login__input input  mb-2 input--lg border border-gray-300 block"
-        disabled
-      />
-    </div>
-  );
+  const deleteClient = () => {
+    let client_id = localStorage.getItem('client_id');
+    const payload = { ID: client_id };
+    async function deleteAction() {
+      return dispatch(clientDelete(adminDeleteClient, payload));
+    }
+    deleteAction().then(() => {
+      alert('Deleted client');
+      window.location.pathname = '/superadmin/clients';
+    });
+  };
 
-  if (!clientData) {
+  const createDirector = () => {
+    setDirectorControl([...directorControl, { fullName: '', dateOfBirth: '' }]);
+  };
+
+  const removeDirector = () => {
+    setDirectorControl(directorControl.slice(0, -1));
+  };
+
+  const handleDirectorChange = (i, target) => {
+    setDirectorControl([
+      ...directorControl.slice(0, i),
+      {
+        ...directorControl[i],
+        [target.name]: target.value,
+      },
+      ...directorControl.slice(i + 1),
+    ]);
+  };
+
+  const handleEdit = ({ target }) => {
+    setControl(control => ({
+      ...control,
+      [target.name]: target.value,
+    }));
+  };
+
+  const editClientData = () => {
+    control.ID = clientDetails._id;
+    control.director = directorControl;
+    async function editAction() {
+      return dispatch(editData(adminEditUserData, control));
+    }
+    editAction().then(() => adminEdiClientData.isSuccessful && setDisabled(true))
+  };
+
+  const cancelChanges = () => {
+    setDisabled(true);
+  };
+
+  let border = disabled ? 'border-0' : 'border-1';
+
+  if (data === null || !directorControl ) {
     return <PageSpinner />;
   }
 
   return (
-    <div className="login">
-      <div className="container sm:px-10">
-        <div className="">
-          <div className="block xl:grid grid-cols-2 gap-4 mt-3">
-            <div className="my-auto mx-auto xl:ml-20 px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto bg-white">
-              <div className="mb-3">
-                <div className="mb-3">
-                  Status:{' '}
-                  <span
-                    style={{ fontWeight: '500', color: color }}
-                    className={`text-lg`}
-                  >
-                    {clientData.accountStatus
-                      ? clientData.accountStatus.charAt(0).toUpperCase() +
-                        clientData.accountStatus.slice(1)
-                      : ''}
-                  </span>
-                </div>
-                <header className="font-semibold">Subscription</header>
-                <div
-                  className="mb-2 d-flex"
-                  style={{ justifyContent: 'space-between' }}
-                >
-                  <div>Start:</div>
-                  <div>
-                    <input
-                      type="date"
-                      name="subscriptionBegin"
-                      value={
-                        clientData.subscriptionBegin
-                          ? clientData.subscriptionBegin.slice(0, 10)
-                          : ''
-                      }
-                      disabled
-                      style={{ backgroundColor: 'inherit' }}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div
-                    className="mb-2 d-flex"
-                    style={{ justifyContent: 'space-between' }}
-                  >
-                    <div>End:</div>
-                    <div>
-                      <input
-                        type="date"
-                        name="subscriptionEnd"
-                        value={
-                          clientData.subscriptionEnd
-                            ? clientData.subscriptionEnd.slice(0, 10)
-                            : ''
-                        }
-                        disabled
-                        style={{ backgroundColor: 'inherit' }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {clientData.director &&
-                clientData.director.map((clientData, i) => {
-                  return addNewDirector(i, i);
-                })}
-              <label className="font-semibold mt-2">Account Type:</label>
-              <InputField
-                value={clientData.accountType}
-                name="accountType"
-                type="text"
-                className="login__input input input--lg mb-2 border border-gray-300 block"
-                disabled
+    <>
+      <div className="d-flex justify-content-md-between align-items-end px-3">
+        <div>
+          <Button
+            color="success"
+            size="sm"
+            onClick={() => (disabled ? setDisabled(false) : cancelChanges())}
+          >
+            {disabled ? 'Edit Details' : 'Cancel changes'}
+          </Button>
+        </div>
+        <div>
+          <header className="font-semibold">Subscription</header>
+          <div className="mb-2 d-flex">
+            <div style={{ width: '4rem', fontWeight:'500' }}>Start:</div>
+            <div>
+              <input
+                type="date"
+                name="subscriptionBegin"
+                defaultValue={subscriptionBegin}
+                onChange={({ target }) => setSubscriptionBegin(target.value)}
+                disabled={subDisabled}
+                style={{ backgroundColor: 'inherit' }}
               />
-              <label className="font-semibold mt-2">Company Name:</label>
-              <InputField
-                type="text"
-                value={clientData.companyName || ''}
-                name="Company Name"
-                className="login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled
-              />
-              <label className="font-semibold mt-2">Company Address:</label>
-              <InputField
-                type="text"
-                name="companyAddress"
-                value={clientData.companyAddress || ''}
-                className="login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled
-              />
-              <label className="font-semibold mt-2">City:</label>
-              <InputField
-                type="text"
-                name="city"
-                value={clientData.city || ''}
-                className="login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled
-              />
-              <label className="font-semibold mt-2">Postal Code:</label>
-              <InputField
-                type="text"
-                name="postalCode"
-                value={clientData.postalCode || ''}
-                className="login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled
-              />
-              <label className="font-semibold mt-2">Country:</label>
-              <InputField
-                type="text"
-                name="country"
-                value={clientData.country || ''}
-                className="login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled
-              />
-              <label className="font-semibold mt-2">Phone Number:</label>
-              <InputField
-                type="tel"
-                name="phoneNumber"
-                value={clientData.phoneNumber || ''}
-                className="login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled
-              />
-
-              <label className="font-semibold mt-2">Email:</label>
-              <InputField
-                type="email"
-                name="email"
-                value={clientData.email || ''}
-                className="login__input input  mb-2 input--lg border border-gray-300 block"
-                disabled
-              />
-            </div>
-            <div className="xl:h-auto flex xl:py-0 xl:my-0 mb-5 bg-white">
-              <div className="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto ">
-                <label className="font-semibold mt-2">Website:</label>
-                <InputField
-                  type="text"
-                  name="websiteUrl"
-                  value={clientData.websiteUrl || ''}
-                  className="login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled
-                />
-                <label className="font-semibold mt-2">Company Begin:</label>
-                <InputField
-                  type="text"
-                  name="companyBegin"
-                  value={clientData.companyBegin || ''}
-                  className="login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled
-                />
-                <label className="font-semibold mt-2">Company Reg No:</label>
-                <InputField
-                  type="text"
-                  name="companyRegNo"
-                  value={clientData.companyRegNo || ''}
-                  className="login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled
-                />
-                <label className="font-semibold mt-2">UTR Number:</label>
-                <InputField
-                  type="text"
-                  name="utrNo"
-                  value={clientData.utrNo || ''}
-                  className="login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled
-                />
-                <label className="font-semibold mt-2">VAT Submit Type:</label>
-                <InputField
-                  type="text"
-                  name="vatSubmitType"
-                  value={clientData.vatSubmitType || ''}
-                  className="login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled
-                />
-                <label className="font-semibold mt-2">VAT Scheme:</label>
-                <InputField
-                  type="text"
-                  name="vatScheme"
-                  value={clientData.vatScheme || ''}
-                  className="login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled
-                />
-                <label className="font-semibold mt-2">VAT Reg No:</label>
-                <InputField
-                  type="text"
-                  name="vatRegNo"
-                  value={clientData.vatRegNo || ''}
-                  className="login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled
-                />
-                <label className="font-semibold mt-2">VAT Reg Date:</label>
-                <InputField
-                  type="text"
-                  name="vatRegDate"
-                  value={clientData.vatRegDate || ''}
-                  className="login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled
-                />
-                <label className="font-semibold mt-2">Insurance Number:</label>
-                <InputField
-                  type="text"
-                  name="insuranceNumber"
-                  value={clientData.insuranceNumber || ''}
-                  className="login__input input  mb-2 input--lg border border-gray-300 block"
-                  disabled
-                />
-                <label className="font-semibold mt-2">Payee Ref No:</label>
-                <InputField
-                  type="text"
-                  name="payeeRefNo"
-                  value={clientData.payeeRefNo || ''}
-                  className="login__input input  my-2 input--lg border border-gray-300 block"
-                  disabled
-                />
-              </div>
             </div>
           </div>
+          <div className="mb-2 d-flex">
+            <div style={{ width: '4rem', fontWeight:'500' }}>End:</div>
+            <div>
+              <input
+                type="date"
+                name="subscriptionEnd"
+                defaultValue={subscriptionEnd}
+                onChange={({ target }) => setSubscriptionEnd(target.value)}
+                disabled={subDisabled}
+                style={{ backgroundColor: 'inherit' }}
+              />
+            </div>
+          </div>
+          {subDisabled ? (
+            <Button onClick={() => setSubDisabled(!subDisabled)} size="sm">
+              Set Subscription
+            </Button>
+          ) : (
+            <Button onClick={e => updateSubscription(e, data._id)} size="sm">
+              Update Subscription
+            </Button>
+          )}
         </div>
       </div>
-    </div>
+      <main className="profile-main mt-2">
+        <div>
+          <ul className="profile-ul">
+            <li className="my-0 py-2">
+              <div>
+                <p>Account Status:</p>
+              </div>
+              <div style={{ color: color }}>
+                <p className="m-0">
+                  {data.accountStatus
+                    ? data.accountStatus.charAt(0).toUpperCase() +
+                      data.accountStatus.slice(1)
+                    : ''}
+                </p>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Date Registered:</p>
+              </div>
+              <div>
+                <p className="mb-0">{data.created_dt && data.created_dt.slice(0, 10)}</p>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Account Type:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <InputDropdown
+                    userProfile
+                    className="inp border-grey-300 w-100"
+                    style={{
+                      background: 'inherit',
+                      borderBottom: `${!disabled && '2px grey solid'}`,
+                    }}
+                    defaultValue={data.accountType}
+                    name="accountType"
+                    dropdownElementsUser={() =>
+                      AccountTypeDropdownData(data.accountType)
+                    }
+                    disabled={disabled}
+                    onChange={handleEdit}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            {directorControl.length && (
+                <>
+                  <li className="my-0 py-2 flex-column align-items-start">
+                    <ul className="director-ul">
+                      {directorControl.map((director, i) => (
+                        <li key={'director' + (i + 1)} className="">
+                          <p className="font-semibold mb-0">{`Director ${
+                            i + 1
+                          }`}</p>
+                          <div className="director-div">
+                            <div className="d-flex align-items-baseline">
+                              <p>Full Name:</p>
+                              <FormGroup className="w-100 m-0">
+                                <input
+                                  type="text"
+                                  name="fullName"
+                                  defaultValue={director.fullName}
+                                  disabled={disabled}
+                                  className={border}
+                                  onChange={({ target }) =>
+                                    handleDirectorChange(i, target)
+                                  }
+                                />
+                              </FormGroup>
+                            </div>
+                            <div className="d-flex align-items-baseline">
+                              <p style={{ fontWeight: 500 }}>Date of Birth:</p>
+                              <FormGroup className="w-100 m-0">
+                                <input
+                                  type="text"
+                                  name="dateOfBirth"
+                                  defaultValue={director.dateOfBirth && director.dateOfBirth.slice(0, 10)}
+                                  disabled={disabled}
+                                  className={border}
+                                  onChange={({ target }) =>
+                                    handleDirectorChange(i, target)
+                                  }
+                                />
+                              </FormGroup>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    {disabled ? null : (
+                      <div className="d-flex">
+                        <MdAddCircleOutline
+                          className={`cursor-pointer`}
+                          onClick={() => createDirector()}
+                        />
+                        {directorControl.length > 1 && (
+                          <MdRemoveCircleOutline
+                            onClick={removeDirector}
+                            className="mx-2 cursor-pointer"
+                          />
+                        )}
+                      </div>
+                    )}
+                  </li>
+                </>
+              )}
+            <li className="my-0 py-2">
+              <div>
+                <p>Company Name:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.companyName}
+                    name="companyName"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Company Reg. No.:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.companyRegNo}
+                    name="companyRegNo"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Company Begin:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.companyBegin && data.companyBegin.slice(0, 10)}
+                    name="companyBegin"
+                    onChange={handleEdit}
+                    disabled={disabled} 
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Company Address:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.companyAddress}
+                    name="companyAddress"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>City:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.city}
+                    name="city"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Country:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.country}
+                    name="country"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Email:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.email}
+                    name="email"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Insurance Number:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.insuranceNumber}
+                    name="insuranceNumber"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Payee Ref No.:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.payeeRefNo}
+                    name="payeeRefNo"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Phone Number:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.phoneNumber && `0${data.phoneNumber}`} 
+                    name="phoneNumber"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Postal Code:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.postalCode}
+                    name="postalCode"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>UTR No.:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.utrNo}
+                    name="utrNo"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Vat Reg No.:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.vatRegNo}
+                    name="vatRegNo"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Vat Reg Date:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={
+                      data.vatRegDate && data.vatRegDate.slice(0, 10)
+                    }
+                    name="vatRegDate"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Vat Scheme:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.vatScheme}
+                    name="vatScheme"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>Vat Submit Type:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.vatSubmitType}
+                    name="vatSubmitType"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+            <li className="my-0 py-2">
+              <div>
+                <p>website URL:</p>
+              </div>
+              <div>
+                <FormGroup className="w-100 m-0">
+                  <input
+                    type="text"
+                    defaultValue={data.websiteUrl}
+                    name="websiteUrl"
+                    onChange={handleEdit}
+                    disabled={disabled}
+                    className={border}
+                  />
+                </FormGroup>
+              </div>
+            </li>
+          </ul>
+          {disabled === false && <Button size="sm" onClick={editClientData}>Submit Changes</Button>}
+        </div>
+      </main>
+      <div className="mx-auto d-flex justify-content-end" style={{width: '100%', maxWidth: '800px'}}>
+        <Button
+          color="danger"
+          size="sm"
+          className="mt-4"
+          onClick={deleteClient}
+        >
+          Delete Client
+        </Button>
+      </div>
+    </>
+    
   );
-}
+};

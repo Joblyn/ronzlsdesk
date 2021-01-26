@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../actions/user/Users';
 import nProgress from 'nprogress';
 import PopupSuccess from '../../components/popup-success';
+import { useHistory } from 'react-router-dom';
 
 export default function UploadDocument() {
   const [fileName, setFileName] = useState('');
@@ -21,9 +22,11 @@ export default function UploadDocument() {
   const [isLoading, setIsLoading] = useState(false);
   const [source, setSource] = useState();
   const [showPopup, setShowPopup] = useState(false);
-  const accountOfficer = useSelector(state => state.userData.data.accountOfficer);
-
+  const accountOfficer = useSelector(
+    state => state.userData.data.accountOfficer,
+  );
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getUser(getUserData));
@@ -53,10 +56,11 @@ export default function UploadDocument() {
         setSource('');
         nProgress.done();
         nProgress.remove();
+        history.push('/user/documents/sent');
       })
       .catch(err => {
         alert('Opps, An error occurred, please try again!');
-        console.error();
+        console.log(err);
         nProgress.done();
         nProgress.remove();
       });
@@ -72,20 +76,23 @@ export default function UploadDocument() {
         formData.append('docName', fileName);
         formData.append('docContentUrl', inpFile.files[0]);
         upload(formData);
-      };
-    }
-    else {
+      }
+    } else {
       setShowPopup(true);
     }
   };
 
   const handleSubmit2 = e => {
     e.preventDefault();
-    setIsLoading(true);
-    const formData = new FormData();
-    formData.append('docName', fileName);
-    formData.append('docContentUrl', source);
-    upload(formData);
+    if (accountOfficer) {
+      setIsLoading(true);
+      const formData = new FormData();
+      formData.append('docName', fileName);
+      formData.append('docContentUrl', source);
+      upload(formData);
+    } else {
+      setShowPopup(true);
+    }
   };
 
   const handleCapture = target => {
@@ -103,12 +110,14 @@ export default function UploadDocument() {
       title="Dashboard"
       breadcrumbs={[{ name: 'Upload Document', active: true }]}
     >
-      {showPopup && <PopupSuccess 
-        button
+      {showPopup && (
+        <PopupSuccess
+          button
           majorText="You have not yet been assigned to an admin."
           text="You are unable to upload a document as you have not yet been assigned to an admin. Please wait untill you have been assigned, or contact the management."
           setShow={setShowPopup}
-      />}
+        />
+      )}
       <div className="main">
         <h3 className="text-center">Upload Document</h3>
         <div className="cont">

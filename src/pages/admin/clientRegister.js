@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import InputField from '../../components/InputField';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import InputDropdown from '../../components/InputDropdown';
 import Label from 'reactstrap/lib/Label';
 import { MdRemoveCircleOutline, MdAddCircleOutline } from 'react-icons/md';
 import { registerUser } from '../../actions/admin/clients/Clients';
 import { adminCreateNewUser } from '../../apiConstants/apiConstants';
+import { useHistory } from 'react-router';
 
 export default function ClientRegister() {
   const [inputList, setInputList] = useState([1]);
@@ -18,7 +19,8 @@ export default function ClientRegister() {
   const [isLoading, setIsLoading] = useState(false);
   let obj = {};
   const dispatch = useDispatch();
-  const adminRegisterUser = useSelector(state => state.adminRegisterNewUser);
+  // const adminRegisterUser = useSelector(state => state.adminRegisterNewUser);
+  const history = useHistory();
 
   const _onFocus = event => {
     event.currentTarget.type = 'date';
@@ -143,14 +145,16 @@ export default function ClientRegister() {
       setIsLoading(true);
       let managers = prepareManager(managerControl);
       let payload = { director: managers, ...control };
-      dispatch(registerUser(adminCreateNewUser, payload));
+      async function regUserAction() {
+        return dispatch(registerUser(adminCreateNewUser, payload));
+      }
       setIsLoading(false);
+      regUserAction().then(() => {
+        alert('New client registered!');
+        history.push('/admin/clients');
+      });
     }
   };
-
-  if (adminRegisterUser.isSuccessful) {
-    alert('New client registered!');
-  }
 
   return (
     <div className="login">

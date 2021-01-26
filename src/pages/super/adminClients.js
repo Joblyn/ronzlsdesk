@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 export default function AdminClients(props) {
   const { adminId } = props.match.params;
   const clients = useSelector(state => state.adminClients.clients);
+  console.log(clients);
 
   const viewDetails = id => {
     localStorage.setItem('client_id', id);

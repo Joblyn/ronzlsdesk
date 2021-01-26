@@ -33,7 +33,6 @@ export default function CreateAppointment() {
   const dispatch = useDispatch();
   const userBookAppointment = useSelector(state => state.userBookAppointment);
   const userData = useSelector(state => state.userData.data);
-  console.log(userData);
 
   const lastWeek = new Date(
     today.getFullYear(),

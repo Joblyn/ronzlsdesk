@@ -54,6 +54,7 @@ export default function Appointments() {
         return rows.push({
           id: i + 1,
           client: appointment.client ? appointment.client.director[0].fullName : '- -',
+          admin: appointment.accountOfficer.fullName,
           message: appointment.appointmentMessage || '- -',
           dateScheduled: scheduledDate,
           timeStart: startTime.slice(0, 5),
@@ -92,6 +93,13 @@ export default function Appointments() {
               {
                 id: 'client',
                 label: 'Client',
+                align: 'center',
+                minWidth: 150,
+                color: value => 'blue',
+              },
+              {
+                id: 'admin',
+                label: 'Admin',
                 align: 'center',
                 minWidth: 150,
                 color: value => 'blue',
