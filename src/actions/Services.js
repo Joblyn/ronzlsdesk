@@ -98,7 +98,7 @@ export const postData = (url, payload, done) => {
         nprogress.remove();
         console.error();
         alert('Oopps!! An error occurred, please try again.');
-        window.location.reload();
+        // window.location.reload();
       });
   };
 };
@@ -123,12 +123,13 @@ export const postDataWithToken = (url, payload, done) => {
         if (data.data) {
           nprogress.done();
           nprogress.remove();
+          console.log(data);
           dispatch(done(data.data));
         } else if (data.error) {
           nprogress.done();
           nprogress.remove();
           alert(data.error);
-          window.location.reload();
+          // window.location.reload();
         }
       })
       .catch(err => {

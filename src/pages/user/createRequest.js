@@ -15,7 +15,7 @@ export default function CreateRequest() {
   const [showPopup, setShowPopup] = useState(false);
   const history = useHistory();
   const accountOfficer = useSelector(state => state.userData.data.accountOfficer);
-
+  console.log(accountOfficer);
   const handleChange = target => {
     setRequestData(prevState => ({
       ...prevState,

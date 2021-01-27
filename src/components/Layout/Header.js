@@ -4,24 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import Avatar from 'components/Avatar';
 import { UserCard } from 'components/Card';
 import Portrait from '../../portrait.png';
-
-// import Notifications from 'components/Notifications';
-// import SearchInput from 'components/SearchInput';
-// import { notificationsData } from 'demos/header';
-// import withBadge from 'hocs/withBadge';
 import { getAllAdmin, getUserData } from 'apiConstants/apiConstants';
 
 import {
   MdClearAll,
   MdExitToApp,
   MdLockOutline,
-  // MdHelp,
-  // MdInsertChart,
-  // MdMessage,
-  // MdNotificationsActive,
-  // MdNotificationsNone,
   MdPersonPin,
-  // MdSettingsApplications,
 } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import {
@@ -46,22 +35,8 @@ import Button from '../button';
 
 const bem = bn.create('header');
 
-// const MdNotificationsActiveWithBadge = withBadge({
-//   size: 'md',
-//   color: 'primary',
-//   style: {
-//     top: -10,
-//     right: -10,
-//     display: 'inline-flex',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   children: <small>5</small>,
-// })(MdNotificationsActive);
 
 function Header() {
-  // const [isOpenNotificationPopover, setIsOpenNotificationPopover] = useState(false);
-  // const [isNotificationConfirmed, setIsNotificationConfirmed] = useState(false);
   const [isOpenUserCardPopover, setIsOpenUserCardPopover] = useState(false);
 
   const dispatch = useDispatch();
@@ -76,13 +51,6 @@ function Header() {
       dispatch(getUser(getUserData));
     }
   }, []);
-  // const toggleNotificationPopover = () => {
-  //   setIsOpenNotificationPopover(isOpenNotificationPopover => !isOpenNotificationPopover);
-
-  //   if (!isNotificationConfirmed) {
-  //     setIsNotificationConfirmed(true);
-  //   }
-  // };
 
   const toggleUserCardPopover = () => {
     setIsOpenUserCardPopover(isOpenUserCardPopover => !isOpenUserCardPopover);
@@ -104,38 +72,8 @@ function Header() {
           value={<MdClearAll size={25} />}
         />
       </Nav>
-      {/* <Nav navbar>
-        <SearchInput />
-      </Nav> */}
 
       <Nav navbar className={bem.e('nav-right')}>
-        {/* <NavItem className="d-inline-flex">
-          <NavLink id="Popover1" className="position-relative">
-            {isNotificationConfirmed ? (
-              <MdNotificationsNone
-                size={25}
-                className="text-secondary can-click"
-                onClick={toggleNotificationPopover}
-              />
-            ) : (
-              <MdNotificationsActiveWithBadge
-                size={25}
-                className="text-secondary can-click animated swing infinite"
-                onClick={toggleNotificationPopover}
-              />
-            )}
-          </NavLink>
-          <Popover
-            placement="bottom"
-            isOpen={isOpenNotificationPopover}
-            toggle={toggleNotificationPopover}
-            target="Popover1"
-          >
-            <PopoverBody>
-              <Notifications notificationsData={notificationsData} />
-            </PopoverBody>
-          </Popover>
-        </NavItem> */}
 
         <NavItem>
           <NavLink id="Popover2">
@@ -156,7 +94,8 @@ function Header() {
             <PopoverBody className="p-0 border-light">
               <UserCard
                 avatar={userData.profilePics || Portrait}
-                title={adminData.fullName || userData.companyName || (userData.director && userData.director[0].fullName)}
+                title={ adminData.fullName || (userData.director && userData.director[0].fullName)
+                }
                 subtitle={adminData.email || userData.email}
                 className="border-light"
               >

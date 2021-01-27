@@ -272,23 +272,25 @@ export default function Profile() {
                   </FormGroup>
                 </div>
               </li>
-              <li className="my-0 py-2">
-                <div>
-                  <p>Company Name:</p>
-                </div>
-                <div>
-                  <FormGroup className="w-100 m-0">
-                    <InputField
-                      type="text"
-                      defaultValue={details.companyName}
-                      name="companyName"
-                      onChange={({ target }) => handleChange(target)}
-                      disabled={disabled}
-                      className={border}
-                    />
-                  </FormGroup>
-                </div>
-              </li>
+              {details.accountType === 'company' && (
+                <li className="my-0 py-2">
+                  <div>
+                    <p>Company Name:</p>
+                  </div>
+                  <div>
+                    <FormGroup className="w-100 m-0">
+                      <InputField
+                        type="text"
+                        defaultValue={details.companyName}
+                        name="companyName"
+                        onChange={({ target }) => handleChange(target)}
+                        disabled={disabled}
+                        className={border}
+                      />
+                    </FormGroup>
+                  </div>
+                </li>
+              )}
               {directorControl.length !== 0 && (
                 <>
                   <li className="my-0 py-2 flex-column align-items-start">
@@ -353,44 +355,48 @@ export default function Profile() {
                   </li>
                 </>
               )}
+              {details.accountType === 'company' && (
+                <>
+                  <li className="my-0 py-2">
+                    <div>
+                      <p>Company Reg. No.:</p>
+                    </div>
+                    <div>
+                      <FormGroup className="w-100 m-0">
+                        <InputField
+                          type="text"
+                          defaultValue={details.companyRegNo}
+                          name="companyRegNo"
+                          onChange={({ target }) => handleChange(target)}
+                          disabled={disabled}
+                          className={border}
+                        />
+                      </FormGroup>
+                    </div>
+                  </li>
+                  <li className="my-0 py-2">
+                    <div>
+                      <p>Company Begin:</p>
+                    </div>
+                    <div>
+                      <FormGroup className="w-100 m-0">
+                        <InputField
+                          type="text"
+                          defaultValue={details.companyBegin.slice(0, 10)}
+                          name="companyBegin"
+                          onChange={({ target }) => handleChange(target)}
+                          disabled={disabled}
+                          className={border}
+                          placeholder="yyyy-mm-dd"
+                        />
+                      </FormGroup>
+                    </div>
+                  </li>
+                </>
+              )}
               <li className="my-0 py-2">
                 <div>
-                  <p>Company Reg. No.:</p>
-                </div>
-                <div>
-                  <FormGroup className="w-100 m-0">
-                    <InputField
-                      type="text"
-                      defaultValue={details.companyRegNo}
-                      name="companyRegNo"
-                      onChange={({ target }) => handleChange(target)}
-                      disabled={disabled}
-                      className={border}
-                    />
-                  </FormGroup>
-                </div>
-              </li>
-              <li className="my-0 py-2">
-                <div>
-                  <p>Company Begin:</p>
-                </div>
-                <div>
-                  <FormGroup className="w-100 m-0">
-                    <InputField
-                      type="text"
-                      defaultValue={details.companyBegin.slice(0, 10)}
-                      name="companyBegin"
-                      onChange={({ target }) => handleChange(target)}
-                      disabled={disabled}
-                      className={border}
-                      placeholder="yyyy-mm-dd"
-                    />
-                  </FormGroup>
-                </div>
-              </li>
-              <li className="my-0 py-2">
-                <div>
-                  <p>Company Address:</p>
+                  <p>Address:</p>
                 </div>
                 <div>
                   <FormGroup className="w-100 m-0">
@@ -458,40 +464,6 @@ export default function Profile() {
               </li>
               <li className="my-0 py-2">
                 <div>
-                  <p>Insurance Number:</p>
-                </div>
-                <div>
-                  <FormGroup className="w-100 m-0">
-                    <InputField
-                      type="text"
-                      defaultValue={details.insuranceNumber}
-                      name="insuranceNumber"
-                      onChange={({ target }) => handleChange(target)}
-                      disabled={disabled}
-                      className={border}
-                    />
-                  </FormGroup>
-                </div>
-              </li>
-              <li className="my-0 py-2">
-                <div>
-                  <p>Payee Ref No.:</p>
-                </div>
-                <div>
-                  <FormGroup className="w-100 m-0">
-                    <InputField
-                      type="text"
-                      defaultValue={details.payeeRefNo}
-                      name="payeeRefNo"
-                      onChange={({ target }) => handleChange(target)}
-                      disabled={disabled}
-                      className={border}
-                    />
-                  </FormGroup>
-                </div>
-              </li>
-              <li className="my-0 py-2">
-                <div>
                   <p>Phone Number:</p>
                 </div>
                 <div>
@@ -526,13 +498,56 @@ export default function Profile() {
               </li>
               <li className="my-0 py-2">
                 <div>
+                  <p>Insurance Number:</p>
+                </div>
+                <div>
+                  <FormGroup className="w-100 m-0">
+                    <InputField
+                      type="text"
+                      defaultValue={
+                        details.insuranceNumber !== '0000'
+                          ? details.insuranceNumber
+                          : ''
+                      }
+                      name="insuranceNumber"
+                      onChange={({ target }) => handleChange(target)}
+                      disabled={disabled}
+                      className={border}
+                    />
+                  </FormGroup>
+                </div>
+              </li>
+              <li className="my-0 py-2">
+                <div>
+                  <p>Payee Ref No.:</p>
+                </div>
+                <div>
+                  <FormGroup className="w-100 m-0">
+                    <InputField
+                      type="text"
+                      defaultValue={
+                        details.payeeRefNo !== '0000' ? details.payeeRefNo : ''
+                      }
+                      name="payeeRefNo"
+                      onChange={({ target }) => handleChange(target)}
+                      disabled={disabled}
+                      className={border}
+                    />
+                  </FormGroup>
+                </div>
+              </li>
+
+              <li className="my-0 py-2">
+                <div>
                   <p>UTR No.:</p>
                 </div>
                 <div>
                   <FormGroup className="w-100 m-0">
                     <InputField
                       type="text"
-                      defaultValue={details.utrNo}
+                      defaultValue={
+                        details.utrNo !== '0000' ? details.utrNo : ''
+                      }
                       name="utrNo"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
@@ -549,7 +564,9 @@ export default function Profile() {
                   <FormGroup className="w-100 m-0">
                     <InputField
                       type="text"
-                      defaultValue={details.vatRegNo}
+                      defaultValue={
+                        details.vatRegNo !== '000' ? details.vatRegNo : ''
+                      }
                       name="vatRegNo"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
@@ -566,7 +583,11 @@ export default function Profile() {
                   <FormGroup className="w-100 m-0">
                     <InputField
                       type="text"
-                      defaultValue={details.vatRegDate.slice(0, 10)}
+                      defaultValue={
+                        details.vatRegDate.slice(0, 10) !== '0000-01-01'
+                          ? details.vatRegDate.slice(0, 10)
+                          : ''
+                      }
                       name="vatRegDate"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
@@ -583,7 +604,9 @@ export default function Profile() {
                   <FormGroup className="w-100 m-0">
                     <InputField
                       type="text"
-                      defaultValue={details.vatScheme}
+                      defaultValue={
+                        details.vatScheme !== 'null' ? details.vatScheme : ''
+                      }
                       name="vatScheme"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
@@ -600,7 +623,11 @@ export default function Profile() {
                   <FormGroup className="w-100 m-0">
                     <InputField
                       type="text"
-                      defaultValue={details.vatSubmitType}
+                      defaultValue={
+                        details.vatSubmitType !== 'null'
+                          ? details.vatSubmitType
+                          : ''
+                      }
                       name="vatSubmitType"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}
@@ -617,7 +644,9 @@ export default function Profile() {
                   <FormGroup className="w-100 m-0">
                     <InputField
                       type="text"
-                      defaultValue={details.websiteUrl}
+                      defaultValue={
+                        details.websiteUrl !== 'null' ? details.websiteUrl : ''
+                      }
                       name="websiteUrl"
                       onChange={({ target }) => handleChange(target)}
                       disabled={disabled}

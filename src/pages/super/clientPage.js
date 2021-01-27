@@ -157,6 +157,7 @@ const AdminClient = () => {
             alert('Users added successfully!');
             nProgress.done();
             nProgress.remove();
+            window.location.reload();
           })
           .catch(err => {
             alert('Opps, An error occurred, please try again!');
@@ -199,106 +200,110 @@ const AdminClient = () => {
           exportHead="ALL CLIENTS"
         />
       </div>
-      {adminGetClient.users.length ? <div
-        style={{
-          overflowX: 'auto',
-          overflowY: 'hidden',
-        }}
-      >
-        <CustomTable
-          pagination
-          pagerows
-          search
-          searchType="client"
-          columns={[
-            {
-              id: 'id',
-              align: 'center',
-              label: 'ID',
-              minWidth: 20,
-              color: value => 'blue',
-            },
-            {
-              id: 'client',
-              align: 'center',
-              label: 'Client',
-              minWidth: 100,
-              color: value => 'blue',
-            },
-            {
-              id: 'accountType',
-              align: 'center',
-              label: 'Account Type',
-              minWidth: 50,
-              color: value => 'blue',
-            },
-            {
-              id: 'companyName',
-              align: 'center',
-              label: 'Company Name',
-              minWidth: 100,
-              color: value => 'blue',
-            },
-            {
-              id: 'companyAddress',
-              label: 'Address',
-              minWidth: 150,
-              align: 'center',
-              color: value => 'blue',
-            },
-            {
-              id: 'phoneNumber',
-              label: 'Phone Number',
-              minWidth: 50,
-              align: 'center',
-              color: value => 'blue',
-            },
-            {
-              id: 'email',
-              label: 'Email',
-              minWidth: 100,
-              align: 'center',
-              color: value => 'blue',
-            },
-            {
-              id: 'website',
-              label: 'Website',
-              minWidth: 80,
-              align: 'center',
-              color: value => 'blue',
-            },
-            {
-              id: 'status',
-              label: 'Status',
-              minWidth: 100,
-              align: 'center',
-              color: value => 'blue',
-            },
-            {
-              id: 'admin',
-              label: 'Admin',
-              minWidth: 150,
-              align: 'center',
-              color: value => 'blue',
-            },
-            {
-              id: 'actions',
-              label: 'Actions',
-              minWidth: 'fit-content',
-              align: 'center',
-              color: value => 'blue',
-            },
-          ]}
-          rows={getRows(adminGetClient.users)}
-        />
-      </div> : <div
+      {adminGetClient.users.length ? (
+        <div
+          style={{
+            overflowX: 'auto',
+            overflowY: 'hidden',
+          }}
+        >
+          <CustomTable
+            pagination
+            pagerows
+            search
+            searchType="client"
+            columns={[
+              {
+                id: 'id',
+                align: 'center',
+                label: 'ID',
+                minWidth: 20,
+                color: value => 'blue',
+              },
+              {
+                id: 'client',
+                align: 'center',
+                label: 'Client',
+                minWidth: 100,
+                color: value => 'blue',
+              },
+              {
+                id: 'accountType',
+                align: 'center',
+                label: 'Account Type',
+                minWidth: 50,
+                color: value => 'blue',
+              },
+              {
+                id: 'companyName',
+                align: 'center',
+                label: 'Company Name',
+                minWidth: 100,
+                color: value => 'blue',
+              },
+              {
+                id: 'companyAddress',
+                label: 'Address',
+                minWidth: 150,
+                align: 'center',
+                color: value => 'blue',
+              },
+              {
+                id: 'phoneNumber',
+                label: 'Phone Number',
+                minWidth: 50,
+                align: 'center',
+                color: value => 'blue',
+              },
+              {
+                id: 'email',
+                label: 'Email',
+                minWidth: 100,
+                align: 'center',
+                color: value => 'blue',
+              },
+              {
+                id: 'website',
+                label: 'Website',
+                minWidth: 80,
+                align: 'center',
+                color: value => 'blue',
+              },
+              {
+                id: 'status',
+                label: 'Status',
+                minWidth: 100,
+                align: 'center',
+                color: value => 'blue',
+              },
+              {
+                id: 'admin',
+                label: 'Admin',
+                minWidth: 150,
+                align: 'center',
+                color: value => 'blue',
+              },
+              {
+                id: 'actions',
+                label: 'Actions',
+                minWidth: 'fit-content',
+                align: 'center',
+                color: value => 'blue',
+              },
+            ]}
+            rows={getRows(adminGetClient.users)}
+          />
+        </div>
+      ) : (
+        <div
           className="d-flex align-items-center justify-content-center"
           style={{ height: '50vh' }}
         >
           <em style={{ fontSize: '1.2rem', opacity: '.75' }}>
             No clients exist yet.
           </em>
-        </div>}
+        </div>
+      )}
 
       {showModal && (
         <>

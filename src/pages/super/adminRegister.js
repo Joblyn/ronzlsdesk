@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import {
   register,
@@ -10,12 +10,14 @@ import { adminRegsiter } from '../../apiConstants/apiConstants';
 //components
 import InputField from '../../components/InputField';
 import InputDropdown from '../../components/InputDropdown';
+import { useHistory } from 'react-router';
 
 const AdminRegister = () => {
   const [control, setControl] = useState({});
   // const [createdAdmin, setCreatedAdmin] = useState('');
   const dispatch = useDispatch();
-  const adminRegister = useSelector(state => state.adminRegisterAuth);
+  const history = useHistory();
+  // const adminRegister = useSelector(state => state.adminRegisterAuth);
 
   const handleChange = event => {
     setControl({
@@ -26,10 +28,14 @@ const AdminRegister = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(register(adminRegsiter, control));
+    async function adminRegAction() {
+      dispatch(register(adminRegsiter, control));
+    }
     const { fullName } = control;
-    adminRegister.isSuccessful && alert(`Registered ${fullName} as Admin!`);
-    window.location.reload();
+    adminRegAction().then(() => {
+      alert(`Registered ${fullName} as Admin.`);
+      history.push('/superadmin/admins');
+    });
   };
 
   const datas = [
@@ -53,12 +59,12 @@ const AdminRegister = () => {
           <div className="xl:h-auto flex py-5 xl:py-0 xl:my-0">
             <div className="my-auto mx-auto xl:ml-2 bg-white xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto min-h-screen">
               <form onSubmit={handleSubmit}>
-                <div className="intro-x mt-8">
+                <div className="mt-8">
                   <InputField
                     type="text"
                     name="fullName"
                     onChange={handleChange}
-                    className="intro-x login__input input input--lg border border-gray-300 block w-100"
+                    className="login__input input input--lg border border-gray-300 block w-100"
                     placeholder="Full Name"
                     required
                   />
