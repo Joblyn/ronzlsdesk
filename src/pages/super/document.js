@@ -27,18 +27,18 @@ const Documents = () => {
     let rows = [];
     data &&
       data.reverse().map((document, i) => {
-        let sender;
-        let receiver;
+        let client;
+        let admin
         if (document.sender) {
-          sender = document.sender.director[0].fullName;
+          client = document.sender.director[0].fullName || document.receiver.director[0].fullName;
         }
         if (document.receiver) {
-          receiver = document.receiver.fullName;
+          admin = document.receiver.fullName || document.sender.fullName;
         }
         return rows.push({
           id: i + 1,
-          client: sender || 'null',
-          admin: receiver || 'null',
+          client: client,
+          admin: admin,
           docName: document.docName,
           date: document.created_dt.slice(0, 10),
           view: (
@@ -73,7 +73,8 @@ const Documents = () => {
             pagination
             pagerows
             search
-            searchType="client"
+            searchType="docName"
+            searchPlaceholder="Search document name"
             columns={[
               {
                 id: 'id',

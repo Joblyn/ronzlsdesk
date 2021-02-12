@@ -25,7 +25,7 @@ export default function AdminReceivedDocumnents() {
       documents.reverse().map((document, i) =>
         rows.push({
           id: i + 1,
-          client: document.sender && document.sender.companyName,
+          client: document.sender && document.sender.director[0].fullName,
           docName: document.docName,
           date: document.created_dt.slice(0, 10),
           view: (

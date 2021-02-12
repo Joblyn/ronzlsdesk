@@ -10,7 +10,7 @@ import { adminRegsiter } from '../../apiConstants/apiConstants';
 //components
 import InputField from '../../components/InputField';
 import InputDropdown from '../../components/InputDropdown';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 const AdminRegister = () => {
   const [control, setControl] = useState({});

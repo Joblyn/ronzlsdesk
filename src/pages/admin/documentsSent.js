@@ -26,7 +26,7 @@ export default function AdminSentDocuments() {
       documents.reverse().map((document, i) => {
         let client;
         if (document.receiver) {
-          client = document.receiver.companyName;
+          client = document.receiver && document.receiver.director[0].fullName;
         }
         return rows.push({
           id: i + 1,

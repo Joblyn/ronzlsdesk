@@ -89,6 +89,7 @@ export default function CustomTable({
   pagination,
   search,
   searchType,
+  searchPlaceholder,
   pagerows,
   rows,
   columns,
@@ -277,7 +278,7 @@ export default function CustomTable({
       <Grid item>
         <Grid container={true} justify="space-between" alignItems="flex-start">
           <Grid item className="ml-auto">
-            {search ? <Search handleSearchChange={handleSearchChange} /> : ''}
+            {search ? <Search handleSearchChange={handleSearchChange} searchPlaceholder={searchPlaceholder}/> : ''}
           </Grid>
         </Grid>
       </Grid>

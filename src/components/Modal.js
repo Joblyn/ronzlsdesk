@@ -8,7 +8,7 @@ import nProgress from 'nprogress';
 
 export default function Modal({ action, color }) {
   const [showModal, setShowModal] = useState(false);
-  const [client, setClient] = useState({});
+  const [client, setClient] = useState();
   const [fileName, setFileName] = useState('');
   const [file, setFile] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +18,7 @@ export default function Modal({ action, color }) {
   const isInvalid = file === '' || fileName === '' || client === {};
   const handleSubmit = e => {
     e.preventDefault();
-    
+
     const formData = new FormData();
     const inpFile = document.getElementById('file');
     formData.append('docName', fileName);
@@ -28,6 +28,7 @@ export default function Modal({ action, color }) {
     let prodURL = 'https://cmsbackend2.herokuapp.com/api/v1/';
     let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
     const endpoint = baseUrl + adminUploadDoc + client._id;
+    console.log(endpoint);
     const token = localStorage.getItem('jwtToken');
     const bearerToken = 'Bearer ' + token;
     nProgress.start();
@@ -42,9 +43,10 @@ export default function Modal({ action, color }) {
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         nProgress.done();
         nProgress.remove();
-        alert(`Sent document to ${client.companyName}.`);
+        alert(`Sent document to ${client.director[0].fullName}.`);
         setShowModal(false);
         setIsLoading(false);
         window.location.reload();
@@ -56,7 +58,7 @@ export default function Modal({ action, color }) {
         console.error();
         setIsLoading(false);
         setShowModal(false);
-        window.location.reload();
+        // window.location.reload();
       });
   };
 
@@ -123,29 +125,33 @@ export default function Modal({ action, color }) {
                       style={{ borderBottom: '2px solid rgba(0, 0, 0, 0.2)' }}
                     >
                       <select
-                        value={client}
+                        defaultValue=""
                         className="inp border-grey-300"
                         style={{
                           background: 'inherit',
                           width: '100%',
                         }}
-                        onChange={({ target }) => setClient(target.value)}
+                        onChange={({target}) => {
+                          console.log(JSON.parse(target.value))
+                          setClient(JSON.parse(target.value));
+                        }}
                       >
-                        <option value="send to">Send to</option>
-                        {clients.map((client, i) => (
-                          <option key={i + 1} value={client}>
-                            {client.companyName}
+                        <option value="">Send to</option>
+                        {clients.map((client, i) => {
+                          return (
+                          <option key={i + 1} value={JSON.stringify(client)}>
+                            {client.director[0].fullName}
                           </option>
-                        ))}
+                        )})}
                       </select>
                     </FormGroup>
                     <Button
                       type="submit"
                       form="doc-form"
-                      disabled={isInvalid || isLoading} 
+                      disabled={isInvalid || isLoading}
                       style={{ marginRight: 'auto' }}
                     >
-                      Upload
+                      Send
                     </Button>
                   </Form>
                 </div>

@@ -47,7 +47,7 @@ export default function AdminClients() {
         return rows.push({
           id: i + 1,
           client: client.director[0].fullName,
-          companyName: client.companyName || '- -',
+          companyName: client.companyName !== 'null' ? client.companyName : '- -',
           accountType: client.accountType,
           companyAddress: client.companyAddress,
           phoneNumber: client.phoneNumber,
