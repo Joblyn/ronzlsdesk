@@ -33,8 +33,8 @@ export default function UploadDocument() {
   }, []);
 
   const upload = formData => {
-    let localURL = 'https://cmsbackend2.herokuapp.com/api/v1/';
-    let prodURL = 'https://cmsbackend2.herokuapp.com/api/v1/';
+    let localURL = 'https://cmsbackv1.herokuapp.com/api/v1/';
+    let prodURL = 'https://cmsbackv1.herokuapp.com/api/v1/';
     let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
     const endpoint = baseUrl + userUploaDocToAdmin + accountOfficer._id;
     const token = localStorage.getItem('jwtToken');

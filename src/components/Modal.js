@@ -24,8 +24,8 @@ export default function Modal({ action, color }) {
     formData.append('docName', fileName);
     formData.append('docContentUrl', inpFile.files[0]);
 
-    let localURL = 'https://cmsbackend2.herokuapp.com/api/v1/';
-    let prodURL = 'https://cmsbackend2.herokuapp.com/api/v1/';
+    let localURL = 'https://cmsbackv1.herokuapp.com/api/v1/';
+    let prodURL = 'https://cmsbackv1.herokuapp.com/api/v1/';
     let baseUrl = process.env.NODE_ENV === 'production' ? prodURL : localURL;
     const endpoint = baseUrl + adminUploadDoc + client._id;
     console.log(endpoint);
