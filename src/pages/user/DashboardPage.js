@@ -5,8 +5,8 @@ import {
   Row,
 } from 'reactstrap';
 
-import { AnnouncementCard } from 'components/Card';
-import Page from 'components/Page';
+import { AnnouncementCard } from '../../components/Card';
+import Page from '../../components/Page';
 
 class DashboardPage extends React.Component {
   render() {

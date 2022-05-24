@@ -1,6 +1,6 @@
 import React from 'react';
-import { AnnouncementCard, } from 'components/Card';
-import Page from 'components/Page';
+import { AnnouncementCard, } from '../../components/Card';
+import Page from '../../components/Page';
 import { Link } from "react-router-dom";
 import {
   Col,

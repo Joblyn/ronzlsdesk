@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import CustomTable from '../../components/table/CustomTable';
 import { Link } from 'react-router-dom';

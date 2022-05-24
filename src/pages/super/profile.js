@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import { getAdminData } from '../../actions/admin/authAction/Users';
-import { getAllAdmin } from 'apiConstants/apiConstants';
+import { getAllAdmin } from '../../apiConstants/apiConstants';
 
 export default function Profile() {
   const dispatch = useDispatch();
   const adminData = useSelector(state => state.adminData);
   useEffect(() => {
     dispatch(getAdminData(getAllAdmin));
-  }, []);
+  }, [dispatch]);
 
   if (!adminData.phoneNumber) {
     return <PageSpinner />;

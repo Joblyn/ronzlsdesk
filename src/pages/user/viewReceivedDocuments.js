@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import CustomTable from '../../components/table/CustomTable';
 import { getDocumentSentByAdmin } from '../../actions/user/Users';
 import { userGetDocumentSentByAdminToUser } from '../../apiConstants/apiConstants';
@@ -17,7 +17,7 @@ export default function ViewReceivedDocuments() {
 
   useEffect(() => {
     dispatch(getDocumentSentByAdmin(userGetDocumentSentByAdminToUser));
-  }, []);
+  }, [dispatch]);
 
   const getRows = documents => {
     let rows = [];

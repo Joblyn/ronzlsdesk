@@ -51,7 +51,7 @@ const ResetForgotPassword = () => {
     if(forgotPasswordReset.isSuccessful) {
       setShowPopup(true);
     }
-  }, []);
+  }, [forgotPasswordReset]);
 
   if(forgotPasswordReset.isSuccessful) {
     alert('Password changed successfully. Please login with new password.');

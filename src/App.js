@@ -27,46 +27,46 @@ import { ProtectedRoute } from './validations/protectedRoute';
 import { IsUserRedirect } from './validations/isUserRedirect';
 
 //Admin
-const AdminDashboard = React.lazy(() => import('pages/admin/adminDashboard'));
-const AdminProfile = React.lazy(() => import('pages/admin/adminProfile'));
-const AdminClients = React.lazy(() => import('pages/admin/adminClients'));
-const AdminReceivedDocuments = React.lazy(() => import('pages/admin/documentsReceived'));
-const AdminSentDocuments =React.lazy(() => import('pages/admin/documentsSent'))
-const AdminRequests = React.lazy(() => import('pages/admin/adminRequests'));
-const AdminAppointments = React.lazy(() => import('pages/admin/adminAppointments'));
-const AdminViewClientDetails = React.lazy(() => import('pages/admin/adminViewClientDetails'));
-const AdminResetPassword = React.lazy(() => import('pages/admin/resetPassword'));
-const AdminRegisterClient = React.lazy(() => import('pages/admin/clientRegister'));
+const AdminDashboard = React.lazy(() => import('./pages/admin/adminDashboard'));
+const AdminProfile = React.lazy(() => import('./pages/admin/adminProfile'));
+const AdminClients = React.lazy(() => import('./pages/admin/adminClients'));
+const AdminReceivedDocuments = React.lazy(() => import('./pages/admin/documentsReceived'));
+const AdminSentDocuments =React.lazy(() => import('./pages/admin/documentsSent'))
+const AdminRequests = React.lazy(() => import('./pages/admin/adminRequests'));
+const AdminAppointments = React.lazy(() => import('./pages/admin/adminAppointments'));
+const AdminViewClientDetails = React.lazy(() => import('./pages/admin/adminViewClientDetails'));
+const AdminResetPassword = React.lazy(() => import('./pages/admin/resetPassword'));
+const AdminRegisterClient = React.lazy(() => import('./pages/admin/clientRegister'));
 
 //User
-const DashboardPage = React.lazy(() => import('pages/user/DashboardPage'));
-const Profile = React.lazy(() => import('pages/user/profile'));
-const CreateNewRequest = React.lazy(() => import('pages/user/createRequest'));
-const UserViewRequests = React.lazy(() => import('pages/user/viewRequests'));
-const UserViewReceivedDocuments = React.lazy(() => import('pages/user/viewReceivedDocuments'));
-const UserViewSentDocuments = React.lazy(() => import('pages/user/viewSentDocuments'));
-const UserUploadDocument = React.lazy(() => import('pages/user/uploadDocument'));
-const UserViewAppointments = React.lazy(() => import('pages/user/viewAppointments'));
-const BookAppointment = React.lazy(() => import('pages/user/bookAppointment'));
-const UserResetPassword = React.lazy(() => import('pages/user/resetPassword'));
-const UserPhoto = React.lazy(() => import('pages/user/photo'));
+const DashboardPage = React.lazy(() => import('./pages/user/DashboardPage'));
+const Profile = React.lazy(() => import('./pages/user/profile'));
+const CreateNewRequest = React.lazy(() => import('./pages/user/createRequest'));
+const UserViewRequests = React.lazy(() => import('./pages/user/viewRequests'));
+const UserViewReceivedDocuments = React.lazy(() => import('./pages/user/viewReceivedDocuments'));
+const UserViewSentDocuments = React.lazy(() => import('./pages/user/viewSentDocuments'));
+const UserUploadDocument = React.lazy(() => import('./pages/user/uploadDocument'));
+const UserViewAppointments = React.lazy(() => import('./pages/user/viewAppointments'));
+const BookAppointment = React.lazy(() => import('./pages/user/bookAppointment'));
+const UserResetPassword = React.lazy(() => import('./pages/user/resetPassword'));
+const UserPhoto = React.lazy(() => import('./pages/user/photo'));
 
 // superAdmin
-const superAdminDashboard = React.lazy(() => import('pages/super/adminDashboard'));
-const superAdminRegisterAdmin = React.lazy(() => import('pages/super/adminRegister'));
-const superAdminRegisterClient = React.lazy(() => import('pages/super/clientRegister'))
-const superAdminAllAdmins = React.lazy(() => import('pages/super/allAdmins'));
-const superAdmin_Admin_Clients = React.lazy(() => import('pages/super/adminClients'));
-const superAdmin_Admin_Client = React.lazy(() => import('pages/super/adminClient'));
-const superAdminProfile = React.lazy(() => import('pages/super/profile'));
-const superAdminRequests = React.lazy(() => import('pages/super/requests'));
-const superAdminAppointments = React.lazy(() => import('pages/super/appointments'));
-const superAdminDocumentPage = React.lazy(() => import('pages/super/document')); 
-const superAdminClientPage = React.lazy(() => import('pages/super/clientPage'));
-const superAdminClients_Active = React.lazy(() => import('pages/super/activeClients'));
-const superAdminClients_InActive = React.lazy(() => import('pages/super/inactiveClients'));
-const superAdminClients_Prospect = React.lazy(() => import('pages/super/prospectClients'));
-const superAdminViewClientDetails = React.lazy(() => import('pages/super/adminViewClientDetails'));
+const superAdminDashboard = React.lazy(() => import('./pages/super/adminDashboard'));
+const superAdminRegisterAdmin = React.lazy(() => import('./pages/super/adminRegister'));
+const superAdminRegisterClient = React.lazy(() => import('./pages/super/clientRegister'))
+const superAdminAllAdmins = React.lazy(() => import('./pages/super/allAdmins'));
+const superAdmin_Admin_Clients = React.lazy(() => import('./pages/super/adminClients'));
+const superAdmin_Admin_Client = React.lazy(() => import('./pages/super/adminClient'));
+const superAdminProfile = React.lazy(() => import('./pages/super/profile'));
+const superAdminRequests = React.lazy(() => import('./pages/super/requests'));
+const superAdminAppointments = React.lazy(() => import('./pages/super/appointments'));
+const superAdminDocumentPage = React.lazy(() => import('./pages/super/document')); 
+const superAdminClientPage = React.lazy(() => import('./pages/super/clientPage'));
+const superAdminClients_Active = React.lazy(() => import('./pages/super/activeClients'));
+const superAdminClients_InActive = React.lazy(() => import('./pages/super/inactiveClients'));
+const superAdminClients_Prospect = React.lazy(() => import('./pages/super/prospectClients'));
+const superAdminViewClientDetails = React.lazy(() => import('./pages/super/adminViewClientDetails'));
 
 const auth = localStorage.getItem('jwtToken');
 const role = localStorage.getItem('role');

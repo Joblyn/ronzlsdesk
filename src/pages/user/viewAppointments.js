@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getAppointments } from '../../actions/user/Users';
 import { userGetAppointments } from '../../apiConstants/apiConstants';
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import CustomTable from '../../components/table/CustomTable';
 import PageSpinner from '../../components/PageSpinner';
 
@@ -13,7 +13,7 @@ export default function ViewAppointments() {
 
   useEffect(() => {
     dispatch(getAppointments(userGetAppointments));
-  }, []);
+  }, [dispatch]);
 
   const getRows = data => {
     let rows = [];

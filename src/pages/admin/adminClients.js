@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import CustomTable from '../../components/table/CustomTable';
 import { getClientsUnderAdmin } from '../../apiConstants/apiConstants';
 import { adminGetClients } from '../../actions/admin/clients/Clients';
@@ -14,7 +14,7 @@ export default function AdminClients() {
 
   useEffect(() => {
     dispatch(adminGetClients(getClientsUnderAdmin));
-  }, []);
+  }, [dispatch]);
 
   const handleClick = id => {
     localStorage.setItem('client_id', id);

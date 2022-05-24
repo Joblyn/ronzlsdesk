@@ -4,7 +4,7 @@ import { Button } from 'reactstrap';
 
 import { getRequests } from '../../actions/user/Users';
 import { userGetRequests } from "../../apiConstants/apiConstants";
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import CustomTable from '../../components/table/CustomTable';
 import PageSpinner from '../../components/PageSpinner';
 
@@ -15,7 +15,7 @@ export default function ViewRequests() {
 
   useEffect(() => {
     dispatch(getRequests(userGetRequests));
-  }, []);
+  }, [dispatch]);
 
   if (getUserRequests.isSuccessful) {
     console.log(getUserRequests.requests);

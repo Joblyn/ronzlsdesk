@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Button } from 'reactstrap';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import CustomTable from '../../components/table/CustomTable';
 import PageSpinner from '../../components/PageSpinner';
 import { Link } from 'react-router-dom';
@@ -15,7 +15,7 @@ export default function ViewSentDocuments() {
 
   useEffect(() => {
     dispatch(getDocumentSentByUser(userGetDocumentSentByUser));
-  }, []);
+  }, [dispatch]);
 
   const getRows = documents => {
     let rows = [];

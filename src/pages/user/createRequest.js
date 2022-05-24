@@ -6,7 +6,7 @@ import { Button, Form, FormGroup } from 'reactstrap';
 import { MdAttachment } from 'react-icons/md';
 import { userCreateRequest } from '../../apiConstants/apiConstants';
 import InputField from '../../components/InputField';
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import PopupSuccess from '../../components/popup-success';
 
 export default function CreateRequest() {

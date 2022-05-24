@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import CustomTable from '../../components/table/CustomTable';
 import { getClient } from '../../actions/admin/clients/Clients';
@@ -37,7 +37,7 @@ const AdminClient = () => {
 
   useEffect(() => {
     dispatch(getClient(getAllClients));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (AddClientToAdmin.isSuccessful) {
@@ -45,7 +45,7 @@ const AdminClient = () => {
       setShowModal(false);
       window.location.reload();
     }
-  }, [AddClientToAdmin]);
+  }, [AddClientToAdmin, client.name, selectedAdmin.name]);
 
   const viewDetails = id => {
     localStorage.setItem('client_id', id);

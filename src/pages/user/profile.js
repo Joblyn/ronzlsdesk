@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import PageSpinner from '../../components/PageSpinner';
-import { getUserData } from 'apiConstants/apiConstants';
+import { getUserData } from '../../apiConstants/apiConstants';
 import { getUser } from '../../actions/user/Users';
 import { useEffect } from 'react';
 import InputField from '../../components/InputField';
@@ -26,7 +26,7 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(getUser(getUserData));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setDetails(userData);

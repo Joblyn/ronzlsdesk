@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import InfiniteCalendar from 'react-infinite-calendar';
-import { getColor } from 'utils/colors';
+import { getColor } from '../../utils/colors';
 import { Button, Form, FormGroup } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import InputField from '../../components/InputField';
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import { bookAppointment } from '../../actions/user/Users';
 import { userBookAppointmentWithAdmin } from '../../apiConstants/apiConstants';
 import Label from 'reactstrap/lib/Label';

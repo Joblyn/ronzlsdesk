@@ -1,5 +1,5 @@
-import logo200Image from 'assets/images/logo.png';
-import sidebarBgImage from 'assets/img/sidebar/sidebar-4.jpg';
+import logo200Image from '../../assets/images/logo.png';
+import sidebarBgImage from '../../assets/img/sidebar/sidebar-4.jpg';
 import React from 'react';
 import {
   MdDashboard,
@@ -17,7 +17,7 @@ import {
   NavItem,
   NavLink as BSNavLink,
 } from 'reactstrap';
-import bn from 'utils/bemnames';
+import bn from '../../utils/bemnames';
 
 const sidebarBackground = {
   backgroundImage: `url("${sidebarBgImage}")`,

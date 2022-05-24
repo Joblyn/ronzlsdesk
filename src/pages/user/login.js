@@ -41,7 +41,7 @@ const Login = () => {
       dispatch(setCurrentUser(decoded));
       window.location.pathname = '/user/dashboard';
     }
-  }, [userLog]);
+  }, [userLog, dispatch]);
 
   const handleSubmit = event => {
     event.preventDefault();

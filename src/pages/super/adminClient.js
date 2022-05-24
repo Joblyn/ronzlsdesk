@@ -39,7 +39,7 @@ export default function AdminClient() {
     let client_id = localStorage.getItem('client_id');
     let endpoint = getClientDetail + client_id;
     dispatch(getClientDetails(endpoint));
-  }, []);
+  }, [dispatch]);
 
   const [color, setColor] = useState('');
   useEffect(() => {

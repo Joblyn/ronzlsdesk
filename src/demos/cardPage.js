@@ -1,5 +1,5 @@
 import ChartJS from 'chart.js';
-import { getColor } from 'utils/colors';
+import { getColor } from '../utils/colors';
 
 import bg5Image from 'assets/img/bg/background_1920-5.jpg';
 import bg6Image from 'assets/img/bg/background_1920-6.jpg';

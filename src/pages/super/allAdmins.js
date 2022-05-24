@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import { superAdminGetAllAdmins } from '../../apiConstants/apiConstants';
 import { getAllAdmins } from '../../actions/admin/authAction/Users';
 import { setAdminClients } from '../../actions/admin/clients/Clients';
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import Portrait from '../../portrait.png';
 
-export default function allAdmins() {
+export default function AllAdmins() {
   const dispatch = useDispatch();
   const AllAdmins = useSelector(state => state.superAdminGetAllAdmins);
   const [admins, setAdmins] = useState([]);
@@ -17,7 +17,7 @@ export default function allAdmins() {
 
   useEffect(() => {
     dispatch(getAllAdmins(superAdminGetAllAdmins));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (AllAdmins.isSuccessful) {

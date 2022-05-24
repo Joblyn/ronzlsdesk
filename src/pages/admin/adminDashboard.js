@@ -5,8 +5,8 @@ import {
 } from 'reactstrap';
 import{ Link } from 'react-router-dom';
 
-import { AnnouncementCard } from 'components/Card';
-import Page from 'components/Page';
+import { AnnouncementCard } from '../../components/Card';
+import Page from '../../components/Page';
 
 class DashboardAdmin extends React.Component {
 

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import CustomTable from '../../components/table/CustomTable';
 import { getClient } from '../../actions/admin/clients/Clients';
 import { getAllClients } from '../../apiConstants/apiConstants';
@@ -15,7 +15,7 @@ export default function InActiveClients() {
 
   useEffect(() => {
     dispatch(getClient(getAllClients));
-  }, []);
+  }, [dispatch]);
 
   const viewDetails = id => {
     localStorage.setItem('client_id', id);

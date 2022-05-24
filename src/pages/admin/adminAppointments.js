@@ -11,7 +11,7 @@ import {
   confirmAppointment,
   getAppointments,
 } from '../../actions/admin/clients/Clients';
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import CustomTable from '../../components/table/CustomTable';
 
@@ -22,7 +22,7 @@ export default function AdminAppointments() {
 
   useEffect(() => {
     dispatch(getAppointments(getClientAppointments));
-  }, []);
+  }, [dispatch]);
 
   const onConfirmAppointment = id => {
     let endpoint = confirmClientAppointment + id;

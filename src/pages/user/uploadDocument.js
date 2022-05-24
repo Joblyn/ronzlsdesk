@@ -3,7 +3,7 @@ import { Button, Form } from 'reactstrap';
 
 import { MdPhotoCamera, MdFileUpload, MdClear } from 'react-icons/md';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import InputField from '../../components/InputField';
 import {
   getUserData,
@@ -30,7 +30,7 @@ export default function UploadDocument() {
 
   useEffect(() => {
     dispatch(getUser(getUserData));
-  }, []);
+  }, [dispatch]);
 
   const upload = formData => {
     let localURL = 'https://cmsbackv1.herokuapp.com/api/v1/';

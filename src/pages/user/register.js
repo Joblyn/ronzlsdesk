@@ -41,7 +41,7 @@ const Register = () => {
       setIsLoading(false);
       window.location.pathname = '/user/dashboard';
     }
-  }, [userReg]);
+  }, [userReg, dispatch]);
 
   const handleInputChange = (event, count) => {
     obj[event.target.name] = event.target.value;

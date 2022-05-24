@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { adminGetDocumentsReceivedFromUser } from '../../apiConstants/apiConstants';
 import { getDocumentsReceivedFromUser } from '../../actions/admin/clients/Clients';
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import CustomTable from '../../components/table/CustomTable';
 import PageSpinner from '../../components/PageSpinner';
 import { Button } from 'reactstrap';
@@ -17,7 +17,7 @@ export default function AdminReceivedDocumnents() {
 
   useEffect(() => {
     dispatch(getDocumentsReceivedFromUser(adminGetDocumentsReceivedFromUser));
-  }, []);
+  }, [dispatch]);
 
   const getRows = documents => {
     let rows = [];

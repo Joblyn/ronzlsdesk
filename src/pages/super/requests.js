@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'reactstrap';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import CustomTable from '../../components/table/CustomTable';
 
@@ -15,7 +15,7 @@ export default function Requests() {
 
   useEffect(() => {
     dispatch(getAllRequests(adminGetRequests));
-  }, []);
+  }, [dispatch]);
 
   const getRows = requests => {
     let rows = [];

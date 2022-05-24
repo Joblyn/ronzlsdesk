@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import CustomTable from '../../components/table/CustomTable';
 import PageSpinner from '../../components/PageSpinner';
 import { getDocumentsSentToUser } from '../../actions/admin/clients/Clients';
@@ -18,7 +18,7 @@ export default function AdminSentDocuments() {
 
   useEffect(() => {
     dispatch(getDocumentsSentToUser(adminGetDocumentsSentToUser));
-  }, []);
+  }, [dispatch]);
 
   const getRows = documents => {
     let rows = [];

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Avatar from 'components/Avatar';
-import { UserCard } from 'components/Card';
+import Avatar from '../../components/Avatar';
+import { UserCard } from '../../components/Card';
 import Portrait from '../../portrait.png';
-import { getAllAdmin, getUserData } from 'apiConstants/apiConstants';
+import { getAllAdmin, getUserData } from '../../apiConstants/apiConstants';
 
 import {
   MdClearAll,
@@ -24,7 +24,7 @@ import {
   Popover,
   PopoverBody,
 } from 'reactstrap';
-import bn from 'utils/bemnames';
+import bn from '../../utils/bemnames';
 import {
   getAdminData,
   logOutAction,
@@ -50,7 +50,7 @@ function Header() {
     } else if (role === 'user') {
       dispatch(getUser(getUserData));
     }
-  }, []);
+  }, [dispatch]);
 
   const toggleUserCardPopover = () => {
     setIsOpenUserCardPopover(isOpenUserCardPopover => !isOpenUserCardPopover);

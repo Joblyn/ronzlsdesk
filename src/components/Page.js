@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'utils/propTypes';
+import PropTypes from '../utils/propTypes';
 
-import bn from 'utils/bemnames';
+import bn from '../utils/bemnames';
 
 import { Breadcrumb, BreadcrumbItem, Nav } from 'reactstrap';
-import SearchInput from 'components/SearchInput';
+import SearchInput from './SearchInput';
 
 // import Typography from './Typography';
 

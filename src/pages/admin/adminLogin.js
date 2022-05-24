@@ -47,7 +47,7 @@ const AdminLogin = () => {
         window.location.pathname = '/superadmin/dashboard';
       }
     }
-  }, [adminLog]);
+  }, [adminLog, dispatch]);
 
   const handleSubmit = event => {
     event.preventDefault();

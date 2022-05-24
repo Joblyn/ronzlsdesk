@@ -1,4 +1,4 @@
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import React, {
   useEffect,
   // useRef
@@ -17,7 +17,7 @@ const Documents = () => {
 
   useEffect(() => {
     dispatch(getAllDocuments(adminGetDocuments));
-  }, []);
+  }, [dispatch]);
 
   if (adminGetAllDocuments.isSuccessful) {
     console.log('Check: ' + adminGetAllDocuments.documents);

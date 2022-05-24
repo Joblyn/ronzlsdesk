@@ -12,7 +12,7 @@ export default function Landing() {
     const token = localStorage.getItem('jwtToken');
     const role = localStorage.getItem('role');
     token && history.push(`/${role}/dashboard`);
-  }, []);
+  }, [history]);
 
   return (
     <div

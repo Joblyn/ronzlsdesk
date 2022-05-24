@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import InputField from '../../components/InputField';
 import Form from 'reactstrap/lib/Form';
 import Label from 'reactstrap/lib/Label';

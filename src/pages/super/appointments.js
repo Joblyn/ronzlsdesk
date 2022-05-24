@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAppointments } from '../../actions/admin/clients/Clients';
 import { getClientAppointments } from '../../apiConstants/apiConstants';
 
-import Page from 'components/Page';
+import Page from '../../components/Page';
 import PageSpinner from '../../components/PageSpinner';
 import CustomTable from '../../components/table/CustomTable';
 
@@ -14,7 +14,7 @@ export default function Appointments() {
 
   useEffect(() => {
     dispatch(getAppointments(getClientAppointments));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (adminGetAppointments.isSuccessful) {

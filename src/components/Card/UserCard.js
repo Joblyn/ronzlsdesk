@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
-import PropTypes from 'utils/propTypes';
+import PropTypes from '../../utils/propTypes';
 
 import classNames from 'classnames';
 

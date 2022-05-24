@@ -12,7 +12,7 @@ import {
   CardText,
 } from 'reactstrap';
 
-import Page from 'components/Page';
+import Page from '../components/Page';
 
 class Unauthorized extends React.Component {
   state = {
