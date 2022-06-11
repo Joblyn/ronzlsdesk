@@ -14,7 +14,7 @@ import {
 
 import Page from '../components/Page';
 
-class Unauthorized extends React.Component {
+class Unauthodrized extends React.Component {
   state = {
     rSelected: null,
     cSelected: [],
